@@ -1,0 +1,541 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9A152D10189626B40013B647 /* ComposeDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */; };
+		9A152D12189626D30013B647 /* ComposeDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */; };
+		9A5ED7A9189245D000BA8E02 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7A8189245D000BA8E02 /* Foundation.framework */; };
+		9A5ED7AB189245D000BA8E02 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7AA189245D000BA8E02 /* CoreGraphics.framework */; };
+		9A5ED7AD189245D000BA8E02 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7AC189245D000BA8E02 /* UIKit.framework */; };
+		9A5ED7B3189245D000BA8E02 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7B1189245D000BA8E02 /* InfoPlist.strings */; };
+		9A5ED7B5189245D000BA8E02 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7B4189245D000BA8E02 /* main.m */; };
+		9A5ED7B9189245D000BA8E02 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7B8189245D000BA8E02 /* AppDelegate.m */; };
+		9A5ED7BB189245D000BA8E02 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7BA189245D000BA8E02 /* Images.xcassets */; };
+		9A5ED7C2189245D000BA8E02 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7C1189245D000BA8E02 /* XCTest.framework */; };
+		9A5ED7C3189245D000BA8E02 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7A8189245D000BA8E02 /* Foundation.framework */; };
+		9A5ED7C4189245D000BA8E02 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7AC189245D000BA8E02 /* UIKit.framework */; };
+		9A5ED7CC189245D000BA8E02 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7CA189245D000BA8E02 /* InfoPlist.strings */; };
+		9A5ED7CE189245D000BA8E02 /* SoCalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7CD189245D000BA8E02 /* SoCalTests.m */; };
+		9A5ED7DA189245F900BA8E02 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7D8189245F900BA8E02 /* MainVC.m */; };
+		9A5ED7DB189245F900BA8E02 /* MainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7D9189245F900BA8E02 /* MainVC.xib */; };
+		9A5ED7DF1892471800BA8E02 /* EventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7DD1892471800BA8E02 /* EventVC.m */; };
+		9A5ED7E01892471800BA8E02 /* EventVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7DE1892471800BA8E02 /* EventVC.xib */; };
+		9A5ED7E41892476C00BA8E02 /* ComposeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7E21892476C00BA8E02 /* ComposeVC.m */; };
+		9A5ED7E51892476C00BA8E02 /* ComposeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7E31892476C00BA8E02 /* ComposeVC.xib */; };
+		9A5ED81A18924F5F00BA8E02 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED81918924F5F00BA8E02 /* MobileCoreServices.framework */; };
+		9A5ED81C18924F6700BA8E02 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED81B18924F6700BA8E02 /* SystemConfiguration.framework */; };
+		9A5ED81E18924F6D00BA8E02 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED81D18924F6D00BA8E02 /* QuartzCore.framework */; };
+		9A5ED82118924FFB00BA8E02 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED82018924FFB00BA8E02 /* Helpers.m */; };
+		9A5ED825189253F800BA8E02 /* CKCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED824189253F800BA8E02 /* CKCalendarView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9A5ED7C5189245D000BA8E02 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A5ED79D189245D000BA8E02 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A5ED7A4189245D000BA8E02;
+			remoteInfo = SoCal;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9A152D0E189626B40013B647 /* ComposeDateTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeDateTimeCell.h; sourceTree = "<group>"; };
+		9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeDateTimeCell.m; sourceTree = "<group>"; };
+		9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeDateTimeCell.xib; sourceTree = "<group>"; };
+		9A5ED7A5189245D000BA8E02 /* SoCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A5ED7A8189245D000BA8E02 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9A5ED7AA189245D000BA8E02 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9A5ED7AC189245D000BA8E02 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9A5ED7B0189245D000BA8E02 /* SoCal-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SoCal-Info.plist"; sourceTree = "<group>"; };
+		9A5ED7B2189245D000BA8E02 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9A5ED7B4189245D000BA8E02 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9A5ED7B6189245D000BA8E02 /* SoCal-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoCal-Prefix.pch"; sourceTree = "<group>"; };
+		9A5ED7B7189245D000BA8E02 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9A5ED7B8189245D000BA8E02 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9A5ED7BA189245D000BA8E02 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9A5ED7C0189245D000BA8E02 /* SoCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A5ED7C1189245D000BA8E02 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		9A5ED7C9189245D000BA8E02 /* SoCalTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SoCalTests-Info.plist"; sourceTree = "<group>"; };
+		9A5ED7CB189245D000BA8E02 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9A5ED7CD189245D000BA8E02 /* SoCalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoCalTests.m; sourceTree = "<group>"; };
+		9A5ED7D7189245F900BA8E02 /* MainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainVC.h; sourceTree = "<group>"; };
+		9A5ED7D8189245F900BA8E02 /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
+		9A5ED7D9189245F900BA8E02 /* MainVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainVC.xib; sourceTree = "<group>"; };
+		9A5ED7DC1892471800BA8E02 /* EventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventVC.h; sourceTree = "<group>"; };
+		9A5ED7DD1892471800BA8E02 /* EventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventVC.m; sourceTree = "<group>"; };
+		9A5ED7DE1892471800BA8E02 /* EventVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventVC.xib; sourceTree = "<group>"; };
+		9A5ED7E11892476C00BA8E02 /* ComposeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeVC.h; sourceTree = "<group>"; };
+		9A5ED7E21892476C00BA8E02 /* ComposeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeVC.m; sourceTree = "<group>"; };
+		9A5ED7E31892476C00BA8E02 /* ComposeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeVC.xib; sourceTree = "<group>"; };
+		9A5ED81918924F5F00BA8E02 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		9A5ED81B18924F6700BA8E02 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9A5ED81D18924F6D00BA8E02 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9A5ED81F18924FFB00BA8E02 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		9A5ED82018924FFB00BA8E02 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
+		9A5ED823189253F800BA8E02 /* CKCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCalendarView.h; sourceTree = "<group>"; };
+		9A5ED824189253F800BA8E02 /* CKCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCalendarView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9A5ED7A2189245D000BA8E02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A5ED81E18924F6D00BA8E02 /* QuartzCore.framework in Frameworks */,
+				9A5ED81C18924F6700BA8E02 /* SystemConfiguration.framework in Frameworks */,
+				9A5ED81A18924F5F00BA8E02 /* MobileCoreServices.framework in Frameworks */,
+				9A5ED7AB189245D000BA8E02 /* CoreGraphics.framework in Frameworks */,
+				9A5ED7AD189245D000BA8E02 /* UIKit.framework in Frameworks */,
+				9A5ED7A9189245D000BA8E02 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A5ED7BD189245D000BA8E02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A5ED7C2189245D000BA8E02 /* XCTest.framework in Frameworks */,
+				9A5ED7C4189245D000BA8E02 /* UIKit.framework in Frameworks */,
+				9A5ED7C3189245D000BA8E02 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9A5ED79C189245D000BA8E02 = {
+			isa = PBXGroup;
+			children = (
+				9A5ED7E618924E3E00BA8E02 /* Externals */,
+				9A5ED7AE189245D000BA8E02 /* SoCal */,
+				9A5ED7C7189245D000BA8E02 /* SoCalTests */,
+				9A5ED7A7189245D000BA8E02 /* Frameworks */,
+				9A5ED7A6189245D000BA8E02 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9A5ED7A6189245D000BA8E02 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A5ED7A5189245D000BA8E02 /* SoCal.app */,
+				9A5ED7C0189245D000BA8E02 /* SoCalTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9A5ED7A7189245D000BA8E02 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A5ED81D18924F6D00BA8E02 /* QuartzCore.framework */,
+				9A5ED81B18924F6700BA8E02 /* SystemConfiguration.framework */,
+				9A5ED81918924F5F00BA8E02 /* MobileCoreServices.framework */,
+				9A5ED7A8189245D000BA8E02 /* Foundation.framework */,
+				9A5ED7AA189245D000BA8E02 /* CoreGraphics.framework */,
+				9A5ED7AC189245D000BA8E02 /* UIKit.framework */,
+				9A5ED7C1189245D000BA8E02 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9A5ED7AE189245D000BA8E02 /* SoCal */ = {
+			isa = PBXGroup;
+			children = (
+				9A5ED7B7189245D000BA8E02 /* AppDelegate.h */,
+				9A5ED7B8189245D000BA8E02 /* AppDelegate.m */,
+				9A5ED7BA189245D000BA8E02 /* Images.xcassets */,
+				9A5ED7AF189245D000BA8E02 /* Supporting Files */,
+				9A5ED7D7189245F900BA8E02 /* MainVC.h */,
+				9A5ED7D8189245F900BA8E02 /* MainVC.m */,
+				9A5ED7D9189245F900BA8E02 /* MainVC.xib */,
+				9A5ED7DC1892471800BA8E02 /* EventVC.h */,
+				9A5ED7DD1892471800BA8E02 /* EventVC.m */,
+				9A5ED7DE1892471800BA8E02 /* EventVC.xib */,
+				9A5ED7E11892476C00BA8E02 /* ComposeVC.h */,
+				9A5ED7E21892476C00BA8E02 /* ComposeVC.m */,
+				9A5ED7E31892476C00BA8E02 /* ComposeVC.xib */,
+				9A5ED81F18924FFB00BA8E02 /* Helpers.h */,
+				9A5ED82018924FFB00BA8E02 /* Helpers.m */,
+				9A152D0E189626B40013B647 /* ComposeDateTimeCell.h */,
+				9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */,
+				9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */,
+			);
+			path = SoCal;
+			sourceTree = "<group>";
+		};
+		9A5ED7AF189245D000BA8E02 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9A5ED7B0189245D000BA8E02 /* SoCal-Info.plist */,
+				9A5ED7B1189245D000BA8E02 /* InfoPlist.strings */,
+				9A5ED7B4189245D000BA8E02 /* main.m */,
+				9A5ED7B6189245D000BA8E02 /* SoCal-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9A5ED7C7189245D000BA8E02 /* SoCalTests */ = {
+			isa = PBXGroup;
+			children = (
+				9A5ED7CD189245D000BA8E02 /* SoCalTests.m */,
+				9A5ED7C8189245D000BA8E02 /* Supporting Files */,
+			);
+			path = SoCalTests;
+			sourceTree = "<group>";
+		};
+		9A5ED7C8189245D000BA8E02 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9A5ED7C9189245D000BA8E02 /* SoCalTests-Info.plist */,
+				9A5ED7CA189245D000BA8E02 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9A5ED7E618924E3E00BA8E02 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				9A5ED822189253F800BA8E02 /* CKCalendar */,
+			);
+			path = Externals;
+			sourceTree = "<group>";
+		};
+		9A5ED822189253F800BA8E02 /* CKCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				9A5ED823189253F800BA8E02 /* CKCalendarView.h */,
+				9A5ED824189253F800BA8E02 /* CKCalendarView.m */,
+			);
+			path = CKCalendar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9A5ED7A4189245D000BA8E02 /* SoCal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A5ED7D1189245D000BA8E02 /* Build configuration list for PBXNativeTarget "SoCal" */;
+			buildPhases = (
+				9A5ED7A1189245D000BA8E02 /* Sources */,
+				9A5ED7A2189245D000BA8E02 /* Frameworks */,
+				9A5ED7A3189245D000BA8E02 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SoCal;
+			productName = SoCal;
+			productReference = 9A5ED7A5189245D000BA8E02 /* SoCal.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9A5ED7BF189245D000BA8E02 /* SoCalTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A5ED7D4189245D000BA8E02 /* Build configuration list for PBXNativeTarget "SoCalTests" */;
+			buildPhases = (
+				9A5ED7BC189245D000BA8E02 /* Sources */,
+				9A5ED7BD189245D000BA8E02 /* Frameworks */,
+				9A5ED7BE189245D000BA8E02 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9A5ED7C6189245D000BA8E02 /* PBXTargetDependency */,
+			);
+			name = SoCalTests;
+			productName = SoCalTests;
+			productReference = 9A5ED7C0189245D000BA8E02 /* SoCalTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9A5ED79D189245D000BA8E02 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = HereNow;
+				TargetAttributes = {
+					9A5ED7BF189245D000BA8E02 = {
+						TestTargetID = 9A5ED7A4189245D000BA8E02;
+					};
+				};
+			};
+			buildConfigurationList = 9A5ED7A0189245D000BA8E02 /* Build configuration list for PBXProject "SoCal" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9A5ED79C189245D000BA8E02;
+			productRefGroup = 9A5ED7A6189245D000BA8E02 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9A5ED7A4189245D000BA8E02 /* SoCal */,
+				9A5ED7BF189245D000BA8E02 /* SoCalTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9A5ED7A3189245D000BA8E02 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A5ED7B3189245D000BA8E02 /* InfoPlist.strings in Resources */,
+				9A5ED7DB189245F900BA8E02 /* MainVC.xib in Resources */,
+				9A5ED7E51892476C00BA8E02 /* ComposeVC.xib in Resources */,
+				9A152D12189626D30013B647 /* ComposeDateTimeCell.xib in Resources */,
+				9A5ED7BB189245D000BA8E02 /* Images.xcassets in Resources */,
+				9A5ED7E01892471800BA8E02 /* EventVC.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A5ED7BE189245D000BA8E02 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A5ED7CC189245D000BA8E02 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9A5ED7A1189245D000BA8E02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A5ED7B9189245D000BA8E02 /* AppDelegate.m in Sources */,
+				9A5ED7DA189245F900BA8E02 /* MainVC.m in Sources */,
+				9A5ED825189253F800BA8E02 /* CKCalendarView.m in Sources */,
+				9A152D10189626B40013B647 /* ComposeDateTimeCell.m in Sources */,
+				9A5ED7B5189245D000BA8E02 /* main.m in Sources */,
+				9A5ED82118924FFB00BA8E02 /* Helpers.m in Sources */,
+				9A5ED7DF1892471800BA8E02 /* EventVC.m in Sources */,
+				9A5ED7E41892476C00BA8E02 /* ComposeVC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A5ED7BC189245D000BA8E02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A5ED7CE189245D000BA8E02 /* SoCalTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9A5ED7C6189245D000BA8E02 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9A5ED7A4189245D000BA8E02 /* SoCal */;
+			targetProxy = 9A5ED7C5189245D000BA8E02 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9A5ED7B1189245D000BA8E02 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A5ED7B2189245D000BA8E02 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9A5ED7CA189245D000BA8E02 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A5ED7CB189245D000BA8E02 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9A5ED7CF189245D000BA8E02 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9A5ED7D0189245D000BA8E02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9A5ED7D2189245D000BA8E02 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
+				INFOPLIST_FILE = "SoCal/SoCal-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9FE9F863-E5CA-4759-B459-82278EBA32B0";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9A5ED7D3189245D000BA8E02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: HereNow Pte. Ltd. (ZJN6979MJ3)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
+				INFOPLIST_FILE = "SoCal/SoCal-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9FE9F863-E5CA-4759-B459-82278EBA32B0";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		9A5ED7D5189245D000BA8E02 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SoCal.app/SoCal";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SoCalTests/SoCalTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		9A5ED7D6189245D000BA8E02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SoCal.app/SoCal";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
+				INFOPLIST_FILE = "SoCalTests/SoCalTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9A5ED7A0189245D000BA8E02 /* Build configuration list for PBXProject "SoCal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A5ED7CF189245D000BA8E02 /* Debug */,
+				9A5ED7D0189245D000BA8E02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A5ED7D1189245D000BA8E02 /* Build configuration list for PBXNativeTarget "SoCal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A5ED7D2189245D000BA8E02 /* Debug */,
+				9A5ED7D3189245D000BA8E02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A5ED7D4189245D000BA8E02 /* Build configuration list for PBXNativeTarget "SoCalTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A5ED7D5189245D000BA8E02 /* Debug */,
+				9A5ED7D6189245D000BA8E02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9A5ED79D189245D000BA8E02 /* Project object */;
+}

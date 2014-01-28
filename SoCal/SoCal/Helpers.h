@@ -11,6 +11,7 @@
 @interface Helpers : NSObject
 
 +(UIColor *)suriaOrangeColorWithAlpha:(float)alpha;
++(UIColor *)pmBlueColorWithAlpha:(float)alpha;
 +(UIColor *)luncheonBlueColorWithAlpha:(float)alpha;
 +(UIColor *)bondiBlueColorWithAlpha:(float)alpha;
 

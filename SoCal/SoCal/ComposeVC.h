@@ -18,6 +18,7 @@
 
 @property (nonatomic, weak) IBOutlet CKCalendarView *calendarView;
 @property (nonatomic, strong) NSMutableArray *selectedDateItems;
+@property (nonatomic, strong) NSMutableArray *selectedDateItemsViews;
 
 @property (nonatomic, weak) IBOutlet UITableView *dateTimeTable;
 @property (nonatomic, strong) NSMutableArray *eventDateTimesArray;
@@ -26,6 +27,16 @@
 
 @property (nonatomic, weak) IBOutlet UIView *timePickerView;
 @property (nonatomic, weak) IBOutlet UIDatePicker *timePicker;
+
+@property (nonatomic, weak) IBOutlet UIScrollView *mainScrollView;
+@property (nonatomic, weak) IBOutlet UIView *composeEventContainer;
+@property (nonatomic, weak) IBOutlet UIView *timeSelectionContainer;
+
+@property (nonatomic, weak) IBOutlet UITextView *txtEventName;
+@property (nonatomic, weak) IBOutlet UITextView *txtLocation;
+@property (nonatomic, weak) IBOutlet UITextView *txtDescription;
+
+@property (nonatomic, weak) IBOutlet UIButton *selectDatesButton;
 
 -(void)deleteCellAtIndexPathRow:(NSInteger)row;
 -(void)editTimeForCellAtIndexPathRow:(NSInteger)row;

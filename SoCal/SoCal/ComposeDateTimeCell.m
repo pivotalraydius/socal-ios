@@ -60,7 +60,9 @@
     self.indexPathRow = row;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMMM d, EEEE"];
+    [dateFormatter setDateFormat:@"MMMM d, EEEE, hh:mm a"];
+    [dateFormatter setAMSymbol:@"am"];
+    [dateFormatter setPMSymbol:@"pm"];
     
     NSString *dateString = [dateFormatter stringFromDate:date];
     
@@ -71,23 +73,36 @@
     if (self.indexPathRow % 2 == 0) {
         
         //shift left
-        NSLog(@"cell %i left", self.indexPathRow);
         [self.mainView setFrame:CGRectMake(0, self.mainView.frame.origin.y, self.mainView.frame.size.width, self.mainView.frame.size.height)];
     }
     else {
         
         //shift right
-        NSLog(@"cell %i right", self.indexPathRow);
         [self.mainView setFrame:CGRectMake(25, self.mainView.frame.origin.y, self.mainView.frame.size.width, self.mainView.frame.size.height)];
     }
     
-    NSLog(@"mainView: %@", self.mainView);
+    if ([dateString hasSuffix:@"am"]) {
+        [self.barBGView setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        [self.btnDeleteCell.titleLabel setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        [self.btnAcceptTime setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        [self.lblEventEditTime setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        [self.lblTimeTitleLabel setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+    }
+    else {
+        [self.barBGView setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        [self.btnDeleteCell setTitleColor:[Helpers pmBlueColorWithAlpha:1.0] forState:UIControlStateNormal];
+        [self.btnAcceptTime setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        [self.lblEventEditTime setTextColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        [self.lblTimeTitleLabel setTextColor:[Helpers pmBlueColorWithAlpha:1.0]];
+    }
 }
 
 -(void)updateCellWithTime:(NSDate *)date {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MMMM d, EEEE, hh:mm a"];
+    [dateFormatter setAMSymbol:@"am"];
+    [dateFormatter setPMSymbol:@"pm"];
     
     NSString *dateString = [dateFormatter stringFromDate:date];
     
@@ -97,10 +112,27 @@
     
     NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
     [dateFormatter2 setDateFormat:@"hh:mm a"];
+    [dateFormatter2 setAMSymbol:@"am"];
+    [dateFormatter2 setPMSymbol:@"pm"];
     
     NSString *dateString2 = [dateFormatter2 stringFromDate:date];
     
     NSString *displayString2 = dateString2;
+    
+    if ([dateString2 hasSuffix:@"am"]) {
+        [self.barBGView setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        [self.btnDeleteCell.titleLabel setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        [self.btnAcceptTime setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        [self.lblEventEditTime setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        [self.lblTimeTitleLabel setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+    }
+    else {
+        [self.barBGView setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        [self.btnDeleteCell setTitleColor:[Helpers pmBlueColorWithAlpha:1.0] forState:UIControlStateNormal];
+        [self.btnAcceptTime setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        [self.lblEventEditTime setTextColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        [self.lblTimeTitleLabel setTextColor:[Helpers pmBlueColorWithAlpha:1.0]];
+    }
     
     [self.lblEventEditTime setText:displayString2];
 }

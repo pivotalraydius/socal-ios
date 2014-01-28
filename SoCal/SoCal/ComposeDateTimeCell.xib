@@ -86,11 +86,13 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="barBGView" destination="c29-Z6-gWj" id="xNr-5W-hRI"/>
                 <outlet property="btnAcceptTime" destination="Uoq-5W-biw" id="Y1Y-Ed-2M1"/>
                 <outlet property="btnDeleteCell" destination="V16-rI-NNk" id="Dr2-G5-5fe"/>
                 <outlet property="btnEditTime" destination="xvz-QT-gZV" id="RNS-gn-lcW"/>
                 <outlet property="lblEventDateTime" destination="0Rr-gz-0Z6" id="1ab-Ef-eEh"/>
                 <outlet property="lblEventEditTime" destination="hAC-Bf-Huy" id="pO9-JO-QRN"/>
+                <outlet property="lblTimeTitleLabel" destination="UUW-WK-iOo" id="571-EY-b2I"/>
                 <outlet property="mainView" destination="LJA-gg-cHO" id="NiC-w1-Ijc"/>
             </connections>
         </tableViewCell>

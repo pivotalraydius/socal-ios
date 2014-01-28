@@ -87,6 +87,19 @@
 
 @end
 
+//@interface DateButtonView : UIControl
+//
+//@property (nonatomic, strong) UILabel *titleLabel;
+//@property (nonatomic, strong) NSDate *date;
+//@property (nonatomic, strong) CKDateItem *dateItem;
+//@property (nonatomic, strong) NSCalendar *calendar;
+//
+//@end
+//
+//@implementation DateButtonView
+//
+//@end
+
 @implementation CKDateItem
 
 - (id)init {
@@ -253,6 +266,9 @@
         [dateButtons addObject:dateButton];
     }
     self.dateButtons = dateButtons;
+    
+    selectedDatesViewsArray = [[NSMutableArray alloc] initWithCapacity:0];
+    selectedDatesArray = [[NSMutableArray alloc] initWithCapacity:0];
 
     // initialize the thing
     self.monthShowing = [NSDate date];
@@ -369,6 +385,18 @@
         }
 
         dateButton.frame = [self _calculateDayCellFrame:date];
+        
+        /* OVER HERE!!!!!!! */
+        
+        for (NSInteger i = 0; i < selectedDatesArray.count; i++) {
+            
+            NSDate *dateForButton = [selectedDatesArray objectAtIndex:i];
+            UIView *viewForDate = [selectedDatesViewsArray objectAtIndex:i];
+            
+            if ([dateForButton compare:dateButton.date] == NSOrderedSame) {
+                [dateButton addSubview:viewForDate];
+            }
+        }
 
         [self.calendarContainer addSubview:dateButton];
 
@@ -379,6 +407,27 @@
     if ([self.delegate respondsToSelector:@selector(calendar:didLayoutInRect:)]) {
         [self.delegate calendar:self didLayoutInRect:self.frame];
     }
+}
+
+-(void)setSubviews:(NSArray *)views toDateButtonWithDate:(NSArray *)dateArray {
+    
+    [selectedDatesArray removeAllObjects];
+    [selectedDatesViewsArray removeAllObjects];
+    
+    for (DateButton *dateButton in self.dateButtons) {
+        
+        UIView *subviewToRemove = [dateButton viewWithTag:666];
+        [subviewToRemove removeFromSuperview];
+        subviewToRemove = nil;
+    }
+    
+    [selectedDatesArray addObjectsFromArray:dateArray];
+    [selectedDatesViewsArray addObjectsFromArray:views];
+}
+
+-(NSArray *)getDateButtons {
+    
+    return self.dateButtons;
 }
 
 - (void)_updateDayOfWeekLabels {
@@ -392,7 +441,7 @@
 
     NSUInteger i = 0;
     for (NSString *day in weekdays) {
-        [[self.dayOfWeekLabels objectAtIndex:i] setText:[day uppercaseString]];
+        [[self.dayOfWeekLabels objectAtIndex:i] setText:day];
         i++;
     }
 }
@@ -585,6 +634,7 @@
 - (void)setDateFont:(UIFont *)font {
     for (DateButton *dateButton in self.dateButtons) {
         dateButton.titleLabel.font = font;
+        [dateButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 10, 0)];
     }
 }
 - (UIFont *)dateFont {

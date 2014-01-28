@@ -25,9 +25,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setupCalendar];
     [self setupTestData];
-    [self setupTimePicker];
+    [self setupMainScrollView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
+    
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,8 +55,39 @@
     
     self.eventDateTimesArray = [[NSMutableArray alloc] initWithCapacity:0];
     self.selectedDateItems = [[NSMutableArray alloc] initWithCapacity:0];
+    self.selectedDateItemsViews = [[NSMutableArray alloc] initWithCapacity:0];
     
     currentlySelectedDateTimeCell = -1;
+}
+
+-(void)setupMainScrollView {
+    
+    [self.mainScrollView addSubview:self.composeEventContainer];
+    
+    [self.composeEventContainer setFrame:CGRectMake(0, 0, self.composeEventContainer.frame.size.width, self.composeEventContainer.frame.size.height)];
+    
+    [self setupComposeEventContainer];
+    
+    [self.mainScrollView addSubview:self.timeSelectionContainer];
+    
+    [self.timeSelectionContainer setFrame:CGRectMake(320, 0, self.timeSelectionContainer.frame.size.width, self.timeSelectionContainer.frame.size.height)];
+    
+    [self setupTimeSelectionContainer];
+    
+    [self.mainScrollView setScrollEnabled:NO];
+}
+
+-(void)setupComposeEventContainer {
+    
+    [Helpers setBorderToView:self.txtEventName borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
+    [Helpers setBorderToView:self.txtLocation borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
+    [Helpers setBorderToView:self.txtDescription borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
+}
+
+-(void)setupTimeSelectionContainer {
+ 
+    [self setupCalendar];
+    [self setupTimePicker];
 }
 
 -(void)setupCalendar {
@@ -51,8 +97,19 @@
     [self.calendarView setBackgroundColor:[UIColor whiteColor]];
     [self.calendarView setInnerBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self.calendarView setDayOfWeekTextColor:[UIColor whiteColor]];
+    [self.calendarView setDateFont:[UIFont systemFontOfSize:10.0]];
  
     [self.calendarView setDelegate:self];
+}
+
+-(void)scrollToTimeSelection {
+    
+    [self.mainScrollView setContentOffset:CGPointMake(320.0, 0.0) animated:YES];
+}
+
+-(void)scrollToComposeEvent {
+    
+    [self.mainScrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
 }
 
 #pragma mark - Main Actions
@@ -64,6 +121,12 @@
 
 -(IBAction)doneButtonAction {
     
+    [self scrollToComposeEvent];
+}
+
+-(IBAction)selectDatesAction {
+    
+    [self scrollToTimeSelection];
 }
 
 #pragma mark - Time Picker Methods
@@ -122,6 +185,9 @@
     
     [self.eventDateTimesArray removeObjectAtIndex:currentlySelectedDateTimeCell];
     [self.eventDateTimesArray insertObject:self.timePicker.date atIndex:currentlySelectedDateTimeCell];
+    
+//    [self.selectedDateItems removeObjectAtIndex:currentlySelectedDateTimeCell];
+//    [self.selectedDateItems insertObject:self.timePicker.date atIndex:currentlySelectedDateTimeCell];
 }
 
 #pragma mark - Calendar Delegate Methods
@@ -141,20 +207,6 @@
 
 -(void)calendar:(CKCalendarView *)calendar didDeselectDate:(NSDate *)date {
     
-}
-
--(void)calendar:(CKCalendarView *)calendar configureDateItem:(CKDateItem *)dateItem forDate:(NSDate *)date {
-//    
-//    for (NSDate *aDate in self.selectedDateItems) {
-//        
-//        if (aDate == date) {
-//            
-//            [dateItem setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
-//            [dateItem setTextColor:[UIColor whiteColor]];
-//            
-//            [calendar layoutSubviews];
-//        }
-//    }
 }
 
 #pragma mark - Table View Delegate Methods
@@ -220,7 +272,10 @@
 -(void)deleteCellAtIndexPathRow:(NSInteger)row {
  
     [self.eventDateTimesArray removeObjectAtIndex:row];
+    [self.selectedDateItems removeObjectAtIndex:row];
     [self.dateTimeTable reloadData];
+    
+    [self updateCalendarSubviews];
 }
 
 -(void)editTimeForCellAtIndexPathRow:(NSInteger)row {
@@ -231,7 +286,80 @@
 
 -(void)closeTimePanelForCellAtIndexPathRow:(NSInteger)row {
     
+    [self updateCalendarSubviews];
+    
     [self tableView:self.dateTimeTable didDeselectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+}
+
+-(void)updateCalendarSubviews {
+    
+    [self.selectedDateItemsViews removeAllObjects];
+    
+    for (NSDate *dateToAdd in self.selectedDateItems) {
+        
+        NSDate *timeDate = [self.eventDateTimesArray objectAtIndex:[self.selectedDateItems indexOfObject:dateToAdd]];
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 3.5, 30, 30)];
+        [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        [view.layer setCornerRadius:view.frame.size.height/2];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        [label setFont:[UIFont systemFontOfSize:10.0]];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MMMM d, EEEE, hh:mm a"];
+        [dateFormatter setAMSymbol:@"am"];
+        [dateFormatter setPMSymbol:@"pm"];
+        
+        NSString *dateString = [dateFormatter stringFromDate:timeDate];
+        
+        if ([dateString hasSuffix:@"am"]) {
+            [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        }
+        else {
+            [view setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        }
+        
+        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+        [dateFormatter2 setDateFormat:@"hh:mm"];
+        
+        NSString *dateString2 = [dateFormatter2 stringFromDate:timeDate];
+        NSString *displayString2 = dateString2;
+        [label setText:displayString2];
+        
+        [view addSubview:label];
+        
+        [view setTag:666];
+        
+        [self.selectedDateItemsViews addObject:view];
+    }
+    
+    [self.calendarView setSubviews:self.selectedDateItemsViews toDateButtonWithDate:self.selectedDateItems];
+    
+    [self.calendarView reloadData];
+}
+
+#pragma mark - Keyboard Methods
+
+-(void)keyboardWillShow {
+    
+    downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [downSwipe setDirection:UISwipeGestureRecognizerDirectionDown];
+    [self.view addGestureRecognizer:downSwipe];
+}
+
+-(void)keyboardWillHide {
+    
+    [self.view removeGestureRecognizer:downSwipe];
+}
+
+-(void)hideKeyboard {
+    
+    [self.txtEventName resignFirstResponder];
+    [self.txtLocation resignFirstResponder];
+    [self.txtDescription resignFirstResponder];
 }
 
 @end

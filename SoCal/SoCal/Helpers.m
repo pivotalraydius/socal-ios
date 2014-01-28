@@ -15,6 +15,11 @@
     return [UIColor colorWithRed:255.0/255.0 green:175.0/255.0 blue:55.0/255.0 alpha:alpha];
 }
 
++(UIColor *)pmBlueColorWithAlpha:(float)alpha {
+    
+    return [UIColor colorWithRed:121.0/255.0 green:150.0/255.0 blue:179.0/255.0 alpha:alpha];
+}
+
 +(UIColor *)luncheonBlueColorWithAlpha:(float)alpha {
     
     return [UIColor colorWithRed:127.0/255.0 green:209.0/255.0 blue:216.0/255.0 alpha:alpha];

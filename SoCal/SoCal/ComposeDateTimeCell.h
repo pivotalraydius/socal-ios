@@ -12,6 +12,8 @@
 
 @property (nonatomic, weak) id parentVC;
 @property (nonatomic, weak) IBOutlet UIView *mainView;
+@property (nonatomic, weak) IBOutlet UIView *barBGView;
+@property (nonatomic, weak) IBOutlet UILabel *lblTimeTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *lblEventDateTime;
 @property (nonatomic, weak) IBOutlet UILabel *lblEventEditTime;
 @property (nonatomic, weak) IBOutlet UIButton *btnDeleteCell;

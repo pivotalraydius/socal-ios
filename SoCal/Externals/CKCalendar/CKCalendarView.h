@@ -32,6 +32,11 @@ typedef enum {
 } CKCalendarStartDay;
 
 @interface CKCalendarView : UIView
+{
+    
+    NSMutableArray *selectedDatesArray;
+    NSMutableArray *selectedDatesViewsArray;
+}
 
 - (id)initWithStartDay:(CKCalendarStartDay)firstDay;
 - (id)initWithStartDay:(CKCalendarStartDay)firstDay frame:(CGRect)frame;
@@ -64,6 +69,9 @@ typedef enum {
 // Helper methods for delegates, etc.
 - (BOOL)date:(NSDate *)date1 isSameDayAsDate:(NSDate *)date2;
 - (BOOL)dateIsInCurrentMonth:(NSDate *)date;
+
+-(void)setSubviews:(NSArray *)views toDateButtonWithDate:(NSArray *)dateArray;
+-(NSArray *)getDateButtons;
 
 @end
 

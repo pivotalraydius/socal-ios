@@ -33,6 +33,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 -(void)setupUI {
     
     [Helpers setBorderToView:self.btnCreateEvent borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
@@ -47,6 +51,8 @@
 
 -(IBAction)btnUseInviteAction {
     
+    self.eventVC = [[EventVC alloc] init];
+    [self.navigationController pushViewController:self.eventVC animated:YES];
 }
 
 @end

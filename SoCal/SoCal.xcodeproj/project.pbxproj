@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9A152D10189626B40013B647 /* ComposeDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */; };
 		9A152D12189626D30013B647 /* ComposeDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */; };
+		9A4821921898E312002DA0E4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4821911898E312002DA0E4 /* MapKit.framework */; };
 		9A5ED7A9189245D000BA8E02 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7A8189245D000BA8E02 /* Foundation.framework */; };
 		9A5ED7AB189245D000BA8E02 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7AA189245D000BA8E02 /* CoreGraphics.framework */; };
 		9A5ED7AD189245D000BA8E02 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7AC189245D000BA8E02 /* UIKit.framework */; };
@@ -48,6 +49,7 @@
 		9A152D0E189626B40013B647 /* ComposeDateTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeDateTimeCell.h; sourceTree = "<group>"; };
 		9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeDateTimeCell.m; sourceTree = "<group>"; };
 		9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeDateTimeCell.xib; sourceTree = "<group>"; };
+		9A4821911898E312002DA0E4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9A5ED7A5189245D000BA8E02 /* SoCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A5ED7A8189245D000BA8E02 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9A5ED7AA189245D000BA8E02 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -87,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A4821921898E312002DA0E4 /* MapKit.framework in Frameworks */,
 				9A5ED81E18924F6D00BA8E02 /* QuartzCore.framework in Frameworks */,
 				9A5ED81C18924F6700BA8E02 /* SystemConfiguration.framework in Frameworks */,
 				9A5ED81A18924F5F00BA8E02 /* MobileCoreServices.framework in Frameworks */,
@@ -132,6 +135,7 @@
 		9A5ED7A7189245D000BA8E02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A4821911898E312002DA0E4 /* MapKit.framework */,
 				9A5ED81D18924F6D00BA8E02 /* QuartzCore.framework */,
 				9A5ED81B18924F6700BA8E02 /* SystemConfiguration.framework */,
 				9A5ED81918924F5F00BA8E02 /* MobileCoreServices.framework */,

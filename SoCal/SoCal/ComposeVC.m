@@ -51,6 +51,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 -(void)setupTestData {
     
     self.eventDateTimesArray = [[NSMutableArray alloc] initWithCapacity:0];

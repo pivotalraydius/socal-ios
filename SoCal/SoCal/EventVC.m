@@ -219,6 +219,8 @@
         [self.postsTable setHidden:NO];
         [self.bottomBar setHidden:NO];
         
+        [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, self.postsTable.frame.size.height)];
+        
         if (scrollView.contentOffset.x < 320.0) {
             
             [self.mainBackButton setTitle:@"Home" forState:UIControlStateNormal];
@@ -230,6 +232,8 @@
             [self.mainBackButton setTitle:@"Details" forState:UIControlStateNormal];
             [self.mainDoneButton setTitle:@"Done" forState:UIControlStateNormal];
             [self.lblTitleLabel setText:@"Dates"];
+            
+            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 374, self.postsTable.frame.size.width, self.postsTable.frame.size.height)];
         }
         else if (scrollView.contentOffset.x < 920.0) {
             

@@ -20,11 +20,12 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CKCalendarView.h"
 
-#define BUTTON_MARGIN 4
+#define BUTTON_MARGIN 0
 #define CALENDAR_MARGIN 5
-#define TOP_HEIGHT 44
+#define TOP_HEIGHT 30
 #define DAYS_HEADER_HEIGHT 20
 #define DEFAULT_CELL_WIDTH 43
+#define DEFAULT_CELL_HEIGHT 35
 #define CELL_BORDER_WIDTH 1
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -133,6 +134,7 @@
 @property (nonatomic, strong) NSDate *selectedDate;
 @property (nonatomic, strong) NSCalendar *calendar;
 @property(nonatomic, assign) CGFloat cellWidth;
+@property(nonatomic, assign) CGFloat cellHeight;
 
 @end
 
@@ -141,7 +143,7 @@
 @dynamic locale;
 
 - (id)init {
-    return [self initWithStartDay:startSunday];
+    return [self initWithStartDay:startMonday];
 }
 
 - (id)initWithStartDay:(CKCalendarStartDay)firstDay {
@@ -153,6 +155,7 @@
     [self.calendar setLocale:[NSLocale currentLocale]];
 
     self.cellWidth = DEFAULT_CELL_WIDTH;
+    self.cellHeight = DEFAULT_CELL_HEIGHT;
 
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
@@ -292,7 +295,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self _init:startSunday];
+        [self _init:startMonday];
     }
     return self;
 }
@@ -307,7 +310,8 @@
     if (self.adaptHeightToNumberOfWeeksInMonth) {
         numberOfWeeksToShow = [self _numberOfWeeksInMonthContainingDate:self.monthShowing];
     }
-    CGFloat containerHeight = (numberOfWeeksToShow * (self.cellWidth + CELL_BORDER_WIDTH) + DAYS_HEADER_HEIGHT);
+//    CGFloat containerHeight = (numberOfWeeksToShow * (self.cellWidth + CELL_BORDER_WIDTH) + DAYS_HEADER_HEIGHT);
+    CGFloat containerHeight = (numberOfWeeksToShow * (self.cellHeight + CELL_BORDER_WIDTH) + DAYS_HEADER_HEIGHT);
 
     CGRect newFrame = self.frame;
     newFrame.size.height = containerHeight + CALENDAR_MARGIN + TOP_HEIGHT;
@@ -317,8 +321,12 @@
 
     self.titleLabel.text = [self.dateFormatter stringFromDate:_monthShowing];
     self.titleLabel.frame = CGRectMake(0, 0, self.bounds.size.width, TOP_HEIGHT);
-    self.prevButton.frame = CGRectMake(BUTTON_MARGIN, BUTTON_MARGIN, 58, 38);
-    self.nextButton.frame = CGRectMake(self.bounds.size.width - 58 - BUTTON_MARGIN, BUTTON_MARGIN, 58, 38);
+    self.prevButton.frame = CGRectMake(BUTTON_MARGIN + 5, BUTTON_MARGIN, 70, 30);
+    self.nextButton.frame = CGRectMake(self.bounds.size.width - 70 - 9 - BUTTON_MARGIN, BUTTON_MARGIN, 70, 30);
+    [self.prevButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [self.nextButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+//    [self.prevButton setBackgroundColor:[UIColor blueColor]];
+//    [self.nextButton setBackgroundColor:[UIColor blueColor]];
     
     NSDateComponents* dateComponents = [[NSDateComponents alloc]init];
     NSCalendar* calendar = [NSCalendar currentCalendar];
@@ -535,7 +543,8 @@
 	
     NSInteger placeInWeek = [self _placeInWeekForDate:date];
 
-    return CGRectMake(placeInWeek * (self.cellWidth + CELL_BORDER_WIDTH), (row * (self.cellWidth + CELL_BORDER_WIDTH)) + CGRectGetMaxY(self.daysHeader.frame) + CELL_BORDER_WIDTH, self.cellWidth, self.cellWidth);
+//    return CGRectMake(placeInWeek * (self.cellWidth + CELL_BORDER_WIDTH), (row * (self.cellWidth + CELL_BORDER_WIDTH)) + CGRectGetMaxY(self.daysHeader.frame) + CELL_BORDER_WIDTH, self.cellWidth, self.cellWidth);
+    return CGRectMake(placeInWeek * (self.cellWidth + CELL_BORDER_WIDTH), (row * (self.cellHeight + CELL_BORDER_WIDTH)) + CGRectGetMaxY(self.daysHeader.frame) + CELL_BORDER_WIDTH, self.cellWidth, self.cellHeight);
 }
 
 - (void)_moveCalendarToNextMonth {
@@ -588,6 +597,8 @@
 
 - (void)setTitleFont:(UIFont *)font {
     self.titleLabel.font = font;
+    self.prevButton.titleLabel.font = font;
+    self.nextButton.titleLabel.font = font;
 }
 - (UIFont *)titleFont {
     return self.titleLabel.font;

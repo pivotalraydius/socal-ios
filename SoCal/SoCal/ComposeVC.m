@@ -98,10 +98,12 @@
     
     [self.calendarView setOnlyShowCurrentMonth:NO];
     
+    
     [self.calendarView setBackgroundColor:[UIColor whiteColor]];
     [self.calendarView setInnerBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self.calendarView setDayOfWeekTextColor:[UIColor whiteColor]];
     [self.calendarView setDateFont:[UIFont systemFontOfSize:10.0]];
+    [self.calendarView setTitleFont:[UIFont systemFontOfSize:14.0]];
  
     [self.calendarView setDelegate:self];
 }
@@ -326,6 +328,8 @@
             [view setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
         }
         
+        [self addBtmHalfCircleToView:view];
+        
         NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
         [dateFormatter2 setDateFormat:@"hh:mm"];
         
@@ -343,6 +347,28 @@
     [self.calendarView setSubviews:self.selectedDateItemsViews toDateButtonWithDate:self.selectedDateItems];
     
     [self.calendarView reloadData];
+}
+
+-(void)addBtmHalfCircleToView:(UIView *)view {
+    
+//    CGContextRef gc = UIGraphicsGetCurrentContext();
+//    CGContextBeginPath(gc);
+//    CGContextAddArc(gc, 150, 150, view.frame.size.width/2, -M_PI_2, M_PI_2, 1);
+//    CGContextClosePath(gc); // could be omitted
+//    CGContextSetFillColorWithColor(gc, [UIColor cyanColor].CGColor);
+//    CGContextFillPath(gc);
+    
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    CGPoint point = CGPointMake(view.frame.origin.x, view.frame.origin.y);
+//    CGFloat radius = view.frame.size.width/2;
+//    
+//    CGContextMoveToPoint(context, point.x, point.y);
+//    CGContextAddArc(context, point.x, point.y, radius, M_PI, M_PI * 2.0, YES);
+//    CGContextSetStrokeColorWithColor(context, [[UIColor blackColor] CGColor]);
+//    CGContextSetLineWidth(context, 2.0);
+//    
+//    CGContextDrawPath(context, kCGPathStroke);
 }
 
 #pragma mark - Keyboard Methods

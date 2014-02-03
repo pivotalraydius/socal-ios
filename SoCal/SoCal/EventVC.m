@@ -206,6 +206,7 @@
     [self.calEventDatesCalendar setInnerBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self.calEventDatesCalendar setDayOfWeekTextColor:[UIColor whiteColor]];
     [self.calEventDatesCalendar setDateFont:[UIFont systemFontOfSize:10.0]];
+    [self.calEventDatesCalendar setTitleFont:[UIFont systemFontOfSize:14.0]];
     
 //    [self.calEventDatesCalendar setDelegate:self];
 }
@@ -233,7 +234,7 @@
             [self.mainDoneButton setTitle:@"Done" forState:UIControlStateNormal];
             [self.lblTitleLabel setText:@"Dates"];
             
-            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 374, self.postsTable.frame.size.width, self.postsTable.frame.size.height)];
+            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 377, self.postsTable.frame.size.width, self.postsTable.frame.size.height)];
         }
         else if (scrollView.contentOffset.x < 920.0) {
             

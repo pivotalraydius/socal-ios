@@ -44,7 +44,7 @@
                             <color key="textColor" red="0.0" green="0.63921568630000003" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="New" translatesAutoresizingMaskIntoConstraints="NO" id="Bfc-ei-4Vt">
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="NewEvent" translatesAutoresizingMaskIntoConstraints="NO" id="Bfc-ei-4Vt">
                             <rect key="frame" x="176" y="0.0" width="44" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.63921568630000003" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -66,7 +66,7 @@
                             <color key="textColor" red="0.0" green="0.63921568630000003" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Pencil" translatesAutoresizingMaskIntoConstraints="NO" id="1eD-vv-fqu">
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="EnterInvite" translatesAutoresizingMaskIntoConstraints="NO" id="1eD-vv-fqu">
                             <rect key="frame" x="176" y="0.0" width="44" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.63921568630000003" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -84,7 +84,7 @@
         </view>
     </objects>
     <resources>
-        <image name="New" width="35" height="35"/>
-        <image name="Pencil" width="10" height="30"/>
+        <image name="EnterInvite" width="44" height="44"/>
+        <image name="NewEvent" width="44" height="44"/>
     </resources>
 </document>

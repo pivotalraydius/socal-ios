@@ -33,6 +33,7 @@
 		9A5ED81E18924F6D00BA8E02 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED81D18924F6D00BA8E02 /* QuartzCore.framework */; };
 		9A5ED82118924FFB00BA8E02 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED82018924FFB00BA8E02 /* Helpers.m */; };
 		9A5ED825189253F800BA8E02 /* CKCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED824189253F800BA8E02 /* CKCalendarView.m */; };
+		9AF7896E18A086AA008EA2E5 /* RDLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		9A5ED82018924FFB00BA8E02 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
 		9A5ED823189253F800BA8E02 /* CKCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCalendarView.h; sourceTree = "<group>"; };
 		9A5ED824189253F800BA8E02 /* CKCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCalendarView.m; sourceTree = "<group>"; };
+		9AF7896C18A086AA008EA2E5 /* RDLabeledTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDLabeledTextView.h; sourceTree = "<group>"; };
+		9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDLabeledTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,8 @@
 				9A152D0E189626B40013B647 /* ComposeDateTimeCell.h */,
 				9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */,
 				9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */,
+				9AF7896C18A086AA008EA2E5 /* RDLabeledTextView.h */,
+				9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */,
 			);
 			path = SoCal;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 				9A5ED7B9189245D000BA8E02 /* AppDelegate.m in Sources */,
 				9A5ED7DA189245F900BA8E02 /* MainVC.m in Sources */,
 				9A5ED825189253F800BA8E02 /* CKCalendarView.m in Sources */,
+				9AF7896E18A086AA008EA2E5 /* RDLabeledTextView.m in Sources */,
 				9A152D10189626B40013B647 /* ComposeDateTimeCell.m in Sources */,
 				9A5ED7B5189245D000BA8E02 /* main.m in Sources */,
 				9A5ED82118924FFB00BA8E02 /* Helpers.m in Sources */,

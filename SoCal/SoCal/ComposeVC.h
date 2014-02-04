@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CKCalendarView.h"
 #import "RDLabeledTextView.h"
+#import "LocationVC.h"
 
 @interface ComposeVC : UIViewController <CKCalendarDelegate, UITableViewDataSource, UITableViewDelegate>
 {
@@ -34,8 +35,9 @@
 @property (nonatomic, weak) IBOutlet UIView *timeSelectionContainer;
 
 @property (nonatomic, weak) IBOutlet RDLabeledTextView *txtEventName;
-@property (nonatomic, weak) IBOutlet RDLabeledTextView *txtLocation;
 @property (nonatomic, weak) IBOutlet RDLabeledTextView *txtDescription;
+
+@property (nonatomic, weak) IBOutlet UIControl *btnLocation;
 
 @property (nonatomic, weak) IBOutlet UIButton *selectDatesButton;
 

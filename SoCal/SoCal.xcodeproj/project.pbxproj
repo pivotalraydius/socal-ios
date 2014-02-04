@@ -34,6 +34,8 @@
 		9A5ED82118924FFB00BA8E02 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED82018924FFB00BA8E02 /* Helpers.m */; };
 		9A5ED825189253F800BA8E02 /* CKCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED824189253F800BA8E02 /* CKCalendarView.m */; };
 		9AF7896E18A086AA008EA2E5 /* RDLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */; };
+		9AF7897218A0DDCC008EA2E5 /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7897018A0DDCC008EA2E5 /* LocationVC.m */; };
+		9AF7897318A0DDCC008EA2E5 /* LocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,9 @@
 		9A5ED824189253F800BA8E02 /* CKCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCalendarView.m; sourceTree = "<group>"; };
 		9AF7896C18A086AA008EA2E5 /* RDLabeledTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDLabeledTextView.h; sourceTree = "<group>"; };
 		9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDLabeledTextView.m; sourceTree = "<group>"; };
+		9AF7896F18A0DDCC008EA2E5 /* LocationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationVC.h; sourceTree = "<group>"; };
+		9AF7897018A0DDCC008EA2E5 /* LocationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationVC.m; sourceTree = "<group>"; };
+		9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +178,9 @@
 				9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */,
 				9AF7896C18A086AA008EA2E5 /* RDLabeledTextView.h */,
 				9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */,
+				9AF7896F18A0DDCC008EA2E5 /* LocationVC.h */,
+				9AF7897018A0DDCC008EA2E5 /* LocationVC.m */,
+				9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */,
 			);
 			path = SoCal;
 			sourceTree = "<group>";
@@ -304,6 +312,7 @@
 				9A152D12189626D30013B647 /* ComposeDateTimeCell.xib in Resources */,
 				9A5ED7BB189245D000BA8E02 /* Images.xcassets in Resources */,
 				9A5ED7E01892471800BA8E02 /* EventVC.xib in Resources */,
+				9AF7897318A0DDCC008EA2E5 /* LocationVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +334,7 @@
 				9A5ED7B9189245D000BA8E02 /* AppDelegate.m in Sources */,
 				9A5ED7DA189245F900BA8E02 /* MainVC.m in Sources */,
 				9A5ED825189253F800BA8E02 /* CKCalendarView.m in Sources */,
+				9AF7897218A0DDCC008EA2E5 /* LocationVC.m in Sources */,
 				9AF7896E18A086AA008EA2E5 /* RDLabeledTextView.m in Sources */,
 				9A152D10189626B40013B647 /* ComposeDateTimeCell.m in Sources */,
 				9A5ED7B5189245D000BA8E02 /* main.m in Sources */,

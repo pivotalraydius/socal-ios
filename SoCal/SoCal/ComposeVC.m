@@ -84,18 +84,15 @@
 -(void)setupComposeEventContainer {
     
     [self.txtEventName setTitle:@"Event Name"];
-    [self.txtLocation setTitle:@"Location"];
     [self.txtDescription setTitle:@"Description"];
     
     [self.txtEventName setTitleColor:[Helpers bondiBlueColorWithAlpha:1.0]];
     [self.txtEventName setTextColor:[Helpers bondiBlueColorWithAlpha:1.0]];
-    [self.txtLocation setTitleColor:[Helpers bondiBlueColorWithAlpha:1.0]];
-    [self.txtLocation setTextColor:[Helpers bondiBlueColorWithAlpha:1.0]];
     [self.txtDescription setTitleColor:[Helpers bondiBlueColorWithAlpha:1.0]];
     [self.txtDescription setTextColor:[Helpers bondiBlueColorWithAlpha:1.0]];
     
     [Helpers setBorderToView:self.txtEventName borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
-    [Helpers setBorderToView:self.txtLocation borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
+    [Helpers setBorderToView:self.btnLocation borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     [Helpers setBorderToView:self.txtDescription borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
 }
 
@@ -144,6 +141,12 @@
 -(IBAction)selectDatesAction {
     
     [self scrollToTimeSelection];
+}
+
+-(IBAction)locationButtonAction {
+    
+    LocationVC *locationVC = [[LocationVC alloc] init];
+    [self.navigationController pushViewController:locationVC animated:YES];
 }
 
 #pragma mark - Time Picker Methods
@@ -445,10 +448,6 @@
 //    CGContextDrawPath(context, kCGPathStroke);
 }
 
-#pragma mark - Text View Methods
-
-
-
 #pragma mark - Keyboard Methods
 
 -(void)keyboardWillShow {
@@ -466,7 +465,6 @@
 -(void)hideKeyboard {
     
     [self.txtEventName resignFirstResponder];
-    [self.txtLocation resignFirstResponder];
     [self.txtDescription resignFirstResponder];
 }
 

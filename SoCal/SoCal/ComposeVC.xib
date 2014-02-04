@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeVC">
             <connections>
+                <outlet property="btnLocation" destination="1d5-gs-itG" id="SJL-Ic-2e9"/>
                 <outlet property="calendarView" destination="eX7-kF-R1i" id="EZz-fZ-pWi"/>
                 <outlet property="composeEventContainer" destination="YuH-Nq-7EA" id="PuT-A4-etq"/>
                 <outlet property="dateTimeDoneButton" destination="O9A-Mn-HMB" id="m9K-of-JYj"/>
@@ -17,7 +18,6 @@
                 <outlet property="timeSelectionContainer" destination="gWn-xu-FVK" id="uP0-Z9-rcr"/>
                 <outlet property="txtDescription" destination="FT2-Wd-Ik0" id="UA0-5C-zPb"/>
                 <outlet property="txtEventName" destination="paC-3Q-Ott" id="OaW-70-fsj"/>
-                <outlet property="txtLocation" destination="1d5-gs-itG" id="WOV-0V-ARK"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -134,10 +134,26 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1d5-gs-itG" userLabel="eventLocation" customClass="RDLabeledTextView">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1d5-gs-itG" userLabel="btnEventLocation" customClass="UIControl">
                     <rect key="frame" x="20" y="67" width="280" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Location" translatesAutoresizingMaskIntoConstraints="NO" id="GUe-iS-4jn">
+                            <rect key="frame" x="236" y="0.0" width="44" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRx-lD-KBH">
+                            <rect key="frame" x="0.0" y="0.0" width="235" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.0" green="0.63921568630000003" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="locationButtonAction" destination="-1" eventType="touchUpInside" id="44d-ei-IpG"/>
+                    </connections>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FT2-Wd-Ik0" userLabel="eventDescription" customClass="RDLabeledTextView">
                     <rect key="frame" x="20" y="124" width="280" height="88"/>
@@ -189,6 +205,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </objects>
     <resources>
         <image name="Cross" width="26" height="18"/>
+        <image name="Location" width="44" height="44"/>
         <image name="MapFade" width="50" height="108"/>
         <image name="MapFadeReverse" width="50" height="108"/>
         <image name="Tick" width="26" height="18"/>

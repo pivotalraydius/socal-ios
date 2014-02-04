@@ -374,6 +374,7 @@
         [view addSubview:label];
         
         [view setTag:666];
+        [view setUserInteractionEnabled:NO];
         
         [self.selectedDateItemsViews addObject:view];
     }
@@ -417,6 +418,7 @@
 //        [view addSubview:label];
         
         [view setTag:666];
+        [view setUserInteractionEnabled:NO];
         
         [self.selectedDateItems addObject:dateToAdd];
         [self.selectedDateItemsViews addObject:view];

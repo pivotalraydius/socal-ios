@@ -15,9 +15,9 @@
                 <outlet property="timePicker" destination="JzA-h0-Dl6" id="73U-OB-XIR"/>
                 <outlet property="timePickerView" destination="wKg-e5-Udu" id="HQI-hj-GmB"/>
                 <outlet property="timeSelectionContainer" destination="gWn-xu-FVK" id="uP0-Z9-rcr"/>
-                <outlet property="txtDescription" destination="K4i-EP-ofw" id="biA-O1-L6m"/>
-                <outlet property="txtEventName" destination="sz8-Hr-trg" id="jE7-96-NJh"/>
-                <outlet property="txtLocation" destination="uhK-VK-276" id="Hsb-SJ-eVR"/>
+                <outlet property="txtDescription" destination="FT2-Wd-Ik0" id="UA0-5C-zPb"/>
+                <outlet property="txtEventName" destination="paC-3Q-Ott" id="OaW-70-fsj"/>
+                <outlet property="txtLocation" destination="1d5-gs-itG" id="WOV-0V-ARK"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -117,27 +117,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Event Name" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sz8-Hr-trg">
-                    <rect key="frame" x="20" y="10" width="280" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Location" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uhK-VK-276">
-                    <rect key="frame" x="20" y="67" width="280" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Description" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="K4i-EP-ofw">
-                    <rect key="frame" x="20" y="124" width="280" height="88"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCb-Bc-hFy">
                     <rect key="frame" x="20" y="432" width="280" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -150,6 +129,21 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <action selector="selectDatesAction" destination="-1" eventType="touchUpInside" id="zcY-vz-D9i"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="paC-3Q-Ott" userLabel="eventNameTextView" customClass="RDLabeledTextView">
+                    <rect key="frame" x="20" y="10" width="280" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1d5-gs-itG" userLabel="eventLocation" customClass="RDLabeledTextView">
+                    <rect key="frame" x="20" y="67" width="280" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FT2-Wd-Ik0" userLabel="eventDescription" customClass="RDLabeledTextView">
+                    <rect key="frame" x="20" y="124" width="280" height="88"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

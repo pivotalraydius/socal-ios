@@ -83,6 +83,17 @@
 
 -(void)setupComposeEventContainer {
     
+    [self.txtEventName setTitle:@"Event Name"];
+    [self.txtLocation setTitle:@"Location"];
+    [self.txtDescription setTitle:@"Description"];
+    
+    [self.txtEventName setTitleColor:[Helpers bondiBlueColorWithAlpha:1.0]];
+    [self.txtEventName setTextColor:[Helpers bondiBlueColorWithAlpha:1.0]];
+    [self.txtLocation setTitleColor:[Helpers bondiBlueColorWithAlpha:1.0]];
+    [self.txtLocation setTextColor:[Helpers bondiBlueColorWithAlpha:1.0]];
+    [self.txtDescription setTitleColor:[Helpers bondiBlueColorWithAlpha:1.0]];
+    [self.txtDescription setTextColor:[Helpers bondiBlueColorWithAlpha:1.0]];
+    
     [Helpers setBorderToView:self.txtEventName borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     [Helpers setBorderToView:self.txtLocation borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     [Helpers setBorderToView:self.txtDescription borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
@@ -370,6 +381,10 @@
 //    
 //    CGContextDrawPath(context, kCGPathStroke);
 }
+
+#pragma mark - Text View Methods
+
+
 
 #pragma mark - Keyboard Methods
 

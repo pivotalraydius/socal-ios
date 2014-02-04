@@ -457,11 +457,15 @@
     downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [downSwipe setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.view addGestureRecognizer:downSwipe];
+    
+    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:tapGesture];
 }
 
 -(void)keyboardWillHide {
     
     [self.view removeGestureRecognizer:downSwipe];
+    [self.view removeGestureRecognizer:tapGesture];
 }
 
 -(void)hideKeyboard {

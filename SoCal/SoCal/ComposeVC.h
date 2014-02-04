@@ -16,6 +16,7 @@
     NSInteger currentlySelectedDateTimeCell;
     
     UISwipeGestureRecognizer *downSwipe;
+    UITapGestureRecognizer *tapGesture;
 }
 
 @property (nonatomic, weak) IBOutlet CKCalendarView *calendarView;

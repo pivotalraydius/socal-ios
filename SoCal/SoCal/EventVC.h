@@ -15,6 +15,7 @@
     BOOL hasName;
     
     UISwipeGestureRecognizer *downSwipe;
+    UITapGestureRecognizer *tapGesture;
 }
 
 @property (nonatomic, weak) IBOutlet UIView *detailsView;

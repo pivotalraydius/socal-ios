@@ -394,10 +394,8 @@
 
         dateButton.frame = [self _calculateDayCellFrame:date];
         
-        /* OVER HERE!!!!!!! */
-        /* OVER HERE!!!!!!! */
-        /* OVER HERE!!!!!!! */
-        /* OVER HERE!!!!!!! */
+        /* OVER HERE!!!!!!! ------------------------------------------------- */
+        /* OVER HERE!!!!!!! ------------------------------------------------- */
         
         for (NSInteger i = 0; i < selectedDatesArray.count; i++) {
             
@@ -408,6 +406,9 @@
                 [dateButton addSubview:viewForDate];
             }
         }
+        
+        /* UP HERE!!!!!!! ------------------------------------------------- */
+        /* UP HERE!!!!!!! ------------------------------------------------- */
 
         [self.calendarContainer addSubview:dateButton];
 
@@ -425,15 +426,20 @@
     [selectedDatesArray removeAllObjects];
     [selectedDatesViewsArray removeAllObjects];
     
+    [self clearDateButtonSubviews];
+    
+    [selectedDatesArray addObjectsFromArray:dateArray];
+    [selectedDatesViewsArray addObjectsFromArray:views];
+}
+
+-(void)clearDateButtonSubviews {
+    
     for (DateButton *dateButton in self.dateButtons) {
         
         UIView *subviewToRemove = [dateButton viewWithTag:666];
         [subviewToRemove removeFromSuperview];
         subviewToRemove = nil;
     }
-    
-    [selectedDatesArray addObjectsFromArray:dateArray];
-    [selectedDatesViewsArray addObjectsFromArray:views];
 }
 
 -(NSArray *)getDateButtons {
@@ -562,6 +568,9 @@
             [self.delegate calendar:self didChangeToMonth:self.monthShowing];
         }
     }
+    
+    [self clearDateButtonSubviews];
+    [self layoutSubviews];
 }
 
 - (void)_moveCalendarToPreviousMonth {
@@ -576,6 +585,9 @@
             [self.delegate calendar:self didChangeToMonth:self.monthShowing];
         }
     }
+    
+    [self clearDateButtonSubviews];
+    [self layoutSubviews];
 }
 
 - (void)_dateButtonPressed:(id)sender {

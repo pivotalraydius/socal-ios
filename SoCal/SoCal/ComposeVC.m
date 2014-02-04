@@ -202,9 +202,6 @@
     
     [self.eventDateTimesArray removeObjectAtIndex:currentlySelectedDateTimeCell];
     [self.eventDateTimesArray insertObject:self.timePicker.date atIndex:currentlySelectedDateTimeCell];
-    
-//    [self.selectedDateItems removeObjectAtIndex:currentlySelectedDateTimeCell];
-//    [self.selectedDateItems insertObject:self.timePicker.date atIndex:currentlySelectedDateTimeCell];
 }
 
 #pragma mark - Calendar Delegate Methods
@@ -212,9 +209,13 @@
 -(void)calendar:(CKCalendarView *)calendar didSelectDate:(NSDate *)date {
     
     if (self.eventDateTimesArray.count < 5) {
+        
+        if (currentlySelectedDateTimeCell >= 0) {
+            
+            [self tableView:self.dateTimeTable didDeselectRowAtIndexPath:[NSIndexPath indexPathForRow:currentlySelectedDateTimeCell inSection:0]];
+        }
      
         [self.eventDateTimesArray addObject:date];
-        [self.selectedDateItems addObject:date];
         
         [self.dateTimeTable reloadData];
         
@@ -282,6 +283,8 @@
     
     [tableView beginUpdates];
     [tableView endUpdates];
+    
+    [self updateCalendarSubviews];
 }
 
 #pragma mark - ComposeDateTimeCell Actions
@@ -289,7 +292,6 @@
 -(void)deleteCellAtIndexPathRow:(NSInteger)row {
  
     [self.eventDateTimesArray removeObjectAtIndex:row];
-    [self.selectedDateItems removeObjectAtIndex:row];
     [self.dateTimeTable reloadData];
     
     [self updateCalendarSubviews];
@@ -310,11 +312,31 @@
 
 -(void)updateCalendarSubviews {
     
+    [self.selectedDateItems removeAllObjects];
     [self.selectedDateItemsViews removeAllObjects];
     
-    for (NSDate *dateToAdd in self.selectedDateItems) {
+    NSMutableArray *multiInDay = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (NSDate *dateToAdd in self.eventDateTimesArray) {
         
-        NSDate *timeDate = [self.eventDateTimesArray objectAtIndex:[self.selectedDateItems indexOfObject:dateToAdd]];
+        if ([self.selectedDateItems lastObject]) {
+            
+            if ([self.calendarView date:[self.selectedDateItems lastObject] isSameDayAsDate:dateToAdd]) {
+                
+                //don't add
+                [multiInDay addObject:dateToAdd];
+                [self.selectedDateItems removeObject:[self.selectedDateItems lastObject]];
+            }
+            else {
+                [self.selectedDateItems addObject:dateToAdd];
+            }
+        }
+        else {
+            [self.selectedDateItems addObject:dateToAdd];
+        }
+    }
+    
+    for (NSDate *dateToAdd in self.selectedDateItems) {
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 3.5, 30, 30)];
         [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
@@ -330,7 +352,7 @@
         [dateFormatter setAMSymbol:@"am"];
         [dateFormatter setPMSymbol:@"pm"];
         
-        NSString *dateString = [dateFormatter stringFromDate:timeDate];
+        NSString *dateString = [dateFormatter stringFromDate:dateToAdd];
         
         if ([dateString hasSuffix:@"am"]) {
             [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
@@ -339,12 +361,10 @@
             [view setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
         }
         
-        [self addBtmHalfCircleToView:view];
-        
         NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
         [dateFormatter2 setDateFormat:@"hh:mm"];
         
-        NSString *dateString2 = [dateFormatter2 stringFromDate:timeDate];
+        NSString *dateString2 = [dateFormatter2 stringFromDate:dateToAdd];
         NSString *displayString2 = dateString2;
         [label setText:displayString2];
         
@@ -355,8 +375,51 @@
         [self.selectedDateItemsViews addObject:view];
     }
     
-    [self.calendarView setSubviews:self.selectedDateItemsViews toDateButtonWithDate:self.selectedDateItems];
     
+    for (NSDate *dateToAdd in multiInDay) {
+        
+        //TO DO make the half-circle view here
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 3.5, 30, 30)];
+        [view setBackgroundColor:[Helpers bondiBlueColorWithAlpha:1.0]];
+        [view.layer setCornerRadius:view.frame.size.height/2];
+        
+//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+//        [label setTextColor:[UIColor whiteColor]];
+//        [label setBackgroundColor:[UIColor clearColor]];
+//        [label setTextAlignment:NSTextAlignmentCenter];
+//        [label setFont:[UIFont systemFontOfSize:10.0]];
+        
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:@"MMMM d, EEEE, hh:mm a"];
+//        [dateFormatter setAMSymbol:@"am"];
+//        [dateFormatter setPMSymbol:@"pm"];
+//        
+//        NSString *dateString = [dateFormatter stringFromDate:timeDate];
+//        
+//        if ([dateString hasSuffix:@"am"]) {
+//            [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+//        }
+//        else {
+//            [view setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+//        }
+//        
+//        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+//        [dateFormatter2 setDateFormat:@"hh:mm"];
+//        
+//        NSString *dateString2 = [dateFormatter2 stringFromDate:timeDate];
+//        NSString *displayString2 = dateString2;
+//        [label setText:displayString2];
+//        
+//        [view addSubview:label];
+        
+        [view setTag:666];
+        
+        [self.selectedDateItems addObject:dateToAdd];
+        [self.selectedDateItemsViews addObject:view];
+    }
+    
+    [self.calendarView setSubviews:self.selectedDateItemsViews toDateButtonWithDate:self.selectedDateItems];
     [self.calendarView reloadData];
 }
 

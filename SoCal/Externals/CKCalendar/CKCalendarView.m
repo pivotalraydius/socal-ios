@@ -395,13 +395,16 @@
         dateButton.frame = [self _calculateDayCellFrame:date];
         
         /* OVER HERE!!!!!!! */
+        /* OVER HERE!!!!!!! */
+        /* OVER HERE!!!!!!! */
+        /* OVER HERE!!!!!!! */
         
         for (NSInteger i = 0; i < selectedDatesArray.count; i++) {
             
             NSDate *dateForButton = [selectedDatesArray objectAtIndex:i];
             UIView *viewForDate = [selectedDatesViewsArray objectAtIndex:i];
             
-            if ([dateForButton compare:dateButton.date] == NSOrderedSame) {
+            if ([self date:dateForButton isSameDayAsDate:dateButton.date]) {
                 [dateButton addSubview:viewForDate];
             }
         }

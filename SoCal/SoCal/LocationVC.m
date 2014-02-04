@@ -29,6 +29,22 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
+    
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+    [super viewWillDisappear:animated];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -47,6 +63,29 @@
 -(IBAction)doneButtonAction {
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Keyboard Methods
+
+-(void)keyboardWillShow {
+    
+    downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [downSwipe setDirection:UISwipeGestureRecognizerDirectionDown];
+    [self.view addGestureRecognizer:downSwipe];
+    
+    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:tapGesture];
+}
+
+-(void)keyboardWillHide {
+    
+    [self.view removeGestureRecognizer:downSwipe];
+    [self.view removeGestureRecognizer:tapGesture];
+}
+
+-(void)hideKeyboard {
+    
+    [self.searchField resignFirstResponder];
 }
 
 @end

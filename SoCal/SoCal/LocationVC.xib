@@ -6,6 +6,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationVC">
             <connections>
+                <outlet property="mapView" destination="82Y-Yx-vV4" id="vgJ-gQ-jgR"/>
+                <outlet property="placeAddress" destination="LJW-2h-fCP" id="V8P-5Q-XCk"/>
+                <outlet property="placeName" destination="u4x-6A-oa8" id="ygj-xO-pmG"/>
+                <outlet property="placesTable" destination="iD5-Pd-6fY" id="4hM-wT-su9"/>
+                <outlet property="searchField" destination="OP9-XJ-88f" id="xFR-Lz-emF"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>

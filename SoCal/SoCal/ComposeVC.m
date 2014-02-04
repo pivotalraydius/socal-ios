@@ -215,19 +215,30 @@
         
         if (currentlySelectedDateTimeCell >= 0) {
             
-            [self tableView:self.dateTimeTable didDeselectRowAtIndexPath:[NSIndexPath indexPathForRow:currentlySelectedDateTimeCell inSection:0]];
+//            NSLog(@"date: %@", date);
+            
+//            [self tableView:self.dateTimeTable didDeselectRowAtIndexPath:[NSIndexPath indexPathForRow:currentlySelectedDateTimeCell inSection:0]];
+            [self deleteCellAtIndexPathRow:currentlySelectedDateTimeCell];
+            currentlySelectedDateTimeCell = -1;
         }
+        else {
+            
+            [self.eventDateTimesArray addObject:date];
+            
+            [self.dateTimeTable reloadData];
+            
+            [self tableView:self.dateTimeTable didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.eventDateTimesArray.count-1 inSection:0]];
+        }
+        
+//        NSLog(@"date: %@", date);
      
-        [self.eventDateTimesArray addObject:date];
         
-        [self.dateTimeTable reloadData];
-        
-        [self tableView:self.dateTimeTable didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.eventDateTimesArray.count-1 inSection:0]];
     }
 }
 
 -(void)calendar:(CKCalendarView *)calendar didDeselectDate:(NSDate *)date {
     
+//    [self deleteCellAtIndexPathRow:currentlySelectedDateTimeCell];
 }
 
 #pragma mark - Table View Delegate Methods
@@ -287,7 +298,7 @@
     [tableView beginUpdates];
     [tableView endUpdates];
     
-    [self updateCalendarSubviews];
+//    [self updateCalendarSubviews];
 }
 
 #pragma mark - ComposeDateTimeCell Actions
@@ -385,8 +396,10 @@
         //TO DO make the half-circle view here
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 3.5, 30, 30)];
-        [view setBackgroundColor:[Helpers bondiBlueColorWithAlpha:1.0]];
+        [view setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
         [view.layer setCornerRadius:view.frame.size.height/2];
+        
+        
         
 //        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
 //        [label setTextColor:[UIColor whiteColor]];

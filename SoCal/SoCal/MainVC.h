@@ -10,7 +10,11 @@
 #import "EventVC.h"
 #import "ComposeVC.h"
 
-@interface MainVC : UIViewController
+@interface MainVC : UIViewController <UITextFieldDelegate>
+{
+    UISwipeGestureRecognizer *downSwipe;
+    UITapGestureRecognizer *tapGesture;
+}
 
 @property (nonatomic, strong) ComposeVC *composeVC;
 @property (nonatomic, strong) EventVC *eventVC;
@@ -20,5 +24,7 @@
 @property (nonatomic, weak) IBOutlet UIControl *btnUseInvite;
 @property (nonatomic, weak) IBOutlet UILabel *lblBtnCreateEvent;
 @property (nonatomic, weak) IBOutlet UILabel *lblBtnUseInvite;
+
+@property (nonatomic, weak) IBOutlet UITextField *inviteCodeField;
 
 @end

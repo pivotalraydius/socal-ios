@@ -15,6 +15,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        hasName = NO;
+        self.eventDateTimesArray = [[NSMutableArray alloc] initWithCapacity:0];
+        self.selectedDateItems = [[NSMutableArray alloc] initWithCapacity:0];
+        self.selectedDateItemsViews = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
 }
@@ -26,6 +31,9 @@
         // Custom initialization
         
         hasName = NO;
+        self.eventDateTimesArray = [[NSMutableArray alloc] initWithCapacity:0];
+        self.selectedDateItems = [[NSMutableArray alloc] initWithCapacity:0];
+        self.selectedDateItemsViews = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
 }
@@ -36,6 +44,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setupUI];
+    [self retrieveEvent];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -98,6 +107,160 @@
     [self.eventDateMaybePiece.layer setCornerRadius:self.eventDateMaybePiece.frame.size.height/2];
     
     [self setupCalendar];
+}
+
+-(void)retrieveEvent {
+    
+    NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
+    
+    [[NetworkAPIClient sharedClient] postPath:RETRIEVE_EVENT parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *eventDict = [responseObject objectForKey:@"topic"];
+        
+        //set labels
+        [self setEventTitleWithTitle:[eventDict objectForKey:@"title"] place:[eventDict objectForKey:@"place_name"] andDate:nil];
+        [self.lblDetailsInfo setText:[eventDict objectForKey:@"description"]];
+        
+        //set map
+        CGFloat lat = [[eventDict objectForKey:@"latitude"] floatValue];
+        CGFloat lng = [[eventDict objectForKey:@"longitude"] floatValue];
+        
+        MKCoordinateRegion region;
+        MKCoordinateSpan span;
+        span.latitudeDelta = 0.005;
+        span.longitudeDelta = 0.005;
+        region.span = span;
+        region.center = CLLocationCoordinate2DMake(lat, lng);
+        [self.detailsMapView setRegion:region animated:YES];
+        
+        NSArray *dateStringsArray = [eventDict objectForKey:@"datetime"];
+        
+        for (NSDictionary *dateDict in dateStringsArray) {
+            
+            [self.eventDateTimesArray addObject:[Helpers dateFromString:[dateDict objectForKey:@"dateNtime"]]];
+        }
+        
+        [self updateCalendarSubviews];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"retrieve event failed with error: %@", error);
+    }];
+}
+
+-(void)updateEventDateTimeArrayWith:(NSString *)datetimeString {
+    
+    
+}
+
+-(void)setEventTitleWithTitle:(NSString *)title place:(NSString *)placeName andDate:(NSDate *)date {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMMM d, EEEE, hh:mm a"];
+    [dateFormatter setAMSymbol:@"am"];
+    [dateFormatter setPMSymbol:@"pm"];
+    
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    
+    if (title && placeName && date) {
+        [self.lblDetailsEventTitle setText:[NSString stringWithFormat:@"%@, %@ at %@", title, dateString, placeName]];
+    }
+    else if (title && placeName) {
+        [self.lblDetailsEventTitle setText:[NSString stringWithFormat:@"%@, Date Uncomfirmed, at %@", title, placeName]];
+    }
+    else if (title && date) {
+        [self.lblDetailsEventTitle setText:[NSString stringWithFormat:@"%@, %@, Location Unconfirmed", title, dateString]];
+    }
+    else {
+        [self.lblDetailsEventTitle setText:[NSString stringWithFormat:@"%@, Date and Location Unconfirmed", title]];
+    }
+}
+
+-(void)updateCalendarSubviews {
+    
+    [self.selectedDateItems removeAllObjects];
+    [self.selectedDateItemsViews removeAllObjects];
+    
+    NSMutableArray *multiInDay = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (NSDate *dateToAdd in self.eventDateTimesArray) {
+        
+        if ([self.selectedDateItems lastObject]) {
+            
+            if ([self.calEventDatesCalendar date:[self.selectedDateItems lastObject] isSameDayAsDate:dateToAdd]) {
+                
+                //don't add
+                [multiInDay addObject:dateToAdd];
+                [self.selectedDateItems removeObject:[self.selectedDateItems lastObject]];
+            }
+            else {
+                [self.selectedDateItems addObject:dateToAdd];
+            }
+        }
+        else {
+            [self.selectedDateItems addObject:dateToAdd];
+        }
+    }
+    
+    for (NSDate *dateToAdd in self.selectedDateItems) {
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
+        [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        [view.layer setCornerRadius:view.frame.size.height/2];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        [label setFont:[UIFont systemFontOfSize:10.0]];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MMMM d, EEEE, hh:mm a"];
+        [dateFormatter setAMSymbol:@"am"];
+        [dateFormatter setPMSymbol:@"pm"];
+        
+        NSString *dateString = [dateFormatter stringFromDate:dateToAdd];
+        
+        if ([dateString hasSuffix:@"am"]) {
+            [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        }
+        else {
+            [view setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        }
+        
+        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+        [dateFormatter2 setDateFormat:@"hh:mm"];
+        
+        NSString *dateString2 = [dateFormatter2 stringFromDate:dateToAdd];
+        NSString *displayString2 = dateString2;
+        [label setText:displayString2];
+        
+        [view addSubview:label];
+        
+        [view setTag:666];
+        [view setUserInteractionEnabled:NO];
+        
+        [self.selectedDateItemsViews addObject:view];
+    }
+    
+    
+    for (NSDate *dateToAdd in multiInDay) {
+        
+        //TO DO make the half-circle view here
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
+        [view setBackgroundColor:[UIColor redColor]];
+        [view.layer setCornerRadius:view.frame.size.height/2];
+        
+        [view setTag:666];
+        [view setUserInteractionEnabled:NO];
+        
+        [self.selectedDateItems addObject:dateToAdd];
+        [self.selectedDateItemsViews addObject:view];
+    }
+    
+    [self.calEventDatesCalendar setSubviews:self.selectedDateItemsViews toDateButtonWithDate:self.selectedDateItems];
+    [self.calEventDatesCalendar reloadData];
 }
 
 #pragma mark - View Action Methods

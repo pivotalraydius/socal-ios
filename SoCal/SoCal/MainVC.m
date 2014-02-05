@@ -19,6 +19,24 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
+    
+    [self.inviteCodeField setHidden:YES];
+    
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -39,6 +57,8 @@
 
 -(void)setupUI {
     
+    [self.inviteCodeField setHidden:YES];
+    
     [Helpers setBorderToView:self.btnCreateEvent borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     [Helpers setBorderToView:self.btnUseInvite borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
 }
@@ -51,8 +71,51 @@
 
 -(IBAction)btnUseInviteAction {
     
+    [self.inviteCodeField setHidden:NO];
+}
+
+-(void)openEventVC {
+    
+    [self hideKeyboard];
+    
     self.eventVC = [[EventVC alloc] init];
+    [self.eventVC setEventInviteCode:self.inviteCodeField.text];
     [self.navigationController pushViewController:self.eventVC animated:YES];
+}
+
+#pragma mark - UITextField Delegate Methods
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if (textField == self.inviteCodeField) {
+        
+        [self openEventVC];
+    }
+    
+    return YES;
+}
+
+#pragma mark - Keyboard Methods
+
+-(void)keyboardWillShow {
+    
+    downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [downSwipe setDirection:UISwipeGestureRecognizerDirectionDown];
+    [self.view addGestureRecognizer:downSwipe];
+    
+    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:tapGesture];
+}
+
+-(void)keyboardWillHide {
+    
+    [self.view removeGestureRecognizer:downSwipe];
+    [self.view removeGestureRecognizer:tapGesture];
+}
+
+-(void)hideKeyboard {
+    
+    [self.inviteCodeField resignFirstResponder];
 }
 
 @end

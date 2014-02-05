@@ -62,7 +62,11 @@
 @property (nonatomic, weak) IBOutlet UITableView *doneDatesTableView;
 @property (nonatomic, weak) IBOutlet UILabel *lblDoneSummaryLabel;
 
-@property (nonatomic, strong) NSNumber *eventInviteCode;
+@property (nonatomic, strong) NSString *eventInviteCode;
 @property (nonatomic, strong) NSString *eventUserName;
+
+@property (nonatomic, strong) NSMutableArray *eventDateTimesArray;
+@property (nonatomic, strong) NSMutableArray *selectedDateItems;
+@property (nonatomic, strong) NSMutableArray *selectedDateItemsViews;
 
 @end

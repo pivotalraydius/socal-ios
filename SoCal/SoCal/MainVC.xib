@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="btnCreateEvent" destination="NOd-fd-dO4" id="9xH-EO-fHi"/>
                 <outlet property="btnUseInvite" destination="q03-1p-ITi" id="xLc-b5-TIw"/>
+                <outlet property="inviteCodeField" destination="bB9-La-66q" id="h8s-1y-PZd"/>
                 <outlet property="lblBtnCreateEvent" destination="Dpl-Fy-tFK" id="Svu-l8-y2V"/>
                 <outlet property="lblBtnUseInvite" destination="7FY-XG-qVn" id="UGo-yM-i6g"/>
                 <outlet property="lblMainTitleLabel" destination="Wy3-ic-7Lp" id="w64-7W-FWo"/>
@@ -77,6 +78,15 @@
                         <action selector="btnUseInviteAction" destination="-1" eventType="touchUpInside" id="dc5-Zi-D9u"/>
                     </connections>
                 </view>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter invite code" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bB9-La-66q">
+                    <rect key="frame" x="50" y="321" width="220" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="z8c-cO-hIg"/>
+                    </connections>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

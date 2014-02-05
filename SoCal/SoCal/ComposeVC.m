@@ -27,12 +27,21 @@
     
     [self setupTestData];
     [self setupMainScrollView];
+    
+    [self getNewInviteCode];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
+    
+    if (self.selectedLocationDict) {
+        [self.lblBtnLocation setText:[self.selectedLocationDict objectForKey:@"name"]];
+    }
+    else {
+        [self.lblBtnLocation setText:@"Location"];
+    }
     
     [super viewWillAppear:animated];
 }
@@ -133,9 +142,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(IBAction)doneButtonAction {
+-(IBAction)dateSelectionDoneButtonAction {
     
     [self scrollToComposeEvent];
+}
+
+-(IBAction)doneButtonAction {
+    
+    [self createEvent];
 }
 
 -(IBAction)selectDatesAction {
@@ -146,6 +160,7 @@
 -(IBAction)locationButtonAction {
     
     LocationVC *locationVC = [[LocationVC alloc] init];
+    [locationVC setParentVC:self];
     [self.navigationController pushViewController:locationVC animated:YES];
 }
 
@@ -455,6 +470,57 @@
 //    CGContextSetLineWidth(context, 2.0);
 //    
 //    CGContextDrawPath(context, kCGPathStroke);
+}
+
+#pragma mark - Create Event Methods
+
+-(void)getNewInviteCode {
+ 
+    [[NetworkAPIClient sharedClient] postPath:GENERATE_INVITE_CODE parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        self.invitationCode = [responseObject objectForKey:@"invitation_code"];
+        NSLog(@"invitation code: %@", self.invitationCode);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"Retrieve invite code failed");
+    }];
+}
+
+-(void)createEvent {
+    
+    CGFloat latitude = [[self.selectedLocationDict objectForKey:@"latitude"] floatValue];
+    CGFloat longitude = [[self.selectedLocationDict objectForKey:@"longitude"] floatValue];
+    NSString *placeName = [self.selectedLocationDict objectForKey:@"name"];
+    NSString *placeAddress = [self.selectedLocationDict objectForKey:@"address"];
+    
+    NSString *dateString = @"";
+    for (NSDate *date in self.eventDateTimesArray) {
+
+        dateString = [dateString stringByAppendingString:[Helpers stringFromDate:date]];
+        dateString = [dateString stringByAppendingString:@","];
+    }
+    
+    NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
+    [queryInfo setObject:self.txtEventName.text forKey:@"event_name"];
+    [queryInfo setObject:self.invitationCode forKey:@"invitation_code"];
+    [queryInfo setObject:[NSNumber numberWithFloat:latitude] forKey:@"latitude"];
+    [queryInfo setObject:[NSNumber numberWithFloat:longitude] forKey:@"longitude"];
+    [queryInfo setObject:placeName forKey:@"place_name"];
+    [queryInfo setObject:placeAddress forKey:@"address"];
+    [queryInfo setObject:self.txtDescription.text forKey:@"description"];
+    [queryInfo setObject:dateString forKey:@"datetime"];
+    
+    [[NetworkAPIClient sharedClient] postPath:CREATE_EVENT parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"create event success");
+        [self closeButtonAction];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       
+        NSLog(@"creat event failed with error: %@", error);
+    }];
 }
 
 #pragma mark - Keyboard Methods

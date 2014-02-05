@@ -8,9 +8,12 @@
             <connections>
                 <outlet property="btnLocation" destination="1d5-gs-itG" id="SJL-Ic-2e9"/>
                 <outlet property="calendarView" destination="eX7-kF-R1i" id="EZz-fZ-pWi"/>
+                <outlet property="closeButton" destination="l9F-er-MHN" id="fRz-4d-zNC"/>
                 <outlet property="composeEventContainer" destination="YuH-Nq-7EA" id="PuT-A4-etq"/>
                 <outlet property="dateTimeDoneButton" destination="O9A-Mn-HMB" id="m9K-of-JYj"/>
                 <outlet property="dateTimeTable" destination="sp3-z9-tGG" id="ysD-cb-42k"/>
+                <outlet property="doneButton" destination="9CU-5X-laK" id="9ca-pt-mLb"/>
+                <outlet property="lblBtnLocation" destination="aRx-lD-KBH" id="6Pa-ku-21X"/>
                 <outlet property="mainScrollView" destination="35g-tJ-2nl" id="8ep-3G-gge"/>
                 <outlet property="selectDatesButton" destination="bCb-Bc-hFy" id="KEw-aE-xus"/>
                 <outlet property="timePicker" destination="JzA-h0-Dl6" id="73U-OB-XIR"/>
@@ -56,6 +59,9 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="doneButtonAction" destination="-1" eventType="touchUpInside" id="Uzt-yg-2Da"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.63921568630000003" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,6 +69,9 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35g-tJ-2nl">
                     <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Fpj-MV-PQ6"/>
+                    </connections>
                 </scrollView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sp3-z9-tGG">
                     <rect key="frame" x="10" y="338" width="300" height="150"/>
@@ -187,7 +196,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="doneButtonAction" destination="-1" eventType="touchUpInside" id="sPU-UV-kfv"/>
+                        <action selector="dateSelectionDoneButtonAction" destination="-1" eventType="touchUpInside" id="ooj-8S-o69"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MapFade" translatesAutoresizingMaskIntoConstraints="NO" id="6MY-2H-gGG">

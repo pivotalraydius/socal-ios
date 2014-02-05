@@ -28,6 +28,9 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *dateTimeDoneButton;
 
+@property (nonatomic, weak) IBOutlet UIButton *closeButton;
+@property (nonatomic, weak) IBOutlet UIButton *doneButton;
+
 @property (nonatomic, weak) IBOutlet UIView *timePickerView;
 @property (nonatomic, weak) IBOutlet UIDatePicker *timePicker;
 
@@ -39,8 +42,12 @@
 @property (nonatomic, weak) IBOutlet RDLabeledTextView *txtDescription;
 
 @property (nonatomic, weak) IBOutlet UIControl *btnLocation;
-
+@property (nonatomic, weak) IBOutlet UILabel *lblBtnLocation;
 @property (nonatomic, weak) IBOutlet UIButton *selectDatesButton;
+
+@property (nonatomic, strong) NSDictionary *selectedLocationDict;
+
+@property (nonatomic, strong) NSNumber *invitationCode;
 
 -(void)deleteCellAtIndexPathRow:(NSInteger)row;
 -(void)editTimeForCellAtIndexPathRow:(NSInteger)row;

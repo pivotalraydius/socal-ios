@@ -17,4 +17,7 @@
 
 +(void)setBorderToView:(UIView*)view borderColor:(UIColor*)color borderThickness:(float)thickness borderRadius:(float)radius;
 
++(NSDate *)dateFromString:(NSString *)dateString;
++(NSString *)stringFromDate:(NSDate *)date;
+
 @end

@@ -37,4 +37,24 @@
     if (radius>0) [view.layer setCornerRadius:radius];
 }
 
++ (NSDate *)dateFromString:(NSString *)dateString {
+    
+    if (!dateString) return nil;
+    if ([dateString hasSuffix:@"Z"]) {
+        dateString = [[dateString substringToIndex:(dateString.length-1)] stringByAppendingString:@"-0000"];
+    }
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+    
+    return [formatter dateFromString:dateString];
+}
+
++(NSString *)stringFromDate:(NSDate *)date {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+    
+    return [formatter stringFromDate:date];
+}
+
 @end

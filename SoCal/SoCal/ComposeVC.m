@@ -215,30 +215,37 @@
         
         if (currentlySelectedDateTimeCell >= 0) {
             
-//            NSLog(@"date: %@", date);
+            //if selected date different from currentlyselecteddatetimecell date
+            NSDate *currentlySelected = [self.eventDateTimesArray objectAtIndex:currentlySelectedDateTimeCell];
             
-//            [self tableView:self.dateTimeTable didDeselectRowAtIndexPath:[NSIndexPath indexPathForRow:currentlySelectedDateTimeCell inSection:0]];
             [self deleteCellAtIndexPathRow:currentlySelectedDateTimeCell];
-            currentlySelectedDateTimeCell = -1;
+            
+            if ([self.calendarView date:date isSameDayAsDate:currentlySelected]) {
+                
+                //if same
+            }
+            else {
+                
+                //if different
+                
+                [self.eventDateTimesArray addObject:date];
+                [self.dateTimeTable reloadData];
+                
+                [self tableView:self.dateTimeTable didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.eventDateTimesArray.count-1 inSection:0]];
+            }
         }
         else {
             
             [self.eventDateTimesArray addObject:date];
-            
             [self.dateTimeTable reloadData];
             
             [self tableView:self.dateTimeTable didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.eventDateTimesArray.count-1 inSection:0]];
         }
-        
-//        NSLog(@"date: %@", date);
-     
-        
     }
 }
 
 -(void)calendar:(CKCalendarView *)calendar didDeselectDate:(NSDate *)date {
-    
-//    [self deleteCellAtIndexPathRow:currentlySelectedDateTimeCell];
+
 }
 
 #pragma mark - Table View Delegate Methods
@@ -297,8 +304,24 @@
     
     [tableView beginUpdates];
     [tableView endUpdates];
+}
+
+#pragma mark - UIScrollView Delegate Methods
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-//    [self updateCalendarSubviews];
+    if (scrollView == self.mainScrollView) {
+        
+        if (scrollView.contentOffset.x >= 320.0) {
+            
+            [self.closeButton setHidden:YES];
+            [self.doneButton setHidden:YES];
+        }
+        else {
+            [self.closeButton setHidden:NO];
+            [self.doneButton setHidden:NO];
+        }
+    }
 }
 
 #pragma mark - ComposeDateTimeCell Actions
@@ -307,6 +330,8 @@
  
     [self.eventDateTimesArray removeObjectAtIndex:row];
     [self.dateTimeTable reloadData];
+    
+    currentlySelectedDateTimeCell = -1;
     
     [self updateCalendarSubviews];
 }
@@ -352,7 +377,7 @@
     
     for (NSDate *dateToAdd in self.selectedDateItems) {
         
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 3.5, 30, 30)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
         [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
         [view.layer setCornerRadius:view.frame.size.height/2];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -395,40 +420,9 @@
         
         //TO DO make the half-circle view here
         
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 3.5, 30, 30)];
-        [view setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
+        [view setBackgroundColor:[UIColor redColor]];
         [view.layer setCornerRadius:view.frame.size.height/2];
-        
-        
-        
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-//        [label setTextColor:[UIColor whiteColor]];
-//        [label setBackgroundColor:[UIColor clearColor]];
-//        [label setTextAlignment:NSTextAlignmentCenter];
-//        [label setFont:[UIFont systemFontOfSize:10.0]];
-        
-//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//        [dateFormatter setDateFormat:@"MMMM d, EEEE, hh:mm a"];
-//        [dateFormatter setAMSymbol:@"am"];
-//        [dateFormatter setPMSymbol:@"pm"];
-//        
-//        NSString *dateString = [dateFormatter stringFromDate:timeDate];
-//        
-//        if ([dateString hasSuffix:@"am"]) {
-//            [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
-//        }
-//        else {
-//            [view setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
-//        }
-//        
-//        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
-//        [dateFormatter2 setDateFormat:@"hh:mm"];
-//        
-//        NSString *dateString2 = [dateFormatter2 stringFromDate:timeDate];
-//        NSString *displayString2 = dateString2;
-//        [label setText:displayString2];
-//        
-//        [view addSubview:label];
         
         [view setTag:666];
         [view setUserInteractionEnabled:NO];

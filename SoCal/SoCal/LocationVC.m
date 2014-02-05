@@ -7,10 +7,9 @@
 //
 
 #import "LocationVC.h"
-
-@interface LocationVC ()
-
-@end
+#import "UIBAlertView.h"
+#import "PlaceSearchCell.h"
+#import "ComposeVC.h"
 
 @implementation LocationVC
 
@@ -18,15 +17,40 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self initialize];
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (void)initialize
+{
+    self.arFilteredPlaces = [[NSMutableArray alloc] initWithCapacity:0];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    CGFloat lat = 1.2893;
+    CGFloat lng = 103.7819;
+    
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.005;
+    span.longitudeDelta = 0.005;
+    region.span = span;
+    region.center = CLLocationCoordinate2DMake(lat, lng);
+    [self.mapView setRegion:region animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -57,12 +81,187 @@
 
 -(IBAction)closeButtonAction {
     
+    [(ComposeVC *)self.parentVC setSelectedLocationDict:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(IBAction)doneButtonAction {
     
+    [(ComposeVC *)self.parentVC setSelectedLocationDict:selectedPlaceDict];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Get Location Methods
+
+-(void)searchForPlacesOnServer {
+    
+    [self hideKeyboard];
+    
+    [[NetworkAPIClient sharedStagingClient] cancelAllHTTPOperationsWithMethod:@"POST" path:PLACES_WITHIN_LOCATION];
+    [[NetworkAPIClient sharedStagingClient] cancelAllHTTPOperationsWithMethod:@"POST" path:PLACES_CHECKIN_SEARCH_NEARBY_PLACES];
+    [[NetworkAPIClient sharedStagingClient] cancelAllHTTPOperationsWithMethod:@"POST" path:PLACES_WITHIN_LOCALITY];
+    
+    NSString *locationKeyword = [[self.txtPlaceName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] lowercaseString];
+    NSString *cityKeyword = [[self.txtCityName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] lowercaseString] ;
+    
+    CLLocationCoordinate2D centerCoor = [self.mapView centerCoordinate];
+    CLLocationCoordinate2D topCenterCoor = [self.mapView convertPoint:CGPointMake(self.mapView.frame.size.width / 2.0f, 0) toCoordinateFromView:self.mapView];
+    
+    CLLocation *centerLocation = [[CLLocation alloc] initWithLatitude:centerCoor.latitude longitude:centerCoor.longitude];
+    CLLocation *topCenterLocation = [[CLLocation alloc] initWithLatitude:topCenterCoor.latitude longitude:topCenterCoor.longitude];
+    
+    CLLocationDistance radius = [centerLocation distanceFromLocation:topCenterLocation];
+    
+    NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
+    NSString *path = PLACES_WITHIN_LOCATION;
+    
+    if ([locationKeyword isEqualToString:@""] && [cityKeyword isEqualToString:@""]) {
+        
+        //has neither keywords
+        //do a map-restricted search without keywords
+        
+        path = PLACES_CHECKIN_SEARCH_NEARBY_PLACES;
+        radius = radius/1000; //select_venue API uses km instead of m
+        
+        [queryInfo setObject:[NSNumber numberWithFloat:centerCoor.latitude] forKey:@"latitude"];
+        [queryInfo setObject:[NSNumber numberWithFloat:centerCoor.longitude] forKey:@"longitude"];
+        [queryInfo setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
+    }
+    else if ([locationKeyword isEqualToString:@""] && ![cityKeyword isEqualToString:@""]) {
+        
+        //has city keyword no location keyword
+        //alert user to input location keyword
+        
+        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Missing main keyword" message:@"Please enter the main search keyword together with your city keyword." cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+            
+        }];
+        
+        return;
+    }
+    else if (![locationKeyword isEqualToString:@""] && [cityKeyword isEqualToString:@""]) {
+        
+        //has location keyword no city keyword
+        //do a map-restricted search with location keyword
+        
+        path = PLACES_WITHIN_LOCATION;
+        
+        [queryInfo setObject:[NSNumber numberWithFloat:centerCoor.latitude] forKey:@"latitude"];
+        [queryInfo setObject:[NSNumber numberWithFloat:centerCoor.longitude] forKey:@"longitude"];
+        [queryInfo setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
+        
+        [queryInfo setObject:locationKeyword forKey:@"keyword"];
+        
+    }
+    else if (![locationKeyword isEqualToString:@""] && ![cityKeyword isEqualToString:@""]) {
+        
+        //has both keywords
+        //do a non-map-restricted locality search with both keywords
+        
+        path = PLACES_WITHIN_LOCALITY;
+        
+        [queryInfo setObject:locationKeyword forKey:@"keyword"];
+        [queryInfo setObject:cityKeyword forKey:@"locality"];
+    }
+    
+    [self.arFilteredPlaces removeAllObjects];
+    [self.placesTable reloadData];
+    selectedPlaceDict = nil;
+    
+    [[NetworkAPIClient sharedStagingClient] postPath:path parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self.arFilteredPlaces removeAllObjects];
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            
+            NSArray *dbArray = [responseObject objectForKey:@"database"];
+            NSArray *ftArray = [responseObject objectForKey:@"factual"];
+            
+            [self.arFilteredPlaces addObjectsFromArray:dbArray];
+            [self.arFilteredPlaces addObjectsFromArray:ftArray];
+        }
+        else if ([responseObject isKindOfClass:[NSArray class]]) {
+            
+            [self.arFilteredPlaces addObjectsFromArray:responseObject];
+        }
+        
+        [self.placesTable reloadData];
+        selectedPlaceDict = nil;
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [self.arFilteredPlaces removeAllObjects];
+        
+        [self.txtPlaceName setText:@""];
+        
+        [self.placesTable reloadData];
+        selectedPlaceDict = nil;
+    }];
+}
+
+#pragma mark - UITableView Delegate Methods
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.arFilteredPlaces.count;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
+    PlaceSearchCell *cell = (PlaceSearchCell *)[tableView dequeueReusableCellWithIdentifier:@"PlaceSearchCell"];
+    
+    if (!cell) {
+        cell = [PlaceSearchCell newCell];
+    }
+    
+    NSDictionary *placeDict = [self.arFilteredPlaces objectAtIndex:indexPath.row];
+    
+    [cell.lblPlaceName setText:[placeDict objectForKey:@"name"]];
+    [cell.lblPlaceAddress setText:[placeDict objectForKey:@"address"]];
+    
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 70.0;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSDictionary *placeDict = [self.arFilteredPlaces objectAtIndex:indexPath.row];
+    
+    [self.placeName setText:[placeDict objectForKey:@"name"]];
+    [self.placeAddress setText:[placeDict objectForKey:@"address"]];
+    
+    CGFloat lat = [[placeDict objectForKey:@"latitude"] floatValue];
+    CGFloat lng = [[placeDict objectForKey:@"longitude"] floatValue];
+    
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.005;
+    span.longitudeDelta = 0.005;
+    region.span = span;
+    region.center = CLLocationCoordinate2DMake(lat, lng);
+    [self.mapView setRegion:region animated:YES];
+    
+    selectedPlaceDict = placeDict;
+}
+
+#pragma mark - UITextField Delegate Methods
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if (self.txtPlaceName || self.txtCityName) {
+        
+        [self searchForPlacesOnServer];
+    }
+    
+    return YES;
 }
 
 #pragma mark - Keyboard Methods
@@ -85,7 +284,8 @@
 
 -(void)hideKeyboard {
     
-    [self.searchField resignFirstResponder];
+    [self.txtPlaceName resignFirstResponder];
+    [self.txtCityName resignFirstResponder];
 }
 
 @end

@@ -10,7 +10,8 @@
                 <outlet property="placeAddress" destination="LJW-2h-fCP" id="V8P-5Q-XCk"/>
                 <outlet property="placeName" destination="u4x-6A-oa8" id="ygj-xO-pmG"/>
                 <outlet property="placesTable" destination="iD5-Pd-6fY" id="4hM-wT-su9"/>
-                <outlet property="searchField" destination="OP9-XJ-88f" id="xFR-Lz-emF"/>
+                <outlet property="txtCityName" destination="NQB-eW-7zr" id="xpN-WF-pm2"/>
+                <outlet property="txtPlaceName" destination="OP9-XJ-88f" id="8iS-Yn-j2E"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -57,15 +58,30 @@
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.63921568630000003" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="82Y-Yx-vV4">
-                    <rect key="frame" x="20" y="72" width="280" height="170"/>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82Y-Yx-vV4">
+                    <rect key="frame" x="20" y="142" width="280" height="143"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="zuQ-In-uZe"/>
+                    </connections>
                 </mapView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type here to search" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OP9-XJ-88f">
-                    <rect key="frame" x="20" y="250" width="280" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type here to search for a place/address" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OP9-XJ-88f">
+                    <rect key="frame" x="20" y="72" width="280" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="hRa-wH-tVg"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter a city name here (optional)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NQB-eW-7zr">
+                    <rect key="frame" x="20" y="105" width="280" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="PUf-dg-jPj"/>
+                    </connections>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Place Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4x-6A-oa8">
                     <rect key="frame" x="20" y="288" width="280" height="25"/>
@@ -87,6 +103,10 @@ Line 2</string>
                     <rect key="frame" x="0.0" y="355" width="320" height="213"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="zg4-OD-u9W"/>
+                        <outlet property="delegate" destination="-1" id="Bw3-9x-6sc"/>
+                    </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

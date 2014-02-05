@@ -24,6 +24,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
     
+    [self.inviteCodeField setText:@""];
     [self.inviteCodeField setHidden:YES];
     
     [super viewWillAppear:animated];
@@ -72,6 +73,7 @@
 -(IBAction)btnUseInviteAction {
     
     [self.inviteCodeField setHidden:NO];
+    [self.inviteCodeField becomeFirstResponder];
 }
 
 -(void)openEventVC {
@@ -116,6 +118,7 @@
 -(void)hideKeyboard {
     
     [self.inviteCodeField resignFirstResponder];
+    [self.inviteCodeField setHidden:YES];
 }
 
 @end

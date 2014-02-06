@@ -72,8 +72,15 @@
 
 -(IBAction)btnUseInviteAction {
     
-    [self.inviteCodeField setHidden:NO];
-    [self.inviteCodeField becomeFirstResponder];
+    if ([self.inviteCodeField.text isEqualToString:@""]) {
+     
+        [self.inviteCodeField setHidden:NO];
+        [self.inviteCodeField becomeFirstResponder];
+    }
+    else {
+        
+        [self openEventVC];
+    }
 }
 
 -(void)openEventVC {
@@ -105,14 +112,14 @@
     [downSwipe setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.view addGestureRecognizer:downSwipe];
     
-    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    [self.view addGestureRecognizer:tapGesture];
+//    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+//    [self.view addGestureRecognizer:tapGesture];
 }
 
 -(void)keyboardWillHide {
     
     [self.view removeGestureRecognizer:downSwipe];
-    [self.view removeGestureRecognizer:tapGesture];
+//    [self.view removeGestureRecognizer:tapGesture];
 }
 
 -(void)hideKeyboard {

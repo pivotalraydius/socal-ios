@@ -545,7 +545,7 @@
     
     //reset button positions
     
-    [UIView animateWithDuration:0.1
+    [UIView animateWithDuration:0.05
                      animations:^{
                          
                          [self.eventDateYesPiece setFrame:CGRectMake(20, 269, self.eventDateYesPiece.frame.size.width, self.eventDateYesPiece.frame.size.height)];
@@ -557,7 +557,7 @@
                      }];
     
     //check gesture and release point
-    CGPoint releaseLocation = [gesture locationInView:self.calEventDatesCalendar];
+//    CGPoint releaseLocation = [gesture locationInView:self.calEventDatesCalendar];
     
 }
 

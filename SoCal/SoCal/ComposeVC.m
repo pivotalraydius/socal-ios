@@ -233,6 +233,9 @@
             //if selected date different from currentlyselecteddatetimecell date
             NSDate *currentlySelected = [self.eventDateTimesArray objectAtIndex:currentlySelectedDateTimeCell];
             
+            NSLog(@"was selected: %@", currentlySelected);
+            NSLog(@"just selected: %@", date);
+            
             [self deleteCellAtIndexPathRow:currentlySelectedDateTimeCell];
             
             if ([self.calendarView date:date isSameDayAsDate:currentlySelected]) {
@@ -246,7 +249,9 @@
                 [self.eventDateTimesArray addObject:date];
                 [self.dateTimeTable reloadData];
                 
-                [self tableView:self.dateTimeTable didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.eventDateTimesArray.count-1 inSection:0]];
+                if (self.eventDateTimesArray.count > 0) {
+                    [self tableView:self.dateTimeTable didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.eventDateTimesArray.count-1 inSection:0]];
+                }
             }
         }
         else {
@@ -254,7 +259,9 @@
             [self.eventDateTimesArray addObject:date];
             [self.dateTimeTable reloadData];
             
-            [self tableView:self.dateTimeTable didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.eventDateTimesArray.count-1 inSection:0]];
+            if (self.eventDateTimesArray.count > 0) {
+                [self tableView:self.dateTimeTable didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.eventDateTimesArray.count-1 inSection:0]];
+            }
         }
     }
 }

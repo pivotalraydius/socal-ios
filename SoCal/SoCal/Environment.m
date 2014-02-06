@@ -64,6 +64,18 @@
     return @"13441";
 }
 
+//+(NSString *)Pusher_Key {
+//    return @"cf60b3956ba93143ee47";
+//}
+//
+//+(NSString *)Pusher_Secret {
+//    return @"2e208eb4dafb67912d34";
+//}
+//
+//+(NSString *)LuncheonAppURLBaseHost {
+//    return @"luncheonDevelopment://";
+//}
+
 +(NSString *)Pusher_Key {
     return @"cf60b3956ba93143ee47";
 }

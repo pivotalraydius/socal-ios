@@ -19,5 +19,6 @@
 
 +(NSDate *)dateFromString:(NSString *)dateString;
 +(NSString *)stringFromDate:(NSDate *)date;
++(NSString *)timeframeFromString:(NSString *)timeString;
 
 @end

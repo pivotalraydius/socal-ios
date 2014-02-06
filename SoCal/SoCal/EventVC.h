@@ -9,13 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "CKCalendarView.h"
+#import "PTPusher.h"
 
-@interface EventVC : UIViewController <UIScrollViewDelegate>
+@interface EventVC : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, PTPusherDelegate>
 {
     BOOL hasName;
     
     UISwipeGestureRecognizer *downSwipe;
     UITapGestureRecognizer *tapGesture;
+    
+    UIPanGestureRecognizer *yesPan;
+    UIPanGestureRecognizer *noPan;
+    UIPanGestureRecognizer *maybePan;
 }
 
 @property (nonatomic, weak) IBOutlet UIView *detailsView;
@@ -27,6 +32,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *mainDoneButton;
 
 @property (nonatomic, weak) IBOutlet UITableView *postsTable;
+@property (nonatomic, strong) NSMutableArray *postsArray;
 
 @property (nonatomic, weak) IBOutlet UIView *bottomBar;
 @property (nonatomic, weak) IBOutlet UILabel *lblEnterNamePrompt;
@@ -53,7 +59,6 @@
 
 @property (nonatomic, weak) IBOutlet CKCalendarView *calEventDatesCalendar;
 
-@property (nonatomic, weak) IBOutlet UIView *actionBar;
 @property (nonatomic, weak) IBOutlet UIView *eventDateYesPiece;
 @property (nonatomic, weak) IBOutlet UIView *eventDateNoPiece;
 @property (nonatomic, weak) IBOutlet UIView *eventDateMaybePiece;
@@ -68,5 +73,7 @@
 @property (nonatomic, strong) NSMutableArray *eventDateTimesArray;
 @property (nonatomic, strong) NSMutableArray *selectedDateItems;
 @property (nonatomic, strong) NSMutableArray *selectedDateItemsViews;
+
+@property (nonatomic, strong) PTPusher *pusherClient;
 
 @end

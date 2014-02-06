@@ -7,6 +7,8 @@
 //
 
 #import "EventVC.h"
+#import "PostCell.h"
+#import "PTPusherEvent.h"
 
 @implementation EventVC
 
@@ -20,6 +22,7 @@
         self.eventDateTimesArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.selectedDateItems = [[NSMutableArray alloc] initWithCapacity:0];
         self.selectedDateItemsViews = [[NSMutableArray alloc] initWithCapacity:0];
+        self.postsArray = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
 }
@@ -34,6 +37,7 @@
         self.eventDateTimesArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.selectedDateItems = [[NSMutableArray alloc] initWithCapacity:0];
         self.selectedDateItemsViews = [[NSMutableArray alloc] initWithCapacity:0];
+        self.postsArray = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
 }
@@ -45,6 +49,9 @@
     
     [self setupUI];
     [self retrieveEvent];
+    [self downloadPosts];
+    [self pusherConnect];
+    [self initTouchForVoteButtons];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -299,6 +306,7 @@
 
 -(void)closeEventVC {
  
+    [self pusherDisconnect];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -350,13 +358,18 @@
     self.eventUserName = self.txtNameField.text;
     hasName = YES;
     
+    [self.postsTable setAlpha:1.0];
+    
     [self setBottomBarMode];
+    
+    [self.postsTable reloadData];
 }
 
 #pragma mark - Posts Methods
 
 -(IBAction)btnPostAction {
     
+    [self createPost];
 }
 
 #pragma mark - Calendar Methods
@@ -372,6 +385,180 @@
     [self.calEventDatesCalendar setTitleFont:[UIFont systemFontOfSize:14.0]];
     
 //    [self.calEventDatesCalendar setDelegate:self];
+}
+
+#pragma mark - Pusher Methods
+
+-(void)pusherConnect {
+    
+    self.pusherClient = [PTPusher pusherWithKey:[Environment Pusher_Key] connectAutomatically:NO encrypted:YES];
+    [self.pusherClient setDelegate:self];
+    [self.pusherClient connect];
+    [self.pusherClient setReconnectAutomatically:YES];
+    [self.pusherClient setReconnectDelay:0.1];
+}
+
+-(void)pusherDisconnect {
+    
+    [self.pusherClient disconnect];
+    [self.pusherClient setDelegate:nil];
+    self.pusherClient = nil;
+}
+
+#pragma mark - Pusher Delegate Methods
+
+-(void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection {
+    
+    //subscribe to main channel on connect
+    
+    NSString *channelName = [NSString stringWithFormat:@"%@_channel", self.eventInviteCode];
+    [self.pusherClient subscribeToChannelNamed:channelName];
+}
+
+-(void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection {
+    
+    NSLog(@"Pusher did disconnect");
+}
+
+-(void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error {
+    
+    NSLog(@"Pusher did disconnect with error");
+}
+
+-(void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error {
+    
+    NSLog(@"Pusher did fail with error");
+}
+
+-(void)pusher:(PTPusher *)pusher didSubscribeToChannel:(PTPusherChannel *)channel {
+ 
+    //add block handlers for pusher events
+    [pusher bindToEventNamed:@"new_post" handleWithBlock:^(PTPusherEvent *channelEvent) {
+        
+        NSDictionary *postDict = channelEvent.data;
+        [self handleNewPost:postDict];
+    }];
+}
+
+-(void)pusher:(PTPusher *)pusher didUnsubscribeFromChannel:(PTPusherChannel *)channel {
+    
+    NSLog(@"Unsubscribed from channel");
+}
+
+-(void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error {
+    
+    NSLog(@"Pusher did fail to subscribe to channel");
+}
+
+
+#pragma mark - Posts Methods
+
+-(void)downloadPosts {
+    
+    NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
+    [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
+    
+    [[NetworkAPIClient sharedClient] postPath:SOCAL_DOWNLOAD_POSTS parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self.postsArray removeAllObjects];
+        
+        NSArray *posts = [responseObject objectForKey:@"posts"];
+        
+        [self.postsArray addObjectsFromArray:posts];
+        
+        [self.postsTable reloadData];
+        
+        [self.postsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.postsArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
+-(void)handleNewPost:(NSDictionary *)newPost {
+    
+    [self.postsArray addObject:newPost];
+    [self.postsTable reloadData];
+    [self.postsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.postsArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+-(void)createPost {
+    
+    NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
+    [queryInfo setObject:self.eventUserName forKey:@"username"];
+    [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
+    [queryInfo setObject:self.txtPostField.text forKey:@"content"];
+    
+    [[NetworkAPIClient sharedClient] postPath:SOCAL_CREATE_POST parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self.txtPostField setText:@""];
+        [self hideKeyboard];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
+#pragma mark - Drag Yes/No/Maybe Methods
+
+-(void)initTouchForVoteButtons {
+    
+    yesPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [self.eventDateYesPiece addGestureRecognizer:yesPan];
+    noPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [self.eventDateNoPiece addGestureRecognizer:noPan];
+    maybePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [self.eventDateMaybePiece addGestureRecognizer:maybePan];
+}
+
+-(void)handlePan:(UIPanGestureRecognizer *)gesture {
+    
+    CGPoint touchLocation = [gesture locationInView:self.datesView];
+    
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        
+    }
+    else if (gesture.state == UIGestureRecognizerStateChanged) {
+        
+        if (gesture == yesPan) {
+            
+            self.eventDateYesPiece.center = touchLocation;
+        }
+        else if (gesture == noPan) {
+            
+            self.eventDateNoPiece.center = touchLocation;
+        }
+        else if (gesture == maybePan) {
+            
+            self.eventDateMaybePiece.center = touchLocation;
+        }
+    }
+    else if (gesture.state == UIGestureRecognizerStateEnded) {
+        
+        [self checkVoteButtonsTarget:gesture];
+    }
+}
+
+-(void)checkVoteButtonsTarget:(UIPanGestureRecognizer *)gesture {
+    
+    //reset button positions
+    
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         
+                         [self.eventDateYesPiece setFrame:CGRectMake(20, 269, self.eventDateYesPiece.frame.size.width, self.eventDateYesPiece.frame.size.height)];
+                         [self.eventDateNoPiece setFrame:CGRectMake(72, 269, self.eventDateNoPiece.frame.size.width, self.eventDateNoPiece.frame.size.height)];
+                         [self.eventDateMaybePiece setFrame:CGRectMake(124, 269, self.eventDateMaybePiece.frame.size.width, self.eventDateMaybePiece.frame.size.height)];
+                         
+                     } completion:^(BOOL finished) {
+                         
+                     }];
+    
+    //check gesture and release point
+    CGPoint releaseLocation = [gesture locationInView:self.calEventDatesCalendar];
+    
 }
 
 #pragma mark - UIScrollView Delegate Methods
@@ -415,6 +602,45 @@
             else [self.lblEnterNamePrompt setHidden:NO];
         }
     }
+}
+
+#pragma mark - UITableView Delegate Methods
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.postsArray.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    PostCell *cell = (PostCell *)[tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    
+    if (!cell) {
+        cell = [PostCell newPostCell];
+    }
+    
+    NSDictionary *postDict = [self.postsArray objectAtIndex:indexPath.row];
+    
+    [cell.contentLabel setText:[postDict objectForKey:@"content"]];
+    [cell.authorLabel setText:[postDict objectForKey:@"username"]];
+    [cell.timeLabel setText:[Helpers timeframeFromString:[postDict objectForKey:@"created_at"]]];
+    
+    if ([cell.authorLabel.text isEqualToString:self.eventUserName]) {
+        [cell setRightSide];
+    }
+    else {
+        [cell setLeftSide];
+    }
+    
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 65.0;
 }
 
 #pragma mark - Keyboard Methods

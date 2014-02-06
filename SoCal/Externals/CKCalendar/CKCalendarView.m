@@ -779,4 +779,16 @@
     return coloredImg;
 }
 
+#pragma mark - Kale's additions
+
+- (NSDate *)dateForLocationInView:(CGPoint)point {
+    
+    NSDate *date = nil;
+    
+    //check if point is within which datebutton
+    //return date accordingly, or return nil
+    
+    return date;
+}
+
 @end

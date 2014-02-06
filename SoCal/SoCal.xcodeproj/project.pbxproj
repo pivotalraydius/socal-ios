@@ -47,6 +47,15 @@
 		9AA365CD18A20918004C0E86 /* UIBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365CC18A20918004C0E86 /* UIBAlertView.m */; };
 		9AA365D018A20D06004C0E86 /* PlaceSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365CF18A20D06004C0E86 /* PlaceSearchCell.m */; };
 		9AA365D218A20D20004C0E86 /* PlaceSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA365D118A20D20004C0E86 /* PlaceSearchCell.xib */; };
+		9ACDDA1A18A35EBB00FF4F5C /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACDDA1918A35EBB00FF4F5C /* PostCell.m */; };
+		9ACDDA1C18A35ECC00FF4F5C /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ACDDA1B18A35ECC00FF4F5C /* PostCell.xib */; };
+		9ACDDA3718A381AD00FF4F5C /* libPusher-combined.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA2718A381AD00FF4F5C /* libPusher-combined.a */; };
+		9ACDDA3918A3824100FF4F5C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3818A3824100FF4F5C /* CFNetwork.framework */; };
+		9ACDDA3B18A3825400FF4F5C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3A18A3825400FF4F5C /* Security.framework */; };
+		9ACDDA3D18A3827600FF4F5C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3C18A3827600FF4F5C /* CoreTelephony.framework */; };
+		9ACDDA3F18A3827C00FF4F5C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3E18A3827C00FF4F5C /* libz.dylib */; };
+		9ACDDA4118A3828200FF4F5C /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA4018A3828200FF4F5C /* libicucore.dylib */; };
+		9ACDDA4318A3828E00FF4F5C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA4218A3828E00FF4F5C /* libsqlite3.dylib */; };
 		9AF7896E18A086AA008EA2E5 /* RDLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */; };
 		9AF7897218A0DDCC008EA2E5 /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7897018A0DDCC008EA2E5 /* LocationVC.m */; };
 		9AF7897318A0DDCC008EA2E5 /* LocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */; };
@@ -127,6 +136,31 @@
 		9AA365CE18A20D06004C0E86 /* PlaceSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceSearchCell.h; sourceTree = "<group>"; };
 		9AA365CF18A20D06004C0E86 /* PlaceSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceSearchCell.m; sourceTree = "<group>"; };
 		9AA365D118A20D20004C0E86 /* PlaceSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceSearchCell.xib; sourceTree = "<group>"; };
+		9ACDDA1818A35EBB00FF4F5C /* PostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
+		9ACDDA1918A35EBB00FF4F5C /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
+		9ACDDA1B18A35ECC00FF4F5C /* PostCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
+		9ACDDA2718A381AD00FF4F5C /* libPusher-combined.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPusher-combined.a"; sourceTree = "<group>"; };
+		9ACDDA2818A381AD00FF4F5C /* PTEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTEventListener.h; sourceTree = "<group>"; };
+		9ACDDA2918A381AD00FF4F5C /* PTJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTJSON.h; sourceTree = "<group>"; };
+		9ACDDA2A18A381AD00FF4F5C /* PTJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTJSONParser.h; sourceTree = "<group>"; };
+		9ACDDA2B18A381AD00FF4F5C /* PTPusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusher.h; sourceTree = "<group>"; };
+		9ACDDA2C18A381AD00FF4F5C /* PTPusherAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherAPI.h; sourceTree = "<group>"; };
+		9ACDDA2D18A381AD00FF4F5C /* PTPusherChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannel.h; sourceTree = "<group>"; };
+		9ACDDA2E18A381AD00FF4F5C /* PTPusherConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherConnection.h; sourceTree = "<group>"; };
+		9ACDDA2F18A381AD00FF4F5C /* PTPusherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherDelegate.h; sourceTree = "<group>"; };
+		9ACDDA3018A381AD00FF4F5C /* PTPusherErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherErrors.h; sourceTree = "<group>"; };
+		9ACDDA3118A381AD00FF4F5C /* PTPusherEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEvent.h; sourceTree = "<group>"; };
+		9ACDDA3218A381AD00FF4F5C /* PTPusherEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEventDispatcher.h; sourceTree = "<group>"; };
+		9ACDDA3318A381AD00FF4F5C /* PTPusherEventPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEventPublisher.h; sourceTree = "<group>"; };
+		9ACDDA3418A381AD00FF4F5C /* PTPusherMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherMacros.h; sourceTree = "<group>"; };
+		9ACDDA3518A381AD00FF4F5C /* PTPusherPresenceChannelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherPresenceChannelDelegate.h; sourceTree = "<group>"; };
+		9ACDDA3618A381AD00FF4F5C /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		9ACDDA3818A3824100FF4F5C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		9ACDDA3A18A3825400FF4F5C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		9ACDDA3C18A3827600FF4F5C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		9ACDDA3E18A3827C00FF4F5C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		9ACDDA4018A3828200FF4F5C /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		9ACDDA4218A3828E00FF4F5C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		9AF7896C18A086AA008EA2E5 /* RDLabeledTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDLabeledTextView.h; sourceTree = "<group>"; };
 		9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDLabeledTextView.m; sourceTree = "<group>"; };
 		9AF7896F18A0DDCC008EA2E5 /* LocationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationVC.h; sourceTree = "<group>"; };
@@ -139,6 +173,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ACDDA4318A3828E00FF4F5C /* libsqlite3.dylib in Frameworks */,
+				9ACDDA4118A3828200FF4F5C /* libicucore.dylib in Frameworks */,
+				9ACDDA3F18A3827C00FF4F5C /* libz.dylib in Frameworks */,
+				9ACDDA3D18A3827600FF4F5C /* CoreTelephony.framework in Frameworks */,
+				9ACDDA3B18A3825400FF4F5C /* Security.framework in Frameworks */,
+				9ACDDA3918A3824100FF4F5C /* CFNetwork.framework in Frameworks */,
 				9A4821921898E312002DA0E4 /* MapKit.framework in Frameworks */,
 				9A5ED81E18924F6D00BA8E02 /* QuartzCore.framework in Frameworks */,
 				9A5ED81C18924F6700BA8E02 /* SystemConfiguration.framework in Frameworks */,
@@ -146,6 +186,7 @@
 				9A5ED7AB189245D000BA8E02 /* CoreGraphics.framework in Frameworks */,
 				9A5ED7AD189245D000BA8E02 /* UIKit.framework in Frameworks */,
 				9A5ED7A9189245D000BA8E02 /* Foundation.framework in Frameworks */,
+				9ACDDA3718A381AD00FF4F5C /* libPusher-combined.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +226,12 @@
 		9A5ED7A7189245D000BA8E02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9ACDDA4218A3828E00FF4F5C /* libsqlite3.dylib */,
+				9ACDDA4018A3828200FF4F5C /* libicucore.dylib */,
+				9ACDDA3E18A3827C00FF4F5C /* libz.dylib */,
+				9ACDDA3C18A3827600FF4F5C /* CoreTelephony.framework */,
+				9ACDDA3A18A3825400FF4F5C /* Security.framework */,
+				9ACDDA3818A3824100FF4F5C /* CFNetwork.framework */,
 				9A4821911898E312002DA0E4 /* MapKit.framework */,
 				9A5ED81D18924F6D00BA8E02 /* QuartzCore.framework */,
 				9A5ED81B18924F6700BA8E02 /* SystemConfiguration.framework */,
@@ -200,34 +247,37 @@
 		9A5ED7AE189245D000BA8E02 /* SoCal */ = {
 			isa = PBXGroup;
 			children = (
-				9AA365C218A1DCFE004C0E86 /* Environment.m */,
-				9AA365C318A1DCFE004C0E86 /* Environment.h */,
 				9A5ED7B7189245D000BA8E02 /* AppDelegate.h */,
 				9A5ED7B8189245D000BA8E02 /* AppDelegate.m */,
-				9A5ED7BA189245D000BA8E02 /* Images.xcassets */,
-				9A5ED7AF189245D000BA8E02 /* Supporting Files */,
-				9A5ED7D7189245F900BA8E02 /* MainVC.h */,
-				9A5ED7D8189245F900BA8E02 /* MainVC.m */,
-				9A5ED7D9189245F900BA8E02 /* MainVC.xib */,
-				9A5ED7DC1892471800BA8E02 /* EventVC.h */,
-				9A5ED7DD1892471800BA8E02 /* EventVC.m */,
-				9A5ED7DE1892471800BA8E02 /* EventVC.xib */,
-				9A5ED7E11892476C00BA8E02 /* ComposeVC.h */,
-				9A5ED7E21892476C00BA8E02 /* ComposeVC.m */,
-				9A5ED7E31892476C00BA8E02 /* ComposeVC.xib */,
-				9A5ED81F18924FFB00BA8E02 /* Helpers.h */,
-				9A5ED82018924FFB00BA8E02 /* Helpers.m */,
 				9A152D0E189626B40013B647 /* ComposeDateTimeCell.h */,
 				9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */,
 				9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */,
-				9AF7896C18A086AA008EA2E5 /* RDLabeledTextView.h */,
-				9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */,
+				9A5ED7E11892476C00BA8E02 /* ComposeVC.h */,
+				9A5ED7E21892476C00BA8E02 /* ComposeVC.m */,
+				9A5ED7E31892476C00BA8E02 /* ComposeVC.xib */,
+				9AA365C318A1DCFE004C0E86 /* Environment.h */,
+				9AA365C218A1DCFE004C0E86 /* Environment.m */,
+				9A5ED7DC1892471800BA8E02 /* EventVC.h */,
+				9A5ED7DD1892471800BA8E02 /* EventVC.m */,
+				9A5ED7DE1892471800BA8E02 /* EventVC.xib */,
+				9A5ED81F18924FFB00BA8E02 /* Helpers.h */,
+				9A5ED82018924FFB00BA8E02 /* Helpers.m */,
 				9AF7896F18A0DDCC008EA2E5 /* LocationVC.h */,
 				9AF7897018A0DDCC008EA2E5 /* LocationVC.m */,
 				9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */,
+				9A5ED7D7189245F900BA8E02 /* MainVC.h */,
+				9A5ED7D8189245F900BA8E02 /* MainVC.m */,
+				9A5ED7D9189245F900BA8E02 /* MainVC.xib */,
 				9AA365CE18A20D06004C0E86 /* PlaceSearchCell.h */,
 				9AA365CF18A20D06004C0E86 /* PlaceSearchCell.m */,
 				9AA365D118A20D20004C0E86 /* PlaceSearchCell.xib */,
+				9ACDDA1818A35EBB00FF4F5C /* PostCell.h */,
+				9ACDDA1918A35EBB00FF4F5C /* PostCell.m */,
+				9ACDDA1B18A35ECC00FF4F5C /* PostCell.xib */,
+				9AF7896C18A086AA008EA2E5 /* RDLabeledTextView.h */,
+				9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */,
+				9A5ED7BA189245D000BA8E02 /* Images.xcassets */,
+				9A5ED7AF189245D000BA8E02 /* Supporting Files */,
 			);
 			path = SoCal;
 			sourceTree = "<group>";
@@ -264,10 +314,11 @@
 		9A5ED7E618924E3E00BA8E02 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
-				9AA365CA18A20918004C0E86 /* UIBAlertView */,
-				9AA365A118A1DC59004C0E86 /* Raydius */,
+				9ACDDA2618A381AD00FF4F5C /* Pusher */,
 				9AA365A418A1DC59004C0E86 /* AFNetworking */,
 				9A5ED822189253F800BA8E02 /* CKCalendar */,
+				9AA365A118A1DC59004C0E86 /* Raydius */,
+				9AA365CA18A20918004C0E86 /* UIBAlertView */,
 			);
 			path = Externals;
 			sourceTree = "<group>";
@@ -323,6 +374,29 @@
 				9AA365CC18A20918004C0E86 /* UIBAlertView.m */,
 			);
 			path = UIBAlertView;
+			sourceTree = "<group>";
+		};
+		9ACDDA2618A381AD00FF4F5C /* Pusher */ = {
+			isa = PBXGroup;
+			children = (
+				9ACDDA2718A381AD00FF4F5C /* libPusher-combined.a */,
+				9ACDDA2818A381AD00FF4F5C /* PTEventListener.h */,
+				9ACDDA2918A381AD00FF4F5C /* PTJSON.h */,
+				9ACDDA2A18A381AD00FF4F5C /* PTJSONParser.h */,
+				9ACDDA2B18A381AD00FF4F5C /* PTPusher.h */,
+				9ACDDA2C18A381AD00FF4F5C /* PTPusherAPI.h */,
+				9ACDDA2D18A381AD00FF4F5C /* PTPusherChannel.h */,
+				9ACDDA2E18A381AD00FF4F5C /* PTPusherConnection.h */,
+				9ACDDA2F18A381AD00FF4F5C /* PTPusherDelegate.h */,
+				9ACDDA3018A381AD00FF4F5C /* PTPusherErrors.h */,
+				9ACDDA3118A381AD00FF4F5C /* PTPusherEvent.h */,
+				9ACDDA3218A381AD00FF4F5C /* PTPusherEventDispatcher.h */,
+				9ACDDA3318A381AD00FF4F5C /* PTPusherEventPublisher.h */,
+				9ACDDA3418A381AD00FF4F5C /* PTPusherMacros.h */,
+				9ACDDA3518A381AD00FF4F5C /* PTPusherPresenceChannelDelegate.h */,
+				9ACDDA3618A381AD00FF4F5C /* SRWebSocket.h */,
+			);
+			path = Pusher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -404,6 +478,7 @@
 				9A5ED7DB189245F900BA8E02 /* MainVC.xib in Resources */,
 				9A5ED7E51892476C00BA8E02 /* ComposeVC.xib in Resources */,
 				9A152D12189626D30013B647 /* ComposeDateTimeCell.xib in Resources */,
+				9ACDDA1C18A35ECC00FF4F5C /* PostCell.xib in Resources */,
 				9A5ED7BB189245D000BA8E02 /* Images.xcassets in Resources */,
 				9A5ED7E01892471800BA8E02 /* EventVC.xib in Resources */,
 				9AF7897318A0DDCC008EA2E5 /* LocationVC.xib in Resources */,
@@ -437,6 +512,7 @@
 				9AF7897218A0DDCC008EA2E5 /* LocationVC.m in Sources */,
 				9AA365BE18A1DC59004C0E86 /* AFPropertyListRequestOperation.m in Sources */,
 				9AF7896E18A086AA008EA2E5 /* RDLabeledTextView.m in Sources */,
+				9ACDDA1A18A35EBB00FF4F5C /* PostCell.m in Sources */,
 				9AA365C018A1DC59004C0E86 /* AFXMLRequestOperation.m in Sources */,
 				9AA365C118A1DC59004C0E86 /* UIImageView+AFNetworking.m in Sources */,
 				9AA365B818A1DC59004C0E86 /* NetworkAPIClient.m in Sources */,
@@ -570,6 +646,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
 				INFOPLIST_FILE = "SoCal/SoCal-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/RSEnterprise/Workspace/socal-ios/SoCal/Externals/Pusher",
+				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9FE9F863-E5CA-4759-B459-82278EBA32B0";
 				WRAPPER_EXTENSION = app;
@@ -585,6 +666,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
 				INFOPLIST_FILE = "SoCal/SoCal-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/RSEnterprise/Workspace/socal-ios/SoCal/Externals/Pusher",
+				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9FE9F863-E5CA-4759-B459-82278EBA32B0";
 				WRAPPER_EXTENSION = app;

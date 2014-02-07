@@ -193,12 +193,17 @@
     downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideTimePicker)];
     [downSwipe setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.view addGestureRecognizer:downSwipe];
+    
+    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideTimePicker)];
+    [self.view addGestureRecognizer:tapGesture];
 }
 
 -(void)hideTimePicker {
     
     [self.view removeGestureRecognizer:downSwipe];
     downSwipe = nil;
+    [self.view removeGestureRecognizer:tapGesture];
+    tapGesture = nil;
     
     [self.timePicker removeTarget:self action:@selector(timePickerValueChanged) forControlEvents:UIControlEventValueChanged];
     
@@ -319,6 +324,8 @@
     
     [tableView beginUpdates];
     [tableView endUpdates];
+    
+    [self.dateTimeTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.eventDateTimesArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {

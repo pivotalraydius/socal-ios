@@ -10,6 +10,13 @@
 #import "PostCell.h"
 #import "PTPusherEvent.h"
 
+#define VOTE_BUTTON_STILL   0
+#define VOTE_BUTTON_MOTION  1
+
+#define VOTE_MAYBE 0
+#define VOTE_YES   1
+#define VOTE_NO    2
+
 @implementation EventVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -480,6 +487,7 @@
     
     [self.postsArray addObject:newPost];
     [self.postsTable reloadData];
+    
     [self.postsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.postsArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
@@ -519,6 +527,7 @@
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
         
+        [self switchVoteButton:gesture.view toMode:VOTE_BUTTON_MOTION];
     }
     else if (gesture.state == UIGestureRecognizerStateChanged) {
         
@@ -537,7 +546,87 @@
     }
     else if (gesture.state == UIGestureRecognizerStateEnded) {
         
+        [self switchVoteButton:gesture.view toMode:VOTE_BUTTON_STILL];
         [self checkVoteButtonsTarget:gesture];
+    }
+}
+
+-(void)switchVoteButton:(id)button toMode:(NSInteger)mode {
+    
+    if (button == self.eventDateYesPiece) {
+        
+        if (mode == VOTE_BUTTON_MOTION) {
+            
+            UIColor *color = self.eventDateYesPiece.backgroundColor;
+            [self.eventDateYesPiece setBackgroundColor:[UIColor clearColor]];
+            [self.eventDateYesPiece.layer setBorderColor:color.CGColor];
+            [self.eventDateYesPiece.layer setBorderWidth:1.0];
+            [self.eventDateYesPiece setTitleColor:color forState:UIControlStateNormal];
+            
+            CGAffineTransform t = CGAffineTransformMakeScale(1.5, 1.5);
+            CGPoint center = self.eventDateYesPiece.center;
+            self.eventDateYesPiece.transform = t;
+            self.eventDateYesPiece.center = center;
+        }
+        else {
+            
+            UIColor *color = [UIColor colorWithCGColor:self.eventDateYesPiece.layer.borderColor];
+            [self.eventDateYesPiece setBackgroundColor:color];
+            [self.eventDateYesPiece.layer setBorderWidth:0.0];
+            [self.eventDateYesPiece setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            
+            self.eventDateYesPiece.transform = CGAffineTransformIdentity;
+        }
+    }
+    else if (button == self.eventDateNoPiece) {
+        
+        if (mode == VOTE_BUTTON_MOTION) {
+            
+            UIColor *color = self.eventDateNoPiece.backgroundColor;
+            [self.eventDateNoPiece setBackgroundColor:[UIColor clearColor]];
+            [self.eventDateNoPiece.layer setBorderColor:color.CGColor];
+            [self.eventDateNoPiece.layer setBorderWidth:1.0];
+            [self.eventDateNoPiece setTitleColor:color forState:UIControlStateNormal];
+            
+            CGAffineTransform t = CGAffineTransformMakeScale(1.5, 1.5);
+            CGPoint center = self.eventDateNoPiece.center;
+            self.eventDateNoPiece.transform = t;
+            self.eventDateNoPiece.center = center;
+        }
+        else {
+            
+            UIColor *color = [UIColor colorWithCGColor:self.eventDateNoPiece.layer.borderColor];
+            [self.eventDateNoPiece setBackgroundColor:color];
+            [self.eventDateNoPiece.layer setBorderWidth:0.0];
+            [self.eventDateNoPiece setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            
+            self.eventDateNoPiece.transform = CGAffineTransformIdentity;
+        }
+    }
+    else if (button == self.eventDateMaybePiece) {
+        
+        if (mode == VOTE_BUTTON_MOTION) {
+            
+            UIColor *color = self.eventDateMaybePiece.backgroundColor;
+            [self.eventDateMaybePiece setBackgroundColor:[UIColor clearColor]];
+            [self.eventDateMaybePiece.layer setBorderColor:color.CGColor];
+            [self.eventDateMaybePiece.layer setBorderWidth:1.0];
+            [self.eventDateMaybePiece setTitleColor:color forState:UIControlStateNormal];
+            
+            CGAffineTransform t = CGAffineTransformMakeScale(1.5, 1.5);
+            CGPoint center = self.eventDateMaybePiece.center;
+            self.eventDateMaybePiece.transform = t;
+            self.eventDateMaybePiece.center = center;
+        }
+        else {
+            
+            UIColor *color = [UIColor colorWithCGColor:self.eventDateMaybePiece.layer.borderColor];
+            [self.eventDateMaybePiece setBackgroundColor:color];
+            [self.eventDateMaybePiece.layer setBorderWidth:0.0];
+            [self.eventDateMaybePiece setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            
+            self.eventDateMaybePiece.transform = CGAffineTransformIdentity;
+        }
     }
 }
 
@@ -557,8 +646,26 @@
                      }];
     
     //check gesture and release point
-//    CGPoint releaseLocation = [gesture locationInView:self.calEventDatesCalendar];
+    CGPoint releaseLocation = [gesture locationInView:self.calEventDatesCalendar];
+    NSDate *releasePointDate = [self.calEventDatesCalendar dateForLocationInView:releaseLocation];
     
+    if (gesture.view == self.eventDateYesPiece) {
+        
+        [self vote:VOTE_YES forDate:releasePointDate];
+    }
+    else if (gesture.view == self.eventDateNoPiece) {
+        
+        [self vote:VOTE_NO forDate:releasePointDate];
+    }
+    else if (gesture.view == self.eventDateMaybePiece) {
+        
+        [self vote:VOTE_MAYBE forDate:releasePointDate];
+    }
+}
+
+-(void)vote:(NSInteger)vote forDate:(NSDate *)date {
+    
+    NSLog(@"Voted: %i for date: %@", vote, date);
 }
 
 #pragma mark - UIScrollView Delegate Methods
@@ -570,7 +677,7 @@
         [self.postsTable setHidden:NO];
         [self.bottomBar setHidden:NO];
         
-        [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, self.postsTable.frame.size.height)];
+        [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, 210)];
         
         if (scrollView.contentOffset.x < 320.0) {
             
@@ -584,7 +691,7 @@
             [self.mainDoneButton setTitle:@"Done" forState:UIControlStateNormal];
             [self.lblTitleLabel setText:@"Dates"];
             
-            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 377, self.postsTable.frame.size.width, self.postsTable.frame.size.height)];
+            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 377, self.postsTable.frame.size.width, 210-(377-314))];
         }
         else if (scrollView.contentOffset.x < 920.0) {
             

@@ -59,9 +59,9 @@
 
 @property (nonatomic, weak) IBOutlet CKCalendarView *calEventDatesCalendar;
 
-@property (nonatomic, weak) IBOutlet UIView *eventDateYesPiece;
-@property (nonatomic, weak) IBOutlet UIView *eventDateNoPiece;
-@property (nonatomic, weak) IBOutlet UIView *eventDateMaybePiece;
+@property (nonatomic, weak) IBOutlet UIButton *eventDateYesPiece;
+@property (nonatomic, weak) IBOutlet UIButton *eventDateNoPiece;
+@property (nonatomic, weak) IBOutlet UIButton *eventDateMaybePiece;
 @property (nonatomic, weak) IBOutlet UILabel *lblEventDateInstruction;
 
 @property (nonatomic, weak) IBOutlet UITableView *doneDatesTableView;

@@ -70,8 +70,10 @@ typedef enum {
 - (BOOL)date:(NSDate *)date1 isSameDayAsDate:(NSDate *)date2;
 - (BOOL)dateIsInCurrentMonth:(NSDate *)date;
 
--(void)setSubviews:(NSArray *)views toDateButtonWithDate:(NSArray *)dateArray;
 -(NSArray *)getDateButtons;
+
+-(void)setSubviews:(NSArray *)views toDateButtonWithDate:(NSArray *)dateArray;
+- (NSDate *)dateForLocationInView:(CGPoint)point;
 
 @end
 

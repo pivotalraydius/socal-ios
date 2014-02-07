@@ -779,14 +779,26 @@
     return coloredImg;
 }
 
-#pragma mark - Kale's additions
+#pragma mark - Kale's additional helpers
 
 - (NSDate *)dateForLocationInView:(CGPoint)point {
     
+    CGPoint aPoint = [self.calendarContainer convertPoint:point fromView:self];
+    
     NSDate *date = nil;
     
-    //check if point is within which datebutton
-    //return date accordingly, or return nil
+    for (DateButton *aButton in self.dateButtons) {
+        
+        CGRect frame = aButton.frame;
+        
+        if (CGRectContainsPoint(frame, aPoint)) {
+         
+            NSLog(@"1. point: %f, %f", aPoint.x, aPoint.y);
+            NSLog(@"2. frame: %f, %f, %f, %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+            
+            date = aButton.date;
+        }
+    }
     
     return date;
 }

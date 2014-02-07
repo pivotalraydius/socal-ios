@@ -648,7 +648,7 @@
 				INFOPLIST_FILE = "SoCal/SoCal-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/RSEnterprise/Workspace/socal-ios/SoCal/Externals/Pusher",
+					"./Externals/Pusher/**",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -668,7 +668,7 @@
 				INFOPLIST_FILE = "SoCal/SoCal-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/RSEnterprise/Workspace/socal-ios/SoCal/Externals/Pusher",
+					"./Externals/Pusher/**",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";

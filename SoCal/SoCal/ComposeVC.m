@@ -8,6 +8,7 @@
 
 #import "ComposeVC.h"
 #import "ComposeDateTimeCell.h"
+#import "RDPieView.h"
 
 @implementation ComposeVC
 
@@ -399,8 +400,8 @@
     
     for (NSDate *dateToAdd in self.selectedDateItems) {
         
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
-        [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        RDPieView *view = [[RDPieView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
+//        [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
         [view.layer setCornerRadius:view.frame.size.height/2];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [label setTextColor:[UIColor whiteColor]];
@@ -416,10 +417,12 @@
         NSString *dateString = [dateFormatter stringFromDate:dateToAdd];
         
         if ([dateString hasSuffix:@"am"]) {
-            [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+            [view setBackgroundColor:[UIColor clearColor]];
+            [view setVal1:0 setVal2:1];
         }
         else {
-            [view setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+            [view setBackgroundColor:[UIColor clearColor]];
+            [view setVal1:1 setVal2:0];
         }
         
         NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
@@ -442,9 +445,12 @@
         
         //TO DO make the half-circle view here
         
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
-        [view setBackgroundColor:[UIColor redColor]];
+        RDPieView *view = [[RDPieView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
+        [view setBackgroundColor:[UIColor clearColor]];
+        [view setVal1:0.5 setVal2:0.5];
         [view.layer setCornerRadius:view.frame.size.height/2];
+        
+        [self addBtmHalfCircleToView:view];
         
         [view setTag:666];
         [view setUserInteractionEnabled:NO];

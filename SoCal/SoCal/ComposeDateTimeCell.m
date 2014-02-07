@@ -83,7 +83,7 @@
     
     if ([dateString hasSuffix:@"am"]) {
         [self.barBGView setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
-        [self.btnDeleteCell.titleLabel setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        [self.btnDeleteCell setTitleColor:[Helpers suriaOrangeColorWithAlpha:1.0] forState:UIControlStateNormal];
         [self.btnAcceptTime setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
         [self.lblEventEditTime setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
         [self.lblTimeTitleLabel setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];

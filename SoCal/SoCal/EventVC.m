@@ -649,23 +649,37 @@
     CGPoint releaseLocation = [gesture locationInView:self.calEventDatesCalendar];
     NSDate *releasePointDate = [self.calEventDatesCalendar dateForLocationInView:releaseLocation];
     
+    NSDate *votedDate = nil;
+    
+    for (NSDate *aDate in self.eventDateTimesArray) {
+        
+        if ([self.calEventDatesCalendar date:releasePointDate isSameDayAsDate:aDate]) {
+            
+            votedDate = aDate;
+            
+            //does not take into account multi-dates in day
+        }
+    }
+    
     if (gesture.view == self.eventDateYesPiece) {
         
-        [self vote:VOTE_YES forDate:releasePointDate];
+        [self vote:VOTE_YES forDate:votedDate];
     }
     else if (gesture.view == self.eventDateNoPiece) {
         
-        [self vote:VOTE_NO forDate:releasePointDate];
+        [self vote:VOTE_NO forDate:votedDate];
     }
     else if (gesture.view == self.eventDateMaybePiece) {
         
-        [self vote:VOTE_MAYBE forDate:releasePointDate];
+        [self vote:VOTE_MAYBE forDate:votedDate];
     }
 }
 
 -(void)vote:(NSInteger)vote forDate:(NSDate *)date {
     
     NSLog(@"Voted: %i for date: %@", vote, date);
+    
+    
 }
 
 #pragma mark - UIScrollView Delegate Methods

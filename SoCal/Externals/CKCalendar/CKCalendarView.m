@@ -795,6 +795,7 @@
          
             NSLog(@"1. point: %f, %f", aPoint.x, aPoint.y);
             NSLog(@"2. frame: %f, %f, %f, %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+            NSLog(@"datebutton: %@", aButton.date);
             
             date = aButton.date;
         }

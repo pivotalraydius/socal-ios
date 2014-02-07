@@ -450,7 +450,15 @@
         [view setVal1:0.5 setVal2:0.5];
         [view.layer setCornerRadius:view.frame.size.height/2];
         
-        [self addBtmHalfCircleToView:view];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        [label setFont:[UIFont systemFontOfSize:10.0]];
+        
+        [label setText:@"..."];
+        
+        [view addSubview:label];
         
         [view setTag:666];
         [view setUserInteractionEnabled:NO];

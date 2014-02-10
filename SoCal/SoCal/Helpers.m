@@ -113,4 +113,14 @@
     return @"";
 }
 
++(NSDate*)dateWithNoTime:(NSDate*)date {
+    
+    NSDateComponents *components = [[NSCalendar currentCalendar]
+                                    components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit
+                                    fromDate:date];
+    NSDate *dateWithNoTime = [[NSCalendar currentCalendar]
+                              dateFromComponents:components];
+    return dateWithNoTime;
+}
+
 @end

@@ -57,6 +57,8 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setupUI];
+    [self setupFonts];
+    
     [self retrieveEvent];
     [self downloadPosts];
     [self pusherConnect];
@@ -125,6 +127,31 @@
     [self setupCalendar];
     
     [self.calListEventDatesTable setHidden:YES];
+}
+
+-(void)setupFonts {
+    
+    [self.lblTitleLabel setFont:[Helpers Exo2Regular:24.0]];
+    [self.mainBackButton.titleLabel setFont:[Helpers Exo2Regular:18.0]];
+    [self.mainDoneButton.titleLabel setFont:[Helpers Exo2Regular:18.0]];
+    
+    [self.lblEnterNamePrompt setFont:[Helpers Exo2Regular:18.0]];
+    [self.txtPostField setFont:[Helpers Exo2Regular:18.0]];
+    [self.txtNameField setFont:[Helpers Exo2Regular:18.0]];
+    
+    [self.btnPostButton.titleLabel setFont:[Helpers Exo2Regular:18.0]];
+    [self.btnNameOkButton.titleLabel setFont:[Helpers Exo2Regular:18.0]];
+    
+    [self.lblDetailsEventTitle setFont:[Helpers Exo2Regular:20.0]];
+    
+    [self.lblDetailsInfo setFont:[Helpers Exo2Regular:18.0]];
+    
+    [self.eventDateYesPiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    [self.eventDateNoPiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    [self.eventDateMaybePiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    
+    [self.lblEventDateInstruction setFont:[Helpers Exo2Regular:12.0]];
+    [self.lblDoneSummaryLabel setFont:[Helpers Exo2Regular:14.0]];
 }
 
 -(void)retrieveEvent {
@@ -494,7 +521,8 @@
         
         [self.postsTable reloadData];
         
-        [self.postsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.postsArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        if (self.postsArray.count > 0)
+            [self.postsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.postsArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -709,7 +737,7 @@
         [self.postsTable setHidden:NO];
         [self.bottomBar setHidden:NO];
         
-        [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, 210)];
+//        [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, 210)];
         
         if (scrollView.contentOffset.x < 320.0) {
             
@@ -723,7 +751,7 @@
             [self.mainDoneButton setTitle:@"Done" forState:UIControlStateNormal];
             [self.lblTitleLabel setText:@"Dates"];
             
-            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 377, self.postsTable.frame.size.width, 210-(377-314))];
+//            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 377, self.postsTable.frame.size.width, 210-(377-314))];
         }
         else if (scrollView.contentOffset.x < 920.0) {
             
@@ -746,6 +774,26 @@
             else [self.lblEnterNamePrompt setHidden:NO];
         }
     }
+}
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    
+    if (scrollView == self.mainScrollView) {
+        
+        if (scrollView.contentOffset.x == 0.0) {
+            
+            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, 210)];
+        }
+        else if (scrollView.contentOffset.x == 320.0) {
+            
+            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 377, self.postsTable.frame.size.width, 210-(377-314))];
+        }
+        else if (scrollView.contentOffset.x == 640.0) {
+            
+        }
+    }
+    
+    NSLog(@"%@", self.postsTable);
 }
 
 #pragma mark - UITableView Delegate Methods
@@ -795,6 +843,7 @@
             cell = [ListDateTimeCell newCell];
         }
         
+        [cell renderWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andVote:VOTE_MAYBE];
         
         return cell;
     }

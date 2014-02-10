@@ -23,6 +23,9 @@
 
 -(void)setupUI {
     
+    [self.contentLabel setFont:[Helpers Exo2Regular:14.0]];
+    [self.authorLabel setFont:[Helpers Exo2Regular:12.0]];
+    [self.timeLabel setFont:[Helpers Exo2Regular:12.0]];
 }
 
 -(void)setLeftSide {

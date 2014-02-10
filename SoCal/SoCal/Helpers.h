@@ -10,6 +10,14 @@
 
 @interface Helpers : NSObject
 
++(UIFont *)Exo2Thin:(float)size;
++(UIFont *)Exo2Light:(float)size;
++(UIFont *)Exo2Regular:(float)size;
++(UIFont *)Exo2Medium:(float)size;
++(UIFont *)Exo2Bold:(float)size;
+
++(UIColor *)softGreenColorWithAlpha:(float)alpha;
++(UIColor *)softRedColorWithAlpha:(float)alpha;
 +(UIColor *)suriaOrangeColorWithAlpha:(float)alpha;
 +(UIColor *)pmBlueColorWithAlpha:(float)alpha;
 +(UIColor *)luncheonBlueColorWithAlpha:(float)alpha;

@@ -44,6 +44,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setupUI];
+    [self setupFonts];
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,6 +63,14 @@
     
     [Helpers setBorderToView:self.btnCreateEvent borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     [Helpers setBorderToView:self.btnUseInvite borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
+}
+
+-(void)setupFonts {
+
+    [self.lblMainTitleLabel setFont:[Helpers Exo2Regular:24.0]];
+    [self.lblBtnCreateEvent setFont:[Helpers Exo2Regular:18.0]];
+    [self.lblBtnUseInvite setFont:[Helpers Exo2Regular:18.0]];
+    [self.inviteCodeField setFont:[Helpers Exo2Regular:14.0]];
 }
 
 -(IBAction)btnCreateEventAction {

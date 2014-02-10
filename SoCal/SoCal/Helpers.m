@@ -16,6 +16,41 @@
 
 @implementation Helpers
 
++(UIFont *)Exo2Light:(float)size {
+    
+    return [UIFont fontWithName:@"Exo2.0-Light" size:size];
+}
+
++(UIFont *)Exo2Thin:(float)size {
+    
+    return [UIFont fontWithName:@"Exo2.0-Thin" size:size];
+}
+
++(UIFont *)Exo2Regular:(float)size {
+    
+    return [UIFont fontWithName:@"Exo2.0-Regular" size:size];
+}
+
++(UIFont *)Exo2Medium:(float)size {
+    
+    return [UIFont fontWithName:@"Exo2.0-Medium" size:size];
+}
+
++(UIFont *)Exo2Bold:(float)size {
+    
+    return [UIFont fontWithName:@"Exo2.0-Bold" size:size];
+}
+
++(UIColor *)softGreenColorWithAlpha:(float)alpha {
+    
+    return [UIColor colorWithRed:82.0/255.0 green:201.0/255.0 blue:161.0/255.0 alpha:alpha];
+}
+
++(UIColor *)softRedColorWithAlpha:(float)alpha {
+    
+    return [UIColor colorWithRed:253.0/255.0 green:107.0/255.0 blue:109.0/255.0 alpha:alpha];
+}
+
 +(UIColor *)suriaOrangeColorWithAlpha:(float)alpha {
     
     return [UIColor colorWithRed:255.0/255.0 green:175.0/255.0 blue:55.0/255.0 alpha:alpha];

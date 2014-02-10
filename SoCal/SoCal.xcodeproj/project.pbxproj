@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		9A152D10189626B40013B647 /* ComposeDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */; };
 		9A152D12189626D30013B647 /* ComposeDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */; };
+		9A20BD5418A89F0200B90101 /* SummaryDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A20BD5318A89F0200B90101 /* SummaryDateTimeCell.m */; };
+		9A20BD5718A89F1700B90101 /* ListDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A20BD5618A89F1700B90101 /* ListDateTimeCell.m */; };
+		9A20BD5918A89F2E00B90101 /* SummaryDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5818A89F2E00B90101 /* SummaryDateTimeCell.xib */; };
+		9A20BD5B18A89F3E00B90101 /* ListDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5A18A89F3E00B90101 /* ListDateTimeCell.xib */; };
 		9A4821921898E312002DA0E4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4821911898E312002DA0E4 /* MapKit.framework */; };
 		9A5ED7A9189245D000BA8E02 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7A8189245D000BA8E02 /* Foundation.framework */; };
 		9A5ED7AB189245D000BA8E02 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7AA189245D000BA8E02 /* CoreGraphics.framework */; };
@@ -76,6 +80,12 @@
 		9A152D0E189626B40013B647 /* ComposeDateTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeDateTimeCell.h; sourceTree = "<group>"; };
 		9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeDateTimeCell.m; sourceTree = "<group>"; };
 		9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeDateTimeCell.xib; sourceTree = "<group>"; };
+		9A20BD5218A89F0200B90101 /* SummaryDateTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryDateTimeCell.h; sourceTree = "<group>"; };
+		9A20BD5318A89F0200B90101 /* SummaryDateTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryDateTimeCell.m; sourceTree = "<group>"; };
+		9A20BD5518A89F1700B90101 /* ListDateTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListDateTimeCell.h; sourceTree = "<group>"; };
+		9A20BD5618A89F1700B90101 /* ListDateTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListDateTimeCell.m; sourceTree = "<group>"; };
+		9A20BD5818A89F2E00B90101 /* SummaryDateTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SummaryDateTimeCell.xib; sourceTree = "<group>"; };
+		9A20BD5A18A89F3E00B90101 /* ListDateTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListDateTimeCell.xib; sourceTree = "<group>"; };
 		9A4821911898E312002DA0E4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9A5ED7A5189245D000BA8E02 /* SoCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A5ED7A8189245D000BA8E02 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -265,6 +275,9 @@
 				9A5ED7DE1892471800BA8E02 /* EventVC.xib */,
 				9A5ED81F18924FFB00BA8E02 /* Helpers.h */,
 				9A5ED82018924FFB00BA8E02 /* Helpers.m */,
+				9A20BD5518A89F1700B90101 /* ListDateTimeCell.h */,
+				9A20BD5618A89F1700B90101 /* ListDateTimeCell.m */,
+				9A20BD5A18A89F3E00B90101 /* ListDateTimeCell.xib */,
 				9AF7896F18A0DDCC008EA2E5 /* LocationVC.h */,
 				9AF7897018A0DDCC008EA2E5 /* LocationVC.m */,
 				9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */,
@@ -279,10 +292,13 @@
 				9ACDDA1B18A35ECC00FF4F5C /* PostCell.xib */,
 				9AF7896C18A086AA008EA2E5 /* RDLabeledTextView.h */,
 				9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */,
-				9A5ED7BA189245D000BA8E02 /* Images.xcassets */,
-				9A5ED7AF189245D000BA8E02 /* Supporting Files */,
 				DC1434C318A4B51D0062AD7A /* RDPieView.h */,
 				DC1434C418A4B51D0062AD7A /* RDPieView.m */,
+				9A20BD5218A89F0200B90101 /* SummaryDateTimeCell.h */,
+				9A20BD5318A89F0200B90101 /* SummaryDateTimeCell.m */,
+				9A20BD5818A89F2E00B90101 /* SummaryDateTimeCell.xib */,
+				9A5ED7BA189245D000BA8E02 /* Images.xcassets */,
+				9A5ED7AF189245D000BA8E02 /* Supporting Files */,
 			);
 			path = SoCal;
 			sourceTree = "<group>";
@@ -482,8 +498,10 @@
 				9A5ED7B3189245D000BA8E02 /* InfoPlist.strings in Resources */,
 				9A5ED7DB189245F900BA8E02 /* MainVC.xib in Resources */,
 				9A5ED7E51892476C00BA8E02 /* ComposeVC.xib in Resources */,
+				9A20BD5B18A89F3E00B90101 /* ListDateTimeCell.xib in Resources */,
 				9A152D12189626D30013B647 /* ComposeDateTimeCell.xib in Resources */,
 				9ACDDA1C18A35ECC00FF4F5C /* PostCell.xib in Resources */,
+				9A20BD5918A89F2E00B90101 /* SummaryDateTimeCell.xib in Resources */,
 				9A5ED7BB189245D000BA8E02 /* Images.xcassets in Resources */,
 				9A5ED7E01892471800BA8E02 /* EventVC.xib in Resources */,
 				9AF7897318A0DDCC008EA2E5 /* LocationVC.xib in Resources */,
@@ -513,8 +531,10 @@
 				9A5ED7DA189245F900BA8E02 /* MainVC.m in Sources */,
 				9AA365BF18A1DC59004C0E86 /* AFURLConnectionOperation.m in Sources */,
 				9AA365BD18A1DC59004C0E86 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				9A20BD5418A89F0200B90101 /* SummaryDateTimeCell.m in Sources */,
 				9A5ED825189253F800BA8E02 /* CKCalendarView.m in Sources */,
 				9AA365C418A1DCFE004C0E86 /* Environment.m in Sources */,
+				9A20BD5718A89F1700B90101 /* ListDateTimeCell.m in Sources */,
 				9AF7897218A0DDCC008EA2E5 /* LocationVC.m in Sources */,
 				9AA365BE18A1DC59004C0E86 /* AFPropertyListRequestOperation.m in Sources */,
 				9AF7896E18A086AA008EA2E5 /* RDLabeledTextView.m in Sources */,

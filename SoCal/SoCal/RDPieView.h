@@ -11,10 +11,11 @@
 
 @interface RDPieView : UIView {
 
-    float m_val1;
-	float m_val2;
+    float m_amRatio;
+	float m_pmRatio;
 }
 
--(void)setVal1:(float)val1 setVal2:(float)val2;
+-(void)setAMRatio:(float)amRatio setPMRatio:(float)pmRatio;
+//-(void)setVal1:(float)val1 setVal2:(float)val2;
 
 @end

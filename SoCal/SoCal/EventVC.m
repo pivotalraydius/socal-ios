@@ -9,6 +9,8 @@
 #import "EventVC.h"
 #import "PostCell.h"
 #import "PTPusherEvent.h"
+#import "ListDateTimeCell.h"
+#import "SummaryDateTimeCell.h"
 
 #define VOTE_BUTTON_STILL   0
 #define VOTE_BUTTON_MOTION  1
@@ -121,6 +123,8 @@
     [self.eventDateMaybePiece.layer setCornerRadius:self.eventDateMaybePiece.frame.size.height/2];
     
     [self setupCalendar];
+    
+    [self.calListEventDatesTable setHidden:YES];
 }
 
 -(void)retrieveEvent {
@@ -340,6 +344,20 @@
 -(IBAction)scrollToDetailsInfoView {
     
     [self.svEventInfoScrollView setContentOffset:CGPointMake(0.0, self.detailsInfoView.frame.origin.y) animated:YES];
+}
+
+-(IBAction)switchToCalendarOrListBtnAction {
+    
+    if (self.calEventDatesCalendar.hidden) {
+        [self.calEventDatesCalendar setHidden:NO];
+        [self.calListEventDatesTable setHidden:YES];
+    }
+    else {
+        [self.calEventDatesCalendar setHidden:YES];
+        [self.calListEventDatesTable setHidden:NO];
+        
+        [self.calListEventDatesTable reloadData];
+    }
 }
 
 #pragma mark - Bottom Bar Methods
@@ -709,6 +727,11 @@
         }
         else if (scrollView.contentOffset.x < 920.0) {
             
+            if (scrollView.contentOffset.x == 640.0) {
+                
+                [self.doneDatesTableView reloadData];
+            }
+            
             [self.mainBackButton setTitle:@"Dates" forState:UIControlStateNormal];
             [self.mainDoneButton setTitle:@"Done" forState:UIControlStateNormal];
             [self.lblTitleLabel setText:@"Done"];
@@ -732,36 +755,70 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.postsArray.count;
+    
+    if (tableView == self.postsTable)
+        return self.postsArray.count;
+    else
+        return self.eventDateTimesArray.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    PostCell *cell = (PostCell *)[tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-    
-    if (!cell) {
-        cell = [PostCell newPostCell];
+    if (tableView == self.postsTable) {
+        
+        PostCell *cell = (PostCell *)[tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+        
+        if (!cell) {
+            cell = [PostCell newPostCell];
+        }
+        
+        NSDictionary *postDict = [self.postsArray objectAtIndex:indexPath.row];
+        
+        [cell.contentLabel setText:[postDict objectForKey:@"content"]];
+        [cell.authorLabel setText:[postDict objectForKey:@"username"]];
+        [cell.timeLabel setText:[Helpers timeframeFromString:[postDict objectForKey:@"created_at"]]];
+        
+        if ([cell.authorLabel.text isEqualToString:self.eventUserName]) {
+            [cell setRightSide];
+        }
+        else {
+            [cell setLeftSide];
+        }
+        
+        return cell;
     }
-    
-    NSDictionary *postDict = [self.postsArray objectAtIndex:indexPath.row];
-    
-    [cell.contentLabel setText:[postDict objectForKey:@"content"]];
-    [cell.authorLabel setText:[postDict objectForKey:@"username"]];
-    [cell.timeLabel setText:[Helpers timeframeFromString:[postDict objectForKey:@"created_at"]]];
-    
-    if ([cell.authorLabel.text isEqualToString:self.eventUserName]) {
-        [cell setRightSide];
+    else if (tableView == self.calListEventDatesTable) {
+        
+        ListDateTimeCell *cell = (ListDateTimeCell *)[tableView dequeueReusableCellWithIdentifier:@"ListDateTimeCelll"];
+        
+        if (!cell) {
+            cell = [ListDateTimeCell newCell];
+        }
+        
+        
+        return cell;
     }
     else {
-        [cell setLeftSide];
+        
+        SummaryDateTimeCell *cell = (SummaryDateTimeCell *)[tableView dequeueReusableCellWithIdentifier:@"SummaryDateTimeCell"];
+        
+        if (!cell) {
+            cell = [SummaryDateTimeCell newCell];
+        }
+        
+        
+        return cell;
     }
-    
-    return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 65.0;
+    if (tableView == self.postsTable) {
+        return 65.0;
+    }
+    else {
+        return 50.0;
+    }
 }
 
 #pragma mark - Keyboard Methods

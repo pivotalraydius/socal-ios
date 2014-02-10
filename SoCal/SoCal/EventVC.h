@@ -58,6 +58,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *detailsInfoScrollToInfoButton;
 
 @property (nonatomic, weak) IBOutlet CKCalendarView *calEventDatesCalendar;
+@property (nonatomic, weak) IBOutlet UITableView *calListEventDatesTable;
 
 @property (nonatomic, weak) IBOutlet UIButton *eventDateYesPiece;
 @property (nonatomic, weak) IBOutlet UIButton *eventDateNoPiece;

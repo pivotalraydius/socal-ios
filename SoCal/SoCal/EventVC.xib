@@ -10,6 +10,7 @@
                 <outlet property="btnNameOkButton" destination="cdY-eR-4Yk" id="CMP-9f-q5J"/>
                 <outlet property="btnPostButton" destination="l5i-2a-fc7" id="POL-In-xNa"/>
                 <outlet property="calEventDatesCalendar" destination="osi-h7-ne8" id="eE5-ai-yyn"/>
+                <outlet property="calListEventDatesTable" destination="bny-5c-Ypt" id="RNf-HE-hFW"/>
                 <outlet property="datesView" destination="cnt-FV-6EA" id="JxZ-wf-GYf"/>
                 <outlet property="detailsInfoScrollToInfoButton" destination="z2t-tF-f7V" id="CQ1-I6-xvD"/>
                 <outlet property="detailsInfoScrollToMapButton" destination="7bw-0d-vDJ" id="L7r-kO-uUE"/>
@@ -155,6 +156,15 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bny-5c-Ypt">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="261"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="W1M-Bi-GDc"/>
+                        <outlet property="delegate" destination="-1" id="Ivb-Kx-s93"/>
+                    </connections>
+                </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Kf3-6d-HVe">
                     <rect key="frame" x="20" y="269" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -192,6 +202,16 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Ci-qg-sGc">
+                    <rect key="frame" x="273" y="0.0" width="44" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="LIST">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="switchToCalendarOrListBtnAction" destination="-1" eventType="touchUpInside" id="eSe-bI-bf0"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -200,10 +220,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="IfS-wg-6ne">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="IfS-wg-6ne">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="lh0-6z-Gd3"/>
+                        <outlet property="delegate" destination="-1" id="K7s-F2-QaY"/>
+                    </connections>
                 </tableView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7.30pm, on 6 September is currently the most popular date and time." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ovg-NB-YMN">
                     <rect key="frame" x="20" y="273" width="280" height="50"/>

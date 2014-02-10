@@ -439,12 +439,10 @@
             
             NSString *dateString = [dateFormatter stringFromDate:dateKey];
             
-            if ([dateString hasSuffix:@"am"]) {
-                [view setVal1:0 setVal2:1];
-            }
-            else {
-                [view setVal1:1 setVal2:0];
-            }
+            if ([dateString hasSuffix:@"am"])
+                [view setAMRatio:1 setPMRatio:0];
+            else
+                [view setAMRatio:0 setPMRatio:1];
             
             NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
             [dateFormatter2 setDateFormat:@"hh:mm"];
@@ -466,9 +464,16 @@
                 else if ([dateString hasSuffix:@"pm"])
                     pmCount++;
             }
-            if (pmCount == 0) [view setVal1:0 setVal2:1];
-            else if (amCount == 0) [view setVal1:1 setVal2:0];
-            else [view setVal1:0.5 setVal2:0.5];
+            if (pmCount == 0) [view setAMRatio:1 setPMRatio:0];
+            else if (amCount == 0) [view setAMRatio:0 setPMRatio:1];
+            else {
+            
+                float total = amCount + pmCount;
+                float amRatio = amCount/total;
+                [view setAMRatio:amRatio setPMRatio:1-amRatio];
+            }
+            
+            
             
             [label setText:@"..."];
             

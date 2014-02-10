@@ -13,9 +13,13 @@
 
     float m_amRatio;
 	float m_pmRatio;
+    
+    UIColor *m_amColor;
+    UIColor *m_pmColor;
 }
 
 -(void)setAMRatio:(float)amRatio setPMRatio:(float)pmRatio;
+-(void)setAMColor:(UIColor*)amColor setPMColor:(UIColor*)pmColor;
 //-(void)setVal1:(float)val1 setVal2:(float)val2;
 
 @end

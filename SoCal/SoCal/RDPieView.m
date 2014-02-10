@@ -10,6 +10,8 @@
 
 
 #define PI 3.14159265358979323846
+#define DEFAULT_AM_COLOR [Helpers suriaOrangeColorWithAlpha:1.0]
+#define DEFAULT_PM_COLOR [Helpers pmBlueColorWithAlpha:1.0]
 static inline float radians(double degrees) { return degrees * PI / 180; }
 
 @implementation RDPieView
@@ -80,10 +82,16 @@ static inline float radians(double degrees) { return degrees * PI / 180; }
 	
 }
 
--(void)setVal1:(float)val1 setVal2:(float)val2
-{
-	self->m_val1=val1;
-	self->m_val2=val2;
+-(void)setAMRatio:(float)amRatio setPMRatio:(float)pmRatio {
+    
+	self->m_amRatio=amRatio;
+	self->m_pmRatio=pmRatio;
+}
+
+-(void)setAMColor:(UIColor*)amColor setPMColor:(UIColor*)pmColor {
+
+    self->m_amColor=amColor;
+    self->m_pmColor=pmColor;
 }
 
 @end

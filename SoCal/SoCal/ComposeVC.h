@@ -20,8 +20,8 @@
 }
 
 @property (nonatomic, weak) IBOutlet CKCalendarView *calendarView;
-@property (nonatomic, strong) NSMutableArray *selectedDateItems;
-@property (nonatomic, strong) NSMutableArray *selectedDateItemsViews;
+@property (nonatomic, strong) NSMutableDictionary *selectedCalendarDatesDict;
+@property (nonatomic, strong) NSMutableArray *viewsForSelectedCalendarDates;
 
 @property (nonatomic, weak) IBOutlet UITableView *dateTimeTable;
 @property (nonatomic, strong) NSMutableArray *eventDateTimesArray;

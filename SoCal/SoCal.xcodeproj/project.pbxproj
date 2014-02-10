@@ -13,6 +13,24 @@
 		9A20BD5718A89F1700B90101 /* ListDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A20BD5618A89F1700B90101 /* ListDateTimeCell.m */; };
 		9A20BD5918A89F2E00B90101 /* SummaryDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5818A89F2E00B90101 /* SummaryDateTimeCell.xib */; };
 		9A20BD5B18A89F3E00B90101 /* ListDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5A18A89F3E00B90101 /* ListDateTimeCell.xib */; };
+		9A20BD7018A8D1E100B90101 /* Exo2.0-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5E18A8D1E100B90101 /* Exo2.0-ThinItalic.otf */; };
+		9A20BD7118A8D1E100B90101 /* Exo2.0-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5F18A8D1E100B90101 /* Exo2.0-SemiBoldItalic.otf */; };
+		9A20BD7218A8D1E100B90101 /* Exo2.0-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6018A8D1E100B90101 /* Exo2.0-Thin.otf */; };
+		9A20BD7318A8D1E100B90101 /* Exo2.0-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6118A8D1E100B90101 /* Exo2.0-Regular.otf */; };
+		9A20BD7418A8D1E100B90101 /* Exo2.0-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6218A8D1E100B90101 /* Exo2.0-SemiBold.otf */; };
+		9A20BD7518A8D1E100B90101 /* Exo2.0-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6318A8D1E100B90101 /* Exo2.0-Medium.otf */; };
+		9A20BD7618A8D1E100B90101 /* Exo2.0-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6418A8D1E100B90101 /* Exo2.0-MediumItalic.otf */; };
+		9A20BD7718A8D1E100B90101 /* Exo2.0-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6518A8D1E100B90101 /* Exo2.0-Light.otf */; };
+		9A20BD7818A8D1E100B90101 /* Exo2.0-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6618A8D1E100B90101 /* Exo2.0-LightItalic.otf */; };
+		9A20BD7918A8D1E100B90101 /* Exo2.0-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6718A8D1E100B90101 /* Exo2.0-ExtraLightItalic.otf */; };
+		9A20BD7A18A8D1E100B90101 /* Exo2.0-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6818A8D1E100B90101 /* Exo2.0-Italic.otf */; };
+		9A20BD7B18A8D1E100B90101 /* Exo2.0-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6918A8D1E100B90101 /* Exo2.0-ExtraBoldItalic.otf */; };
+		9A20BD7C18A8D1E100B90101 /* Exo2.0-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6A18A8D1E100B90101 /* Exo2.0-ExtraLight.otf */; };
+		9A20BD7D18A8D1E100B90101 /* Exo2.0-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6B18A8D1E100B90101 /* Exo2.0-BoldItalic.otf */; };
+		9A20BD7E18A8D1E100B90101 /* Exo2.0-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6C18A8D1E100B90101 /* Exo2.0-ExtraBold.otf */; };
+		9A20BD7F18A8D1E100B90101 /* Exo2.0-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6D18A8D1E100B90101 /* Exo2.0-BlackItalic.otf */; };
+		9A20BD8018A8D1E100B90101 /* Exo2.0-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6E18A8D1E100B90101 /* Exo2.0-Bold.otf */; };
+		9A20BD8118A8D1E100B90101 /* Exo2.0-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6F18A8D1E100B90101 /* Exo2.0-Black.otf */; };
 		9A4821921898E312002DA0E4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4821911898E312002DA0E4 /* MapKit.framework */; };
 		9A5ED7A9189245D000BA8E02 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7A8189245D000BA8E02 /* Foundation.framework */; };
 		9A5ED7AB189245D000BA8E02 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7AA189245D000BA8E02 /* CoreGraphics.framework */; };
@@ -86,6 +104,24 @@
 		9A20BD5618A89F1700B90101 /* ListDateTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListDateTimeCell.m; sourceTree = "<group>"; };
 		9A20BD5818A89F2E00B90101 /* SummaryDateTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SummaryDateTimeCell.xib; sourceTree = "<group>"; };
 		9A20BD5A18A89F3E00B90101 /* ListDateTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListDateTimeCell.xib; sourceTree = "<group>"; };
+		9A20BD5E18A8D1E100B90101 /* Exo2.0-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-ThinItalic.otf"; path = "Fonts/exo-2/Exo2.0-ThinItalic.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD5F18A8D1E100B90101 /* Exo2.0-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-SemiBoldItalic.otf"; path = "Fonts/exo-2/Exo2.0-SemiBoldItalic.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6018A8D1E100B90101 /* Exo2.0-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-Thin.otf"; path = "Fonts/exo-2/Exo2.0-Thin.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6118A8D1E100B90101 /* Exo2.0-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-Regular.otf"; path = "Fonts/exo-2/Exo2.0-Regular.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6218A8D1E100B90101 /* Exo2.0-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-SemiBold.otf"; path = "Fonts/exo-2/Exo2.0-SemiBold.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6318A8D1E100B90101 /* Exo2.0-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-Medium.otf"; path = "Fonts/exo-2/Exo2.0-Medium.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6418A8D1E100B90101 /* Exo2.0-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-MediumItalic.otf"; path = "Fonts/exo-2/Exo2.0-MediumItalic.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6518A8D1E100B90101 /* Exo2.0-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-Light.otf"; path = "Fonts/exo-2/Exo2.0-Light.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6618A8D1E100B90101 /* Exo2.0-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-LightItalic.otf"; path = "Fonts/exo-2/Exo2.0-LightItalic.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6718A8D1E100B90101 /* Exo2.0-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-ExtraLightItalic.otf"; path = "Fonts/exo-2/Exo2.0-ExtraLightItalic.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6818A8D1E100B90101 /* Exo2.0-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-Italic.otf"; path = "Fonts/exo-2/Exo2.0-Italic.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6918A8D1E100B90101 /* Exo2.0-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-ExtraBoldItalic.otf"; path = "Fonts/exo-2/Exo2.0-ExtraBoldItalic.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6A18A8D1E100B90101 /* Exo2.0-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-ExtraLight.otf"; path = "Fonts/exo-2/Exo2.0-ExtraLight.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6B18A8D1E100B90101 /* Exo2.0-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-BoldItalic.otf"; path = "Fonts/exo-2/Exo2.0-BoldItalic.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6C18A8D1E100B90101 /* Exo2.0-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-ExtraBold.otf"; path = "Fonts/exo-2/Exo2.0-ExtraBold.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6D18A8D1E100B90101 /* Exo2.0-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-BlackItalic.otf"; path = "Fonts/exo-2/Exo2.0-BlackItalic.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6E18A8D1E100B90101 /* Exo2.0-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-Bold.otf"; path = "Fonts/exo-2/Exo2.0-Bold.otf"; sourceTree = SOURCE_ROOT; };
+		9A20BD6F18A8D1E100B90101 /* Exo2.0-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-Black.otf"; path = "Fonts/exo-2/Exo2.0-Black.otf"; sourceTree = SOURCE_ROOT; };
 		9A4821911898E312002DA0E4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9A5ED7A5189245D000BA8E02 /* SoCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A5ED7A8189245D000BA8E02 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -216,6 +252,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A20BD5C18A8D04B00B90101 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9A20BD5D18A8D1CE00B90101 /* Exo2.0 */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		9A20BD5D18A8D1CE00B90101 /* Exo2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				9A20BD5E18A8D1E100B90101 /* Exo2.0-ThinItalic.otf */,
+				9A20BD5F18A8D1E100B90101 /* Exo2.0-SemiBoldItalic.otf */,
+				9A20BD6018A8D1E100B90101 /* Exo2.0-Thin.otf */,
+				9A20BD6118A8D1E100B90101 /* Exo2.0-Regular.otf */,
+				9A20BD6218A8D1E100B90101 /* Exo2.0-SemiBold.otf */,
+				9A20BD6318A8D1E100B90101 /* Exo2.0-Medium.otf */,
+				9A20BD6418A8D1E100B90101 /* Exo2.0-MediumItalic.otf */,
+				9A20BD6518A8D1E100B90101 /* Exo2.0-Light.otf */,
+				9A20BD6618A8D1E100B90101 /* Exo2.0-LightItalic.otf */,
+				9A20BD6718A8D1E100B90101 /* Exo2.0-ExtraLightItalic.otf */,
+				9A20BD6818A8D1E100B90101 /* Exo2.0-Italic.otf */,
+				9A20BD6918A8D1E100B90101 /* Exo2.0-ExtraBoldItalic.otf */,
+				9A20BD6A18A8D1E100B90101 /* Exo2.0-ExtraLight.otf */,
+				9A20BD6B18A8D1E100B90101 /* Exo2.0-BoldItalic.otf */,
+				9A20BD6C18A8D1E100B90101 /* Exo2.0-ExtraBold.otf */,
+				9A20BD6D18A8D1E100B90101 /* Exo2.0-BlackItalic.otf */,
+				9A20BD6E18A8D1E100B90101 /* Exo2.0-Bold.otf */,
+				9A20BD6F18A8D1E100B90101 /* Exo2.0-Black.otf */,
+			);
+			name = Exo2.0;
+			sourceTree = "<group>";
+		};
 		9A5ED79C189245D000BA8E02 = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +375,7 @@
 		9A5ED7AF189245D000BA8E02 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9A20BD5C18A8D04B00B90101 /* Fonts */,
 				9A5ED7B0189245D000BA8E02 /* SoCal-Info.plist */,
 				9A5ED7B1189245D000BA8E02 /* InfoPlist.strings */,
 				9A5ED7B4189245D000BA8E02 /* main.m */,
@@ -495,17 +565,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A20BD7818A8D1E100B90101 /* Exo2.0-LightItalic.otf in Resources */,
+				9A20BD7A18A8D1E100B90101 /* Exo2.0-Italic.otf in Resources */,
 				9A5ED7B3189245D000BA8E02 /* InfoPlist.strings in Resources */,
+				9A20BD7B18A8D1E100B90101 /* Exo2.0-ExtraBoldItalic.otf in Resources */,
+				9A20BD8018A8D1E100B90101 /* Exo2.0-Bold.otf in Resources */,
 				9A5ED7DB189245F900BA8E02 /* MainVC.xib in Resources */,
+				9A20BD7F18A8D1E100B90101 /* Exo2.0-BlackItalic.otf in Resources */,
+				9A20BD7418A8D1E100B90101 /* Exo2.0-SemiBold.otf in Resources */,
+				9A20BD7018A8D1E100B90101 /* Exo2.0-ThinItalic.otf in Resources */,
+				9A20BD8118A8D1E100B90101 /* Exo2.0-Black.otf in Resources */,
 				9A5ED7E51892476C00BA8E02 /* ComposeVC.xib in Resources */,
+				9A20BD7D18A8D1E100B90101 /* Exo2.0-BoldItalic.otf in Resources */,
+				9A20BD7918A8D1E100B90101 /* Exo2.0-ExtraLightItalic.otf in Resources */,
+				9A20BD7218A8D1E100B90101 /* Exo2.0-Thin.otf in Resources */,
+				9A20BD7318A8D1E100B90101 /* Exo2.0-Regular.otf in Resources */,
+				9A20BD7718A8D1E100B90101 /* Exo2.0-Light.otf in Resources */,
 				9A20BD5B18A89F3E00B90101 /* ListDateTimeCell.xib in Resources */,
+				9A20BD7118A8D1E100B90101 /* Exo2.0-SemiBoldItalic.otf in Resources */,
 				9A152D12189626D30013B647 /* ComposeDateTimeCell.xib in Resources */,
+				9A20BD7518A8D1E100B90101 /* Exo2.0-Medium.otf in Resources */,
 				9ACDDA1C18A35ECC00FF4F5C /* PostCell.xib in Resources */,
+				9A20BD7C18A8D1E100B90101 /* Exo2.0-ExtraLight.otf in Resources */,
 				9A20BD5918A89F2E00B90101 /* SummaryDateTimeCell.xib in Resources */,
 				9A5ED7BB189245D000BA8E02 /* Images.xcassets in Resources */,
+				9A20BD7618A8D1E100B90101 /* Exo2.0-MediumItalic.otf in Resources */,
 				9A5ED7E01892471800BA8E02 /* EventVC.xib in Resources */,
 				9AF7897318A0DDCC008EA2E5 /* LocationVC.xib in Resources */,
 				9AA365D218A20D20004C0E86 /* PlaceSearchCell.xib in Resources */,
+				9A20BD7E18A8D1E100B90101 /* Exo2.0-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

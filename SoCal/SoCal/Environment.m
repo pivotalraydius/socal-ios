@@ -59,16 +59,28 @@
 +(void)registerAPN {
 }
 
+//+(NSString *)Pusher_App_ID {
+//    return @"65761";
+//}
+//
+//+(NSString *)Pusher_Key {
+//    return @"8197ab8e102c7e2ca2eb";
+//}
+//
+//+(NSString *)Pusher_Secret {
+//    return @"e58e48596fbe758eb605";
+//}
+
 +(NSString *)Pusher_App_ID {
-    return @"65761";
+    return @"65760";
 }
 
 +(NSString *)Pusher_Key {
-    return @"8197ab8e102c7e2ca2eb";
+    return @"149e787d80733d128022";
 }
 
 +(NSString *)Pusher_Secret {
-    return @"e58e48596fbe758eb605";
+    return @"08febbd6c964685f36da";
 }
 
 +(NSString *)LuncheonAppURLBaseHost {

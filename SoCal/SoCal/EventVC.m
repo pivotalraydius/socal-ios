@@ -11,6 +11,7 @@
 #import "PTPusherEvent.h"
 #import "ListDateTimeCell.h"
 #import "SummaryDateTimeCell.h"
+#import "RDPieView.h"
 
 #define VOTE_BUTTON_STILL   0
 #define VOTE_BUTTON_MOTION  1
@@ -28,9 +29,10 @@
         // Custom initialization
         
         hasName = NO;
+        self.eventDateTimesDictArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.eventDateTimesArray = [[NSMutableArray alloc] initWithCapacity:0];
-        self.selectedDateItems = [[NSMutableArray alloc] initWithCapacity:0];
-        self.selectedDateItemsViews = [[NSMutableArray alloc] initWithCapacity:0];
+        self.selectedCalendarDatesDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+        self.viewsForSelectedCalendarDates = [[NSMutableArray alloc] initWithCapacity:0];
         self.postsArray = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
@@ -43,9 +45,10 @@
         // Custom initialization
         
         hasName = NO;
+        self.eventDateTimesDictArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.eventDateTimesArray = [[NSMutableArray alloc] initWithCapacity:0];
-        self.selectedDateItems = [[NSMutableArray alloc] initWithCapacity:0];
-        self.selectedDateItemsViews = [[NSMutableArray alloc] initWithCapacity:0];
+        self.selectedCalendarDatesDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+        self.viewsForSelectedCalendarDates = [[NSMutableArray alloc] initWithCapacity:0];
         self.postsArray = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
@@ -163,30 +166,7 @@
         
         NSDictionary *eventDict = [responseObject objectForKey:@"topic"];
         
-        //set labels
-        [self setEventTitleWithTitle:[eventDict objectForKey:@"title"] place:[eventDict objectForKey:@"place_name"] andDate:nil];
-        [self.lblDetailsInfo setText:[eventDict objectForKey:@"description"]];
-        
-        //set map
-        CGFloat lat = [[eventDict objectForKey:@"latitude"] floatValue];
-        CGFloat lng = [[eventDict objectForKey:@"longitude"] floatValue];
-        
-        MKCoordinateRegion region;
-        MKCoordinateSpan span;
-        span.latitudeDelta = 0.005;
-        span.longitudeDelta = 0.005;
-        region.span = span;
-        region.center = CLLocationCoordinate2DMake(lat, lng);
-        [self.detailsMapView setRegion:region animated:YES];
-        
-        NSArray *dateStringsArray = [eventDict objectForKey:@"datetime"];
-        
-        for (NSDictionary *dateDict in dateStringsArray) {
-            
-            [self.eventDateTimesArray addObject:[Helpers dateFromString:[dateDict objectForKey:@"dateNtime"]]];
-        }
-        
-        [self updateCalendarSubviews];
+        [self eventHandler:eventDict];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -194,9 +174,36 @@
     }];
 }
 
--(void)updateEventDateTimeArrayWith:(NSString *)datetimeString {
+-(void)eventHandler:(NSDictionary *)eventDict {
     
+    [self.eventDateTimesArray removeAllObjects];
+    [self.eventDateTimesDictArray removeAllObjects];
     
+    //set labels
+    [self setEventTitleWithTitle:[eventDict objectForKey:@"title"] place:[eventDict objectForKey:@"place_name"] andDate:nil];
+    [self.lblDetailsInfo setText:[eventDict objectForKey:@"description"]];
+    
+    //set map
+    CGFloat lat = [[eventDict objectForKey:@"latitude"] floatValue];
+    CGFloat lng = [[eventDict objectForKey:@"longitude"] floatValue];
+    
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.005;
+    span.longitudeDelta = 0.005;
+    region.span = span;
+    region.center = CLLocationCoordinate2DMake(lat, lng);
+    [self.detailsMapView setRegion:region animated:YES];
+    
+    NSArray *dateStringsArray = [eventDict objectForKey:@"datetime"];
+    [self.eventDateTimesDictArray addObjectsFromArray:dateStringsArray];
+    
+    for (NSDictionary *dateDict in dateStringsArray) {
+        
+        [self.eventDateTimesArray addObject:[Helpers dateFromString:[dateDict objectForKey:@"dateNtime"]]];
+    }
+    
+    [self updateCalendarSubviews];
 }
 
 -(void)setEventTitleWithTitle:(NSString *)title place:(NSString *)placeName andDate:(NSDate *)date {
@@ -224,87 +231,111 @@
 
 -(void)updateCalendarSubviews {
     
-    [self.selectedDateItems removeAllObjects];
-    [self.selectedDateItemsViews removeAllObjects];
+    [self.selectedCalendarDatesDict removeAllObjects];
+    [self.viewsForSelectedCalendarDates removeAllObjects];
     
-    NSMutableArray *multiInDay = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *selectedCalendarDates = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSDate *dateToAdd in self.eventDateTimesArray) {
+    for (NSDate *eventDateTime in self.eventDateTimesArray) {
         
-        if ([self.selectedDateItems lastObject]) {
+        BOOL aldyExist = NO;
+        
+        for (int i = 0 ; i < self.selectedCalendarDatesDict.allKeys.count ; i++) {
             
-            if ([self.calEventDatesCalendar date:[self.selectedDateItems lastObject] isSameDayAsDate:dateToAdd]) {
+            NSString *strDateKey = [[self.selectedCalendarDatesDict allKeys] objectAtIndex:i];
+            NSDate *dateKey = [Helpers dateFromString:strDateKey];
+            if ([self.calEventDatesCalendar date:eventDateTime isSameDayAsDate:dateKey]) {
                 
-                //don't add
-                [multiInDay addObject:dateToAdd];
-                [self.selectedDateItems removeObject:[self.selectedDateItems lastObject]];
-            }
-            else {
-                [self.selectedDateItems addObject:dateToAdd];
+                aldyExist = YES;
+                NSMutableArray *currentDates = [self.selectedCalendarDatesDict objectForKey:strDateKey];
+                [currentDates addObject:eventDateTime];
+                [self.selectedCalendarDatesDict setObject:currentDates forKey:strDateKey];
+                break;
             }
         }
-        else {
-            [self.selectedDateItems addObject:dateToAdd];
+        
+        if (!aldyExist) {
+            
+            NSString *key = [Helpers stringFromDate:eventDateTime];
+            NSMutableArray *dates = [[NSMutableArray alloc] initWithObjects:eventDateTime, nil];
+            [self.selectedCalendarDatesDict setObject:dates forKey:key];
         }
     }
     
-    for (NSDate *dateToAdd in self.selectedDateItems) {
+    
+    
+    for (NSString *strDateKey in self.selectedCalendarDatesDict.allKeys) {
         
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
-        [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
-        [view.layer setCornerRadius:view.frame.size.height/2];
+        NSDate *dateKey = [Helpers dateFromString:strDateKey];
+        NSMutableArray *dates = [self.selectedCalendarDatesDict objectForKey:strDateKey];
+        
+        RDPieView *view = [[RDPieView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
+        [view setBackgroundColor:[UIColor clearColor]];
+        [view setTag:666];
+        
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [label setTextColor:[UIColor whiteColor]];
         [label setBackgroundColor:[UIColor clearColor]];
         [label setTextAlignment:NSTextAlignmentCenter];
         [label setFont:[UIFont systemFontOfSize:10.0]];
         
+        [view addSubview:label];
+        
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"MMMM d, EEEE, hh:mm a"];
         [dateFormatter setAMSymbol:@"am"];
         [dateFormatter setPMSymbol:@"pm"];
         
-        NSString *dateString = [dateFormatter stringFromDate:dateToAdd];
-        
-        if ([dateString hasSuffix:@"am"]) {
-            [view setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        if (dates.count == 1) { // single cell
+            
+            NSString *dateString = [dateFormatter stringFromDate:dateKey];
+            
+            if ([dateString hasSuffix:@"am"])
+                [view setAMRatio:1 setPMRatio:0];
+            else
+                [view setAMRatio:0 setPMRatio:1];
+            
+            NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+            [dateFormatter2 setDateFormat:@"hh:mm"];
+            NSString *dateString2 = [dateFormatter2 stringFromDate:dateKey];
+            NSString *displayString2 = dateString2;
+            [label setText:displayString2];
+            [view setUserInteractionEnabled:NO];
+            
         }
-        else {
-            [view setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        else if(dates.count>1) { // multi-dates cell
+            
+            int amCount = 0; int pmCount = 0;
+            for (NSDate *date in dates) {
+                
+                NSString *dateString = [dateFormatter stringFromDate:date];
+                
+                if ([dateString hasSuffix:@"am"])
+                    amCount++;
+                else if ([dateString hasSuffix:@"pm"])
+                    pmCount++;
+            }
+            if (pmCount == 0) [view setAMRatio:1 setPMRatio:0];
+            else if (amCount == 0) [view setAMRatio:0 setPMRatio:1];
+            else {
+                
+                float total = amCount + pmCount;
+                float amRatio = amCount/total;
+                [view setAMRatio:amRatio setPMRatio:1-amRatio];
+            }
+            
+            
+            
+            [label setText:@"..."];
+            
+            [view setUserInteractionEnabled:NO];
         }
         
-        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
-        [dateFormatter2 setDateFormat:@"hh:mm"];
-        
-        NSString *dateString2 = [dateFormatter2 stringFromDate:dateToAdd];
-        NSString *displayString2 = dateString2;
-        [label setText:displayString2];
-        
-        [view addSubview:label];
-        
-        [view setTag:666];
-        [view setUserInteractionEnabled:NO];
-        
-        [self.selectedDateItemsViews addObject:view];
+        [selectedCalendarDates addObject:dateKey];
+        [self.viewsForSelectedCalendarDates addObject:view];
     }
     
-    
-    for (NSDate *dateToAdd in multiInDay) {
-        
-        //TO DO make the half-circle view here
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
-        [view setBackgroundColor:[UIColor redColor]];
-        [view.layer setCornerRadius:view.frame.size.height/2];
-        
-        [view setTag:666];
-        [view setUserInteractionEnabled:NO];
-        
-        [self.selectedDateItems addObject:dateToAdd];
-        [self.selectedDateItemsViews addObject:view];
-    }
-    
-    [self.calEventDatesCalendar setSubviews:self.selectedDateItemsViews toDateButtonWithDate:self.selectedDateItems];
+    [self.calEventDatesCalendar setSubviews:self.viewsForSelectedCalendarDates toDateButtonWithDate:selectedCalendarDates];
     [self.calEventDatesCalendar reloadData];
 }
 
@@ -490,6 +521,13 @@
         NSDictionary *postDict = channelEvent.data;
         [self handleNewPost:postDict];
     }];
+    
+    [pusher bindToEventNamed:@"broadcast_event" handleWithBlock:^(PTPusherEvent *channelEvent) {
+        
+        NSDictionary *eventDict = channelEvent.data;
+        
+        [self eventHandler:eventDict];
+    }];
 }
 
 -(void)pusher:(PTPusher *)pusher didUnsubscribeFromChannel:(PTPusherChannel *)channel {
@@ -569,31 +607,63 @@
 
 -(void)handlePan:(UIPanGestureRecognizer *)gesture {
     
-    CGPoint touchLocation = [gesture locationInView:self.datesView];
+    if (self.calListEventDatesTable.hidden) {
     
-    if (gesture.state == UIGestureRecognizerStateBegan) {
+        CGPoint touchLocation = [gesture locationInView:self.datesView];
         
-        [self switchVoteButton:gesture.view toMode:VOTE_BUTTON_MOTION];
+        if (gesture.state == UIGestureRecognizerStateBegan) {
+            
+            [self switchVoteButton:gesture.view toMode:VOTE_BUTTON_MOTION];
+        }
+        else if (gesture.state == UIGestureRecognizerStateChanged) {
+            
+            if (gesture == yesPan) {
+                
+                self.eventDateYesPiece.center = touchLocation;
+            }
+            else if (gesture == noPan) {
+                
+                self.eventDateNoPiece.center = touchLocation;
+            }
+            else if (gesture == maybePan) {
+                
+                self.eventDateMaybePiece.center = touchLocation;
+            }
+        }
+        else if (gesture.state == UIGestureRecognizerStateEnded) {
+            
+            [self switchVoteButton:gesture.view toMode:VOTE_BUTTON_STILL];
+            [self checkVoteButtonsTarget:gesture];
+        }
     }
-    else if (gesture.state == UIGestureRecognizerStateChanged) {
+    else {
         
-        if (gesture == yesPan) {
-            
-            self.eventDateYesPiece.center = touchLocation;
-        }
-        else if (gesture == noPan) {
-            
-            self.eventDateNoPiece.center = touchLocation;
-        }
-        else if (gesture == maybePan) {
-            
-            self.eventDateMaybePiece.center = touchLocation;
-        }
-    }
-    else if (gesture.state == UIGestureRecognizerStateEnded) {
+        CGPoint touchLocation = [gesture locationInView:self.datesView];
         
-        [self switchVoteButton:gesture.view toMode:VOTE_BUTTON_STILL];
-        [self checkVoteButtonsTarget:gesture];
+        if (gesture.state == UIGestureRecognizerStateBegan) {
+            
+            [self switchVoteButton:gesture.view toMode:VOTE_BUTTON_MOTION];
+        }
+        else if (gesture.state == UIGestureRecognizerStateChanged) {
+            
+            if (gesture == yesPan) {
+                
+                self.eventDateYesPiece.center = touchLocation;
+            }
+            else if (gesture == noPan) {
+                
+                self.eventDateNoPiece.center = touchLocation;
+            }
+            else if (gesture == maybePan) {
+                
+                self.eventDateMaybePiece.center = touchLocation;
+            }
+        }
+        else if (gesture.state == UIGestureRecognizerStateEnded) {
+            
+            [self switchVoteButton:gesture.view toMode:VOTE_BUTTON_STILL];
+            [self checkVoteButtonsTarget:gesture];
+        }
     }
 }
 
@@ -691,20 +761,33 @@
                          
                      }];
     
-    //check gesture and release point
-    CGPoint releaseLocation = [gesture locationInView:self.calEventDatesCalendar];
-    NSDate *releasePointDate = [self.calEventDatesCalendar dateForLocationInView:releaseLocation];
+    NSDate *releasePointDate = nil;
+    if (self.calListEventDatesTable.hidden) {
+    
+        CGPoint releaseLocation = [gesture locationInView:self.calEventDatesCalendar];
+        releasePointDate = [self.calEventDatesCalendar dateForLocationInView:releaseLocation];
+    }
+    else {
+    
+        CGPoint releaseLocation = [gesture locationInView:self.calListEventDatesTable];
+        releasePointDate = [self dateForLocationInTableView:releaseLocation];
+    }
     
     NSDate *votedDate = nil;
     
-    for (NSDate *aDate in self.eventDateTimesArray) {
-        
-        if ([self.calEventDatesCalendar date:releasePointDate isSameDayAsDate:aDate]) {
+    if (self.calListEventDatesTable.hidden) {
+        for (NSDate *aDate in self.eventDateTimesArray) {
             
-            votedDate = aDate;
-            
-            //does not take into account multi-dates in day
+            if ([self.calEventDatesCalendar date:releasePointDate isSameDayAsDate:aDate]) {
+                
+                votedDate = aDate;
+                break;
+            }
         }
+    }
+    else {
+        
+        votedDate = releasePointDate;
     }
     
     if (gesture.view == self.eventDateYesPiece) {
@@ -721,11 +804,111 @@
     }
 }
 
+-(NSDate *)dateForLocationInTableView:(CGPoint)point {
+    
+    for (int i = 0; i < self.eventDateTimesArray.count; i++) {
+    
+        CGRect frame = [self.calListEventDatesTable rectForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        
+        if (CGRectContainsPoint(frame, point)) {
+            
+            //is voted date
+            return [self.eventDateTimesArray objectAtIndex:i];
+        }
+    }
+    
+    return nil;
+}
+
 -(void)vote:(NSInteger)vote forDate:(NSDate *)date {
     
     NSLog(@"Voted: %i for date: %@", vote, date);
     
+    NSNumber *dateID;
     
+    for (NSDate *aDate in self.eventDateTimesArray) {
+        
+        if ([aDate compare:date] == NSOrderedSame) {
+            
+            dateID = [[self.eventDateTimesDictArray objectAtIndex:[self.eventDateTimesArray indexOfObject:aDate]] objectForKey:@"id"];
+        }
+    }
+    
+    NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
+    [queryInfo setObject:[NSNumber numberWithInt:vote] forKey:@"vote"];
+    [queryInfo setObject:dateID forKey:@"id"];
+    
+    [[NetworkAPIClient sharedClient] postPath:VOTE_FOR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+}
+
+-(void)updateMostPopularDateTime {
+    
+    if (self.eventDateTimesDictArray.count <= 0) {
+        
+        NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
+        [self.lblDoneSummaryLabel setText:str];
+        
+        return;
+    }
+    
+    NSDictionary *mainDict = nil;
+    int yes = 0;
+    
+    for (NSDictionary *dateTimeDict in self.eventDateTimesDictArray) {
+        
+        if (!mainDict) {
+            if ([[dateTimeDict objectForKey:@"yes"] intValue] > 0) {
+                mainDict = dateTimeDict;
+                yes = [[mainDict objectForKey:@"yes"] intValue];
+            }
+        }
+        else {
+            if ([[dateTimeDict objectForKey:@"yes"] intValue] > yes) {
+                mainDict = dateTimeDict;
+                yes = [[mainDict objectForKey:@"yes"] intValue];
+            }
+        }
+    }
+    
+    if (mainDict) {
+        
+        NSDate *date = [Helpers dateFromString:[mainDict objectForKey:@"dateNtime"]];
+        
+        NSString *monthStr = @"";
+        NSString *timeStr = @"";
+        
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        
+        [df setAMSymbol:@"am"];
+        [df setPMSymbol:@"pm"];
+        
+        [df setDateFormat:@"dd MMMM"];
+        
+        monthStr = [NSString stringWithFormat:@"%@",
+                    [df stringFromDate:date]];
+        
+        [df setDateFormat:@"hh:mm a"];
+        
+        timeStr = [NSString stringWithFormat:@"%@",
+                      [df stringFromDate:date]];
+        
+        NSString *str = [NSString stringWithFormat:@"%@ on %@ is currently the most popular date and time.", timeStr, monthStr];
+        
+        [self.lblDoneSummaryLabel setText:str];
+    }
+    else {
+        
+        NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
+        [self.lblDoneSummaryLabel setText:str];
+    }
 }
 
 #pragma mark - UIScrollView Delegate Methods
@@ -758,6 +941,7 @@
             if (scrollView.contentOffset.x == 640.0) {
                 
                 [self.doneDatesTableView reloadData];
+                [self updateMostPopularDateTime];
             }
             
             [self.mainBackButton setTitle:@"Dates" forState:UIControlStateNormal];
@@ -854,7 +1038,15 @@
         if (!cell) {
             cell = [SummaryDateTimeCell newCell];
         }
+
+        NSDate *date = [self.eventDateTimesArray objectAtIndex:indexPath.row];
+        NSDictionary *dateTimeDict = [self.eventDateTimesDictArray objectAtIndex:indexPath.row];
         
+        int maybe = [[dateTimeDict objectForKey:@"maybe"] intValue];
+        int no = [[dateTimeDict objectForKey:@"no"] intValue];
+        int yes = [[dateTimeDict objectForKey:@"yes"] intValue];
+        
+        [cell renderWithDate:date andVotesYes:yes no:no Maybe:maybe];
         
         return cell;
     }

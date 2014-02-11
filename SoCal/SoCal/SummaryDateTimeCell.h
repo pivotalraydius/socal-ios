@@ -18,6 +18,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *monthLabel;
 
+@property (nonatomic, weak) IBOutlet UILabel *starLabel;
+
 +(SummaryDateTimeCell *)newCell;
 -(void)renderWithDate:(NSDate *)date andVotesYes:(NSInteger)yesVotes no:(NSInteger)noVotes Maybe:(NSInteger)maybeVotes;
 

@@ -71,9 +71,10 @@
 @property (nonatomic, strong) NSString *eventInviteCode;
 @property (nonatomic, strong) NSString *eventUserName;
 
+@property (nonatomic, strong) NSMutableArray *eventDateTimesDictArray;
 @property (nonatomic, strong) NSMutableArray *eventDateTimesArray;
-@property (nonatomic, strong) NSMutableArray *selectedDateItems;
-@property (nonatomic, strong) NSMutableArray *selectedDateItemsViews;
+@property (nonatomic, strong) NSMutableDictionary *selectedCalendarDatesDict;
+@property (nonatomic, strong) NSMutableArray *viewsForSelectedCalendarDates;
 
 @property (nonatomic, strong) PTPusher *pusherClient;
 

@@ -18,7 +18,7 @@
 +(NSString *)BaseHost {
     
     return @"http://mfalcon.local:5000/";
-//    return @"http://raydius-tv.local:5000/";
+//    return @"https://socal-staging.herokuapp.com/";
 }
 
 +(NSString *)StagingHost {
@@ -53,7 +53,6 @@
 
 +(NSString *)RackSpace_Avatars_CDN_BaseURL {
     
-//    return @"http://e02ac5183ba0ad4c22c1-84b48088cb4e0b523f14d8b78cb0d538.r52.cf1.rackcdn.com/";
     return @"https://ca7f4351facb1c8b333d-84b48088cb4e0b523f14d8b78cb0d538.ssl.cf1.rackcdn.com/";
 }
 
@@ -61,27 +60,15 @@
 }
 
 +(NSString *)Pusher_App_ID {
-    return @"13441";
+    return @"65761";
 }
 
-//+(NSString *)Pusher_Key {
-//    return @"cf60b3956ba93143ee47";
-//}
-//
-//+(NSString *)Pusher_Secret {
-//    return @"2e208eb4dafb67912d34";
-//}
-//
-//+(NSString *)LuncheonAppURLBaseHost {
-//    return @"luncheonDevelopment://";
-//}
-
 +(NSString *)Pusher_Key {
-    return @"cf60b3956ba93143ee47";
+    return @"8197ab8e102c7e2ca2eb";
 }
 
 +(NSString *)Pusher_Secret {
-    return @"2e208eb4dafb67912d34";
+    return @"e58e48596fbe758eb605";
 }
 
 +(NSString *)LuncheonAppURLBaseHost {

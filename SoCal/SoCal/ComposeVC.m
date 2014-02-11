@@ -234,6 +234,19 @@
     
     if (self.eventDateTimesArray.count < 5) {
         
+        for (int i = 0 ; i < self.selectedCalendarDatesDict.allKeys.count ; i++) {
+            
+            NSString *strDateKey = [[self.selectedCalendarDatesDict allKeys] objectAtIndex:i];
+            NSDate *dateKey = [Helpers dateFromString:strDateKey];
+            if ([self.calendarView date:date isSameDayAsDate:dateKey]) {
+                NSMutableArray *selectedDatesInADay = [self.selectedCalendarDatesDict objectForKey:strDateKey];
+                if (selectedDatesInADay.count == 4) {
+                    return;
+                }
+                
+            }
+        }
+        
         if (currentlySelectedDateTimeCell >= 0) {
             
             //if selected date different from currentlyselecteddatetimecell date

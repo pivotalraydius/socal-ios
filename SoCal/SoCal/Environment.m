@@ -17,8 +17,8 @@
 
 +(NSString *)BaseHost {
     
-    return @"http://mfalcon.local:5000/";
-//    return @"https://socal-staging.herokuapp.com/";
+//    return @"http://mfalcon.local:5000/";
+    return @"https://socal-staging.herokuapp.com/";
 }
 
 +(NSString *)StagingHost {

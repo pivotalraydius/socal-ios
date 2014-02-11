@@ -77,5 +77,6 @@
 @property (nonatomic, strong) NSMutableArray *viewsForSelectedCalendarDates;
 
 @property (nonatomic, strong) PTPusher *pusherClient;
+@property (nonatomic, strong) PTPusherChannel *eventChannel;
 
 @end

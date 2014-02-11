@@ -479,6 +479,10 @@
     [self.pusherClient connect];
     [self.pusherClient setReconnectAutomatically:YES];
     [self.pusherClient setReconnectDelay:0.1];
+    
+    //subscribe to main channel
+    NSString *channelName = [NSString stringWithFormat:@"%@_channel", self.eventInviteCode];
+    [self.pusherClient subscribeToChannelNamed:channelName];
 }
 
 -(void)pusherDisconnect {
@@ -492,10 +496,6 @@
 
 -(void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection {
     
-    //subscribe to main channel on connect
-    
-    NSString *channelName = [NSString stringWithFormat:@"%@_channel", self.eventInviteCode];
-    [self.pusherClient subscribeToChannelNamed:channelName];
 }
 
 -(void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection {
@@ -514,6 +514,8 @@
 }
 
 -(void)pusher:(PTPusher *)pusher didSubscribeToChannel:(PTPusherChannel *)channel {
+    
+    self.eventChannel = channel;
  
     //add block handlers for pusher events
     [pusher bindToEventNamed:@"new_post" handleWithBlock:^(PTPusherEvent *channelEvent) {
@@ -776,13 +778,30 @@
     NSDate *votedDate = nil;
     
     if (self.calListEventDatesTable.hidden) {
+        
+        int count = 0;
+        
         for (NSDate *aDate in self.eventDateTimesArray) {
             
             if ([self.calEventDatesCalendar date:releasePointDate isSameDayAsDate:aDate]) {
                 
                 votedDate = aDate;
-                break;
+                count++;
             }
+        }
+        
+        if (count > 1) {
+            //multiple dates in day
+            //return
+            
+            NSLog(@"Multiple dates in this day");
+            
+            [self switchToCalendarOrListBtnAction];
+            return;
+        }
+        else {
+            //only one date in day
+            //continue
         }
     }
     else {
@@ -821,6 +840,10 @@
 }
 
 -(void)vote:(NSInteger)vote forDate:(NSDate *)date {
+    
+    if (!date) {
+        return;
+    }
     
     NSLog(@"Voted: %i for date: %@", vote, date);
     

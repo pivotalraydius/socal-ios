@@ -10,6 +10,9 @@
                 <outlet property="calendarView" destination="eX7-kF-R1i" id="EZz-fZ-pWi"/>
                 <outlet property="closeButton" destination="l9F-er-MHN" id="fRz-4d-zNC"/>
                 <outlet property="composeEventContainer" destination="YuH-Nq-7EA" id="PuT-A4-etq"/>
+                <outlet property="contactDoneButton" destination="ZsO-QJ-WON" id="EuO-T3-QzL"/>
+                <outlet property="contactsSelectionContainer" destination="IJ8-yz-CGz" id="a5L-wp-Seg"/>
+                <outlet property="contactsTableview" destination="wfL-VU-NfF" id="Ic6-DA-84T"/>
                 <outlet property="dateTimeDoneButton" destination="O9A-Mn-HMB" id="m9K-of-JYj"/>
                 <outlet property="dateTimeTable" destination="sp3-z9-tGG" id="ysD-cb-42k"/>
                 <outlet property="doneButton" destination="9CU-5X-laK" id="9ca-pt-mLb"/>
@@ -149,7 +152,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </state>
                     <connections>
                         <action selector="selectContactsAction" destination="-1" eventType="touchUpInside" id="TKb-N0-O9Q"/>
-                        <action selector="selectDatesAction" destination="-1" eventType="touchUpInside" id="Gay-Tv-fg9"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="paC-3Q-Ott" userLabel="eventNameTextView" customClass="RDLabeledTextView">
@@ -221,6 +223,35 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <rect key="frame" x="260" y="0.0" width="40" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+        <view contentMode="scaleToFill" id="IJ8-yz-CGz" userLabel="contactSelectionContainer">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZsO-QJ-WON">
+                    <rect key="frame" x="20" y="432" width="280" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Done">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="contactSelectionDoneButtonAction" destination="-1" eventType="touchUpInside" id="ZTX-1h-NC8"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wfL-VU-NfF">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="413"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="zD2-Ff-9Dt"/>
+                        <outlet property="delegate" destination="-1" id="jJJ-0H-kfA"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

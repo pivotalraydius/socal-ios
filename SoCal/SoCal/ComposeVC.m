@@ -8,6 +8,7 @@
 
 #import "ComposeVC.h"
 #import "ComposeDateTimeCell.h"
+#import "ContactCell.h"
 #import "RDPieView.h"
 #import <MessageUI/MessageUI.h>
 
@@ -68,10 +69,13 @@
 
 -(void)setupTestData {
     
-    self.selectedContactsArray = [[NSMutableArray alloc] initWithCapacity:0];
+    self.contactsWithEmail = [[NSMutableArray alloc] initWithCapacity:0];
+    self.selectedContacts = [[NSMutableArray alloc] initWithCapacity:0];
     self.eventDateTimesArray = [[NSMutableArray alloc] initWithCapacity:0];
     self.selectedCalendarDatesDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     self.viewsForSelectedCalendarDates = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    [self getContactsWithEmail];
     
     currentlySelectedDateTimeCell = -1;
 }
@@ -84,9 +88,11 @@
     
     [self setupComposeEventContainer];
     
-//    [self.mainScrollView addSubview:self.timeSelectionContainer];
+    [self.mainScrollView addSubview:self.timeSelectionContainer];
+    [self.mainScrollView addSubview:self.contactsSelectionContainer];
     
     [self.timeSelectionContainer setFrame:CGRectMake(320, 0, self.timeSelectionContainer.frame.size.width, self.timeSelectionContainer.frame.size.height)];
+    [self.contactsSelectionContainer setFrame:CGRectMake(320, 0, self.contactsSelectionContainer.frame.size.width, self.contactsSelectionContainer.frame.size.height)];
     
     [self setupTimeSelectionContainer];
     
@@ -137,11 +143,6 @@
     
     [self.mainScrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
     
-    while (self.mainScrollView.subviews.count>0) {
-    
-        [[[self.mainScrollView subviews] lastObject] removeFromSuperview];
-    }
-    
 }
 
 #pragma mark - Main Actions
@@ -157,6 +158,11 @@
 
 }
 
+-(IBAction)contactSelectionDoneButtonAction {
+    
+    [self scrollToComposeEvent];
+}
+
 -(IBAction)doneButtonAction {
     
     [self createEvent];
@@ -164,19 +170,22 @@
 
 -(IBAction)selectDatesAction {
     
-    [self.mainScrollView addSubview:self.timeSelectionContainer];
+    [self.timeSelectionContainer setHidden:NO];
+    [self.contactsSelectionContainer setHidden:YES];
     [self scrollToTimeSelection];
 }
 
 -(IBAction)selectContactsAction {
 
-    if (!self.contactsPicker) {
-        self.contactsPicker = [[ABPeoplePickerNavigationController alloc] init];
-        self.contactsPicker.peoplePickerDelegate = self;
-    }
-    
-    
-    [self.timeSelectionContainer addSubview: self.contactsPicker.view];
+//    if (!self.contactsPicker) {
+//        self.contactsPicker = [[ABPeoplePickerNavigationController alloc] init];
+//        self.contactsPicker.peoplePickerDelegate = self;
+//    }
+//    
+//
+    [self.timeSelectionContainer setHidden:YES];
+    [self.contactsSelectionContainer setHidden:NO];
+    [self.contactsTableview reloadData];
     [self scrollToTimeSelection];
 }
 
@@ -265,7 +274,6 @@
                 if (selectedDatesInADay.count == 4) {
                     return;
                 }
-                
             }
         }
         
@@ -320,55 +328,99 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.eventDateTimesArray.count;
+    if (tableView == self.contactsTableview) {
+        
+        return self.contactsWithEmail.count;
+    }
+    else {
+        return self.eventDateTimesArray.count;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
  
-    ComposeDateTimeCell *cell = (ComposeDateTimeCell *)[tableView dequeueReusableCellWithIdentifier:@"ComposeDateTimeCell"];
-    
-    if (!cell) {
-        cell = [ComposeDateTimeCell newComposeDateTimeCell];
-        [cell setParentVC:self];
-    }
-    
-    [cell renderCellDataWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andIndexPathRow:indexPath.row];
+    if (tableView == self.contactsTableview) {
      
-    return cell;
+        NSString *REUSE_ID = @"ContactCell";
+        
+        ContactCell *cell = nil;
+        if (!(cell = (ContactCell *)[self.contactsTableview dequeueReusableCellWithIdentifier:REUSE_ID])) {
+            cell = [ContactCell newContactCell];
+            
+//            [cell setParentVC:self];
+        }
+        
+        [cell renderCellWithData:[self.contactsWithEmail objectAtIndex:indexPath.row]];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        return cell;
+    }
+    else {
+        ComposeDateTimeCell *cell = (ComposeDateTimeCell *)[tableView dequeueReusableCellWithIdentifier:@"ComposeDateTimeCell"];
+        
+        if (!cell) {
+            cell = [ComposeDateTimeCell newComposeDateTimeCell];
+            [cell setParentVC:self];
+        }
+        
+        [cell renderCellDataWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andIndexPathRow:indexPath.row];
+        
+        return cell;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == currentlySelectedDateTimeCell) {
+    if (tableView == self.contactsTableview) {
         
-        return 80.0;
+        return 44.0;
     }
+    else {
     
-    return 30.0;
+        if (indexPath.row == currentlySelectedDateTimeCell) {
+            
+            return 80.0;
+        }
+        
+        return 30.0;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == currentlySelectedDateTimeCell) {
+    if (tableView == self.contactsTableview) {
         
-        //already selected, deselect
-        [self tableView:tableView didDeselectRowAtIndexPath:indexPath];
+        [[self.contactsWithEmail objectAtIndex:indexPath.row] setObject:[NSNumber numberWithInteger:1] forKey:@"selected"];
     }
+    else {
     
-    currentlySelectedDateTimeCell = indexPath.row;
-    
-    [tableView beginUpdates];
-    [tableView endUpdates];
-    
-    [self.dateTimeTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.eventDateTimesArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        if (indexPath.row == currentlySelectedDateTimeCell) {
+            
+            //already selected, deselect
+            [self tableView:tableView didDeselectRowAtIndexPath:indexPath];
+        }
+        
+        currentlySelectedDateTimeCell = indexPath.row;
+        
+        [tableView beginUpdates];
+        [tableView endUpdates];
+        
+        [self.dateTimeTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.eventDateTimesArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    currentlySelectedDateTimeCell = -1;
-    
-    [tableView beginUpdates];
-    [tableView endUpdates];
+    if (tableView == self.contactsTableview) {
+        
+        [[self.contactsWithEmail objectAtIndex:indexPath.row] setObject:[NSNumber numberWithInteger:0] forKey:@"selected"];
+    }
+    else {
+        
+        currentlySelectedDateTimeCell = -1;
+        
+        [tableView beginUpdates];
+        [tableView endUpdates];
+    }
 }
 
 #pragma mark - UIScrollView Delegate Methods
@@ -600,91 +652,104 @@
     [self.txtDescription resignFirstResponder];
 }
 
-#pragma mark - People picker delegate methods
+//#pragma mark - People picker delegate methods
+//
+//- (void)peoplePickerNavigationControllerDidCancel:
+//(ABPeoplePickerNavigationController *)peoplePicker
+//{
+//    [self.contactsPicker.view removeFromSuperview];
+//    [self scrollToComposeEvent];
+//}
+//
+//
+//- (BOOL)peoplePickerNavigationController:
+//(ABPeoplePickerNavigationController *)peoplePicker
+//      shouldContinueAfterSelectingPerson:(ABRecordRef)person {
+//    
+////    [self displayPerson:person];
+////    [self dismissModalViewControllerAnimated:YES];
+//    
+//    [self addContact:person];
+//    ABPersonViewController *personVC = [[ABPersonViewController alloc] init];
+//    [personVC setHighlightedItemForProperty:kABPersonPhoneProperty withIdentifier:0];
+//    
+//    return NO;
+//}
+//
+//- (BOOL)peoplePickerNavigationController:
+//(ABPeoplePickerNavigationController *)peoplePicker
+//      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+//                                property:(ABPropertyID)property
+//                              identifier:(ABMultiValueIdentifier)identifier
+//{
+//    return NO;
+//}
 
-- (void)peoplePickerNavigationControllerDidCancel:
-(ABPeoplePickerNavigationController *)peoplePicker
-{
-    [self.contactsPicker.view removeFromSuperview];
-    [self scrollToComposeEvent];
-}
-
-
-- (BOOL)peoplePickerNavigationController:
-(ABPeoplePickerNavigationController *)peoplePicker
-      shouldContinueAfterSelectingPerson:(ABRecordRef)person {
-    
-//    [self displayPerson:person];
-//    [self dismissModalViewControllerAnimated:YES];
-    
-    [self addContact:person];
-    ABPersonViewController *personVC = [[ABPersonViewController alloc] init];
-    [personVC setHighlightedItemForProperty:kABPersonPhoneProperty withIdentifier:0];
-    
-    return NO;
-}
-
-- (BOOL)peoplePickerNavigationController:
-(ABPeoplePickerNavigationController *)peoplePicker
-      shouldContinueAfterSelectingPerson:(ABRecordRef)person
-                                property:(ABPropertyID)property
-                              identifier:(ABMultiValueIdentifier)identifier
-{
-    return NO;
-}
-
--(void)addContact:(ABRecordRef)aPerson {
+-(NSArray*)getContactsWithEmail {
     
     NSString* name = @"";
-    NSString* phone = @"";
+//    NSString* phone = @"";
     NSString* email = @"";
     
-    ABMultiValueRef fnameProperty = ABRecordCopyValue(aPerson, kABPersonFirstNameProperty);
-    ABMultiValueRef lnameProperty = ABRecordCopyValue(aPerson, kABPersonLastNameProperty);
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
+    CFIndex nPeople = ABAddressBookGetPersonCount( addressBook );
     
-    ABMultiValueRef phoneProperty = ABRecordCopyValue(aPerson, kABPersonPhoneProperty);\
-    ABMultiValueRef emailProperty = ABRecordCopyValue(aPerson, kABPersonEmailProperty);
-    
-    NSArray *emailArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(emailProperty);
-    NSArray *phoneArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(phoneProperty);
-    
-    
-    if (fnameProperty != nil) {
-        name = [NSString stringWithFormat:@"%@", fnameProperty];
-    }
-    if (lnameProperty != nil) {
-        name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
-    }
-    
-    if ([phoneArray count] > 0) {
-        if ([phoneArray count] > 1) {
-            for (int i = 0; i < [phoneArray count]; i++) {
-                phone = [phone stringByAppendingString:[NSString stringWithFormat:@"%@\n", [phoneArray objectAtIndex:i]]];
-            }
-        }else {
-            phone = [NSString stringWithFormat:@"%@", [phoneArray objectAtIndex:0]];
-        }
-    }
-    
-    if ([emailArray count] > 0) {
-        if ([emailArray count] > 1) {
-            for (int i = 0; i < [emailArray count]; i++) {
-                email = [email stringByAppendingString:[NSString stringWithFormat:@"%@\n", [emailArray objectAtIndex:i]]];
-            }
-        }else {
+    for ( int i = 0; i < nPeople; i++ )
+    {
+        ABRecordRef aPerson = CFArrayGetValueAtIndex( allPeople, i );
+        
+        ABMultiValueRef fnameProperty = ABRecordCopyValue(aPerson, kABPersonFirstNameProperty);
+        ABMultiValueRef lnameProperty = ABRecordCopyValue(aPerson, kABPersonLastNameProperty);
+        
+//        ABMultiValueRef phoneProperty = ABRecordCopyValue(aPerson, kABPersonPhoneProperty);
+        ABMultiValueRef emailProperty = ABRecordCopyValue(aPerson, kABPersonEmailProperty);
+        
+        NSArray *emailArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(emailProperty);
+        
+        
+        if ([emailArray count] > 0) {
+//            if ([emailArray count] > 1) {
+//                for (int i = 0; i < [emailArray count]; i++) {
+//                    email = [email stringByAppendingString:[NSString stringWithFormat:@"%@\n", [emailArray objectAtIndex:i]]];
+//                }
+//            }else {
+//                email = [NSString stringWithFormat:@"%@", [emailArray objectAtIndex:0]];
+//            }
             email = [NSString stringWithFormat:@"%@", [emailArray objectAtIndex:0]];
+            
+            if (fnameProperty != nil) {
+                name = [NSString stringWithFormat:@"%@", fnameProperty];
+            }
+            if (lnameProperty != nil) {
+                name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
+            }
+            
+            NSMutableDictionary *contact = [[NSMutableDictionary alloc] initWithCapacity:0];
+            [contact setObject:name forKey:@"name"];
+            [contact setObject:email forKey:@"email"];
+            [contact setObject:[NSNumber numberWithInteger:0] forKey:@"selected"];
+            [self.contactsWithEmail addObject:contact];
         }
     }
-
-    NSLog(@"NAME : %@",name);
-    NSLog(@"PHONE: %@",phone);
-    NSLog(@"EMAIL: %@",email);
-    NSLog(@"\n");
     
-    NSMutableDictionary *contact = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [contact setObject:name forKey:@"name"];
-    [contact setObject:email forKey:@"email"];
-    [self.selectedContactsArray addObject:contact];
+//    [self.contactsTableview reloadData];
+    
+    return self.contactsWithEmail;
+    
+//    NSArray *phoneArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(phoneProperty);
+//    if ([phoneArray count] > 0) {
+//        if ([phoneArray count] > 1) {
+//            for (int i = 0; i < [phoneArray count]; i++) {
+//                phone = [phone stringByAppendingString:[NSString stringWithFormat:@"%@\n", [phoneArray objectAtIndex:i]]];
+//            }
+//        }else {
+//            phone = [NSString stringWithFormat:@"%@", [phoneArray objectAtIndex:0]];
+//        }
+//    }
+    
+    
+    
 }
 
 -(void)sendInvitationCodeToInvitees {
@@ -698,21 +763,20 @@
     
     NSMutableArray *recipients = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSDictionary *person in self.selectedContactsArray) {
-        
-        [recipients addObject:[person objectForKey:@"email"]];
-    }
+//    for (NSDictionary *person in self.selectedContactsArray) {
+//        
+//        [recipients addObject:[person objectForKey:@"email"]];
+//    }
     
+    MFMailComposeViewController *mailcompose = [[MFMailComposeViewController alloc] init];
     
-    self.mailComposeVC = [[MFMailComposeViewController alloc] init];
-    self.mailComposeVC.mailComposeDelegate = self;
-    [self.mailComposeVC setSubject:@"you are invited to an event"];
-    [self.mailComposeVC setMessageBody:[NSString stringWithFormat:@"invitation code : %@", self.invitationCode] isHTML:NO];
-     [self.mailComposeVC setToRecipients:recipients];
-     [self.navigationController presentViewController:self.mailComposeVC animated:YES completion:^{
-        
-    }];
+    mailcompose = [[MFMailComposeViewController alloc] init];
+    mailcompose.mailComposeDelegate = self;
+    [mailcompose setSubject:@"you are invited to an event"];
+    [mailcompose setMessageBody:[NSString stringWithFormat:@"invitation code : %@", self.invitationCode] isHTML:NO];
+     [mailcompose setToRecipients:[self getSelectedEmails]];
     
+    [self.navigationController presentViewController:mailcompose animated:NO completion:nil];
 }
 
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
@@ -735,12 +799,27 @@
             break;
     }
     
-    [self becomeFirstResponder];
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+//    [self.navigationController popViewControllerAnimated:NO];
+//    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
+    [controller dismissViewControllerAnimated:NO completion:nil];
+    
+
 }
 
+-(NSArray*)getSelectedEmails {
+
+    NSMutableArray *selectedEmails = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (NSDictionary *contact in self.contactsWithEmail) {
+        
+        if ([[contact objectForKey:@"selected"] intValue] == 1) {
+            [selectedEmails addObject: [contact objectForKey:@"email"]];
+        }
+    }
+    return (NSArray*)selectedEmails;
+}
 
 
 @end

@@ -13,13 +13,18 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
 
-@interface ComposeVC : UIViewController <CKCalendarDelegate, UITableViewDataSource, UITableViewDelegate, ABPeoplePickerNavigationControllerDelegate, MFMailComposeViewControllerDelegate>
+@interface ComposeVC : UIViewController <CKCalendarDelegate, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate> // ABPeoplePickerNavigationControllerDelegate
 {
     NSInteger currentlySelectedDateTimeCell;
     
     UISwipeGestureRecognizer *downSwipe;
     UITapGestureRecognizer *tapGesture;
 }
+
+@property (nonatomic, weak) IBOutlet UITableView *contactsTableview;
+@property (nonatomic, weak) IBOutlet UIView *contactsSelectionContainer;
+@property (nonatomic, weak) IBOutlet UIButton *contactDoneButton;
+@property (nonatomic, strong) NSMutableArray *selectedContacts;
 
 @property (nonatomic, strong) MFMailComposeViewController *mailComposeVC;
 @property (nonatomic, strong) ABPeoplePickerNavigationController *contactsPicker;
@@ -29,7 +34,7 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *dateTimeTable;
 @property (nonatomic, strong) NSMutableArray *eventDateTimesArray;
-@property (nonatomic, strong) NSMutableArray *selectedContactsArray;
+@property (nonatomic, strong) NSMutableArray *contactsWithEmail;
 
 @property (nonatomic, weak) IBOutlet UIButton *dateTimeDoneButton;
 

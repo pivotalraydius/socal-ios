@@ -14,6 +14,7 @@
 +(UIFont *)Exo2Light:(float)size;
 +(UIFont *)Exo2Regular:(float)size;
 +(UIFont *)Exo2Medium:(float)size;
++(UIFont *)Exo2MediumItalic:(float)size;
 +(UIFont *)Exo2Bold:(float)size;
 
 +(UIColor *)softGreenColorWithAlpha:(float)alpha;

@@ -36,6 +36,11 @@
     return [UIFont fontWithName:@"Exo2.0-Medium" size:size];
 }
 
++(UIFont *)Exo2MediumItalic:(float)size {
+    
+    return [UIFont fontWithName:@"Exo2.0-MediumItalic" size:size];
+}
+
 +(UIFont *)Exo2Bold:(float)size {
     
     return [UIFont fontWithName:@"Exo2.0-Bold" size:size];

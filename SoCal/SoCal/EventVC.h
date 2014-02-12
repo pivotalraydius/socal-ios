@@ -21,6 +21,8 @@
     UIPanGestureRecognizer *yesPan;
     UIPanGestureRecognizer *noPan;
     UIPanGestureRecognizer *maybePan;
+    
+    NSArray *multiDatesArray;
 }
 
 @property (nonatomic, weak) IBOutlet UIView *detailsView;
@@ -75,6 +77,12 @@
 @property (nonatomic, strong) NSMutableArray *eventDateTimesArray;
 @property (nonatomic, strong) NSMutableDictionary *selectedCalendarDatesDict;
 @property (nonatomic, strong) NSMutableArray *viewsForSelectedCalendarDates;
+
+@property (nonatomic, weak) IBOutlet UIView *multiDayPopupDatesView;
+@property (nonatomic, weak) IBOutlet UILabel *multiDayOption1;
+@property (nonatomic, weak) IBOutlet UILabel *multiDayOption2;
+@property (nonatomic, weak) IBOutlet UILabel *multiDayOption3;
+@property (nonatomic, weak) IBOutlet UILabel *multiDayOption4;
 
 @property (nonatomic, strong) PTPusher *pusherClient;
 @property (nonatomic, strong) PTPusherChannel *eventChannel;

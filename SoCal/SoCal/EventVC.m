@@ -12,6 +12,7 @@
 #import "ListDateTimeCell.h"
 #import "SummaryDateTimeCell.h"
 #import "RDPieView.h"
+#import "UIBAlertView.h"
 
 #define VOTE_BUTTON_STILL   0
 #define VOTE_BUTTON_MOTION  1
@@ -155,6 +156,11 @@
     
     [self.lblEventDateInstruction setFont:[Helpers Exo2Regular:12.0]];
     [self.lblDoneSummaryLabel setFont:[Helpers Exo2Regular:14.0]];
+    
+    [self.multiDayOption1 setTextColor:[UIColor whiteColor]];
+    [self.multiDayOption2 setTextColor:[UIColor whiteColor]];
+    [self.multiDayOption3 setTextColor:[UIColor whiteColor]];
+    [self.multiDayOption4 setTextColor:[UIColor whiteColor]];
 }
 
 -(void)retrieveEvent {
@@ -631,6 +637,8 @@
                 
                 self.eventDateMaybePiece.center = touchLocation;
             }
+            
+            [self checkHoverMultiDate:gesture];
         }
         else if (gesture.state == UIGestureRecognizerStateEnded) {
             
@@ -750,6 +758,60 @@
 
 -(void)checkVoteButtonsTarget:(UIPanGestureRecognizer *)gesture {
     
+    if (!self.multiDayPopupDatesView.hidden) {
+     
+        [self.multiDayPopupDatesView setHidden:YES];
+        
+        CGPoint releaseLocation = [gesture locationInView:self.multiDayPopupDatesView];
+        
+        NSDate *releasePointDate;
+        
+        if (CGRectContainsPoint(self.multiDayOption1.frame, releaseLocation)) {
+         
+            releasePointDate = [multiDatesArray objectAtIndex:0];
+        }
+        else if (CGRectContainsPoint(self.multiDayOption2.frame, releaseLocation)) {
+            
+            releasePointDate = [multiDatesArray objectAtIndex:1];
+        }
+        else if (CGRectContainsPoint(self.multiDayOption3.frame, releaseLocation)) {
+            
+            releasePointDate = [multiDatesArray objectAtIndex:2];
+        }
+        else if (CGRectContainsPoint(self.multiDayOption4.frame, releaseLocation)) {
+            
+            releasePointDate = [multiDatesArray objectAtIndex:3];
+        }
+        
+        if (gesture.view == self.eventDateYesPiece) {
+            
+            [self vote:VOTE_YES forDate:releasePointDate];
+        }
+        else if (gesture.view == self.eventDateNoPiece) {
+            
+            [self vote:VOTE_NO forDate:releasePointDate];
+        }
+        else if (gesture.view == self.eventDateMaybePiece) {
+            
+            [self vote:VOTE_MAYBE forDate:releasePointDate];
+        }
+        
+        //reset button positions
+        
+        [UIView animateWithDuration:0.05
+                         animations:^{
+                             
+                             [self.eventDateYesPiece setFrame:CGRectMake(20, 269, self.eventDateYesPiece.frame.size.width, self.eventDateYesPiece.frame.size.height)];
+                             [self.eventDateNoPiece setFrame:CGRectMake(72, 269, self.eventDateNoPiece.frame.size.width, self.eventDateNoPiece.frame.size.height)];
+                             [self.eventDateMaybePiece setFrame:CGRectMake(124, 269, self.eventDateMaybePiece.frame.size.width, self.eventDateMaybePiece.frame.size.height)];
+                             
+                         } completion:^(BOOL finished) {
+                             
+                         }];
+        
+        return;
+    }
+    
     //reset button positions
     
     [UIView animateWithDuration:0.05
@@ -781,12 +843,15 @@
         
         int count = 0;
         
+        NSMutableArray *multiDates = [[NSMutableArray alloc] initWithCapacity:0];
+        
         for (NSDate *aDate in self.eventDateTimesArray) {
             
             if ([self.calEventDatesCalendar date:releasePointDate isSameDayAsDate:aDate]) {
                 
                 votedDate = aDate;
                 count++;
+                [multiDates addObject:aDate];
             }
         }
         
@@ -796,7 +861,7 @@
             
             NSLog(@"Multiple dates in this day");
             
-            [self switchToCalendarOrListBtnAction];
+//            [self multiDatesInDayHandler:multiDates];
             return;
         }
         else {
@@ -864,7 +929,12 @@
     
     [[NetworkAPIClient sharedClient] postPath:VOTE_FOR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Vote Successful" message:@"You have voted for a date successfully." cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
+        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+            
+            
+        }];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -931,6 +1001,148 @@
         
         NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
         [self.lblDoneSummaryLabel setText:str];
+    }
+}
+
+-(void)checkHoverMultiDate:(UIPanGestureRecognizer *)gesture {
+    
+    NSDate *hoverPointDate = nil;
+        
+    CGPoint hoverLocation = [gesture locationInView:self.calEventDatesCalendar];
+    hoverPointDate = [self.calEventDatesCalendar dateForLocationInView:hoverLocation];
+    
+    int count = 0;
+    
+    NSMutableArray *multiDates = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (NSDate *aDate in self.eventDateTimesArray) {
+        
+        if ([self.calEventDatesCalendar date:hoverPointDate isSameDayAsDate:aDate]) {
+            
+            count++;
+            [multiDates addObject:aDate];
+        }
+    }
+    
+    if (count > 1) {
+        //multiple dates in day
+        //return
+        
+        NSLog(@"Multiple dates in this day");
+        
+        CGPoint touchPoint = [gesture locationInView:self.datesView];
+        
+        [self multiDatesInDayHandler:multiDates andTouchPoint:touchPoint];
+        return;
+    }
+    else {
+        //only one date in day
+        //continue
+    }
+}
+
+-(void)multiDatesInDayHandler:(NSArray *)datesArray andTouchPoint:(CGPoint)touchPoint {
+    
+    multiDatesArray = datesArray;
+    
+    if (self.multiDayPopupDatesView.hidden) {
+    
+        NSLog(@"show frame");
+        
+        [self.multiDayPopupDatesView setHidden:NO];
+        
+        CGFloat originX = 0.0;
+        CGFloat originY = 0.0;
+        
+        if (touchPoint.x >= 160.0) {
+            originX = touchPoint.x - 120.0;
+        }
+        else {
+            originX = touchPoint.x + 20.0;
+        }
+        
+        if (touchPoint.y >= self.calEventDatesCalendar.frame.size.height/2) {
+            originY = touchPoint.y - 120.0;
+        }
+        else {
+            originY = touchPoint.y + 20.0;
+        }
+        
+        [self.multiDayPopupDatesView setFrame:CGRectMake(originX, originY, self.multiDayPopupDatesView.frame.size.width, self.multiDayPopupDatesView.frame.size.height)];
+        
+        [self.multiDayOption1 setText:@""];
+        [self.multiDayOption1 setBackgroundColor:[UIColor clearColor]];
+        [self.multiDayOption2 setText:@""];
+        [self.multiDayOption2 setBackgroundColor:[UIColor clearColor]];
+        [self.multiDayOption3 setText:@""];
+        [self.multiDayOption3 setBackgroundColor:[UIColor clearColor]];
+        [self.multiDayOption4 setText:@""];
+        [self.multiDayOption4 setBackgroundColor:[UIColor clearColor]];
+        
+        for (int i = 0; i < datesArray.count; i++) {
+            
+            NSDate *aDate = [datesArray objectAtIndex:i];
+            
+            NSString *timeStr = @"";
+            
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            
+            [df setAMSymbol:@"am"];
+            [df setPMSymbol:@"pm"];
+            
+            [df setDateFormat:@"dd MMMM"];
+            
+            [df setDateFormat:@"hh:mm a"];
+            
+            timeStr = [NSString stringWithFormat:@"%@",
+                       [df stringFromDate:aDate]];
+            
+            if (i == 0) {
+                
+                [self.multiDayOption1 setText:timeStr];
+                
+                if ([timeStr hasSuffix:@"am"]) {
+                    [self.multiDayOption1 setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+                }
+                else {
+                    [self.multiDayOption1 setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+                }
+                
+            }
+            else if (i == 1) {
+                
+                [self.multiDayOption2 setText:timeStr];
+                
+                if ([timeStr hasSuffix:@"am"]) {
+                    [self.multiDayOption2 setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+                }
+                else {
+                    [self.multiDayOption2 setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+                }
+            }
+            else if (i == 2) {
+                
+                [self.multiDayOption3 setText:timeStr];
+                
+                if ([timeStr hasSuffix:@"am"]) {
+                    [self.multiDayOption3 setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+                }
+                else {
+                    [self.multiDayOption3 setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+                }
+            }
+            else if (i == 3) {
+                
+                [self.multiDayOption4 setText:timeStr];
+                
+                if ([timeStr hasSuffix:@"am"]) {
+                    [self.multiDayOption4 setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+                }
+                else {
+                    [self.multiDayOption4 setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+                }
+            }
+        }
     }
 }
 

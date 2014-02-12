@@ -32,6 +32,11 @@
                 <outlet property="mainBackButton" destination="X6I-OE-Y3E" id="chj-Ec-k8m"/>
                 <outlet property="mainDoneButton" destination="vfg-5h-fgh" id="bfk-Pb-Wup"/>
                 <outlet property="mainScrollView" destination="q0g-kR-A1w" id="aZG-O8-gzL"/>
+                <outlet property="multiDayOption1" destination="oZ3-Yf-4bB" id="bPi-Dc-mhA"/>
+                <outlet property="multiDayOption2" destination="9qW-o4-LTa" id="2fC-Ut-cGJ"/>
+                <outlet property="multiDayOption3" destination="fvH-d1-KDv" id="0nF-7Z-OWp"/>
+                <outlet property="multiDayOption4" destination="AIE-95-4Nk" id="udK-N6-tpl"/>
+                <outlet property="multiDayPopupDatesView" destination="HVc-cu-DUi" id="jNL-Ul-djJ"/>
                 <outlet property="nameInputView" destination="dcL-Q9-L5p" id="eEs-RI-Ios"/>
                 <outlet property="postsInputView" destination="0tp-N6-8OW" id="ZSn-X3-NDq"/>
                 <outlet property="postsTable" destination="Uq6-iZ-x92" id="ndR-Wp-eAR"/>
@@ -165,6 +170,41 @@
                         <outlet property="delegate" destination="-1" id="Ivb-Kx-s93"/>
                     </connections>
                 </tableView>
+                <view hidden="YES" contentMode="scaleToFill" id="HVc-cu-DUi" userLabel="multiDayPopup">
+                    <rect key="frame" x="210" y="40" width="100" height="123"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oZ3-Yf-4bB">
+                            <rect key="frame" x="0.0" y="93" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9qW-o4-LTa">
+                            <rect key="frame" x="0.0" y="62" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fvH-d1-KDv">
+                            <rect key="frame" x="0.0" y="31" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AIE-95-4Nk">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Kf3-6d-HVe">
                     <rect key="frame" x="20" y="269" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

@@ -82,6 +82,9 @@
 		9AF7897218A0DDCC008EA2E5 /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7897018A0DDCC008EA2E5 /* LocationVC.m */; };
 		9AF7897318A0DDCC008EA2E5 /* LocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */; };
 		DC1434C518A4B51D0062AD7A /* RDPieView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1434C418A4B51D0062AD7A /* RDPieView.m */; };
+		DCD74ADE18AB3B8000961BE8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74ADD18AB3B8000961BE8 /* AddressBook.framework */; };
+		DCD74AE018AB3B8A00961BE8 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74ADF18AB3B8A00961BE8 /* AddressBookUI.framework */; };
+		DCD74AE218AB472300961BE8 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74AE118AB472300961BE8 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -215,6 +218,9 @@
 		9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationVC.xib; sourceTree = "<group>"; };
 		DC1434C318A4B51D0062AD7A /* RDPieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDPieView.h; sourceTree = "<group>"; };
 		DC1434C418A4B51D0062AD7A /* RDPieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDPieView.m; sourceTree = "<group>"; };
+		DCD74ADD18AB3B8000961BE8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		DCD74ADF18AB3B8A00961BE8 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		DCD74AE118AB472300961BE8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +228,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCD74AE218AB472300961BE8 /* MessageUI.framework in Frameworks */,
+				DCD74AE018AB3B8A00961BE8 /* AddressBookUI.framework in Frameworks */,
+				DCD74ADE18AB3B8000961BE8 /* AddressBook.framework in Frameworks */,
 				9ACDDA4318A3828E00FF4F5C /* libsqlite3.dylib in Frameworks */,
 				9ACDDA4118A3828200FF4F5C /* libicucore.dylib in Frameworks */,
 				9ACDDA3F18A3827C00FF4F5C /* libz.dylib in Frameworks */,
@@ -308,6 +317,9 @@
 		9A5ED7A7189245D000BA8E02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DCD74AE118AB472300961BE8 /* MessageUI.framework */,
+				DCD74ADF18AB3B8A00961BE8 /* AddressBookUI.framework */,
+				DCD74ADD18AB3B8000961BE8 /* AddressBook.framework */,
 				9ACDDA4218A3828E00FF4F5C /* libsqlite3.dylib */,
 				9ACDDA4018A3828200FF4F5C /* libicucore.dylib */,
 				9ACDDA3E18A3827C00FF4F5C /* libz.dylib */,

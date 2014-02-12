@@ -485,6 +485,8 @@
     [self.calEventDatesCalendar setDateFont:[Helpers Exo2Regular:11.0]];
     [self.calEventDatesCalendar setTitleFont:[Helpers Exo2Medium:14.0]];
     
+    [self.calEventDatesCalendar setNextButtonModifier:-30.0];
+    
     [Helpers setBorderToView:self.listCalButton borderColor:[Helpers suriaOrangeColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     
 //    [self.calEventDatesCalendar setDelegate:self];

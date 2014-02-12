@@ -168,6 +168,8 @@
     self.calendarStartDay = firstDay;
     self.onlyShowCurrentMonth = YES;
     self.adaptHeightToNumberOfWeeksInMonth = YES;
+    
+    self.nextButtonModifier = 0.0;
 
 //    self.layer.cornerRadius = 6.0f;
 
@@ -320,9 +322,9 @@
 //    self.highlight.frame = CGRectMake(1, 1, self.bounds.size.width - 2, 1);
 
     self.titleLabel.text = [self.dateFormatter stringFromDate:_monthShowing];
-    self.titleLabel.frame = CGRectMake(0, 0, self.bounds.size.width, TOP_HEIGHT);
+    self.titleLabel.frame = CGRectMake(0, 0, self.bounds.size.width + self.nextButtonModifier, TOP_HEIGHT);
     self.prevButton.frame = CGRectMake(BUTTON_MARGIN + 5, BUTTON_MARGIN, 70, 30);
-    self.nextButton.frame = CGRectMake(self.bounds.size.width - 70 - 9 - BUTTON_MARGIN - 30, BUTTON_MARGIN, 70, 30);
+    self.nextButton.frame = CGRectMake(self.bounds.size.width - 70 - 9 - BUTTON_MARGIN + self.nextButtonModifier, BUTTON_MARGIN, 70, 30);
     [self.prevButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [self.nextButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
 //    [self.prevButton setBackgroundColor:[UIColor blueColor]];

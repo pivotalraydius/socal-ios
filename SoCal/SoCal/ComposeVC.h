@@ -36,6 +36,8 @@
 @property (nonatomic, strong) NSMutableArray *eventDateTimesArray;
 @property (nonatomic, strong) NSMutableArray *contactsWithEmail;
 
+@property (nonatomic, weak) IBOutlet UILabel *mainTitleLabel;
+
 @property (nonatomic, weak) IBOutlet UIButton *dateTimeDoneButton;
 
 @property (nonatomic, weak) IBOutlet UIButton *closeButton;

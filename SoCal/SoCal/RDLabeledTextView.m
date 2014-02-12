@@ -101,7 +101,7 @@
 
 -(void)setTitleFont:(UIFont *)aTitleFont {
     
-    self.titleFont = aTitleFont;
+    titleFont = aTitleFont;
     [self.titleLabel setFont:titleFont];
 }
 

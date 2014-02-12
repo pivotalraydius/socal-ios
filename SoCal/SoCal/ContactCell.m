@@ -37,6 +37,10 @@
 
     [self.btnSelection setTitle:@"o" forState:UIControlStateSelected];
     [self.btnSelection setTitle:@"" forState:UIControlStateNormal];
+    
+    [self.lblName setFont:[Helpers Exo2Regular:13.0]];
+    [self.lblEmail setFont:[Helpers Exo2Regular:11.0]];
+    [self.btnSelection.titleLabel setFont:[Helpers Exo2Regular:13.0]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

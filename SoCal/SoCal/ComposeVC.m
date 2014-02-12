@@ -30,6 +30,7 @@
     
     [self setupTestData];
     [self setupMainScrollView];
+    [self setupFonts];
     
     [self getNewInviteCode];
 }
@@ -65,6 +66,28 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
+}
+
+-(void)setupFonts {
+    
+    [self.mainTitleLabel setFont:[Helpers Exo2Regular:24.0]];
+    
+    [self.dateTimeDoneButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    [self.closeButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    [self.doneButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    
+    [self.txtEventName setTextFont:[Helpers Exo2Regular:14.0]];
+    [self.txtEventName setTitleFont:[Helpers Exo2Regular:18.0]];
+    
+    [self.txtDescription setTextFont:[Helpers Exo2Regular:14.0]];
+    [self.txtDescription setTitleFont:[Helpers Exo2Regular:18.0]];
+    
+    [self.lblBtnLocation setFont:[Helpers Exo2Regular:18.0]];
+    
+    [self.selectDatesButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    [self.selectContactsButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    
+    [self.contactDoneButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
 }
 
 -(void)setupTestData {
@@ -128,8 +151,8 @@
     [self.calendarView setBackgroundColor:[UIColor whiteColor]];
     [self.calendarView setInnerBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self.calendarView setDayOfWeekTextColor:[UIColor whiteColor]];
-    [self.calendarView setDateFont:[UIFont systemFontOfSize:10.0]];
-    [self.calendarView setTitleFont:[UIFont systemFontOfSize:14.0]];
+    [self.calendarView setDateFont:[Helpers Exo2Regular:11.0]];
+    [self.calendarView setTitleFont:[Helpers Exo2Medium:14.0]];
  
     [self.calendarView setDelegate:self];
 }

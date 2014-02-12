@@ -177,6 +177,12 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"retrieve event failed with error: %@", error);
+        
+        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Error Loading Event" message:@"The invitation code supplied may have been wrong. Please try again." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        
+        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+            [self closeEventVC];
+        }];
     }];
 }
 
@@ -1002,7 +1008,7 @@
     [voteDict setObject:date forKey:@"date"];
     [voteDict setObject:[NSNumber numberWithInt:vote] forKey:@"vote"];
     
-    NSString *key = [NSString stringWithFormat:@"%@_votes", self.eventInviteCode];
+    NSString *key = [NSString stringWithFormat:@"%@_%@_votes", self.eventInviteCode, self.eventUserName];
     
     NSMutableArray *arrayOfVoteDicts = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:key]];
     

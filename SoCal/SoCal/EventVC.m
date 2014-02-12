@@ -937,8 +937,6 @@
         
         UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, but you can only cast 1 vote per date." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
-            
-            [self.calListEventDatesTable reloadData];
         }];
 
         return;
@@ -968,9 +966,9 @@
         UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Vote Successful" message:@"You have voted for a date successfully." cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
-            
-            
         }];
+        
+        [self.calListEventDatesTable reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -980,7 +978,7 @@
 
 -(NSInteger)checkUDForPreviousVote:(NSDate *)date {
     
-    NSString *key = [NSString stringWithFormat:@"%@_votes", self.eventInviteCode];
+    NSString *key = [NSString stringWithFormat:@"%@_%@_votes", self.eventInviteCode, self.eventUserName];
     
     NSMutableArray *arrayOfVoteDicts = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:key]];
     

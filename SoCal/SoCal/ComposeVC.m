@@ -715,4 +715,32 @@
     
 }
 
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            break;
+        case MFMailComposeResultSaved:
+            break;
+        case MFMailComposeResultSent:
+            break;
+        case MFMailComposeResultFailed:
+            break;
+        default:
+        {
+        
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email" message:@"Email Failed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+            break;
+    }
+    
+    [self becomeFirstResponder];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+
+
 @end

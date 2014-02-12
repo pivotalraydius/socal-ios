@@ -468,6 +468,8 @@
 
 -(IBAction)btnPostAction {
     
+    [self.btnPostButton setEnabled:NO];
+    
     [self createPost];
 }
 
@@ -608,8 +610,11 @@
         [self.txtPostField setText:@""];
         [self hideKeyboard];
         
+        [self.btnPostButton setEnabled:YES];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        [self.btnPostButton setEnabled:YES];
     }];
 }
 
@@ -922,6 +927,20 @@
         return;
     }
     
+    NSInteger possibleVote = [self checkUDForPreviousVote:date];
+    
+    if (possibleVote >= VOTE_MAYBE) {
+        
+        NSLog(@"voted before!");
+        
+        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, but you can only cast 1 vote per date." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+            
+        }];
+
+        return;
+    }
+    
     NSLog(@"Voted: %i for date: %@", vote, date);
     
     NSNumber *dateID;
@@ -941,6 +960,8 @@
     
     [[NetworkAPIClient sharedClient] postPath:VOTE_FOR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        [self saveVoteToUD:date andVote:vote];
+        
         UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Vote Successful" message:@"You have voted for a date successfully." cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
@@ -952,6 +973,49 @@
         
         
     }];
+}
+
+-(NSInteger)checkUDForPreviousVote:(NSDate *)date {
+    
+    NSString *key = [NSString stringWithFormat:@"%@_votes", self.eventInviteCode];
+    
+    NSMutableArray *arrayOfVoteDicts = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:key]];
+    
+    if (arrayOfVoteDicts) {
+     
+        for (NSDictionary *voteDict in arrayOfVoteDicts) {
+            
+            NSDate *aDate = [voteDict objectForKey:@"date"];
+            if ([aDate compare:date] == NSOrderedSame) {
+                return [[voteDict objectForKey:@"vote"] intValue];
+            }
+        }
+    }
+    
+    return -1;
+}
+
+-(void)saveVoteToUD:(NSDate *)date andVote:(int)vote {
+    
+    NSMutableDictionary *voteDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [voteDict setObject:date forKey:@"date"];
+    [voteDict setObject:[NSNumber numberWithInt:vote] forKey:@"vote"];
+    
+    NSString *key = [NSString stringWithFormat:@"%@_votes", self.eventInviteCode];
+    
+    NSMutableArray *arrayOfVoteDicts = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:key]];
+    
+    if (arrayOfVoteDicts) {
+        
+        [arrayOfVoteDicts addObject:voteDict];
+    }
+    else {
+        
+        arrayOfVoteDicts = [[NSMutableArray alloc] initWithCapacity:0];
+        [arrayOfVoteDicts addObject:voteDict];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:arrayOfVoteDicts forKey:key];
 }
 
 -(void)updateMostPopularDateTime {
@@ -1277,7 +1341,16 @@
             cell = [ListDateTimeCell newCell];
         }
         
-        [cell renderWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andVote:VOTE_MAYBE];
+        NSInteger possibleVote = [self checkUDForPreviousVote:[self.eventDateTimesArray objectAtIndex:indexPath.row]];
+        
+        if (possibleVote >= VOTE_MAYBE) {
+            
+            [cell renderWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andVote:possibleVote];
+        }
+        else {
+        
+            [cell renderWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andVote:VOTE_MAYBE];
+        }
         
         return cell;
     }

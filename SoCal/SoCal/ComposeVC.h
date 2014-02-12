@@ -10,8 +10,10 @@
 #import "CKCalendarView.h"
 #import "RDLabeledTextView.h"
 #import "LocationVC.h"
+#import <AddressBookUI/AddressBookUI.h>
+#import <MessageUI/MessageUI.h>
 
-@interface ComposeVC : UIViewController <CKCalendarDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ComposeVC : UIViewController <CKCalendarDelegate, UITableViewDataSource, UITableViewDelegate, ABPeoplePickerNavigationControllerDelegate, MFMailComposeViewControllerDelegate>
 {
     NSInteger currentlySelectedDateTimeCell;
     
@@ -19,12 +21,15 @@
     UITapGestureRecognizer *tapGesture;
 }
 
+@property (nonatomic, strong) MFMailComposeViewController *mailComposeVC;
+@property (nonatomic, strong) ABPeoplePickerNavigationController *contactsPicker;
 @property (nonatomic, weak) IBOutlet CKCalendarView *calendarView;
 @property (nonatomic, strong) NSMutableDictionary *selectedCalendarDatesDict;
 @property (nonatomic, strong) NSMutableArray *viewsForSelectedCalendarDates;
 
 @property (nonatomic, weak) IBOutlet UITableView *dateTimeTable;
 @property (nonatomic, strong) NSMutableArray *eventDateTimesArray;
+@property (nonatomic, strong) NSMutableArray *selectedContactsArray;
 
 @property (nonatomic, weak) IBOutlet UIButton *dateTimeDoneButton;
 
@@ -44,6 +49,7 @@
 @property (nonatomic, weak) IBOutlet UIControl *btnLocation;
 @property (nonatomic, weak) IBOutlet UILabel *lblBtnLocation;
 @property (nonatomic, weak) IBOutlet UIButton *selectDatesButton;
+@property (nonatomic, weak) IBOutlet UIButton *selectContactsButton;
 
 @property (nonatomic, strong) NSDictionary *selectedLocationDict;
 

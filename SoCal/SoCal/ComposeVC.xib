@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -15,6 +15,7 @@
                 <outlet property="doneButton" destination="9CU-5X-laK" id="9ca-pt-mLb"/>
                 <outlet property="lblBtnLocation" destination="aRx-lD-KBH" id="6Pa-ku-21X"/>
                 <outlet property="mainScrollView" destination="35g-tJ-2nl" id="8ep-3G-gge"/>
+                <outlet property="selectContactsButton" destination="wVe-T9-wXn" id="RTq-iz-3mH"/>
                 <outlet property="selectDatesButton" destination="bCb-Bc-hFy" id="KEw-aE-xus"/>
                 <outlet property="timePicker" destination="JzA-h0-Dl6" id="73U-OB-XIR"/>
                 <outlet property="timePickerView" destination="wKg-e5-Udu" id="HQI-hj-GmB"/>
@@ -136,6 +137,19 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </state>
                     <connections>
                         <action selector="selectDatesAction" destination="-1" eventType="touchUpInside" id="zcY-vz-D9i"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVe-T9-wXn" userLabel="Button - Select Contacts">
+                    <rect key="frame" x="20" y="471" width="280" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Select Contacts">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="selectContactsAction" destination="-1" eventType="touchUpInside" id="TKb-N0-O9Q"/>
+                        <action selector="selectDatesAction" destination="-1" eventType="touchUpInside" id="Gay-Tv-fg9"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="paC-3Q-Ott" userLabel="eventNameTextView" customClass="RDLabeledTextView">

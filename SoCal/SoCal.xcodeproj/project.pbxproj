@@ -85,6 +85,8 @@
 		DCD74ADE18AB3B8000961BE8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74ADD18AB3B8000961BE8 /* AddressBook.framework */; };
 		DCD74AE018AB3B8A00961BE8 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74ADF18AB3B8A00961BE8 /* AddressBookUI.framework */; };
 		DCD74AE218AB472300961BE8 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74AE118AB472300961BE8 /* MessageUI.framework */; };
+		DCD74AE718AB67E500961BE8 /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCD74AE618AB67E500961BE8 /* ContactCell.xib */; };
+		DCD74AEA18AB680500961BE8 /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD74AE918AB680500961BE8 /* ContactCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +223,9 @@
 		DCD74ADD18AB3B8000961BE8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DCD74ADF18AB3B8A00961BE8 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		DCD74AE118AB472300961BE8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		DCD74AE618AB67E500961BE8 /* ContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCell.xib; sourceTree = "<group>"; };
+		DCD74AE818AB680500961BE8 /* ContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
+		DCD74AE918AB680500961BE8 /* ContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,6 +346,9 @@
 		9A5ED7AE189245D000BA8E02 /* SoCal */ = {
 			isa = PBXGroup;
 			children = (
+				DCD74AE818AB680500961BE8 /* ContactCell.h */,
+				DCD74AE918AB680500961BE8 /* ContactCell.m */,
+				DCD74AE618AB67E500961BE8 /* ContactCell.xib */,
 				9A5ED7B7189245D000BA8E02 /* AppDelegate.h */,
 				9A5ED7B8189245D000BA8E02 /* AppDelegate.m */,
 				9A152D0E189626B40013B647 /* ComposeDateTimeCell.h */,
@@ -595,6 +603,7 @@
 				9A20BD7718A8D1E100B90101 /* Exo2.0-Light.otf in Resources */,
 				9A20BD5B18A89F3E00B90101 /* ListDateTimeCell.xib in Resources */,
 				9A20BD7118A8D1E100B90101 /* Exo2.0-SemiBoldItalic.otf in Resources */,
+				DCD74AE718AB67E500961BE8 /* ContactCell.xib in Resources */,
 				9A152D12189626D30013B647 /* ComposeDateTimeCell.xib in Resources */,
 				9A20BD7518A8D1E100B90101 /* Exo2.0-Medium.otf in Resources */,
 				9ACDDA1C18A35ECC00FF4F5C /* PostCell.xib in Resources */,
@@ -636,6 +645,7 @@
 				9AA365C418A1DCFE004C0E86 /* Environment.m in Sources */,
 				9A20BD5718A89F1700B90101 /* ListDateTimeCell.m in Sources */,
 				9AF7897218A0DDCC008EA2E5 /* LocationVC.m in Sources */,
+				DCD74AEA18AB680500961BE8 /* ContactCell.m in Sources */,
 				9AA365BE18A1DC59004C0E86 /* AFPropertyListRequestOperation.m in Sources */,
 				9AF7896E18A086AA008EA2E5 /* RDLabeledTextView.m in Sources */,
 				9ACDDA1A18A35EBB00FF4F5C /* PostCell.m in Sources */,

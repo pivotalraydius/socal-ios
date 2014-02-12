@@ -23,6 +23,8 @@
     UIPanGestureRecognizer *maybePan;
     
     NSArray *multiDatesArray;
+    
+    NSDate *popularDate;
 }
 
 @property (nonatomic, weak) IBOutlet UIView *detailsView;

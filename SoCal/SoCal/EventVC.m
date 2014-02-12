@@ -155,7 +155,8 @@
     [self.eventDateMaybePiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
     
     [self.lblEventDateInstruction setFont:[Helpers Exo2Regular:12.0]];
-    [self.lblDoneSummaryLabel setFont:[Helpers Exo2Regular:14.0]];
+    [self.lblDoneSummaryLabel setFont:[Helpers Exo2Light:14.0]];
+    [self.lblDoneSummaryLabel setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     
     [self.multiDayOption1 setTextColor:[UIColor whiteColor]];
     [self.multiDayOption2 setTextColor:[UIColor whiteColor]];
@@ -1036,20 +1037,38 @@
     }
     
     NSDictionary *mainDict = nil;
-    int yes = 0;
+    float yesPercent = 0.0;
     
     for (NSDictionary *dateTimeDict in self.eventDateTimesDictArray) {
         
         if (!mainDict) {
             if ([[dateTimeDict objectForKey:@"yes"] intValue] > 0) {
                 mainDict = dateTimeDict;
-                yes = [[mainDict objectForKey:@"yes"] intValue];
+                
+                int yes = [[mainDict objectForKey:@"yes"] intValue];
+                int total = [[mainDict objectForKey:@"yes"] intValue] + [[mainDict objectForKey:@"no"] intValue] + [[mainDict objectForKey:@"maybe"] intValue];
+                
+                yesPercent = yes/total * 100.0;
             }
         }
         else {
-            if ([[dateTimeDict objectForKey:@"yes"] intValue] > yes) {
-                mainDict = dateTimeDict;
-                yes = [[mainDict objectForKey:@"yes"] intValue];
+            
+            if ([[dateTimeDict objectForKey:@"yes"] intValue] > 0) {
+                
+                int yes = [[dateTimeDict objectForKey:@"yes"] intValue];
+                int total = [[dateTimeDict objectForKey:@"yes"] intValue] + [[dateTimeDict objectForKey:@"no"] intValue] + [[dateTimeDict objectForKey:@"maybe"] intValue];
+                
+                float testYesPercent = yes/total * 100.0;
+                
+                if (testYesPercent > yesPercent) {
+                    
+                    mainDict = dateTimeDict;
+                    
+                    int yes = [[mainDict objectForKey:@"yes"] intValue];
+                    int total = [[mainDict objectForKey:@"yes"] intValue] + [[mainDict objectForKey:@"no"] intValue] + [[mainDict objectForKey:@"maybe"] intValue];
+                    
+                    yesPercent = yes/total * 100.0;
+                }
             }
         }
     }
@@ -1079,12 +1098,25 @@
         NSString *str = [NSString stringWithFormat:@"%@ on %@ is currently the most popular date and time.", timeStr, monthStr];
         
         [self.lblDoneSummaryLabel setText:str];
+        [self setSummaryLabelWithAttributedStringForTime:timeStr andMonth:monthStr];
+        
+        popularDate = date;
     }
     else {
         
         NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
         [self.lblDoneSummaryLabel setText:str];
     }
+}
+
+-(void)setSummaryLabelWithAttributedStringForTime:(NSString *)timeStr andMonth:(NSString *)monthStr {
+    
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:self.lblDoneSummaryLabel.text];
+    
+    [string addAttribute:NSFontAttributeName value:[Helpers Exo2MediumItalic:14.0] range:NSMakeRange(0, timeStr.length)];
+    [string addAttribute:NSFontAttributeName value:[Helpers Exo2MediumItalic:14.0] range:NSMakeRange(timeStr.length + 4, monthStr.length)];
+    
+    [self.lblDoneSummaryLabel setAttributedText:string];
 }
 
 -(void)checkHoverMultiDate:(UIPanGestureRecognizer *)gesture {
@@ -1258,8 +1290,8 @@
             
             if (scrollView.contentOffset.x == 640.0) {
                 
-                [self.doneDatesTableView reloadData];
                 [self updateMostPopularDateTime];
+                [self.doneDatesTableView reloadData];
             }
             
             [self.mainBackButton setTitle:@"Dates" forState:UIControlStateNormal];
@@ -1377,6 +1409,13 @@
         int yes = [[dateTimeDict objectForKey:@"yes"] intValue];
         
         [cell renderWithDate:date andVotesYes:yes no:no Maybe:maybe];
+        
+        if ([date compare:popularDate] == NSOrderedSame) {
+            [cell.starLabel setHidden:NO];
+        }
+        else {
+            [cell.starLabel setHidden:YES];
+        }
         
         return cell;
     }

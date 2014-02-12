@@ -936,6 +936,7 @@
         UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, but you can only cast 1 vote per date." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
             
+            [self.calListEventDatesTable reloadData];
         }];
 
         return;

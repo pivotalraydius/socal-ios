@@ -11,7 +11,7 @@
 #import "CKCalendarView.h"
 #import "PTPusher.h"
 
-@interface EventVC : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, PTPusherDelegate>
+@interface EventVC : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, PTPusherDelegate, UITextFieldDelegate>
 {
     BOOL hasName;
     
@@ -77,6 +77,8 @@
 @property (nonatomic, strong) NSMutableArray *eventDateTimesArray;
 @property (nonatomic, strong) NSMutableDictionary *selectedCalendarDatesDict;
 @property (nonatomic, strong) NSMutableArray *viewsForSelectedCalendarDates;
+
+@property (nonatomic, weak) IBOutlet UIButton *listCalButton;
 
 @property (nonatomic, weak) IBOutlet UIView *multiDayPopupDatesView;
 @property (nonatomic, weak) IBOutlet UILabel *multiDayOption1;

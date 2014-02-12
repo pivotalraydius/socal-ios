@@ -48,6 +48,9 @@
     [Helpers setBorderToView:self.dateLabel borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.dateLabel.frame.size.width/2];
     
     [self.starLabel setHidden:YES];
+    
+    [self.dateLabel setFont:[Helpers Exo2Regular:14.0]];
+    [self.monthLabel setFont:[Helpers Exo2Regular:14.0]];
 }
 
 -(void)renderWithDate:(NSDate *)date andVotesYes:(NSInteger)yesVotes no:(NSInteger)noVotes Maybe:(NSInteger)maybeVotes {

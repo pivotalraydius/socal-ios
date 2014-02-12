@@ -29,6 +29,7 @@
                 <outlet property="lblEnterNamePrompt" destination="xw1-JO-g5F" id="hyH-jo-rf2"/>
                 <outlet property="lblEventDateInstruction" destination="fXn-FB-gLE" id="KMr-cI-ZSo"/>
                 <outlet property="lblTitleLabel" destination="Odk-bY-eAR" id="hqr-Zs-0DD"/>
+                <outlet property="listCalButton" destination="7Ci-qg-sGc" id="WBf-oj-Dz5"/>
                 <outlet property="mainBackButton" destination="X6I-OE-Y3E" id="chj-Ec-k8m"/>
                 <outlet property="mainDoneButton" destination="vfg-5h-fgh" id="bfk-Pb-Wup"/>
                 <outlet property="mainScrollView" destination="q0g-kR-A1w" id="aZG-O8-gzL"/>
@@ -153,7 +154,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MapFadeReverse" id="C1t-wH-WdZ">
-                    <rect key="frame" x="260" y="0.0" width="40" height="30"/>
+                    <rect key="frame" x="222" y="0.0" width="40" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <view contentMode="scaleToFill" id="ZTR-Bb-nrU" userLabel="LinkDisToCal">
@@ -243,9 +244,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Ci-qg-sGc">
-                    <rect key="frame" x="273" y="0.0" width="44" height="30"/>
+                    <rect key="frame" x="265" y="2" width="26" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="LIST">
+                    <state key="normal" title="L">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -288,6 +289,9 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="jny-3u-eij"/>
+                    </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l5i-2a-fc7">
                     <rect key="frame" x="254" y="7" width="50" height="30"/>
@@ -313,6 +317,9 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="gaV-fQ-Wlp"/>
+                    </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cdY-eR-4Yk">
                     <rect key="frame" x="252" y="7" width="50" height="30"/>

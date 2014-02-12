@@ -283,7 +283,7 @@
         [label setTextColor:[UIColor whiteColor]];
         [label setBackgroundColor:[UIColor clearColor]];
         [label setTextAlignment:NSTextAlignmentCenter];
-        [label setFont:[UIFont systemFontOfSize:10.0]];
+        [label setFont:[Helpers Exo2Regular:10.0]];
         
         [view addSubview:label];
         
@@ -366,8 +366,18 @@
 -(IBAction)forwardButtonAction {
     
     if (self.mainScrollView.contentOffset.x == 0.0) {
-        //forward to dates
-        [self scrollToDatesView];
+        
+        if (!self.eventUserName) {
+            
+            UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Please enter a name to continue" message:@"Please enter your name to continue browsing this event." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+            }];
+        }
+        else {
+         
+            //forward to dates
+            [self scrollToDatesView];
+        }
     }
     else if (self.mainScrollView.contentOffset.x == 320.0) {
         //forward to done
@@ -470,8 +480,10 @@
     [self.calEventDatesCalendar setBackgroundColor:[UIColor whiteColor]];
     [self.calEventDatesCalendar setInnerBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self.calEventDatesCalendar setDayOfWeekTextColor:[UIColor whiteColor]];
-    [self.calEventDatesCalendar setDateFont:[UIFont systemFontOfSize:10.0]];
-    [self.calEventDatesCalendar setTitleFont:[UIFont systemFontOfSize:14.0]];
+    [self.calEventDatesCalendar setDateFont:[Helpers Exo2Regular:11.0]];
+    [self.calEventDatesCalendar setTitleFont:[Helpers Exo2Medium:14.0]];
+    
+    [Helpers setBorderToView:self.listCalButton borderColor:[Helpers suriaOrangeColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     
 //    [self.calEventDatesCalendar setDelegate:self];
 }
@@ -1206,6 +1218,9 @@
         else if (scrollView.contentOffset.x == 320.0) {
             
             [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 377, self.postsTable.frame.size.width, 210-(377-314))];
+            
+            if (self.postsArray.count > 0)
+                [self.postsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.postsArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
         else if (scrollView.contentOffset.x == 640.0) {
             
@@ -1298,6 +1313,20 @@
 }
 
 #pragma mark - Keyboard Methods
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if (textField == self.txtNameField) {
+        
+        [self btnNameOkAction];
+    }
+    else if (textField == self.txtPostField) {
+        
+        [self btnPostAction];
+    }
+    
+    return YES;
+}
 
 -(void)keyboardWillShow:(NSNotification *)notification {
     

@@ -322,7 +322,7 @@
     self.titleLabel.text = [self.dateFormatter stringFromDate:_monthShowing];
     self.titleLabel.frame = CGRectMake(0, 0, self.bounds.size.width, TOP_HEIGHT);
     self.prevButton.frame = CGRectMake(BUTTON_MARGIN + 5, BUTTON_MARGIN, 70, 30);
-    self.nextButton.frame = CGRectMake(self.bounds.size.width - 70 - 9 - BUTTON_MARGIN, BUTTON_MARGIN, 70, 30);
+    self.nextButton.frame = CGRectMake(self.bounds.size.width - 70 - 9 - BUTTON_MARGIN - 30, BUTTON_MARGIN, 70, 30);
     [self.prevButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [self.nextButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
 //    [self.prevButton setBackgroundColor:[UIColor blueColor]];
@@ -537,7 +537,7 @@
     [self setTitleColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self setTitleFont:[UIFont boldSystemFontOfSize:17.0]];
 
-    [self setDayOfWeekFont:[UIFont boldSystemFontOfSize:12.0]];
+    [self setDayOfWeekFont:[Helpers Exo2Regular:12.0]];
     [self setDayOfWeekTextColor:[UIColor whiteColor]];
     [self setDayOfWeekBottomColor:UIColorFromRGB(0xCCCFD5) topColor:[UIColor whiteColor]];
 

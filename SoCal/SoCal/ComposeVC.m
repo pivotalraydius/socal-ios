@@ -10,6 +10,7 @@
 #import "ComposeDateTimeCell.h"
 #import "ContactCell.h"
 #import "RDPieView.h"
+#import "UIBAlertView.h"
 #import <MessageUI/MessageUI.h>
 
 @implementation ComposeVC
@@ -501,6 +502,29 @@
 }
 
 -(void)closeTimePanelForCellAtIndexPathRow:(NSInteger)row {
+    
+    //check if date-time combination exists
+    NSDate *aDate = [self.eventDateTimesArray objectAtIndex:row];
+    
+    for (NSDate *date in self.eventDateTimesArray) {
+        
+        if (date != aDate) {
+            
+            if ([date compare:aDate] == NSOrderedSame) {
+                
+                //Duplicate!
+                
+                NSLog(@"Duplicate date time combi, cannot accept");
+                
+                UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Date-Time Already Exists" message:@"The selected date-time already exists, please choose another date-time combination." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                
+                [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+                }];
+                
+                return;
+            }
+        }
+    }
     
     [self updateCalendarSubviews];
     

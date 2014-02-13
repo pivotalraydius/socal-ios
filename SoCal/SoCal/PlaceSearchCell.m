@@ -16,7 +16,15 @@
                                                                owner:nil
                                                              options:nil] objectAtIndex:0];
     
+    [cell setupUI];
+    
     return cell;
+}
+
+-(void)setupUI {
+    
+    [self.lblPlaceName setFont:[Helpers Exo2Regular:14.0]];
+    [self.lblPlaceAddress setFont:[Helpers Exo2Regular:14.0]];
 }
 
 @end

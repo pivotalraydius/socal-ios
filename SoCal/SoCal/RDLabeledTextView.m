@@ -61,6 +61,15 @@
     [self.controlView addTarget:self action:@selector(becomeFirstResponder) forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(void)setFrame:(CGRect)frame {
+    
+    [self.textView setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+    [self.titleLabel setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+    [self.controlView setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+    
+    [super setFrame:frame];
+}
+
 -(NSString *)title {
     
     return title;

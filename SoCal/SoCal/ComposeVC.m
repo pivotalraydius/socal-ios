@@ -32,6 +32,7 @@
     
     [self setupTestData];
     [self setupMainScrollView];
+    [self setupUI];
     [self setupFonts];
     
     [self getNewInviteCode];
@@ -68,6 +69,21 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
+}
+
+-(void)setupUI {
+    
+    if ([Helpers iPhone4]) {
+        
+        [self.mainScrollView setFrame:CGRectMake(self.mainScrollView.frame.origin.x, self.mainScrollView.frame.origin.y, self.mainScrollView.frame.size.width, self.mainScrollView.frame.size.height-88)];
+        [self.composeEventContainer setFrame:CGRectMake(self.composeEventContainer.frame.origin.x, self.composeEventContainer.frame.origin.y, self.composeEventContainer.frame.size.width, self.composeEventContainer.frame.size.height-88)];
+        [self.dateTimeTable setFrame:CGRectMake(self.dateTimeTable.frame.origin.x, self.dateTimeTable.frame.origin.y-40, self.dateTimeTable.frame.size.width, self.dateTimeTable.frame.size.height-48)];
+        [self.selectDatesButton setFrame:CGRectMake(self.selectDatesButton.frame.origin.x, self.selectDatesButton.frame.origin.y-88, self.selectDatesButton.frame.size.width, self.selectDatesButton.frame.size.height)];
+        [self.selectContactsButton setFrame:CGRectMake(self.selectContactsButton.frame.origin.x, self.selectContactsButton.frame.origin.y-88, self.selectContactsButton.frame.size.width, self.selectContactsButton.frame.size.height)];
+        [self.dateTimeDoneButton setFrame:CGRectMake(self.dateTimeDoneButton.frame.origin.x, self.dateTimeDoneButton.frame.origin.y-88, self.dateTimeDoneButton.frame.size.width, self.dateTimeDoneButton.frame.size.height)];
+        [self.contactsTableview setFrame:CGRectMake(self.contactsTableview.frame.origin.x, self.contactsTableview.frame.origin.y, self.contactsTableview.frame.size.width, self.contactsTableview.frame.size.height-88)];
+        [self.contactDoneButton setFrame:CGRectMake(self.contactDoneButton.frame.origin.x, self.contactDoneButton.frame.origin.y-88, self.contactDoneButton.frame.size.width, self.contactDoneButton.frame.size.height)];
+    }
 }
 
 -(void)setupFonts {

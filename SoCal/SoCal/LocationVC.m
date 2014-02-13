@@ -41,6 +41,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setupUI];
+    [self setupFonts];
+    
     CGFloat lat = 1.2893;
     CGFloat lng = 103.7819;
     
@@ -73,6 +76,23 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)setupUI {
+    
+    if ([Helpers iPhone4]) {
+     
+        [self.placesTable setFrame:CGRectMake(self.placesTable.frame.origin.x, self.placesTable.frame.origin.y, self.placesTable.frame.size.width, self.placesTable.frame.size.height-88)];
+    }
+}
+
+-(void)setupFonts {
+    
+    [self.txtPlaceName setFont:[Helpers Exo2Regular:14.0]];
+    [self.txtCityName setFont:[Helpers Exo2Regular:14.0]];
+    
+    [self.placeName setFont:[Helpers Exo2Regular:14.0]];
+    [self.placeAddress setFont:[Helpers Exo2Regular:14.0]];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{

@@ -11,6 +11,7 @@
 #import "ContactCell.h"
 #import "RDPieView.h"
 #import "UIBAlertView.h"
+#import "UIImage+MDQRCode.h"
 #import <MessageUI/MessageUI.h>
 
 @implementation ComposeVC
@@ -657,6 +658,18 @@
 
 -(void)createEvent {
     
+    if ([[self.txtEventName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""] || !self.selectedLocationDict || self.eventDateTimesArray.count <= 0) {
+        
+        NSLog(@"Missing data, cannot create event.");
+        
+        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Missing Event Data" message:@"Oops! We can't create an event for you without an Event Name, a Location, and the selected Dates." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        
+        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+        }];
+        
+        return;
+    }
+    
     CGFloat latitude = [[self.selectedLocationDict objectForKey:@"latitude"] floatValue];
     CGFloat longitude = [[self.selectedLocationDict objectForKey:@"longitude"] floatValue];
     NSString *placeName = [self.selectedLocationDict objectForKey:@"name"];
@@ -826,20 +839,21 @@
         return;
     }
     
-    NSMutableArray *recipients = [[NSMutableArray alloc] initWithCapacity:0];
-    
-//    for (NSDictionary *person in self.selectedContactsArray) {
-//        
-//        [recipients addObject:[person objectForKey:@"email"]];
-//    }
-    
     MFMailComposeViewController *mailcompose = [[MFMailComposeViewController alloc] init];
+    
+    NSString *eventURL = [NSString stringWithFormat:@"http://rayd.us/socal/%@",self.invitationCode];
+    
+    NSString *messageBody = [NSString stringWithFormat:@"<html><p>You have been invited to <strong>%@</strong>.</p><p>Scan the QR Code with your SoCal app or type in this invitation code <strong>%@</strong> manually.<p>&nbsp;</p>Alternatively, access our web interface through this <a href=%@>link</a>.</p><p>See you there!</p></html>", self.txtEventName.text, self.invitationCode,eventURL];
+    
+    UIImage *qrCode = [UIImage mdQRCodeForString:eventURL size:300.0];
+    NSData *imageData = UIImageJPEGRepresentation(qrCode, 0.5);
     
     mailcompose = [[MFMailComposeViewController alloc] init];
     mailcompose.mailComposeDelegate = self;
-    [mailcompose setSubject:@"you are invited to an event"];
-    [mailcompose setMessageBody:[NSString stringWithFormat:@"invitation code : %@", self.invitationCode] isHTML:NO];
-     [mailcompose setToRecipients:[self getSelectedEmails]];
+    [mailcompose setSubject:@"You have been invited to an Event!"];
+    [mailcompose setMessageBody:messageBody isHTML:YES];
+    [mailcompose addAttachmentData:imageData mimeType:@"image/jpeg" fileName:[NSString stringWithFormat:@"%@.jpg",self.invitationCode]];
+    [mailcompose setToRecipients:[self getSelectedEmails]];
     
     [self.navigationController presentViewController:mailcompose animated:NO completion:nil];
 }

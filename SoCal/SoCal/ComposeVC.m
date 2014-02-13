@@ -676,11 +676,21 @@
     
     if ([[self.txtEventName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""] || !self.selectedLocationDict || self.eventDateTimesArray.count <= 0) {
         
-        NSLog(@"Missing data, cannot create event.");
-        
         UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Missing Event Data" message:@"Oops! We can't create an event for you without an Event Name, a Location, and the selected Dates." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         
         [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+        }];
+        
+        return;
+    }
+    
+    if ([self getSelectedEmails].count<=0) {
+        
+        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"You Have No Guests!" message:@"Oops! It's going to be a pretty boring event if you are going alone. How about inviting some of your friends?" cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        
+        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+            
+            [self selectContactsAction];
         }];
         
         return;

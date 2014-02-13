@@ -7,6 +7,7 @@
 //
 
 #import "Helpers.h"
+#import "UIDevice+Resolutions.h"
 
 #define RD_ONE_YEAR_IN_SECS   31556926
 #define RD_ONE_MONTH_IN_SECS  2629743
@@ -161,6 +162,17 @@
     NSDate *dateWithNoTime = [[NSCalendar currentCalendar]
                               dateFromComponents:components];
     return dateWithNoTime;
+}
+
++(BOOL)iPhone4 {
+    
+    BOOL itIs = YES;
+    
+    if ([[UIDevice currentDevice] resolution] == UIDeviceResolution_iPhoneRetina4) {
+        itIs = NO;
+    }
+    
+    return itIs;
 }
 
 @end

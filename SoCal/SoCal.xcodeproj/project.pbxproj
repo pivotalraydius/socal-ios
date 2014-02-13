@@ -64,6 +64,7 @@
 		9A7D9D6818AC930B005E32D1 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5E18AC930B005E32D1 /* split.c */; };
 		9A7D9D6918AC930B005E32D1 /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D6118AC930B005E32D1 /* UIImage+MDQRCode.m */; };
 		9A7D9D6B18ACA179005E32D1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7D9D6A18ACA179005E32D1 /* AVFoundation.framework */; };
+		9A7D9D6F18ACAF4B005E32D1 /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D6E18ACAF4B005E32D1 /* UIDevice+Resolutions.m */; };
 		9AA365B818A1DC59004C0E86 /* NetworkAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */; };
 		9AA365B918A1DC59004C0E86 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A618A1DC59004C0E86 /* AFHTTPClient.m */; };
 		9AA365BA18A1DC59004C0E86 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A818A1DC59004C0E86 /* AFHTTPRequestOperation.m */; };
@@ -186,6 +187,8 @@
 		9A7D9D6018AC930B005E32D1 /* UIImage+MDQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MDQRCode.h"; sourceTree = "<group>"; };
 		9A7D9D6118AC930B005E32D1 /* UIImage+MDQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MDQRCode.m"; sourceTree = "<group>"; };
 		9A7D9D6A18ACA179005E32D1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9A7D9D6D18ACAF4B005E32D1 /* UIDevice+Resolutions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Resolutions.h"; sourceTree = "<group>"; };
+		9A7D9D6E18ACAF4B005E32D1 /* UIDevice+Resolutions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Resolutions.m"; sourceTree = "<group>"; };
 		9AA365A218A1DC59004C0E86 /* NetworkAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkAPIClient.h; sourceTree = "<group>"; };
 		9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkAPIClient.m; sourceTree = "<group>"; };
 		9AA365A518A1DC59004C0E86 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -453,6 +456,7 @@
 		9A5ED7E618924E3E00BA8E02 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				9A7D9D6C18ACAF4B005E32D1 /* UIDevice+Resolutions */,
 				9A7D9D5018AC930B005E32D1 /* QR */,
 				9ACDDA2618A381AD00FF4F5C /* Pusher */,
 				9AA365A418A1DC59004C0E86 /* AFNetworking */,
@@ -501,6 +505,15 @@
 				9A7D9D5F18AC930B005E32D1 /* split.h */,
 			);
 			path = libqrencode;
+			sourceTree = "<group>";
+		};
+		9A7D9D6C18ACAF4B005E32D1 /* UIDevice+Resolutions */ = {
+			isa = PBXGroup;
+			children = (
+				9A7D9D6D18ACAF4B005E32D1 /* UIDevice+Resolutions.h */,
+				9A7D9D6E18ACAF4B005E32D1 /* UIDevice+Resolutions.m */,
+			);
+			path = "UIDevice+Resolutions";
 			sourceTree = "<group>";
 		};
 		9AA365A118A1DC59004C0E86 /* Raydius */ = {
@@ -696,6 +709,7 @@
 				9A7D9D6918AC930B005E32D1 /* UIImage+MDQRCode.m in Sources */,
 				9AA365BB18A1DC59004C0E86 /* AFImageRequestOperation.m in Sources */,
 				9AA365BA18A1DC59004C0E86 /* AFHTTPRequestOperation.m in Sources */,
+				9A7D9D6F18ACAF4B005E32D1 /* UIDevice+Resolutions.m in Sources */,
 				9A5ED7B9189245D000BA8E02 /* AppDelegate.m in Sources */,
 				DC1434C518A4B51D0062AD7A /* RDPieView.m in Sources */,
 				9A7D9D6618AC930B005E32D1 /* qrspec.c in Sources */,

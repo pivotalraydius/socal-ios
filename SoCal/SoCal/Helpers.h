@@ -30,4 +30,7 @@
 +(NSString *)stringFromDate:(NSDate *)date;
 +(NSString *)timeframeFromString:(NSString *)timeString;
 +(NSDate *)dateWithNoTime:(NSDate *)date;
+
++(BOOL)iPhone4;
+
 @end

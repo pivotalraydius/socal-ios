@@ -70,13 +70,13 @@
 
     if (selected) {
         [self setAccessoryType:UITableViewCellAccessoryCheckmark];
-        [self.lblCheck setText:@"\u2705"]; //u2705
+        [self.lblCheck setText:@"\u2714"]; //u2705
         NSLog(@"selected");
     }
     else {
         
         [self setAccessoryType:UITableViewCellAccessoryNone];
-        [self.lblCheck setText:@"\u2B1C"]; //u2B1C
+        [self.lblCheck setText:@""]; //u2B1C
         NSLog(@"NOT selected");
     }
     

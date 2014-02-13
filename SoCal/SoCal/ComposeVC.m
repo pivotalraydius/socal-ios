@@ -165,6 +165,7 @@
 -(void)scrollToComposeEvent {
     
     [self.mainScrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+    [self.dateTimeTable setHidden:NO];
     
 }
 
@@ -208,6 +209,7 @@
 //
     [self.timeSelectionContainer setHidden:YES];
     [self.contactsSelectionContainer setHidden:NO];
+    [self.dateTimeTable setHidden:YES];
     [self.contactsTableview reloadData];
     [self scrollToTimeSelection];
 }

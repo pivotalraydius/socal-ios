@@ -131,6 +131,13 @@
     [self setupCalendar];
     
     [self.calListEventDatesTable setHidden:YES];
+    
+    if ([Helpers iPhone4]) {
+        
+        [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, self.postsTable.frame.origin.y, self.postsTable.frame.size.width, self.postsTable.frame.size.height-88)];
+        [self.bottomBar setFrame:CGRectMake(self.bottomBar.frame.origin.x, self.bottomBar.frame.origin.y-88, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
+        [self.lblEnterNamePrompt setFrame:CGRectMake(self.lblEnterNamePrompt.frame.origin.x, self.lblEnterNamePrompt.frame.origin.y-88, self.lblEnterNamePrompt.frame.size.width, self.lblEnterNamePrompt.frame.size.height)];
+    }
 }
 
 -(void)setupFonts {
@@ -1334,13 +1341,18 @@
     
     if (scrollView == self.mainScrollView) {
         
+        float modifier = 0.0;
+        if ([Helpers iPhone4]) {
+            modifier = -88.0;
+        }
+        
         if (scrollView.contentOffset.x == 0.0) {
             
-            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, 210)];
+            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, 210 + modifier)];
         }
         else if (scrollView.contentOffset.x == 320.0) {
             
-            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 377, self.postsTable.frame.size.width, 210-(377-314))];
+            [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 377, self.postsTable.frame.size.width, 210-(377-314) + modifier)];
             
             if (self.postsArray.count > 0)
                 [self.postsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.postsArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];

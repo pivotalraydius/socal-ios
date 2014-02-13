@@ -464,11 +464,31 @@
     self.eventUserName = self.txtNameField.text;
     hasName = YES;
     
+    [self submitUsernameToServer];
+    
     [self.postsTable setAlpha:1.0];
     
     [self setBottomBarMode];
     
     [self.postsTable reloadData];
+}
+
+#pragma mark - Username Methods
+
+-(void)submitUsernameToServer {
+    
+    NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
+    [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
+    [queryInfo setObject:self.eventUserName forKey:@"username"];
+    
+    [[NetworkAPIClient sharedClient] postPath:SOCAL_CREATE_USER parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"%@ has joined the conversation.", self.eventUserName);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 
 #pragma mark - Posts Methods

@@ -843,7 +843,7 @@
     
     NSString *eventURL = [NSString stringWithFormat:@"http://rayd.us/socal/%@",self.invitationCode];
     
-    NSString *messageBody = [NSString stringWithFormat:@"<html><p>You have been invited to <strong>%@</strong>.</p><p>Scan the QR Code with your SoCal app or type in this invitation code <strong>%@</strong> manually.<p>&nbsp;</p>Alternatively, access our web interface through this <a href=%@>link</a>.</p><p>See you there!</p></html>", self.txtEventName.text, self.invitationCode,eventURL];
+    NSString *messageBody = [NSString stringWithFormat:@"<html><p>You have been invited to <strong>%@</strong>.</p><p>Scan the QR Code with your SoCal app or type in this invitation code <strong>%@</strong> manually.</p><p>Alternatively, access our web interface through this <a href=%@>link</a>.</p><p>See you there!</p></html>", self.txtEventName.text, self.invitationCode,eventURL];
     
     UIImage *qrCode = [UIImage mdQRCodeForString:eventURL size:300.0];
     NSData *imageData = UIImageJPEGRepresentation(qrCode, 0.5);

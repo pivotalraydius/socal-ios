@@ -50,7 +50,9 @@
     [self setupUI];
     [self setupFonts];
     
-    [self setupScanner];
+    if ([self isCameraAvailable]) {
+        [self setupScanner];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,6 +71,12 @@
     
     [Helpers setBorderToView:self.btnCreateEvent borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     [Helpers setBorderToView:self.btnUseInvite borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
+    
+    if ([Helpers iPhone4]) {
+        
+        [self.btnCreateEvent setFrame:CGRectMake(self.btnCreateEvent.frame.origin.x, self.btnCreateEvent.frame.origin.y-88, self.btnCreateEvent.frame.size.width, self.btnCreateEvent.frame.size.height)];
+        [self.btnUseInvite setFrame:CGRectMake(self.btnUseInvite.frame.origin.x, self.btnUseInvite.frame.origin.y-88, self.btnUseInvite.frame.size.width, self.btnUseInvite.frame.size.height)];
+    }
 }
 
 -(void)setupFonts {

@@ -26,6 +26,8 @@
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
     
+    [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:YES];
+    
     return YES;
 }
 

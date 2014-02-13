@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="btnCreateEvent" destination="NOd-fd-dO4" id="9xH-EO-fHi"/>
                 <outlet property="btnUseInvite" destination="q03-1p-ITi" id="xLc-b5-TIw"/>
+                <outlet property="codePreview" destination="CA2-g2-NC0" id="qu0-hV-4Dp"/>
                 <outlet property="inviteCodeField" destination="bB9-La-66q" id="h8s-1y-PZd"/>
                 <outlet property="lblBtnCreateEvent" destination="Dpl-Fy-tFK" id="Svu-l8-y2V"/>
                 <outlet property="lblBtnUseInvite" destination="7FY-XG-qVn" id="UGo-yM-i6g"/>
@@ -87,6 +88,12 @@
                     <connections>
                         <action selector="btnUseInviteAction" destination="-1" eventType="touchUpInside" id="dc5-Zi-D9u"/>
                     </connections>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CA2-g2-NC0" userLabel="qrCode">
+                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

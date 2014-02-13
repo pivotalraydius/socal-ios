@@ -61,18 +61,7 @@
     [self.lblName setText:strName];
     [self.lblEmail setText:strEmail];
     
-    if ([selected intValue] == 1) {
-    
-        [self.btnSelection setSelected:YES];
-        [self.btnSelection setTitle:@"o" forState:UIControlStateSelected];
-    }
-    else {
-    
-        [self.btnSelection setSelected:NO];
-        [self.btnSelection setTitle:@"" forState:UIControlStateNormal];
-    }
-    
-
+    [self.btnSelection setSelected:([selected intValue]==1)];
 }
 
 @end

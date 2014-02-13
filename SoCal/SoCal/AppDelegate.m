@@ -28,6 +28,29 @@
     
     [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:YES];
     
+//    ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
+//
+//    
+//    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+//        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+//            if (granted) {
+//                // If the app is authorized to access the first time then add the contact
+//
+//            } else {
+//                // Show an alert here if user denies access telling that the contact cannot be added because you didn't allow it to access the contacts
+//            }
+//        });
+//    }
+//    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+//        // If the user user has earlier provided the access, then add the contact
+//
+//    }
+//    else {
+//        // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
+//        
+//
+//    }
+    
     return YES;
 }
 

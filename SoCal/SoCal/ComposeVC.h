@@ -13,7 +13,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
 
-@interface ComposeVC : UIViewController <CKCalendarDelegate, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate> // ABPeoplePickerNavigationControllerDelegate
+@interface ComposeVC : UIViewController <CKCalendarDelegate, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate> // ABPeoplePickerNavigationControllerDelegate
 {
     NSInteger currentlySelectedDateTimeCell;
     

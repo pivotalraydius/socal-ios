@@ -792,69 +792,72 @@
 -(NSArray*)getContactsWithEmail {
     
     NSString* name = @"";
-//    NSString* phone = @"";
+    //    NSString* phone = @"";
     NSString* email = @"";
     
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
-    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
-    CFIndex nPeople = ABAddressBookGetPersonCount( addressBook );
     
-    for ( int i = 0; i < nPeople; i++ )
-    {
-        ABRecordRef aPerson = CFArrayGetValueAtIndex( allPeople, i );
-        
-        ABMultiValueRef fnameProperty = ABRecordCopyValue(aPerson, kABPersonFirstNameProperty);
-        ABMultiValueRef lnameProperty = ABRecordCopyValue(aPerson, kABPersonLastNameProperty);
-        
-//        ABMultiValueRef phoneProperty = ABRecordCopyValue(aPerson, kABPersonPhoneProperty);
-        ABMultiValueRef emailProperty = ABRecordCopyValue(aPerson, kABPersonEmailProperty);
-        
-        NSArray *emailArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(emailProperty);
-        
-        
-        if ([emailArray count] > 0) {
-//            if ([emailArray count] > 1) {
-//                for (int i = 0; i < [emailArray count]; i++) {
-//                    email = [email stringByAppendingString:[NSString stringWithFormat:@"%@\n", [emailArray objectAtIndex:i]]];
-//                }
-//            }else {
-//                email = [NSString stringWithFormat:@"%@", [emailArray objectAtIndex:0]];
-//            }
-            email = [NSString stringWithFormat:@"%@", [emailArray objectAtIndex:0]];
-            
-            if (fnameProperty != nil) {
-                name = [NSString stringWithFormat:@"%@", fnameProperty];
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+            if (granted) {
+                // If the app is authorized to access the first time then add the contact
+                
+            } else {
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Access to contacts Is Denied" message:@"User denied the access to the contacts" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+                // Show an alert here if user denies access telling that the contact cannot be added because you didn't allow it to access the contacts
             }
-            if (lnameProperty != nil) {
-                name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
-            }
+        });
+    }
+    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+        // If the user user has earlier provided the access, then add the contact
+        
+        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
+        CFIndex nPeople = ABAddressBookGetPersonCount( addressBook );
+        
+        for ( int i = 0; i < nPeople; i++ )
+        {
+            ABRecordRef aPerson = CFArrayGetValueAtIndex( allPeople, i );
             
-            NSMutableDictionary *contact = [[NSMutableDictionary alloc] initWithCapacity:0];
-            [contact setObject:name forKey:@"name"];
-            [contact setObject:email forKey:@"email"];
-            [contact setObject:[NSNumber numberWithBool:NO] forKey:@"selected"];
-            [self.contactsWithEmail addObject:contact];
+            ABMultiValueRef fnameProperty = ABRecordCopyValue(aPerson, kABPersonFirstNameProperty);
+            ABMultiValueRef lnameProperty = ABRecordCopyValue(aPerson, kABPersonLastNameProperty);
+            
+            //        ABMultiValueRef phoneProperty = ABRecordCopyValue(aPerson, kABPersonPhoneProperty);
+            ABMultiValueRef emailProperty = ABRecordCopyValue(aPerson, kABPersonEmailProperty);
+            
+            NSArray *emailArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(emailProperty);
+            
+            
+            if ([emailArray count] > 0) {
+                
+                email = [NSString stringWithFormat:@"%@", [emailArray objectAtIndex:0]];
+                
+                if (fnameProperty != nil) {
+                    name = [NSString stringWithFormat:@"%@", fnameProperty];
+                }
+                if (lnameProperty != nil) {
+                    name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
+                }
+                
+                NSMutableDictionary *contact = [[NSMutableDictionary alloc] initWithCapacity:0];
+                [contact setObject:name forKey:@"name"];
+                [contact setObject:email forKey:@"email"];
+                [contact setObject:[NSNumber numberWithBool:NO] forKey:@"selected"];
+                [self.contactsWithEmail addObject:contact];
+            }
         }
     }
-    
-//    [self.contactsTableview reloadData];
+    else {
+        // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"access to contacts is not allowed" message:@"Pls turn on the permission in your setting" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
     
     return self.contactsWithEmail;
-    
-//    NSArray *phoneArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(phoneProperty);
-//    if ([phoneArray count] > 0) {
-//        if ([phoneArray count] > 1) {
-//            for (int i = 0; i < [phoneArray count]; i++) {
-//                phone = [phone stringByAppendingString:[NSString stringWithFormat:@"%@\n", [phoneArray objectAtIndex:i]]];
-//            }
-//        }else {
-//            phone = [NSString stringWithFormat:@"%@", [phoneArray objectAtIndex:0]];
-//        }
-//    }
-    
-    
-    
 }
+
 
 -(void)sendInvitationCodeToInvitees {
 
@@ -924,6 +927,18 @@
         }
     }
     return (NSArray*)selectedEmails;
+}
+
+#pragma mark - UIAlertView Delegates
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+
+    if (buttonIndex == 0) { //
+        NSLog(@"0");
+    }
+    if (buttonIndex == 1) {
+        NSLog(@"1");
+    }
 }
 
 

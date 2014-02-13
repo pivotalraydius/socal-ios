@@ -55,6 +55,14 @@
 		9A5ED81E18924F6D00BA8E02 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED81D18924F6D00BA8E02 /* QuartzCore.framework */; };
 		9A5ED82118924FFB00BA8E02 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED82018924FFB00BA8E02 /* Helpers.m */; };
 		9A5ED825189253F800BA8E02 /* CKCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED824189253F800BA8E02 /* CKCalendarView.m */; };
+		9A7D9D6218AC930B005E32D1 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5218AC930B005E32D1 /* bitstream.c */; };
+		9A7D9D6318AC930B005E32D1 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5418AC930B005E32D1 /* mask.c */; };
+		9A7D9D6418AC930B005E32D1 /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5618AC930B005E32D1 /* qrencode.c */; };
+		9A7D9D6518AC930B005E32D1 /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5818AC930B005E32D1 /* qrinput.c */; };
+		9A7D9D6618AC930B005E32D1 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5A18AC930B005E32D1 /* qrspec.c */; };
+		9A7D9D6718AC930B005E32D1 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5C18AC930B005E32D1 /* rscode.c */; };
+		9A7D9D6818AC930B005E32D1 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5E18AC930B005E32D1 /* split.c */; };
+		9A7D9D6918AC930B005E32D1 /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D6118AC930B005E32D1 /* UIImage+MDQRCode.m */; };
 		9AA365B818A1DC59004C0E86 /* NetworkAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */; };
 		9AA365B918A1DC59004C0E86 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A618A1DC59004C0E86 /* AFHTTPClient.m */; };
 		9AA365BA18A1DC59004C0E86 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A818A1DC59004C0E86 /* AFHTTPRequestOperation.m */; };
@@ -160,6 +168,22 @@
 		9A5ED82018924FFB00BA8E02 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
 		9A5ED823189253F800BA8E02 /* CKCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCalendarView.h; sourceTree = "<group>"; };
 		9A5ED824189253F800BA8E02 /* CKCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCalendarView.m; sourceTree = "<group>"; };
+		9A7D9D5218AC930B005E32D1 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
+		9A7D9D5318AC930B005E32D1 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
+		9A7D9D5418AC930B005E32D1 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
+		9A7D9D5518AC930B005E32D1 /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mask.h; sourceTree = "<group>"; };
+		9A7D9D5618AC930B005E32D1 /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrencode.c; sourceTree = "<group>"; };
+		9A7D9D5718AC930B005E32D1 /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrencode.h; sourceTree = "<group>"; };
+		9A7D9D5818AC930B005E32D1 /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrinput.c; sourceTree = "<group>"; };
+		9A7D9D5918AC930B005E32D1 /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrinput.h; sourceTree = "<group>"; };
+		9A7D9D5A18AC930B005E32D1 /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrspec.c; sourceTree = "<group>"; };
+		9A7D9D5B18AC930B005E32D1 /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrspec.h; sourceTree = "<group>"; };
+		9A7D9D5C18AC930B005E32D1 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
+		9A7D9D5D18AC930B005E32D1 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
+		9A7D9D5E18AC930B005E32D1 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
+		9A7D9D5F18AC930B005E32D1 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		9A7D9D6018AC930B005E32D1 /* UIImage+MDQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MDQRCode.h"; sourceTree = "<group>"; };
+		9A7D9D6118AC930B005E32D1 /* UIImage+MDQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MDQRCode.m"; sourceTree = "<group>"; };
 		9AA365A218A1DC59004C0E86 /* NetworkAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkAPIClient.h; sourceTree = "<group>"; };
 		9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkAPIClient.m; sourceTree = "<group>"; };
 		9AA365A518A1DC59004C0E86 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -425,6 +449,7 @@
 		9A5ED7E618924E3E00BA8E02 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				9A7D9D5018AC930B005E32D1 /* QR */,
 				9ACDDA2618A381AD00FF4F5C /* Pusher */,
 				9AA365A418A1DC59004C0E86 /* AFNetworking */,
 				9A5ED822189253F800BA8E02 /* CKCalendar */,
@@ -441,6 +466,37 @@
 				9A5ED824189253F800BA8E02 /* CKCalendarView.m */,
 			);
 			path = CKCalendar;
+			sourceTree = "<group>";
+		};
+		9A7D9D5018AC930B005E32D1 /* QR */ = {
+			isa = PBXGroup;
+			children = (
+				9A7D9D5118AC930B005E32D1 /* libqrencode */,
+				9A7D9D6018AC930B005E32D1 /* UIImage+MDQRCode.h */,
+				9A7D9D6118AC930B005E32D1 /* UIImage+MDQRCode.m */,
+			);
+			path = QR;
+			sourceTree = "<group>";
+		};
+		9A7D9D5118AC930B005E32D1 /* libqrencode */ = {
+			isa = PBXGroup;
+			children = (
+				9A7D9D5218AC930B005E32D1 /* bitstream.c */,
+				9A7D9D5318AC930B005E32D1 /* bitstream.h */,
+				9A7D9D5418AC930B005E32D1 /* mask.c */,
+				9A7D9D5518AC930B005E32D1 /* mask.h */,
+				9A7D9D5618AC930B005E32D1 /* qrencode.c */,
+				9A7D9D5718AC930B005E32D1 /* qrencode.h */,
+				9A7D9D5818AC930B005E32D1 /* qrinput.c */,
+				9A7D9D5918AC930B005E32D1 /* qrinput.h */,
+				9A7D9D5A18AC930B005E32D1 /* qrspec.c */,
+				9A7D9D5B18AC930B005E32D1 /* qrspec.h */,
+				9A7D9D5C18AC930B005E32D1 /* rscode.c */,
+				9A7D9D5D18AC930B005E32D1 /* rscode.h */,
+				9A7D9D5E18AC930B005E32D1 /* split.c */,
+				9A7D9D5F18AC930B005E32D1 /* split.h */,
+			);
+			path = libqrencode;
 			sourceTree = "<group>";
 		};
 		9AA365A118A1DC59004C0E86 /* Raydius */ = {
@@ -633,10 +689,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A7D9D6918AC930B005E32D1 /* UIImage+MDQRCode.m in Sources */,
 				9AA365BB18A1DC59004C0E86 /* AFImageRequestOperation.m in Sources */,
 				9AA365BA18A1DC59004C0E86 /* AFHTTPRequestOperation.m in Sources */,
 				9A5ED7B9189245D000BA8E02 /* AppDelegate.m in Sources */,
 				DC1434C518A4B51D0062AD7A /* RDPieView.m in Sources */,
+				9A7D9D6618AC930B005E32D1 /* qrspec.c in Sources */,
 				9A5ED7DA189245F900BA8E02 /* MainVC.m in Sources */,
 				9AA365BF18A1DC59004C0E86 /* AFURLConnectionOperation.m in Sources */,
 				9AA365BD18A1DC59004C0E86 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -646,12 +704,17 @@
 				9A20BD5718A89F1700B90101 /* ListDateTimeCell.m in Sources */,
 				9AF7897218A0DDCC008EA2E5 /* LocationVC.m in Sources */,
 				DCD74AEA18AB680500961BE8 /* ContactCell.m in Sources */,
+				9A7D9D6518AC930B005E32D1 /* qrinput.c in Sources */,
+				9A7D9D6418AC930B005E32D1 /* qrencode.c in Sources */,
 				9AA365BE18A1DC59004C0E86 /* AFPropertyListRequestOperation.m in Sources */,
 				9AF7896E18A086AA008EA2E5 /* RDLabeledTextView.m in Sources */,
+				9A7D9D6318AC930B005E32D1 /* mask.c in Sources */,
 				9ACDDA1A18A35EBB00FF4F5C /* PostCell.m in Sources */,
 				9AA365C018A1DC59004C0E86 /* AFXMLRequestOperation.m in Sources */,
+				9A7D9D6718AC930B005E32D1 /* rscode.c in Sources */,
 				9AA365C118A1DC59004C0E86 /* UIImageView+AFNetworking.m in Sources */,
 				9AA365B818A1DC59004C0E86 /* NetworkAPIClient.m in Sources */,
+				9A7D9D6218AC930B005E32D1 /* bitstream.c in Sources */,
 				9AA365CD18A20918004C0E86 /* UIBAlertView.m in Sources */,
 				9AA365BC18A1DC59004C0E86 /* AFJSONRequestOperation.m in Sources */,
 				9A152D10189626B40013B647 /* ComposeDateTimeCell.m in Sources */,
@@ -660,6 +723,7 @@
 				9A5ED7DF1892471800BA8E02 /* EventVC.m in Sources */,
 				9A5ED7E41892476C00BA8E02 /* ComposeVC.m in Sources */,
 				9AA365D018A20D06004C0E86 /* PlaceSearchCell.m in Sources */,
+				9A7D9D6818AC930B005E32D1 /* split.c in Sources */,
 				9AA365B918A1DC59004C0E86 /* AFHTTPClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

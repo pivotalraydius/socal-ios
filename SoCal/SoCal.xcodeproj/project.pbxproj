@@ -63,6 +63,7 @@
 		9A7D9D6718AC930B005E32D1 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5C18AC930B005E32D1 /* rscode.c */; };
 		9A7D9D6818AC930B005E32D1 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5E18AC930B005E32D1 /* split.c */; };
 		9A7D9D6918AC930B005E32D1 /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D6118AC930B005E32D1 /* UIImage+MDQRCode.m */; };
+		9A7D9D6B18ACA179005E32D1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7D9D6A18ACA179005E32D1 /* AVFoundation.framework */; };
 		9AA365B818A1DC59004C0E86 /* NetworkAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */; };
 		9AA365B918A1DC59004C0E86 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A618A1DC59004C0E86 /* AFHTTPClient.m */; };
 		9AA365BA18A1DC59004C0E86 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A818A1DC59004C0E86 /* AFHTTPRequestOperation.m */; };
@@ -184,6 +185,7 @@
 		9A7D9D5F18AC930B005E32D1 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		9A7D9D6018AC930B005E32D1 /* UIImage+MDQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MDQRCode.h"; sourceTree = "<group>"; };
 		9A7D9D6118AC930B005E32D1 /* UIImage+MDQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MDQRCode.m"; sourceTree = "<group>"; };
+		9A7D9D6A18ACA179005E32D1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9AA365A218A1DC59004C0E86 /* NetworkAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkAPIClient.h; sourceTree = "<group>"; };
 		9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkAPIClient.m; sourceTree = "<group>"; };
 		9AA365A518A1DC59004C0E86 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A7D9D6B18ACA179005E32D1 /* AVFoundation.framework in Frameworks */,
 				DCD74AE218AB472300961BE8 /* MessageUI.framework in Frameworks */,
 				DCD74AE018AB3B8A00961BE8 /* AddressBookUI.framework in Frameworks */,
 				DCD74ADE18AB3B8000961BE8 /* AddressBook.framework in Frameworks */,
@@ -346,6 +349,7 @@
 		9A5ED7A7189245D000BA8E02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A7D9D6A18ACA179005E32D1 /* AVFoundation.framework */,
 				DCD74AE118AB472300961BE8 /* MessageUI.framework */,
 				DCD74ADF18AB3B8A00961BE8 /* AddressBookUI.framework */,
 				DCD74ADD18AB3B8000961BE8 /* AddressBook.framework */,
@@ -843,6 +847,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hnin Htet Aung (66SG73UQVV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
 				INFOPLIST_FILE = "SoCal/SoCal-Info.plist";
@@ -852,7 +857,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9FE9F863-E5CA-4759-B459-82278EBA32B0";
+				PROVISIONING_PROFILE = "6CBF2F18-75D7-4294-814E-BC7836CE87B0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

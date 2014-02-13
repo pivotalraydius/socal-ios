@@ -13,15 +13,13 @@
 
 }
 
-@property (nonatomic, strong) NSDictionary* data;
 @property (nonatomic, weak) id parentVC;
+@property (nonatomic, weak) IBOutlet UILabel *lblCheck;
 @property (nonatomic, weak) IBOutlet UILabel *lblName;
 @property (nonatomic, weak) IBOutlet UILabel *lblEmail;
-@property (nonatomic, weak) IBOutlet UIButton *btnSelection;
 
 +(ContactCell *)newContactCell;
 -(void)setupUI;
 -(void)renderCellWithData:(NSDictionary*)data;
-//-(void)updateCellWithTime:(NSDate *)date;
 
 @end

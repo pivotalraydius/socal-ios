@@ -210,8 +210,22 @@
     [self.timeSelectionContainer setHidden:YES];
     [self.contactsSelectionContainer setHidden:NO];
     [self.dateTimeTable setHidden:YES];
-    [self.contactsTableview reloadData];
     [self scrollToTimeSelection];
+    [self.contactsTableview reloadData];
+    
+    for (int i = 0 ; i < self.contactsWithEmail.count ; i++) {
+        
+        NSDictionary *data = [self.contactsWithEmail objectAtIndex:i];
+        
+        if ([[data objectForKey:@"selected"] boolValue]) {
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            [self.contactsTableview selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+            
+        }
+    }
+    
+    NSLog(@"Done");
 }
 
 -(IBAction)locationButtonAction {
@@ -375,8 +389,10 @@
 //            [cell setParentVC:self];
         }
         
-        [cell renderCellWithData:[self.contactsWithEmail objectAtIndex:indexPath.row]];
+        NSDictionary *data = [self.contactsWithEmail objectAtIndex:indexPath.row];
+        [cell renderCellWithData:data];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
         return cell;
     }
     else {
@@ -414,7 +430,7 @@
     
     if (tableView == self.contactsTableview) {
         
-        [[self.contactsWithEmail objectAtIndex:indexPath.row] setObject:[NSNumber numberWithInteger:1] forKey:@"selected"];
+        [[self.contactsWithEmail objectAtIndex:indexPath.row] setObject:[NSNumber numberWithBool:YES] forKey:@"selected"];
     }
     else {
     
@@ -437,7 +453,7 @@
     
     if (tableView == self.contactsTableview) {
         
-        [[self.contactsWithEmail objectAtIndex:indexPath.row] setObject:[NSNumber numberWithInteger:0] forKey:@"selected"];
+        [[self.contactsWithEmail objectAtIndex:indexPath.row] setObject:[NSNumber numberWithBool:NO] forKey:@"selected"];
     }
     else {
         
@@ -753,7 +769,7 @@
             NSMutableDictionary *contact = [[NSMutableDictionary alloc] initWithCapacity:0];
             [contact setObject:name forKey:@"name"];
             [contact setObject:email forKey:@"email"];
-            [contact setObject:[NSNumber numberWithInteger:0] forKey:@"selected"];
+            [contact setObject:[NSNumber numberWithBool:NO] forKey:@"selected"];
             [self.contactsWithEmail addObject:contact];
         }
     }
@@ -839,7 +855,7 @@
     
     for (NSDictionary *contact in self.contactsWithEmail) {
         
-        if ([[contact objectForKey:@"selected"] intValue] == 1) {
+        if ([[contact objectForKey:@"selected"] boolValue]) {
             [selectedEmails addObject: [contact objectForKey:@"email"]];
         }
     }

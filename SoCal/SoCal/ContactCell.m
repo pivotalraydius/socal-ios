@@ -33,23 +33,25 @@
     return self;
 }
 
--(void) setupUI {
+- (void)prepareForReuse {
 
-    [self.btnSelection setTitle:@"o" forState:UIControlStateSelected];
-    [self.btnSelection setTitle:@"" forState:UIControlStateNormal];
+    [self setSelected:NO animated:NO];
+}
+
+-(void) setupUI {
     
     [self.lblName setFont:[Helpers Exo2Regular:13.0]];
     [self.lblEmail setFont:[Helpers Exo2Regular:11.0]];
-    [self.btnSelection.titleLabel setFont:[Helpers Exo2Regular:13.0]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    [super setSelected:selected animated:animated];
+    if (self.selected == selected) return;
     
-    [self.btnSelection setSelected:selected];
+    [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    [self reloadDataWithSelectedState:selected];
 }
 
 -(void)renderCellWithData:(NSDictionary*)data {
@@ -57,11 +59,34 @@
     NSString *strName = [data objectForKey:@"name"];
     NSString *strEmail = [data objectForKey:@"email"];
     NSNumber *selected = [data objectForKey:@"selected"];
-    [self setupUI];
     [self.lblName setText:strName];
     [self.lblEmail setText:strEmail];
     
-    [self.btnSelection setSelected:([selected intValue]==1)];
+    NSLog(@"%@ : selected : %d", strName, selected.intValue);
+    [self reloadDataWithSelectedState:[selected boolValue]];
+}
+
+-(void)reloadDataWithSelectedState: (BOOL) selected {
+
+    if (selected) {
+        [self setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [self.lblCheck setText:@"\u2705"]; //u2705
+        NSLog(@"selected");
+    }
+    else {
+        
+        [self setAccessoryType:UITableViewCellAccessoryNone];
+        [self.lblCheck setText:@"\u2B1C"]; //u2B1C
+        NSLog(@"NOT selected");
+    }
+    
+    /*
+     selected \u2705
+     unselected \u2B1C
+     
+     @"\u2611", @"\u2B1C", @"\u2705", @"\u26AB", @"\u26AA", @"\u2714", @"\U0001F44D", @"\U0001F44E"
+
+     */
 }
 
 @end

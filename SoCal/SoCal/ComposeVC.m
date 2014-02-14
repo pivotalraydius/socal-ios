@@ -50,6 +50,8 @@
         [self.lblBtnLocation setText:@"Location"];
     }
     
+    if(self.contactsWithEmail.count<=0) [self checkAddressBookAccess];
+    
     [super viewWillAppear:animated];
 }
 
@@ -116,7 +118,7 @@
     self.selectedCalendarDatesDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     self.viewsForSelectedCalendarDates = [[NSMutableArray alloc] initWithCapacity:0];
     
-    [self getContactsWithEmail];
+//    [self checkAddressBookAccess];
     
     currentlySelectedDateTimeCell = -1;
 }
@@ -178,6 +180,7 @@
 -(void)scrollToTimeSelection {
     
     [self.mainScrollView setContentOffset:CGPointMake(320.0, 0.0) animated:YES];
+    if(self.contactsWithEmail.count<=0) [self checkAddressBookAccess];
 }
 
 -(void)scrollToComposeEvent {
@@ -756,53 +759,19 @@
     [self.txtDescription resignFirstResponder];
 }
 
-//#pragma mark - People picker delegate methods
-//
-//- (void)peoplePickerNavigationControllerDidCancel:
-//(ABPeoplePickerNavigationController *)peoplePicker
-//{
-//    [self.contactsPicker.view removeFromSuperview];
-//    [self scrollToComposeEvent];
-//}
-//
-//
-//- (BOOL)peoplePickerNavigationController:
-//(ABPeoplePickerNavigationController *)peoplePicker
-//      shouldContinueAfterSelectingPerson:(ABRecordRef)person {
-//    
-////    [self displayPerson:person];
-////    [self dismissModalViewControllerAnimated:YES];
-//    
-//    [self addContact:person];
-//    ABPersonViewController *personVC = [[ABPersonViewController alloc] init];
-//    [personVC setHighlightedItemForProperty:kABPersonPhoneProperty withIdentifier:0];
-//    
-//    return NO;
-//}
-//
-//- (BOOL)peoplePickerNavigationController:
-//(ABPeoplePickerNavigationController *)peoplePicker
-//      shouldContinueAfterSelectingPerson:(ABRecordRef)person
-//                                property:(ABPropertyID)property
-//                              identifier:(ABMultiValueIdentifier)identifier
-//{
-//    return NO;
-//}
-
--(NSArray*)getContactsWithEmail {
-    
-    NSString* name = @"";
-    //    NSString* phone = @"";
-    NSString* email = @"";
+-(void)checkAddressBookAccess {
     
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
     
     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
         ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
             if (granted) {
-                // If the app is authorized to access the first time then add the contact
+                // the app is authorized to access the first time
                 
-            } else {
+                [self getContactsWithEmail];
+                
+            } else { // the app is not authorized to access the address book
+                
                 
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Access to contacts Is Denied" message:@"User denied the access to the contacts" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
@@ -813,46 +782,61 @@
     else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
         // If the user user has earlier provided the access, then add the contact
         
-        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
-        CFIndex nPeople = ABAddressBookGetPersonCount( addressBook );
+        [self getContactsWithEmail];
         
-        for ( int i = 0; i < nPeople; i++ )
-        {
-            ABRecordRef aPerson = CFArrayGetValueAtIndex( allPeople, i );
-            
-            ABMultiValueRef fnameProperty = ABRecordCopyValue(aPerson, kABPersonFirstNameProperty);
-            ABMultiValueRef lnameProperty = ABRecordCopyValue(aPerson, kABPersonLastNameProperty);
-            
-            //        ABMultiValueRef phoneProperty = ABRecordCopyValue(aPerson, kABPersonPhoneProperty);
-            ABMultiValueRef emailProperty = ABRecordCopyValue(aPerson, kABPersonEmailProperty);
-            
-            NSArray *emailArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(emailProperty);
-            
-            
-            if ([emailArray count] > 0) {
-                
-                email = [NSString stringWithFormat:@"%@", [emailArray objectAtIndex:0]];
-                
-                if (fnameProperty != nil) {
-                    name = [NSString stringWithFormat:@"%@", fnameProperty];
-                }
-                if (lnameProperty != nil) {
-                    name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
-                }
-                
-                NSMutableDictionary *contact = [[NSMutableDictionary alloc] initWithCapacity:0];
-                [contact setObject:name forKey:@"name"];
-                [contact setObject:email forKey:@"email"];
-                [contact setObject:[NSNumber numberWithBool:NO] forKey:@"selected"];
-                [self.contactsWithEmail addObject:contact];
-            }
-        }
     }
-    else {
+    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied) {
         // If the user user has NOT earlier provided the access, create an alert to tell the user to go to Settings app and allow access
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"access to contacts is not allowed" message:@"Pls turn on the permission in your setting" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Permission Denied!" message:@"Access to address book data for this app is explicitly denied before. You can grant the permission in your setting." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
+    }
+    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusRestricted) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Permission Denied!" message:@"Access to address book data is not allowed under your current access right on this phone." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
+-(NSArray*)getContactsWithEmail {
+    
+    NSString* name = @"";
+    NSString* email = @"";
+    
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
+    CFIndex nPeople = ABAddressBookGetPersonCount( addressBook );
+    
+    for ( int i = 0; i < nPeople; i++ )
+    {
+        ABRecordRef aPerson = CFArrayGetValueAtIndex( allPeople, i );
+        
+        ABMultiValueRef fnameProperty = ABRecordCopyValue(aPerson, kABPersonFirstNameProperty);
+        ABMultiValueRef lnameProperty = ABRecordCopyValue(aPerson, kABPersonLastNameProperty);
+        
+        //        ABMultiValueRef phoneProperty = ABRecordCopyValue(aPerson, kABPersonPhoneProperty);
+        ABMultiValueRef emailProperty = ABRecordCopyValue(aPerson, kABPersonEmailProperty);
+        
+        NSArray *emailArray = (__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(emailProperty);
+        
+        
+        if ([emailArray count] > 0) {
+            
+            email = [NSString stringWithFormat:@"%@", [emailArray objectAtIndex:0]];
+            
+            if (fnameProperty != nil) {
+                name = [NSString stringWithFormat:@"%@", fnameProperty];
+            }
+            if (lnameProperty != nil) {
+                name = [name stringByAppendingString:[NSString stringWithFormat:@" %@", lnameProperty]];
+            }
+            
+            NSMutableDictionary *contact = [[NSMutableDictionary alloc] initWithCapacity:0];
+            [contact setObject:name forKey:@"name"];
+            [contact setObject:email forKey:@"email"];
+            [contact setObject:[NSNumber numberWithBool:NO] forKey:@"selected"];
+            [self.contactsWithEmail addObject:contact];
+        }
     }
     
     return self.contactsWithEmail;

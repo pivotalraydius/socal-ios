@@ -36,4 +36,6 @@
 @property (nonatomic, strong) AVCaptureMetadataOutput *output;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *preview;
 
+@property (nonatomic, weak) IBOutlet UIButton *btnCancelQRCodeScanner;
+
 @end

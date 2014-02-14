@@ -71,6 +71,7 @@
     
     [Helpers setBorderToView:self.btnCreateEvent borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     [Helpers setBorderToView:self.btnUseInvite borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
+    [Helpers setBorderToView:self.btnCancelQRCodeScanner borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:3.0];
     
     if ([Helpers iPhone4]) {
         
@@ -85,6 +86,7 @@
     [self.lblBtnCreateEvent setFont:[Helpers Exo2Regular:18.0]];
     [self.lblBtnUseInvite setFont:[Helpers Exo2Regular:18.0]];
     [self.inviteCodeField setFont:[Helpers Exo2Regular:14.0]];
+    [self.btnCancelQRCodeScanner.titleLabel setFont:[Helpers Exo2Regular:18.0]];
 }
 
 -(IBAction)btnCreateEventAction {
@@ -104,6 +106,11 @@
         
         [self openEventVC];
     }
+}
+
+-(IBAction)btnCancelQRCodeScannerAction {
+    
+    [self dismissScanner];
 }
 
 -(void)openEventVC {
@@ -199,10 +206,7 @@
     
     if (motion == UIEventSubtypeMotionShake) {
         
-        if (self.codePreview.hidden)
-            [self showScanner];
-        else
-            [self dismissScanner];
+        [self showScanner];
     }
 }
 

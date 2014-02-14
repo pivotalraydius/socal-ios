@@ -93,6 +93,8 @@
     int totalCount = yesVotes + noVotes + maybeVotes;
 //    int totalCount = 10;
     
+//    [self.countLabel setText:[NSString stringWithFormat:@"Yes:%i, No:%i, Maybe:%i, Total:%i", yesVotes, noVotes, maybeVotes, totalCount]];
+    
     float yesWidth = 0.0;
     float noWidth = 0.0;
 //    float maybeWidth = 0.0;

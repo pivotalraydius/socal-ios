@@ -20,6 +20,8 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *starLabel;
 
+@property (nonatomic, weak) IBOutlet UILabel *countLabel;
+
 +(SummaryDateTimeCell *)newCell;
 -(void)renderWithDate:(NSDate *)date andVotesYes:(NSInteger)yesVotes no:(NSInteger)noVotes Maybe:(NSInteger)maybeVotes;
 

@@ -718,7 +718,10 @@
     [queryInfo setObject:[NSNumber numberWithFloat:latitude] forKey:@"latitude"];
     [queryInfo setObject:[NSNumber numberWithFloat:longitude] forKey:@"longitude"];
     [queryInfo setObject:placeName forKey:@"place_name"];
-    [queryInfo setObject:placeAddress forKey:@"address"];
+    
+    if (placeAddress)
+        [queryInfo setObject:placeAddress forKey:@"address"];
+    
     [queryInfo setObject:self.txtDescription.text forKey:@"description"];
     [queryInfo setObject:dateString forKey:@"datetime"];
     

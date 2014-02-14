@@ -88,6 +88,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *multiDayOption3;
 @property (nonatomic, weak) IBOutlet UILabel *multiDayOption4;
 
+@property (nonatomic, strong) NSMutableArray *voteDictArray;
+
 @property (nonatomic, strong) PTPusher *pusherClient;
 @property (nonatomic, strong) PTPusherChannel *eventChannel;
 

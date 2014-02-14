@@ -30,6 +30,7 @@
         // Custom initialization
         
         hasName = NO;
+        self.voteDictArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.eventDateTimesDictArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.eventDateTimesArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.selectedCalendarDatesDict = [[NSMutableDictionary alloc] initWithCapacity:0];
@@ -46,6 +47,7 @@
         // Custom initialization
         
         hasName = NO;
+        self.voteDictArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.eventDateTimesDictArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.eventDateTimesArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.selectedCalendarDatesDict = [[NSMutableDictionary alloc] initWithCapacity:0];
@@ -198,6 +200,7 @@
     
     [self.eventDateTimesArray removeAllObjects];
     [self.eventDateTimesDictArray removeAllObjects];
+    [self.voteDictArray removeAllObjects];
     
     //set labels
     [self setEventTitleWithTitle:[eventDict objectForKey:@"title"] place:[eventDict objectForKey:@"place_name"] andDate:nil];
@@ -220,7 +223,8 @@
     
     for (NSDictionary *dateDict in dateStringsArray) {
         
-        [self.eventDateTimesArray addObject:[Helpers dateFromString:[dateDict objectForKey:@"dateNtime"]]];
+        NSDate *aDate = [Helpers dateFromString:[dateDict objectForKey:@"dateNtime"]];
+        [self.eventDateTimesArray addObject:aDate];
     }
     
     [self updateCalendarSubviews];
@@ -246,6 +250,27 @@
     }
     else {
         [self.lblDetailsEventTitle setText:[NSString stringWithFormat:@"%@, Date and Location Unconfirmed", title]];
+    }
+}
+
+-(void)setVoteDot:(UIView *)voteDot withColorForDate:(NSDate *)date {
+    
+    for (NSDictionary *voteDict in self.voteDictArray) {
+        
+        NSDate *aDate = [voteDict objectForKey:@"date"];
+        if ([aDate compare:date] == NSOrderedSame) {
+            
+            NSInteger vote = [[voteDict objectForKey:@"vote"] intValue];
+            if (vote == VOTE_MAYBE) {
+                [voteDot setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+            }
+            else if (vote == VOTE_YES) {
+                [voteDot setBackgroundColor:[Helpers softGreenColorWithAlpha:1.0]];
+            }
+            else if (vote == VOTE_NO) {
+                [voteDot setBackgroundColor:[Helpers softRedColorWithAlpha:1.0]];
+            }
+        }
     }
 }
 
@@ -289,9 +314,17 @@
         NSDate *dateKey = [Helpers dateFromString:strDateKey];
         NSMutableArray *dates = [self.selectedCalendarDatesDict objectForKey:strDateKey];
         
+        UIView *voteDot = [[UIView alloc] initWithFrame:CGRectMake(27.5, 26, 5, 5)];
+        [Helpers setBorderToView:voteDot borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:voteDot.frame.size.width/2];
+        [voteDot setBackgroundColor:[UIColor clearColor]];
+        
         RDPieView *view = [[RDPieView alloc] initWithFrame:CGRectMake(3.5, 2.5, 30, 30)];
         [view setBackgroundColor:[UIColor clearColor]];
         [view setTag:666];
+        [view setClipsToBounds:NO];
+        
+        [self setVoteDot:voteDot withColorForDate:dateKey];
+        [view addSubview:voteDot];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [label setTextColor:[UIColor whiteColor]];
@@ -324,6 +357,8 @@
             
         }
         else if(dates.count>1) { // multi-dates cell
+            
+            [voteDot setBackgroundColor:[UIColor clearColor]];
             
             int amCount = 0; int pmCount = 0;
             for (NSDate *date in dates) {
@@ -395,6 +430,7 @@
     }
     else if (self.mainScrollView.contentOffset.x == 320.0) {
         //forward to done
+        [self submitVotesToServer];
         [self scrollToDoneView];
     }
     else if (self.mainScrollView.contentOffset.x == 640.0) {
@@ -417,6 +453,7 @@
 -(void)scrollToDoneView {
     
     [self.mainScrollView setContentOffset:CGPointMake(640.0, 0.0) animated:YES];
+    [self.mainBackButton setHidden:YES];
 }
 
 -(void)scrollToDetailsView {
@@ -472,6 +509,7 @@
     hasName = YES;
     
     [self submitUsernameToServer];
+    [self updateVoteDictArray];
     
     [self.postsTable setAlpha:1.0];
     
@@ -496,6 +534,30 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
+}
+
+-(void)updateVoteDictArray {
+    
+    for (NSDictionary *dateDict in self.eventDateTimesDictArray) {
+        
+        NSDate *aDate = [Helpers dateFromString:[dateDict objectForKey:@"dateNtime"]];
+        NSInteger aVote = [self checkUDForPreviousVote:aDate];
+        NSNumber *dateID = [dateDict objectForKey:@"id"];
+        
+        NSMutableDictionary *voteDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+        
+        [voteDict setObject:aDate forKey:@"date"];
+        
+        if (aVote >= 0) [voteDict setObject:[NSNumber numberWithInt:aVote] forKey:@"vote"];
+        else [voteDict setObject:[NSNumber numberWithInt:VOTE_MAYBE] forKey:@"vote"];
+        
+        [voteDict setObject:dateID forKey:@"id"];
+        
+        [self.voteDictArray addObject:voteDict];
+    }
+    
+    [self updateCalendarSubviews];
+    [self.calListEventDatesTable reloadData];
 }
 
 #pragma mark - Posts Methods
@@ -969,10 +1031,49 @@
         
         NSLog(@"voted before!");
         
-        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, but you can only cast 1 vote per date." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, but you can only vote each date once, and you have already submitted all your dates previously." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
         }];
+        
+        return;
+    }
+    
+    for (NSMutableDictionary *voteDict in self.voteDictArray) {
+        
+        NSDate *aDate = [voteDict objectForKey:@"date"];
+        
+        if ([aDate compare:date] == NSOrderedSame) {
+            
+            [voteDict setObject:[NSNumber numberWithInt:vote] forKey:@"vote"];
+        }
+    }
+    
+    [self updateCalendarSubviews];
+    [self.calListEventDatesTable reloadData];
+}
 
+-(void)submitVotesToServer {
+    
+    for (NSMutableDictionary *voteDict in self.voteDictArray) {
+    
+        NSDate *aDate = [voteDict objectForKey:@"date"];
+        NSInteger possibleVote = [self checkUDForPreviousVote:aDate];
+        
+        if (possibleVote < 0) {
+        
+            NSLog(@"never voted before, submit to server");
+            [self submitToServerVote:[[voteDict objectForKey:@"vote"] intValue] forDate:aDate];
+        }
+        else {
+            
+            NSLog(@"voted before, cannot submit to server");
+        }
+    }
+}
+
+-(void)submitToServerVote:(NSInteger)vote forDate:(NSDate *)date {
+    
+    if (!date) {
         return;
     }
     
@@ -996,13 +1097,7 @@
     [[NetworkAPIClient sharedClient] postPath:VOTE_FOR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [self saveVoteToUD:date andVote:vote];
-        
-        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Vote Successful" message:@"You have voted for a date successfully." cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        
-        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
-        }];
-        
-        [self.calListEventDatesTable reloadData];
+        [self.doneDatesTableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -1412,20 +1507,18 @@
             cell = [ListDateTimeCell newCell];
         }
         
-        NSInteger possibleVote = [self checkUDForPreviousVote:[self.eventDateTimesArray objectAtIndex:indexPath.row]];
+        NSInteger vote = VOTE_MAYBE;
         
-        if (possibleVote >= VOTE_MAYBE) {
-            
-            [cell renderWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andVote:possibleVote];
+        if (self.voteDictArray.count > 0) {
+            NSDictionary *voteDict = [self.voteDictArray objectAtIndex:indexPath.row];
+            vote = [[voteDict objectForKey:@"vote"] intValue];
         }
-        else {
         
-            [cell renderWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andVote:VOTE_MAYBE];
-        }
+        [cell renderWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andVote:vote];
         
         return cell;
     }
-    else {
+    else { //doneDatesTableView
         
         SummaryDateTimeCell *cell = (SummaryDateTimeCell *)[tableView dequeueReusableCellWithIdentifier:@"SummaryDateTimeCell"];
         

@@ -772,9 +772,12 @@
                 
             } else { // the app is not authorized to access the address book
                 
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Access to contacts Is Denied" message:@"User denied the access to the contacts" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alert show];
+                });
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Access to contacts Is Denied" message:@"User denied the access to the contacts" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [alert show];
+                
                 // Show an alert here if user denies access telling that the contact cannot be added because you didn't allow it to access the contacts
             }
         });

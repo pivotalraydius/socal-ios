@@ -228,6 +228,7 @@
     }
     
     [self updateCalendarSubviews];
+    if (self.eventUserName) [self updateVoteDictArray];
 }
 
 -(void)setEventTitleWithTitle:(NSString *)title place:(NSString *)placeName andDate:(NSDate *)date {
@@ -1092,6 +1093,8 @@
     [queryInfo setObject:[NSNumber numberWithInt:vote] forKey:@"vote"];
     [queryInfo setObject:dateID forKey:@"id"];
     
+    NSLog(@"id i am voting for: %@", dateID);
+    
     [[NetworkAPIClient sharedClient] postPath:VOTE_FOR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [self saveVoteToUD:date andVote:vote];
@@ -1157,7 +1160,7 @@
     }
     
     NSDictionary *mainDict = nil;
-    float yesPercent = 0.0;
+    NSInteger yesVotes = 0;
     
     for (NSDictionary *dateTimeDict in self.eventDateTimesDictArray) {
         
@@ -1165,10 +1168,7 @@
             if ([[dateTimeDict objectForKey:@"yes"] intValue] > 0) {
                 mainDict = dateTimeDict;
                 
-                int yes = [[mainDict objectForKey:@"yes"] intValue];
-                int total = [[mainDict objectForKey:@"yes"] intValue] + [[mainDict objectForKey:@"no"] intValue] + [[mainDict objectForKey:@"maybe"] intValue];
-                
-                yesPercent = yes/total * 100.0;
+                yesVotes = [[mainDict objectForKey:@"yes"] intValue];
             }
         }
         else {
@@ -1176,18 +1176,12 @@
             if ([[dateTimeDict objectForKey:@"yes"] intValue] > 0) {
                 
                 int yes = [[dateTimeDict objectForKey:@"yes"] intValue];
-                int total = [[dateTimeDict objectForKey:@"yes"] intValue] + [[dateTimeDict objectForKey:@"no"] intValue] + [[dateTimeDict objectForKey:@"maybe"] intValue];
                 
-                float testYesPercent = yes/total * 100.0;
-                
-                if (testYesPercent > yesPercent) {
+                if (yes > yesVotes) {
                     
                     mainDict = dateTimeDict;
                     
-                    int yes = [[mainDict objectForKey:@"yes"] intValue];
-                    int total = [[mainDict objectForKey:@"yes"] intValue] + [[mainDict objectForKey:@"no"] intValue] + [[mainDict objectForKey:@"maybe"] intValue];
-                    
-                    yesPercent = yes/total * 100.0;
+                    yesVotes = [[mainDict objectForKey:@"yes"] intValue];
                 }
             }
         }
@@ -1223,6 +1217,8 @@
         popularDate = date;
     }
     else {
+        
+        popularDate = nil;
         
         NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
         [self.lblDoneSummaryLabel setText:str];
@@ -1614,11 +1610,12 @@
         
         [cell renderWithDate:date andVotesYes:yes no:no Maybe:maybe];
         
-        if ([date compare:popularDate] == NSOrderedSame) {
-            [cell.starLabel setHidden:NO];
-        }
-        else {
-            [cell.starLabel setHidden:YES];
+        [cell.starLabel setHidden:YES];
+        
+        if (popularDate) {
+            if ([date compare:popularDate] == NSOrderedSame) {
+                [cell.starLabel setHidden:NO];
+            }
         }
         
         return cell;

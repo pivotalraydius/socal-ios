@@ -49,10 +49,6 @@
     
     [self setupUI];
     [self setupFonts];
-    
-    if ([self isCameraAvailable]) {
-        [self setupScanner];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -158,6 +154,8 @@
     
     if ([self isCameraAvailable]) {
         
+        [self setupScanner];
+        
         [self.codePreview setHidden:NO];
         [self.session startRunning];
     }
@@ -167,6 +165,14 @@
     
     [self.session stopRunning];
     [self.codePreview setHidden:YES];
+    
+    [self.preview removeFromSuperlayer];
+    
+    self.device = nil;
+    self.input = nil;
+    self.session = nil;
+    self.output = nil;
+    self.preview = nil;
 }
 
 -(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects

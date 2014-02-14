@@ -75,7 +75,6 @@
 		9AA365BF18A1DC59004C0E86 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365B318A1DC59004C0E86 /* AFURLConnectionOperation.m */; };
 		9AA365C018A1DC59004C0E86 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365B518A1DC59004C0E86 /* AFXMLRequestOperation.m */; };
 		9AA365C118A1DC59004C0E86 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365B718A1DC59004C0E86 /* UIImageView+AFNetworking.m */; };
-		9AA365C418A1DCFE004C0E86 /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365C218A1DCFE004C0E86 /* Environment.m */; };
 		9AA365CD18A20918004C0E86 /* UIBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365CC18A20918004C0E86 /* UIBAlertView.m */; };
 		9AA365D018A20D06004C0E86 /* PlaceSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365CF18A20D06004C0E86 /* PlaceSearchCell.m */; };
 		9AA365D218A20D20004C0E86 /* PlaceSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA365D118A20D20004C0E86 /* PlaceSearchCell.xib */; };
@@ -92,6 +91,92 @@
 		9AF7897218A0DDCC008EA2E5 /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7897018A0DDCC008EA2E5 /* LocationVC.m */; };
 		9AF7897318A0DDCC008EA2E5 /* LocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */; };
 		DC1434C518A4B51D0062AD7A /* RDPieView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1434C418A4B51D0062AD7A /* RDPieView.m */; };
+		DC2A281518AE0F0C005FE5FF /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D6118AC930B005E32D1 /* UIImage+MDQRCode.m */; };
+		DC2A281618AE0F0C005FE5FF /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365AA18A1DC59004C0E86 /* AFImageRequestOperation.m */; };
+		DC2A281718AE0F0C005FE5FF /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A818A1DC59004C0E86 /* AFHTTPRequestOperation.m */; };
+		DC2A281818AE0F0C005FE5FF /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D6E18ACAF4B005E32D1 /* UIDevice+Resolutions.m */; };
+		DC2A281918AE0F0C005FE5FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7B8189245D000BA8E02 /* AppDelegate.m */; };
+		DC2A281A18AE0F0C005FE5FF /* RDPieView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1434C418A4B51D0062AD7A /* RDPieView.m */; };
+		DC2A281B18AE0F0C005FE5FF /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5A18AC930B005E32D1 /* qrspec.c */; };
+		DC2A281C18AE0F0C005FE5FF /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7D8189245F900BA8E02 /* MainVC.m */; };
+		DC2A281D18AE0F0C005FE5FF /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365B318A1DC59004C0E86 /* AFURLConnectionOperation.m */; };
+		DC2A281E18AE0F0C005FE5FF /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365AE18A1DC59004C0E86 /* AFNetworkActivityIndicatorManager.m */; };
+		DC2A281F18AE0F0C005FE5FF /* SummaryDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A20BD5318A89F0200B90101 /* SummaryDateTimeCell.m */; };
+		DC2A282018AE0F0C005FE5FF /* CKCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED824189253F800BA8E02 /* CKCalendarView.m */; };
+		DC2A282218AE0F0C005FE5FF /* ListDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A20BD5618A89F1700B90101 /* ListDateTimeCell.m */; };
+		DC2A282318AE0F0C005FE5FF /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7897018A0DDCC008EA2E5 /* LocationVC.m */; };
+		DC2A282418AE0F0C005FE5FF /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD74AE918AB680500961BE8 /* ContactCell.m */; };
+		DC2A282518AE0F0C005FE5FF /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5818AC930B005E32D1 /* qrinput.c */; };
+		DC2A282618AE0F0C005FE5FF /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5618AC930B005E32D1 /* qrencode.c */; };
+		DC2A282718AE0F0C005FE5FF /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365B118A1DC59004C0E86 /* AFPropertyListRequestOperation.m */; };
+		DC2A282818AE0F0C005FE5FF /* RDLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */; };
+		DC2A282918AE0F0C005FE5FF /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5418AC930B005E32D1 /* mask.c */; };
+		DC2A282A18AE0F0C005FE5FF /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACDDA1918A35EBB00FF4F5C /* PostCell.m */; };
+		DC2A282B18AE0F0C005FE5FF /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365B518A1DC59004C0E86 /* AFXMLRequestOperation.m */; };
+		DC2A282C18AE0F0C005FE5FF /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5C18AC930B005E32D1 /* rscode.c */; };
+		DC2A282D18AE0F0C005FE5FF /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365B718A1DC59004C0E86 /* UIImageView+AFNetworking.m */; };
+		DC2A282E18AE0F0C005FE5FF /* NetworkAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */; };
+		DC2A282F18AE0F0C005FE5FF /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5218AC930B005E32D1 /* bitstream.c */; };
+		DC2A283018AE0F0C005FE5FF /* UIBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365CC18A20918004C0E86 /* UIBAlertView.m */; };
+		DC2A283118AE0F0C005FE5FF /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365AC18A1DC59004C0E86 /* AFJSONRequestOperation.m */; };
+		DC2A283218AE0F0C005FE5FF /* ComposeDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */; };
+		DC2A283318AE0F0C005FE5FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7B4189245D000BA8E02 /* main.m */; };
+		DC2A283418AE0F0C005FE5FF /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED82018924FFB00BA8E02 /* Helpers.m */; };
+		DC2A283518AE0F0C005FE5FF /* EventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7DD1892471800BA8E02 /* EventVC.m */; };
+		DC2A283618AE0F0C005FE5FF /* ComposeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7E21892476C00BA8E02 /* ComposeVC.m */; };
+		DC2A283718AE0F0C005FE5FF /* PlaceSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365CF18A20D06004C0E86 /* PlaceSearchCell.m */; };
+		DC2A283818AE0F0C005FE5FF /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5E18AC930B005E32D1 /* split.c */; };
+		DC2A283918AE0F0C005FE5FF /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A618A1DC59004C0E86 /* AFHTTPClient.m */; };
+		DC2A283B18AE0F0C005FE5FF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7D9D6A18ACA179005E32D1 /* AVFoundation.framework */; };
+		DC2A283C18AE0F0C005FE5FF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74AE118AB472300961BE8 /* MessageUI.framework */; };
+		DC2A283D18AE0F0C005FE5FF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74ADF18AB3B8A00961BE8 /* AddressBookUI.framework */; };
+		DC2A283E18AE0F0C005FE5FF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74ADD18AB3B8000961BE8 /* AddressBook.framework */; };
+		DC2A283F18AE0F0C005FE5FF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA4218A3828E00FF4F5C /* libsqlite3.dylib */; };
+		DC2A284018AE0F0C005FE5FF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA4018A3828200FF4F5C /* libicucore.dylib */; };
+		DC2A284118AE0F0C005FE5FF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3E18A3827C00FF4F5C /* libz.dylib */; };
+		DC2A284218AE0F0C005FE5FF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3C18A3827600FF4F5C /* CoreTelephony.framework */; };
+		DC2A284318AE0F0C005FE5FF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3A18A3825400FF4F5C /* Security.framework */; };
+		DC2A284418AE0F0C005FE5FF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3818A3824100FF4F5C /* CFNetwork.framework */; };
+		DC2A284518AE0F0C005FE5FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4821911898E312002DA0E4 /* MapKit.framework */; };
+		DC2A284618AE0F0C005FE5FF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED81D18924F6D00BA8E02 /* QuartzCore.framework */; };
+		DC2A284718AE0F0C005FE5FF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED81B18924F6700BA8E02 /* SystemConfiguration.framework */; };
+		DC2A284818AE0F0C005FE5FF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED81918924F5F00BA8E02 /* MobileCoreServices.framework */; };
+		DC2A284918AE0F0C005FE5FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7AA189245D000BA8E02 /* CoreGraphics.framework */; };
+		DC2A284A18AE0F0C005FE5FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7AC189245D000BA8E02 /* UIKit.framework */; };
+		DC2A284B18AE0F0C005FE5FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7A8189245D000BA8E02 /* Foundation.framework */; };
+		DC2A284C18AE0F0C005FE5FF /* libPusher-combined.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA2718A381AD00FF4F5C /* libPusher-combined.a */; };
+		DC2A284E18AE0F0C005FE5FF /* Exo2.0-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6618A8D1E100B90101 /* Exo2.0-LightItalic.otf */; };
+		DC2A284F18AE0F0C005FE5FF /* Exo2.0-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6818A8D1E100B90101 /* Exo2.0-Italic.otf */; };
+		DC2A285018AE0F0C005FE5FF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7B1189245D000BA8E02 /* InfoPlist.strings */; };
+		DC2A285118AE0F0C005FE5FF /* Exo2.0-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6918A8D1E100B90101 /* Exo2.0-ExtraBoldItalic.otf */; };
+		DC2A285218AE0F0C005FE5FF /* Exo2.0-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6E18A8D1E100B90101 /* Exo2.0-Bold.otf */; };
+		DC2A285318AE0F0C005FE5FF /* MainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7D9189245F900BA8E02 /* MainVC.xib */; };
+		DC2A285418AE0F0C005FE5FF /* Exo2.0-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6D18A8D1E100B90101 /* Exo2.0-BlackItalic.otf */; };
+		DC2A285518AE0F0C005FE5FF /* Exo2.0-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6218A8D1E100B90101 /* Exo2.0-SemiBold.otf */; };
+		DC2A285618AE0F0C005FE5FF /* Exo2.0-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5E18A8D1E100B90101 /* Exo2.0-ThinItalic.otf */; };
+		DC2A285718AE0F0C005FE5FF /* Exo2.0-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6F18A8D1E100B90101 /* Exo2.0-Black.otf */; };
+		DC2A285818AE0F0C005FE5FF /* ComposeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7E31892476C00BA8E02 /* ComposeVC.xib */; };
+		DC2A285918AE0F0C005FE5FF /* Exo2.0-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6B18A8D1E100B90101 /* Exo2.0-BoldItalic.otf */; };
+		DC2A285A18AE0F0C005FE5FF /* Exo2.0-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6718A8D1E100B90101 /* Exo2.0-ExtraLightItalic.otf */; };
+		DC2A285B18AE0F0C005FE5FF /* Exo2.0-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6018A8D1E100B90101 /* Exo2.0-Thin.otf */; };
+		DC2A285C18AE0F0C005FE5FF /* Exo2.0-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6118A8D1E100B90101 /* Exo2.0-Regular.otf */; };
+		DC2A285D18AE0F0C005FE5FF /* Exo2.0-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6518A8D1E100B90101 /* Exo2.0-Light.otf */; };
+		DC2A285E18AE0F0C005FE5FF /* ListDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5A18A89F3E00B90101 /* ListDateTimeCell.xib */; };
+		DC2A285F18AE0F0C005FE5FF /* Exo2.0-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5F18A8D1E100B90101 /* Exo2.0-SemiBoldItalic.otf */; };
+		DC2A286018AE0F0C005FE5FF /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCD74AE618AB67E500961BE8 /* ContactCell.xib */; };
+		DC2A286118AE0F0C005FE5FF /* ComposeDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */; };
+		DC2A286218AE0F0C005FE5FF /* Exo2.0-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6318A8D1E100B90101 /* Exo2.0-Medium.otf */; };
+		DC2A286318AE0F0C005FE5FF /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ACDDA1B18A35ECC00FF4F5C /* PostCell.xib */; };
+		DC2A286418AE0F0C005FE5FF /* Exo2.0-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6A18A8D1E100B90101 /* Exo2.0-ExtraLight.otf */; };
+		DC2A286518AE0F0C005FE5FF /* SummaryDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5818A89F2E00B90101 /* SummaryDateTimeCell.xib */; };
+		DC2A286618AE0F0C005FE5FF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7BA189245D000BA8E02 /* Images.xcassets */; };
+		DC2A286718AE0F0C005FE5FF /* Exo2.0-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6418A8D1E100B90101 /* Exo2.0-MediumItalic.otf */; };
+		DC2A286818AE0F0C005FE5FF /* EventVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7DE1892471800BA8E02 /* EventVC.xib */; };
+		DC2A286918AE0F0C005FE5FF /* LocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */; };
+		DC2A286A18AE0F0C005FE5FF /* PlaceSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA365D118A20D20004C0E86 /* PlaceSearchCell.xib */; };
+		DC2A286B18AE0F0C005FE5FF /* Exo2.0-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6C18A8D1E100B90101 /* Exo2.0-ExtraBold.otf */; };
+		DC2A287718AE1031005FE5FF /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2A287618AE1031005FE5FF /* Environment.m */; };
+		DC2A287918AE103B005FE5FF /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2A287818AE103B005FE5FF /* Environment.m */; };
 		DCD74ADE18AB3B8000961BE8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74ADD18AB3B8000961BE8 /* AddressBook.framework */; };
 		DCD74AE018AB3B8A00961BE8 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74ADF18AB3B8A00961BE8 /* AddressBookUI.framework */; };
 		DCD74AE218AB472300961BE8 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74AE118AB472300961BE8 /* MessageUI.framework */; };
@@ -210,7 +295,6 @@
 		9AA365B518A1DC59004C0E86 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		9AA365B618A1DC59004C0E86 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		9AA365B718A1DC59004C0E86 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		9AA365C218A1DCFE004C0E86 /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Environment.m; path = SoCal/Environment.m; sourceTree = SOURCE_ROOT; };
 		9AA365C318A1DCFE004C0E86 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Environment.h; path = SoCal/Environment.h; sourceTree = SOURCE_ROOT; };
 		9AA365CB18A20918004C0E86 /* UIBAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBAlertView.h; sourceTree = "<group>"; };
 		9AA365CC18A20918004C0E86 /* UIBAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBAlertView.m; sourceTree = "<group>"; };
@@ -249,6 +333,10 @@
 		9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationVC.xib; sourceTree = "<group>"; };
 		DC1434C318A4B51D0062AD7A /* RDPieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDPieView.h; sourceTree = "<group>"; };
 		DC1434C418A4B51D0062AD7A /* RDPieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDPieView.m; sourceTree = "<group>"; };
+		DC2A286F18AE0F0C005FE5FF /* SoCal-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SoCal-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC2A287418AE101C005FE5FF /* SoCal-Dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "SoCal-Dev-Info.plist"; path = "SoCal-Dev/SoCal-Dev-Info.plist"; sourceTree = SOURCE_ROOT; };
+		DC2A287618AE1031005FE5FF /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Environment.m; path = "SoCal-Dev/Environment/Environment.m"; sourceTree = SOURCE_ROOT; };
+		DC2A287818AE103B005FE5FF /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Environment.m; path = Environment/Environment.m; sourceTree = "<group>"; };
 		DCD74ADD18AB3B8000961BE8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DCD74ADF18AB3B8A00961BE8 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		DCD74AE118AB472300961BE8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -290,6 +378,31 @@
 				9A5ED7C2189245D000BA8E02 /* XCTest.framework in Frameworks */,
 				9A5ED7C4189245D000BA8E02 /* UIKit.framework in Frameworks */,
 				9A5ED7C3189245D000BA8E02 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC2A283A18AE0F0C005FE5FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC2A283B18AE0F0C005FE5FF /* AVFoundation.framework in Frameworks */,
+				DC2A283C18AE0F0C005FE5FF /* MessageUI.framework in Frameworks */,
+				DC2A283D18AE0F0C005FE5FF /* AddressBookUI.framework in Frameworks */,
+				DC2A283E18AE0F0C005FE5FF /* AddressBook.framework in Frameworks */,
+				DC2A283F18AE0F0C005FE5FF /* libsqlite3.dylib in Frameworks */,
+				DC2A284018AE0F0C005FE5FF /* libicucore.dylib in Frameworks */,
+				DC2A284118AE0F0C005FE5FF /* libz.dylib in Frameworks */,
+				DC2A284218AE0F0C005FE5FF /* CoreTelephony.framework in Frameworks */,
+				DC2A284318AE0F0C005FE5FF /* Security.framework in Frameworks */,
+				DC2A284418AE0F0C005FE5FF /* CFNetwork.framework in Frameworks */,
+				DC2A284518AE0F0C005FE5FF /* MapKit.framework in Frameworks */,
+				DC2A284618AE0F0C005FE5FF /* QuartzCore.framework in Frameworks */,
+				DC2A284718AE0F0C005FE5FF /* SystemConfiguration.framework in Frameworks */,
+				DC2A284818AE0F0C005FE5FF /* MobileCoreServices.framework in Frameworks */,
+				DC2A284918AE0F0C005FE5FF /* CoreGraphics.framework in Frameworks */,
+				DC2A284A18AE0F0C005FE5FF /* UIKit.framework in Frameworks */,
+				DC2A284B18AE0F0C005FE5FF /* Foundation.framework in Frameworks */,
+				DC2A284C18AE0F0C005FE5FF /* libPusher-combined.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +458,7 @@
 			children = (
 				9A5ED7A5189245D000BA8E02 /* SoCal.app */,
 				9A5ED7C0189245D000BA8E02 /* SoCalTests.xctest */,
+				DC2A286F18AE0F0C005FE5FF /* SoCal-Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -377,9 +491,6 @@
 		9A5ED7AE189245D000BA8E02 /* SoCal */ = {
 			isa = PBXGroup;
 			children = (
-				DCD74AE818AB680500961BE8 /* ContactCell.h */,
-				DCD74AE918AB680500961BE8 /* ContactCell.m */,
-				DCD74AE618AB67E500961BE8 /* ContactCell.xib */,
 				9A5ED7B7189245D000BA8E02 /* AppDelegate.h */,
 				9A5ED7B8189245D000BA8E02 /* AppDelegate.m */,
 				9A152D0E189626B40013B647 /* ComposeDateTimeCell.h */,
@@ -388,8 +499,10 @@
 				9A5ED7E11892476C00BA8E02 /* ComposeVC.h */,
 				9A5ED7E21892476C00BA8E02 /* ComposeVC.m */,
 				9A5ED7E31892476C00BA8E02 /* ComposeVC.xib */,
+				DCD74AE818AB680500961BE8 /* ContactCell.h */,
+				DCD74AE918AB680500961BE8 /* ContactCell.m */,
+				DCD74AE618AB67E500961BE8 /* ContactCell.xib */,
 				9AA365C318A1DCFE004C0E86 /* Environment.h */,
-				9AA365C218A1DCFE004C0E86 /* Environment.m */,
 				9A5ED7DC1892471800BA8E02 /* EventVC.h */,
 				9A5ED7DD1892471800BA8E02 /* EventVC.m */,
 				9A5ED7DE1892471800BA8E02 /* EventVC.xib */,
@@ -418,6 +531,7 @@
 				9A20BD5318A89F0200B90101 /* SummaryDateTimeCell.m */,
 				9A20BD5818A89F2E00B90101 /* SummaryDateTimeCell.xib */,
 				9A5ED7BA189245D000BA8E02 /* Images.xcassets */,
+				DC2A287118AE0FA8005FE5FF /* Environments */,
 				9A5ED7AF189245D000BA8E02 /* Supporting Files */,
 			);
 			path = SoCal;
@@ -427,9 +541,10 @@
 			isa = PBXGroup;
 			children = (
 				9A20BD5C18A8D04B00B90101 /* Fonts */,
-				9A5ED7B0189245D000BA8E02 /* SoCal-Info.plist */,
 				9A5ED7B1189245D000BA8E02 /* InfoPlist.strings */,
 				9A5ED7B4189245D000BA8E02 /* main.m */,
+				DC2A287418AE101C005FE5FF /* SoCal-Dev-Info.plist */,
+				9A5ED7B0189245D000BA8E02 /* SoCal-Info.plist */,
 				9A5ED7B6189245D000BA8E02 /* SoCal-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -456,13 +571,13 @@
 		9A5ED7E618924E3E00BA8E02 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
-				9A7D9D6C18ACAF4B005E32D1 /* UIDevice+Resolutions */,
-				9A7D9D5018AC930B005E32D1 /* QR */,
-				9ACDDA2618A381AD00FF4F5C /* Pusher */,
 				9AA365A418A1DC59004C0E86 /* AFNetworking */,
 				9A5ED822189253F800BA8E02 /* CKCalendar */,
+				9ACDDA2618A381AD00FF4F5C /* Pusher */,
+				9A7D9D5018AC930B005E32D1 /* QR */,
 				9AA365A118A1DC59004C0E86 /* Raydius */,
 				9AA365CA18A20918004C0E86 /* UIBAlertView */,
+				9A7D9D6C18ACAF4B005E32D1 /* UIDevice+Resolutions */,
 			);
 			path = Externals;
 			sourceTree = "<group>";
@@ -583,6 +698,31 @@
 			path = Pusher;
 			sourceTree = "<group>";
 		};
+		DC2A287118AE0FA8005FE5FF /* Environments */ = {
+			isa = PBXGroup;
+			children = (
+				DC2A287318AE0FC1005FE5FF /* SoCal-Dev */,
+				DC2A287218AE0FB3005FE5FF /* SoCal */,
+			);
+			name = Environments;
+			sourceTree = "<group>";
+		};
+		DC2A287218AE0FB3005FE5FF /* SoCal */ = {
+			isa = PBXGroup;
+			children = (
+				DC2A287818AE103B005FE5FF /* Environment.m */,
+			);
+			name = SoCal;
+			sourceTree = "<group>";
+		};
+		DC2A287318AE0FC1005FE5FF /* SoCal-Dev */ = {
+			isa = PBXGroup;
+			children = (
+				DC2A287618AE1031005FE5FF /* Environment.m */,
+			);
+			name = "SoCal-Dev";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -621,6 +761,23 @@
 			productReference = 9A5ED7C0189245D000BA8E02 /* SoCalTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		DC2A281318AE0F0C005FE5FF /* SoCal-Dev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC2A286C18AE0F0C005FE5FF /* Build configuration list for PBXNativeTarget "SoCal-Dev" */;
+			buildPhases = (
+				DC2A281418AE0F0C005FE5FF /* Sources */,
+				DC2A283A18AE0F0C005FE5FF /* Frameworks */,
+				DC2A284D18AE0F0C005FE5FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SoCal-Dev";
+			productName = SoCal;
+			productReference = DC2A286F18AE0F0C005FE5FF /* SoCal-Dev.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -648,6 +805,7 @@
 			projectRoot = "";
 			targets = (
 				9A5ED7A4189245D000BA8E02 /* SoCal */,
+				DC2A281318AE0F0C005FE5FF /* SoCal-Dev */,
 				9A5ED7BF189245D000BA8E02 /* SoCalTests */,
 			);
 		};
@@ -699,6 +857,43 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DC2A284D18AE0F0C005FE5FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC2A284E18AE0F0C005FE5FF /* Exo2.0-LightItalic.otf in Resources */,
+				DC2A284F18AE0F0C005FE5FF /* Exo2.0-Italic.otf in Resources */,
+				DC2A285018AE0F0C005FE5FF /* InfoPlist.strings in Resources */,
+				DC2A285118AE0F0C005FE5FF /* Exo2.0-ExtraBoldItalic.otf in Resources */,
+				DC2A285218AE0F0C005FE5FF /* Exo2.0-Bold.otf in Resources */,
+				DC2A285318AE0F0C005FE5FF /* MainVC.xib in Resources */,
+				DC2A285418AE0F0C005FE5FF /* Exo2.0-BlackItalic.otf in Resources */,
+				DC2A285518AE0F0C005FE5FF /* Exo2.0-SemiBold.otf in Resources */,
+				DC2A285618AE0F0C005FE5FF /* Exo2.0-ThinItalic.otf in Resources */,
+				DC2A285718AE0F0C005FE5FF /* Exo2.0-Black.otf in Resources */,
+				DC2A285818AE0F0C005FE5FF /* ComposeVC.xib in Resources */,
+				DC2A285918AE0F0C005FE5FF /* Exo2.0-BoldItalic.otf in Resources */,
+				DC2A285A18AE0F0C005FE5FF /* Exo2.0-ExtraLightItalic.otf in Resources */,
+				DC2A285B18AE0F0C005FE5FF /* Exo2.0-Thin.otf in Resources */,
+				DC2A285C18AE0F0C005FE5FF /* Exo2.0-Regular.otf in Resources */,
+				DC2A285D18AE0F0C005FE5FF /* Exo2.0-Light.otf in Resources */,
+				DC2A285E18AE0F0C005FE5FF /* ListDateTimeCell.xib in Resources */,
+				DC2A285F18AE0F0C005FE5FF /* Exo2.0-SemiBoldItalic.otf in Resources */,
+				DC2A286018AE0F0C005FE5FF /* ContactCell.xib in Resources */,
+				DC2A286118AE0F0C005FE5FF /* ComposeDateTimeCell.xib in Resources */,
+				DC2A286218AE0F0C005FE5FF /* Exo2.0-Medium.otf in Resources */,
+				DC2A286318AE0F0C005FE5FF /* PostCell.xib in Resources */,
+				DC2A286418AE0F0C005FE5FF /* Exo2.0-ExtraLight.otf in Resources */,
+				DC2A286518AE0F0C005FE5FF /* SummaryDateTimeCell.xib in Resources */,
+				DC2A286618AE0F0C005FE5FF /* Images.xcassets in Resources */,
+				DC2A286718AE0F0C005FE5FF /* Exo2.0-MediumItalic.otf in Resources */,
+				DC2A286818AE0F0C005FE5FF /* EventVC.xib in Resources */,
+				DC2A286918AE0F0C005FE5FF /* LocationVC.xib in Resources */,
+				DC2A286A18AE0F0C005FE5FF /* PlaceSearchCell.xib in Resources */,
+				DC2A286B18AE0F0C005FE5FF /* Exo2.0-ExtraBold.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -718,7 +913,6 @@
 				9AA365BD18A1DC59004C0E86 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				9A20BD5418A89F0200B90101 /* SummaryDateTimeCell.m in Sources */,
 				9A5ED825189253F800BA8E02 /* CKCalendarView.m in Sources */,
-				9AA365C418A1DCFE004C0E86 /* Environment.m in Sources */,
 				9A20BD5718A89F1700B90101 /* ListDateTimeCell.m in Sources */,
 				9AF7897218A0DDCC008EA2E5 /* LocationVC.m in Sources */,
 				DCD74AEA18AB680500961BE8 /* ContactCell.m in Sources */,
@@ -727,6 +921,7 @@
 				9AA365BE18A1DC59004C0E86 /* AFPropertyListRequestOperation.m in Sources */,
 				9AF7896E18A086AA008EA2E5 /* RDLabeledTextView.m in Sources */,
 				9A7D9D6318AC930B005E32D1 /* mask.c in Sources */,
+				DC2A287918AE103B005FE5FF /* Environment.m in Sources */,
 				9ACDDA1A18A35EBB00FF4F5C /* PostCell.m in Sources */,
 				9AA365C018A1DC59004C0E86 /* AFXMLRequestOperation.m in Sources */,
 				9A7D9D6718AC930B005E32D1 /* rscode.c in Sources */,
@@ -751,6 +946,50 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A5ED7CE189245D000BA8E02 /* SoCalTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC2A281418AE0F0C005FE5FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC2A281518AE0F0C005FE5FF /* UIImage+MDQRCode.m in Sources */,
+				DC2A281618AE0F0C005FE5FF /* AFImageRequestOperation.m in Sources */,
+				DC2A281718AE0F0C005FE5FF /* AFHTTPRequestOperation.m in Sources */,
+				DC2A281818AE0F0C005FE5FF /* UIDevice+Resolutions.m in Sources */,
+				DC2A281918AE0F0C005FE5FF /* AppDelegate.m in Sources */,
+				DC2A281A18AE0F0C005FE5FF /* RDPieView.m in Sources */,
+				DC2A281B18AE0F0C005FE5FF /* qrspec.c in Sources */,
+				DC2A281C18AE0F0C005FE5FF /* MainVC.m in Sources */,
+				DC2A281D18AE0F0C005FE5FF /* AFURLConnectionOperation.m in Sources */,
+				DC2A281E18AE0F0C005FE5FF /* AFNetworkActivityIndicatorManager.m in Sources */,
+				DC2A281F18AE0F0C005FE5FF /* SummaryDateTimeCell.m in Sources */,
+				DC2A282018AE0F0C005FE5FF /* CKCalendarView.m in Sources */,
+				DC2A282218AE0F0C005FE5FF /* ListDateTimeCell.m in Sources */,
+				DC2A282318AE0F0C005FE5FF /* LocationVC.m in Sources */,
+				DC2A282418AE0F0C005FE5FF /* ContactCell.m in Sources */,
+				DC2A282518AE0F0C005FE5FF /* qrinput.c in Sources */,
+				DC2A282618AE0F0C005FE5FF /* qrencode.c in Sources */,
+				DC2A282718AE0F0C005FE5FF /* AFPropertyListRequestOperation.m in Sources */,
+				DC2A282818AE0F0C005FE5FF /* RDLabeledTextView.m in Sources */,
+				DC2A282918AE0F0C005FE5FF /* mask.c in Sources */,
+				DC2A287718AE1031005FE5FF /* Environment.m in Sources */,
+				DC2A282A18AE0F0C005FE5FF /* PostCell.m in Sources */,
+				DC2A282B18AE0F0C005FE5FF /* AFXMLRequestOperation.m in Sources */,
+				DC2A282C18AE0F0C005FE5FF /* rscode.c in Sources */,
+				DC2A282D18AE0F0C005FE5FF /* UIImageView+AFNetworking.m in Sources */,
+				DC2A282E18AE0F0C005FE5FF /* NetworkAPIClient.m in Sources */,
+				DC2A282F18AE0F0C005FE5FF /* bitstream.c in Sources */,
+				DC2A283018AE0F0C005FE5FF /* UIBAlertView.m in Sources */,
+				DC2A283118AE0F0C005FE5FF /* AFJSONRequestOperation.m in Sources */,
+				DC2A283218AE0F0C005FE5FF /* ComposeDateTimeCell.m in Sources */,
+				DC2A283318AE0F0C005FE5FF /* main.m in Sources */,
+				DC2A283418AE0F0C005FE5FF /* Helpers.m in Sources */,
+				DC2A283518AE0F0C005FE5FF /* EventVC.m in Sources */,
+				DC2A283618AE0F0C005FE5FF /* ComposeVC.m in Sources */,
+				DC2A283718AE0F0C005FE5FF /* PlaceSearchCell.m in Sources */,
+				DC2A283818AE0F0C005FE5FF /* split.c in Sources */,
+				DC2A283918AE0F0C005FE5FF /* AFHTTPClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -938,6 +1177,46 @@
 			};
 			name = Release;
 		};
+		DC2A286D18AE0F0C005FE5FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hnin Htet Aung (66SG73UQVV)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/SoCal-Dev/SoCal-Dev-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"./Externals/Pusher/**",
+				);
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "SoCal-Dev";
+				PROVISIONING_PROFILE = "6CBF2F18-75D7-4294-814E-BC7836CE87B0";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DC2A286E18AE0F0C005FE5FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: HereNow Pte. Ltd. (ZJN6979MJ3)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/SoCal-Dev/SoCal-Dev-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"./Externals/Pusher/**",
+				);
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "SoCal-Dev";
+				PROVISIONING_PROFILE = "9FE9F863-E5CA-4759-B459-82278EBA32B0";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -964,6 +1243,15 @@
 			buildConfigurations = (
 				9A5ED7D5189245D000BA8E02 /* Debug */,
 				9A5ED7D6189245D000BA8E02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC2A286C18AE0F0C005FE5FF /* Build configuration list for PBXNativeTarget "SoCal-Dev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC2A286D18AE0F0C005FE5FF /* Debug */,
+				DC2A286E18AE0F0C005FE5FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

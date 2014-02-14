@@ -34,9 +34,13 @@
                 <outlet property="mainDoneButton" destination="vfg-5h-fgh" id="bfk-Pb-Wup"/>
                 <outlet property="mainScrollView" destination="q0g-kR-A1w" id="aZG-O8-gzL"/>
                 <outlet property="multiDayOption1" destination="oZ3-Yf-4bB" id="bPi-Dc-mhA"/>
+                <outlet property="multiDayOption1VoteDot" destination="4vy-TE-DA5" id="i69-md-S5M"/>
                 <outlet property="multiDayOption2" destination="9qW-o4-LTa" id="2fC-Ut-cGJ"/>
+                <outlet property="multiDayOption2VoteDot" destination="Bcu-qd-eXp" id="Rv9-6e-UVS"/>
                 <outlet property="multiDayOption3" destination="fvH-d1-KDv" id="0nF-7Z-OWp"/>
+                <outlet property="multiDayOption3VoteDot" destination="3O8-N3-pQ6" id="8iL-b6-MRo"/>
                 <outlet property="multiDayOption4" destination="AIE-95-4Nk" id="udK-N6-tpl"/>
+                <outlet property="multiDayOption4VoteDot" destination="on4-ah-n2f" id="5a0-Lt-dXv"/>
                 <outlet property="multiDayPopupDatesView" destination="HVc-cu-DUi" id="jNL-Ul-djJ"/>
                 <outlet property="nameInputView" destination="dcL-Q9-L5p" id="eEs-RI-Ios"/>
                 <outlet property="postsInputView" destination="0tp-N6-8OW" id="ZSn-X3-NDq"/>
@@ -182,6 +186,11 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" id="4vy-TE-DA5">
+                            <rect key="frame" x="91" y="114" width="5" height="5"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9qW-o4-LTa">
                             <rect key="frame" x="0.0" y="62" width="100" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -189,6 +198,11 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" id="Bcu-qd-eXp">
+                            <rect key="frame" x="91" y="83" width="5" height="5"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fvH-d1-KDv">
                             <rect key="frame" x="0.0" y="31" width="100" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -196,6 +210,11 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" id="3O8-N3-pQ6">
+                            <rect key="frame" x="91" y="52" width="5" height="5"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AIE-95-4Nk">
                             <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -203,6 +222,11 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" id="on4-ah-n2f">
+                            <rect key="frame" x="91" y="21" width="5" height="5"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>

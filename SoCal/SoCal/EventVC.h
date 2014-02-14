@@ -11,7 +11,7 @@
 #import "CKCalendarView.h"
 #import "PTPusher.h"
 
-@interface EventVC : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, PTPusherDelegate, UITextFieldDelegate>
+@interface EventVC : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, PTPusherDelegate, UITextFieldDelegate, CKCalendarDelegate>
 {
     BOOL hasName;
     
@@ -87,6 +87,10 @@
 @property (nonatomic, weak) IBOutlet UILabel *multiDayOption2;
 @property (nonatomic, weak) IBOutlet UILabel *multiDayOption3;
 @property (nonatomic, weak) IBOutlet UILabel *multiDayOption4;
+@property (nonatomic, weak) IBOutlet UIView *multiDayOption1VoteDot;
+@property (nonatomic, weak) IBOutlet UIView *multiDayOption2VoteDot;
+@property (nonatomic, weak) IBOutlet UIView *multiDayOption3VoteDot;
+@property (nonatomic, weak) IBOutlet UIView *multiDayOption4VoteDot;
 
 @property (nonatomic, strong) NSMutableArray *voteDictArray;
 

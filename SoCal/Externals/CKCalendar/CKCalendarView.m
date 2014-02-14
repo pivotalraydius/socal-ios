@@ -783,7 +783,7 @@
 
 #pragma mark - Kale's additional helpers
 
-- (NSDate *)dateForLocationInView:(CGPoint)point {
+-(NSDate *)dateForLocationInView:(CGPoint)point {
     
     CGPoint aPoint = [self.calendarContainer convertPoint:point fromView:self];
     
@@ -804,6 +804,19 @@
     }
     
     return date;
+}
+
+-(CGPoint)centerPointForDate:(NSDate *)date {
+    
+    for (DateButton *aButton in self.dateButtons) {
+        
+        if ([self date:aButton.date isSameDayAsDate:date]) {
+            
+            return [self.calendarContainer convertPoint:aButton.center toView:self];
+        }
+    }
+    
+    return CGPointMake(0, 0);
 }
 
 @end

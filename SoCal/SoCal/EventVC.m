@@ -307,8 +307,6 @@
         }
     }
     
-    
-    
     for (NSString *strDateKey in self.selectedCalendarDatesDict.allKeys) {
         
         NSDate *dateKey = [Helpers dateFromString:strDateKey];
@@ -585,7 +583,7 @@
     
     [Helpers setBorderToView:self.listCalButton borderColor:[Helpers suriaOrangeColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     
-//    [self.calEventDatesCalendar setDelegate:self];
+    [self.calEventDatesCalendar setDelegate:self];
 }
 
 #pragma mark - Pusher Methods
@@ -874,8 +872,6 @@
 -(void)checkVoteButtonsTarget:(UIPanGestureRecognizer *)gesture {
     
     if (!self.multiDayPopupDatesView.hidden) {
-     
-        [self.multiDayPopupDatesView setHidden:YES];
         
         CGPoint releaseLocation = [gesture locationInView:self.multiDayPopupDatesView];
         
@@ -910,6 +906,8 @@
             
             [self vote:VOTE_MAYBE forDate:releasePointDate];
         }
+        
+        [self performSelector:@selector(hideMultiDayPopupDatesView) withObject:nil afterDelay:0.25];
         
         //reset button positions
         
@@ -1286,8 +1284,6 @@
     
         NSLog(@"show frame");
         
-        [self.multiDayPopupDatesView setHidden:NO];
-        
         CGFloat originX = 0.0;
         CGFloat originY = 0.0;
         
@@ -1315,6 +1311,16 @@
         [self.multiDayOption3 setBackgroundColor:[UIColor clearColor]];
         [self.multiDayOption4 setText:@""];
         [self.multiDayOption4 setBackgroundColor:[UIColor clearColor]];
+        
+        [self.multiDayOption1VoteDot setBackgroundColor:[UIColor clearColor]];
+        [self.multiDayOption2VoteDot setBackgroundColor:[UIColor clearColor]];
+        [self.multiDayOption3VoteDot setBackgroundColor:[UIColor clearColor]];
+        [self.multiDayOption4VoteDot setBackgroundColor:[UIColor clearColor]];
+        
+        [Helpers setBorderToView:self.multiDayOption1VoteDot borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.multiDayOption1VoteDot.frame.size.width/2];
+        [Helpers setBorderToView:self.multiDayOption2VoteDot borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.multiDayOption2VoteDot.frame.size.width/2];
+        [Helpers setBorderToView:self.multiDayOption3VoteDot borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.multiDayOption3VoteDot.frame.size.width/2];
+        [Helpers setBorderToView:self.multiDayOption4VoteDot borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.multiDayOption4VoteDot.frame.size.width/2];
         
         for (int i = 0; i < datesArray.count; i++) {
             
@@ -1345,6 +1351,8 @@
                     [self.multiDayOption1 setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
                 }
                 
+                [self setVoteDot:self.multiDayOption1VoteDot withColorForDate:aDate];
+                [Helpers setBorderToView:self.multiDayOption1VoteDot borderColor:[UIColor whiteColor] borderThickness:0.3 borderRadius:self.multiDayOption1VoteDot.frame.size.width/2];
             }
             else if (i == 1) {
                 
@@ -1356,6 +1364,9 @@
                 else {
                     [self.multiDayOption2 setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
                 }
+                
+                [self setVoteDot:self.multiDayOption2VoteDot withColorForDate:aDate];
+                [Helpers setBorderToView:self.multiDayOption2VoteDot borderColor:[UIColor whiteColor] borderThickness:0.3 borderRadius:self.multiDayOption1VoteDot.frame.size.width/2];
             }
             else if (i == 2) {
                 
@@ -1367,6 +1378,9 @@
                 else {
                     [self.multiDayOption3 setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
                 }
+                
+                [self setVoteDot:self.multiDayOption3VoteDot withColorForDate:aDate];
+                [Helpers setBorderToView:self.multiDayOption3VoteDot borderColor:[UIColor whiteColor] borderThickness:0.3 borderRadius:self.multiDayOption1VoteDot.frame.size.width/2];
             }
             else if (i == 3) {
                 
@@ -1378,8 +1392,73 @@
                 else {
                     [self.multiDayOption4 setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
                 }
+                
+                [self setVoteDot:self.multiDayOption4VoteDot withColorForDate:aDate];
+                [Helpers setBorderToView:self.multiDayOption4VoteDot borderColor:[UIColor whiteColor] borderThickness:0.3 borderRadius:self.multiDayOption1VoteDot.frame.size.width/2];
             }
         }
+        
+        [self.multiDayPopupDatesView setAlpha:0.0];
+        [self.multiDayPopupDatesView setHidden:NO];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            [self.multiDayPopupDatesView setAlpha:1.0];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+}
+
+-(void)hideMultiDayPopupDatesView {
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        [self.multiDayPopupDatesView setAlpha:0.0];
+        
+    } completion:^(BOOL finished) {
+    
+        [self.multiDayPopupDatesView setHidden:YES];
+        [self.multiDayPopupDatesView setAlpha:1.0];
+    }];
+}
+
+-(void)calendar:(CKCalendarView *)calendar didSelectDate:(NSDate *)date {
+    
+    int count = 0;
+    
+    NSMutableArray *multiDates = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (NSDate *aDate in self.eventDateTimesArray) {
+        
+        if ([self.calEventDatesCalendar date:date isSameDayAsDate:aDate]) {
+            
+            count++;
+            [multiDates addObject:aDate];
+        }
+    }
+    
+    if (count > 1) {
+        //multiple dates in day
+        //return
+        
+        NSLog(@"Multiple dates in this day");
+        
+        if (self.multiDayPopupDatesView.hidden) {
+            CGPoint touchPoint = [calendar centerPointForDate:date];
+            touchPoint = CGPointMake(touchPoint.x+20, touchPoint.y);
+            [self multiDatesInDayHandler:multiDates andTouchPoint:touchPoint];
+        }
+        else {
+            [self hideMultiDayPopupDatesView];
+        }
+        
+        return;
+    }
+    else {
+        //only one date in day
+        //continue
     }
 }
 

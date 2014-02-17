@@ -173,6 +173,21 @@
     [self.multiDayOption4 setTextColor:[UIColor whiteColor]];
 }
 
+-(void)additionalSetupForRecentEvent:(NSString *)username {
+    
+    self.eventUserName = username;
+    hasName = YES;
+    
+    [self submitUsernameToServer];
+    [self updateVoteDictArray];
+    
+    [self.postsTable setAlpha:1.0];
+    
+    [self setBottomBarMode];
+    
+    [self.postsTable reloadData];
+}
+
 -(void)retrieveEvent {
     
     NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
@@ -705,6 +720,11 @@
         
         if (self.postsArray.count > 0)
             [self.postsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.postsArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        
+        if (hasName) {
+            
+            [self.postsTable setAlpha:1.0];
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

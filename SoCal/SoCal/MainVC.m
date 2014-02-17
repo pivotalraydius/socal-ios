@@ -32,6 +32,7 @@
 
 -(void)initialize {
     
+    self.recentEventsArray = [[NSMutableArray alloc] initWithCapacity:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,6 +46,13 @@
     [super viewWillAppear:animated];
     
     [self becomeFirstResponder];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    
+    [self retrieveRecentEvents];
+    
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -64,8 +72,6 @@
     
     [self setupUI];
     [self setupFonts];
-    
-    [self retrieveRecentEvents];
 }
 
 - (void)didReceiveMemoryWarning
@@ -270,6 +276,7 @@
     
         NSString *dateStr = @"";
         NSString *monthStr = @"";
+        NSString *dayTimeStr = @"";
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         
@@ -286,23 +293,48 @@
         monthStr = [NSString stringWithFormat:@"%@",
                     [df stringFromDate:date]];
         
+        dayTimeStr = [NSString stringWithFormat:@"%@",
+                      [df stringFromDate:date]];
+        
+        [df setDateFormat:@"eeee, hh:mm a"];
         
         [cell.dateLabel setText:dateStr];
         [cell.monthLabel setText:monthStr];
         
-        [cell.dateLabel setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
-        [cell.monthLabel setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        if ([dayTimeStr hasSuffix:@"am"]) {
+            [cell.dateLabel setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+            [cell.monthLabel setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        }
+        else {
+            [cell.dateLabel setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+            [cell.monthLabel setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        }
     }
     else {
         
         [cell.dateLabel setText:@"?"];
         [cell.monthLabel setText:@"?"];
         
-        [cell.dateLabel setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
-        [cell.monthLabel setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        [cell.dateLabel setBackgroundColor:[Helpers bondiBlueColorWithAlpha:1.0]];
+        [cell.monthLabel setBackgroundColor:[Helpers bondiBlueColorWithAlpha:1.0]];
     }
 
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSDictionary *recentEventDict = [self.recentEventsArray objectAtIndex:indexPath.row];
+    
+    NSString *inviteCode = [recentEventDict objectForKey:@"invitation_code"];
+    NSString *username = [recentEventDict objectForKey:@"username"];
+    
+    [self hideKeyboard];
+    
+    self.eventVC = [[EventVC alloc] init];
+    [self.eventVC setEventInviteCode:inviteCode];
+    [self.eventVC additionalSetupForRecentEvent:username];
+    [self.navigationController pushViewController:self.eventVC animated:YES];
 }
 
 #pragma mark - UITextField Delegate Methods
@@ -350,14 +382,19 @@
     if (self = [super initWithFrame:frame]) {
         
         self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(3, 3, 20, 20)];
-        [self addSubview:self.dateLabel];
-        [Helpers setBorderToView:self.dateLabel borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.dateLabel.frame.size.width/2];
-        [self.dateLabel setFont:[Helpers Exo2Regular:8.0]];
+        [Helpers setBorderToView:self.dateLabel borderColor:[UIColor whiteColor] borderThickness:0.5 borderRadius:self.dateLabel.frame.size.width/2];
+        [self.dateLabel setFont:[Helpers Exo2Regular:11.0]];
+        [self.dateLabel setTextColor:[UIColor whiteColor]];
+        [self.dateLabel setTextAlignment:NSTextAlignmentCenter];
         
         self.monthLabel = [[UILabel alloc] initWithFrame:CGRectMake(7.5, 7.5, 45, 45)];
-        [self addSubview:self.monthLabel];
         [Helpers setBorderToView:self.monthLabel borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.monthLabel.frame.size.width/2];
-        [self.dateLabel setFont:[Helpers Exo2Regular:10.0]];
+        [self.monthLabel setFont:[Helpers Exo2Regular:16.0]];
+        [self.monthLabel setTextColor:[UIColor whiteColor]];
+        [self.monthLabel setTextAlignment:NSTextAlignmentCenter];
+        
+        [self addSubview:self.monthLabel];
+        [self addSubview:self.dateLabel];
     }
     return self;
 }

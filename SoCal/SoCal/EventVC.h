@@ -99,4 +99,6 @@
 @property (nonatomic, strong) PTPusher *pusherClient;
 @property (nonatomic, strong) PTPusherChannel *eventChannel;
 
+
+-(void)additionalSetupForRecentEvent:(NSString *)username;
 @end

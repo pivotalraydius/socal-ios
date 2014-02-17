@@ -463,11 +463,15 @@
 
 -(void)saveToRecentEvents {
     
-    NSMutableArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:@"recent_events_array"];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
     
-    if (!array) {
-        
-        array = [[NSMutableArray alloc] initWithCapacity:0];
+    NSArray *retrievedArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"recent_events_array"];
+    
+    if (!retrievedArray) {
+        //do nothing
+    }
+    else {
+        [array addObjectsFromArray:retrievedArray];
     }
     
     NSMutableDictionary *recentEvent = [[NSMutableDictionary alloc] initWithCapacity:0];
@@ -475,10 +479,30 @@
     if (popularDate) {
         [recentEvent setObject:popularDate forKey:@"popular_date"];
     }
+    else {
+        [self updateMostPopularDateTime];
+        [recentEvent setObject:popularDate forKey:@"popular_date"];
+    }
     [recentEvent setObject:self.eventInviteCode forKey:@"invitation_code"];
     [recentEvent setObject:self.eventUserName forKey:@"username"];
     
-    [array addObject:recentEvent];
+    NSInteger indexExists = -1;
+    
+    for (NSDictionary *event in array) {
+        
+        if ([[event objectForKey:@"invitation_code"] isEqualToString:self.eventInviteCode]) {
+            
+            indexExists = [array indexOfObject:event];
+        }
+    }
+    
+    if (indexExists >= 0) {
+        [array removeObjectAtIndex:indexExists];
+        [array insertObject:recentEvent atIndex:indexExists];
+    }
+    else {
+        [array addObject:recentEvent];
+    }
     
     [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"recent_events_array"];
 }
@@ -1211,14 +1235,18 @@
     
     NSLog(@"id i am voting for: %@", dateID);
     
+    [self.mainDoneButton setEnabled:NO];
+    
     [[NetworkAPIClient sharedClient] postPath:VOTE_FOR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [self saveVoteToUD:date andVote:vote];
         [self.doneDatesTableView reloadData];
         
+        [self.mainDoneButton setEnabled:YES];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        
+        [self.mainDoneButton setEnabled:YES];
     }];
 }
 

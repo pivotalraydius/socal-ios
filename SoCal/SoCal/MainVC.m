@@ -182,6 +182,7 @@
         [self setupScanner];
         
         [self.codePreview setHidden:NO];
+        [self.recentEventsTable setHidden:YES];
         [self.session startRunning];
     }
 }
@@ -190,6 +191,7 @@
     
     [self.session stopRunning];
     [self.codePreview setHidden:YES];
+    [self.recentEventsTable setHidden:NO];
     
     [self.preview removeFromSuperlayer];
     

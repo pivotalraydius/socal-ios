@@ -38,6 +38,8 @@
 @property (nonatomic, weak) IBOutlet UITableView *postsTable;
 @property (nonatomic, strong) NSMutableArray *postsArray;
 
+@property (nonatomic, weak) IBOutlet UIImageView *postsTableGradient;
+
 @property (nonatomic, weak) IBOutlet UIView *bottomBar;
 @property (nonatomic, weak) IBOutlet UILabel *lblEnterNamePrompt;
 @property (nonatomic, weak) IBOutlet UIView *postsInputView;

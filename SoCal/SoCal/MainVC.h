@@ -11,7 +11,7 @@
 #import "ComposeVC.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface MainVC : UIViewController <UITextFieldDelegate, AVCaptureMetadataOutputObjectsDelegate>
+@interface MainVC : UIViewController <UITextFieldDelegate, AVCaptureMetadataOutputObjectsDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 {
     UISwipeGestureRecognizer *downSwipe;
     UITapGestureRecognizer *tapGesture;
@@ -37,5 +37,17 @@
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *preview;
 
 @property (nonatomic, weak) IBOutlet UIButton *btnCancelQRCodeScanner;
+
+@property (nonatomic, weak) IBOutlet UICollectionView *recentEventsTable;
+@property (nonatomic, strong) NSMutableArray *recentEventsArray;
+
+@end
+
+@interface RecentEventCell : UICollectionViewCell
+
+@property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UILabel *monthLabel;
+
+-(id)initWithFrame:(CGRect)frame;
 
 @end

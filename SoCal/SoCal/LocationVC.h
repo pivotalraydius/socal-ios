@@ -9,18 +9,22 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface LocationVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface LocationVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, MKMapViewDelegate>
 {
     UISwipeGestureRecognizer *downSwipe;
     UITapGestureRecognizer *tapGesture;
     
     NSDictionary *selectedPlaceDict;
+    
+    BOOL firstTime;
 }
 
 @property (nonatomic, weak) id parentVC;
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, weak) IBOutlet UITextField *txtPlaceName;
 @property (nonatomic, weak) IBOutlet UITextField *txtCityName;
+
+@property (nonatomic, weak) IBOutlet UILabel *lblMainTitleLabel;
 
 @property (nonatomic, weak) IBOutlet UILabel *placeName;
 @property (nonatomic, weak) IBOutlet UILabel *placeAddress;

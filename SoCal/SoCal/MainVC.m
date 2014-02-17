@@ -15,8 +15,23 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self initialize];
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        // Custom initialization
+        [self initialize];
+    }
+    return self;
+}
+
+-(void)initialize {
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,6 +64,8 @@
     
     [self setupUI];
     [self setupFonts];
+    
+    [self retrieveRecentEvents];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,7 +74,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
+-(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
@@ -74,6 +91,8 @@
         [self.btnCreateEvent setFrame:CGRectMake(self.btnCreateEvent.frame.origin.x, self.btnCreateEvent.frame.origin.y-88, self.btnCreateEvent.frame.size.width, self.btnCreateEvent.frame.size.height)];
         [self.btnUseInvite setFrame:CGRectMake(self.btnUseInvite.frame.origin.x, self.btnUseInvite.frame.origin.y-88, self.btnUseInvite.frame.size.width, self.btnUseInvite.frame.size.height)];
     }
+    
+    [self.recentEventsTable registerClass:[RecentEventCell class] forCellWithReuseIdentifier:@"RECENT_EVENT_CELL"];
 }
 
 -(void)setupFonts {
@@ -216,6 +235,76 @@
     }
 }
 
+#pragma mark - Retrieve Recent Events
+
+-(void)retrieveRecentEvents {
+    
+    [self.recentEventsArray removeAllObjects];
+    
+    NSArray *events = [[NSUserDefaults standardUserDefaults] objectForKey:@"recent_events_array"];
+    [self.recentEventsArray addObjectsFromArray:events];
+    
+    [self.recentEventsTable reloadData];
+}
+
+#pragma mark - UICollectionView Delegate Methods
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
+    return self.recentEventsArray.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    RecentEventCell *cell = (RecentEventCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"RECENT_EVENT_CELL" forIndexPath:indexPath];
+    
+    if (!cell) {
+        
+        cell = [[RecentEventCell alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+    }
+    
+    NSDictionary *recentEventDict = [self.recentEventsArray objectAtIndex:indexPath.row];
+    
+    NSDate *date = [recentEventDict objectForKey:@"popular_date"];
+    if (date) {
+    
+        NSString *dateStr = @"";
+        NSString *monthStr = @"";
+        
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        
+        [df setAMSymbol:@"am"];
+        [df setPMSymbol:@"pm"];
+        
+        [df setDateFormat:@"dd"];
+        
+        dateStr = [NSString stringWithFormat:@"%@",
+                   [df stringFromDate:date]];
+        
+        [df setDateFormat:@"MMM"];
+        
+        monthStr = [NSString stringWithFormat:@"%@",
+                    [df stringFromDate:date]];
+        
+        
+        [cell.dateLabel setText:dateStr];
+        [cell.monthLabel setText:monthStr];
+        
+        [cell.dateLabel setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        [cell.monthLabel setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+    }
+    else {
+        
+        [cell.dateLabel setText:@"?"];
+        [cell.monthLabel setText:@"?"];
+        
+        [cell.dateLabel setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        [cell.monthLabel setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+    }
+
+    return cell;
+}
+
 #pragma mark - UITextField Delegate Methods
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -253,3 +342,25 @@
 }
 
 @end
+
+@implementation RecentEventCell
+
+-(id)initWithFrame:(CGRect)frame {
+    
+    if (self = [super initWithFrame:frame]) {
+        
+        self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(3, 3, 20, 20)];
+        [self addSubview:self.dateLabel];
+        [Helpers setBorderToView:self.dateLabel borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.dateLabel.frame.size.width/2];
+        [self.dateLabel setFont:[Helpers Exo2Regular:8.0]];
+        
+        self.monthLabel = [[UILabel alloc] initWithFrame:CGRectMake(7.5, 7.5, 45, 45)];
+        [self addSubview:self.monthLabel];
+        [Helpers setBorderToView:self.monthLabel borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.monthLabel.frame.size.width/2];
+        [self.dateLabel setFont:[Helpers Exo2Regular:10.0]];
+    }
+    return self;
+}
+
+@end
+

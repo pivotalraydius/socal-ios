@@ -76,6 +76,7 @@ typedef enum {
 
 -(void)setSubviews:(NSArray *)views toDateButtonWithDate:(NSArray *)dateArray;
 -(NSDate *)dateForLocationInView:(CGPoint)point;
+-(CGRect)frameForDate:(NSDate *)date;
 -(CGPoint)centerPointForDate:(NSDate *)date ;
 
 @end

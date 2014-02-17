@@ -34,6 +34,7 @@
 - (void)initialize
 {
     self.arFilteredPlaces = [[NSMutableArray alloc] initWithCapacity:0];
+    firstTime = NO;
 }
 
 - (void)viewDidLoad
@@ -87,6 +88,8 @@
 }
 
 -(void)setupFonts {
+    
+    [self.lblMainTitleLabel setFont:[Helpers Exo2Regular:24.0]];
     
     [self.txtPlaceName setFont:[Helpers Exo2Regular:14.0]];
     [self.txtCityName setFont:[Helpers Exo2Regular:14.0]];
@@ -282,6 +285,27 @@
     }
     
     return YES;
+}
+
+#pragma mark - MapView Delegate Methods
+
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    
+    CGFloat lat = userLocation.location.coordinate.latitude;
+    CGFloat lng = userLocation.location.coordinate.longitude;
+    
+    if (lat != 0.00 && lng != 0.00 && !firstTime) {
+     
+        MKCoordinateRegion region;
+        MKCoordinateSpan span;
+        span.latitudeDelta = 0.005;
+        span.longitudeDelta = 0.005;
+        region.span = span;
+        region.center = CLLocationCoordinate2DMake(lat, lng);
+        [self.mapView setRegion:region animated:YES];
+        
+        firstTime = YES;
+    }
 }
 
 #pragma mark - Keyboard Methods

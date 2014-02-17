@@ -45,6 +45,7 @@
                 <outlet property="nameInputView" destination="dcL-Q9-L5p" id="eEs-RI-Ios"/>
                 <outlet property="postsInputView" destination="0tp-N6-8OW" id="ZSn-X3-NDq"/>
                 <outlet property="postsTable" destination="Uq6-iZ-x92" id="ndR-Wp-eAR"/>
+                <outlet property="postsTableGradient" destination="bDg-Ia-dEz" id="ATe-M2-431"/>
                 <outlet property="svEventInfoScrollView" destination="bsN-qI-WZG" id="6e7-Pk-dTI"/>
                 <outlet property="txtNameField" destination="qbj-VU-zsc" id="jgt-YD-o7p"/>
                 <outlet property="txtPostField" destination="W4e-sM-BVE" id="ypW-KT-TdP"/>
@@ -108,6 +109,10 @@
                         <outlet property="delegate" destination="-1" id="DMn-BU-yei"/>
                     </connections>
                 </tableView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteGradient" id="bDg-Ia-dEz">
+                    <rect key="frame" x="0.0" y="314" width="320" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <view contentMode="scaleToFill" id="N4o-JK-7PE" userLabel="bottomBar">
                     <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -413,5 +418,6 @@
     <resources>
         <image name="MapFade" width="50" height="108"/>
         <image name="MapFadeReverse" width="50" height="108"/>
+        <image name="whiteGradient" width="320" height="15"/>
     </resources>
 </document>

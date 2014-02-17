@@ -439,9 +439,33 @@
 }
 
 -(void)closeEventVC {
+    
+    [self saveToRecentEvents];
  
     [self pusherDisconnect];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)saveToRecentEvents {
+    
+    NSMutableArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:@"recent_events_array"];
+    
+    if (!array) {
+        
+        array = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    
+    NSMutableDictionary *recentEvent = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
+    if (popularDate) {
+        [recentEvent setObject:popularDate forKey:@"popular_date"];
+    }
+    [recentEvent setObject:self.eventInviteCode forKey:@"invitation_code"];
+    [recentEvent setObject:self.eventUserName forKey:@"username"];
+    
+    [array addObject:recentEvent];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"recent_events_array"];
 }
 
 -(void)scrollToDatesView {
@@ -479,6 +503,7 @@
     else {
         [self.calEventDatesCalendar setHidden:YES];
         [self.calListEventDatesTable setHidden:NO];
+        [self.multiDayPopupDatesView setHidden:YES];
         
         [self.calListEventDatesTable reloadData];
     }
@@ -1047,8 +1072,79 @@
         }
     }
     
+    if (!self.calEventDatesCalendar.hidden) {
+        
+        for (NSDate *aDate in multiDatesArray) {
+            
+            if ([aDate compare:date] == NSOrderedSame) {
+                
+                CGRect frame = CGRectMake(0, 0, 0, 0);
+                
+                if ([multiDatesArray indexOfObject:aDate] == 0) {
+                    frame = self.multiDayOption1.frame;
+                }
+                else if ([multiDatesArray indexOfObject:aDate] == 1) {
+                    frame = self.multiDayOption2.frame;
+                }
+                else if ([multiDatesArray indexOfObject:aDate] == 2) {
+                    frame = self.multiDayOption3.frame;
+                }
+                else if ([multiDatesArray indexOfObject:aDate] == 3) {
+                    frame = self.multiDayOption4.frame;
+                }
+                
+                [self flashSelection:frame inView:self.multiDayPopupDatesView];
+                
+                return;
+            }
+        }
+        
+        CGRect frame = [self.calEventDatesCalendar frameForDate:date];
+        [self flashSelection:frame inView:self.calEventDatesCalendar];
+    }
+    else if (!self.calListEventDatesTable.hidden) {
+        
+        NSInteger row = 0;
+        
+        for (NSDate *aDate in self.eventDateTimesArray) {
+            
+            if ([aDate compare:date] == NSOrderedSame) {
+                
+                row = [self.eventDateTimesArray indexOfObject:aDate];
+            }
+        }
+        
+        ListDateTimeCell *cell = (ListDateTimeCell *)[self.calListEventDatesTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+        CGRect frame = [cell convertRect:cell.mainBGView.frame toView:self.calListEventDatesTable];
+        
+        [self flashSelection:frame inView:self.calListEventDatesTable];
+    }
+    
     [self updateCalendarSubviews];
     [self.calListEventDatesTable reloadData];
+}
+
+-(void)flashSelection:(CGRect)frame inView:(UIView *)parentView {
+    
+    UIView *dateView = [[UIView alloc] initWithFrame:frame];
+    [dateView setBackgroundColor:[UIColor darkGrayColor]];
+    [dateView setAlpha:0.5];
+    
+    if (parentView == self.calEventDatesCalendar) {
+        
+        [parentView addSubview:dateView];
+    }
+    else if (parentView == self.multiDayPopupDatesView) {
+        
+        [parentView addSubview:dateView];
+    }
+    else if (parentView == self.calListEventDatesTable) {
+        
+        [parentView addSubview:dateView];
+    }
+    
+    [dateView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.2];
+    dateView = nil;
 }
 
 -(void)submitVotesToServer {
@@ -1466,6 +1562,7 @@
         
         [self.postsTable setHidden:NO];
         [self.bottomBar setHidden:NO];
+        [self.postsTableGradient setHidden:NO];
         
 //        [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, 210)];
         
@@ -1497,6 +1594,7 @@
             
             [self.postsTable setHidden:YES];
             [self.bottomBar setHidden:YES];
+            [self.postsTableGradient setHidden:YES];
         }
         
         if  (self.bottomBar.hidden) [self.lblEnterNamePrompt setHidden:YES];
@@ -1519,10 +1617,12 @@
         if (scrollView.contentOffset.x == 0.0) {
             
             [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, 210 + modifier)];
+            [self.postsTableGradient setFrame:CGRectMake(0, self.postsTable.frame.origin.y, self.postsTableGradient.frame.size.width, self.postsTableGradient.frame.size.height)];
         }
         else if (scrollView.contentOffset.x == 320.0) {
             
             [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 377, self.postsTable.frame.size.width, 210-(377-314) + modifier)];
+            [self.postsTableGradient setFrame:CGRectMake(0, self.postsTable.frame.origin.y, self.postsTableGradient.frame.size.width, self.postsTableGradient.frame.size.height)];
             
             if (self.postsArray.count > 0)
                 [self.postsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.postsArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];

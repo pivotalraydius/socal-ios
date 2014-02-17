@@ -806,6 +806,19 @@
     return date;
 }
 
+-(CGRect)frameForDate:(NSDate *)date {
+    
+    for (DateButton *aButton in self.dateButtons) {
+        
+        if ([self date:aButton.date isSameDayAsDate:date]) {
+            
+            return [self.calendarContainer convertRect:aButton.frame toView:self];
+        }
+    }
+    
+    return CGRectMake(0, 0, 0, 0);
+}
+
 -(CGPoint)centerPointForDate:(NSDate *)date {
     
     for (DateButton *aButton in self.dateButtons) {

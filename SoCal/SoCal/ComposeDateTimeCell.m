@@ -53,6 +53,10 @@
     
     [self.btnDeleteCell.layer setCornerRadius:self.btnDeleteCell.frame.size.height/2];
     [self.btnAcceptTime.layer setCornerRadius:self.btnAcceptTime.frame.size.height/2];
+    
+    [self.lblTimeTitleLabel setFont:[Helpers Exo2Regular:14.0]];
+    [self.lblEventDateTime setFont:[Helpers Exo2Regular:13.0]];
+    [self.lblEventEditTime setFont:[Helpers Exo2Regular:20.0]];
 }
 
 -(void)renderCellDataWithDate:(NSDate *)date andIndexPathRow:(NSInteger)row {

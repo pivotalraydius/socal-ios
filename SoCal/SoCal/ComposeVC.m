@@ -108,6 +108,9 @@
     [self.selectContactsButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
     
     [self.contactDoneButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    
+//    UILabel *label = [UILabel appearanceWhenContainedIn:[UITableView class], [UIDatePicker class], nil];
+//    label.font = [Helpers Exo2Regular:18.0];
 }
 
 -(void)setupTestData {

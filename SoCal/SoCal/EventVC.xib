@@ -273,10 +273,10 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Ci-qg-sGc">
-                    <rect key="frame" x="265" y="2" width="26" height="26"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7Ci-qg-sGc">
+                    <rect key="frame" x="263" y="4" width="30" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="L">
+                    <state key="normal" image="SList">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -420,6 +420,7 @@
         <image name="MapFade" width="50" height="108"/>
         <image name="MapFadeReverse" width="50" height="108"/>
         <image name="NextArrow" width="7" height="47"/>
+        <image name="SList" width="19" height="19"/>
         <image name="whiteGradient" width="320" height="15"/>
     </resources>
 </document>

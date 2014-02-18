@@ -545,11 +545,13 @@
     if (self.calEventDatesCalendar.hidden) {
         [self.calEventDatesCalendar setHidden:NO];
         [self.calListEventDatesTable setHidden:YES];
+        [self.listCalButton setImage:[UIImage imageNamed:@"SList.png"] forState:UIControlStateNormal];
     }
     else {
         [self.calEventDatesCalendar setHidden:YES];
         [self.calListEventDatesTable setHidden:NO];
         [self.multiDayPopupDatesView setHidden:YES];
+        [self.listCalButton setImage:[UIImage imageNamed:@"SCalendar.png"] forState:UIControlStateNormal];
         
         [self.calListEventDatesTable reloadData];
     }
@@ -652,8 +654,6 @@
     [self.calEventDatesCalendar setTitleFont:[Helpers Exo2Medium:14.0]];
     
     [self.calEventDatesCalendar setNextButtonModifier:-30.0];
-    
-    [Helpers setBorderToView:self.listCalButton borderColor:[Helpers suriaOrangeColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     
     [self.calEventDatesCalendar setDelegate:self];
 }

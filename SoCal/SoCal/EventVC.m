@@ -463,6 +463,11 @@
 
 -(void)saveToRecentEvents {
     
+    if (!self.eventInviteCode || !self.eventUserName) {
+        
+        return;
+    }
+    
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
     
     NSArray *retrievedArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"recent_events_array"];
@@ -481,8 +486,10 @@
     }
     else {
         [self updateMostPopularDateTime];
-        [recentEvent setObject:popularDate forKey:@"popular_date"];
+        if (popularDate)
+            [recentEvent setObject:popularDate forKey:@"popular_date"];
     }
+
     [recentEvent setObject:self.eventInviteCode forKey:@"invitation_code"];
     [recentEvent setObject:self.eventUserName forKey:@"username"];
     

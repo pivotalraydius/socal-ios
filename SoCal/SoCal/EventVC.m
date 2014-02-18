@@ -1172,7 +1172,7 @@
     
     UIView *dateView = [[UIView alloc] initWithFrame:frame];
     [dateView setBackgroundColor:[UIColor darkGrayColor]];
-    [dateView setAlpha:0.5];
+    [dateView setAlpha:0.0];
     
     if (parentView == self.calEventDatesCalendar) {
         
@@ -1187,8 +1187,39 @@
         [parentView addSubview:dateView];
     }
     
-    [dateView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.2];
-    dateView = nil;
+    [UIView animateWithDuration:0.1 animations:^{
+        
+        [dateView setAlpha:0.5];
+        
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:0.1 animations:^{
+            
+            [dateView setAlpha:0.0];
+            
+        } completion:^(BOOL finished) {
+            
+            [UIView animateWithDuration:0.1 animations:^{
+                
+                [dateView setAlpha:0.5];
+                
+            } completion:^(BOOL finished) {
+                
+                [UIView animateWithDuration:0.1 animations:^{
+                    
+                    [dateView setAlpha:0.0];
+                    
+                } completion:^(BOOL finished) {
+                    
+                    [dateView removeFromSuperview];
+                    
+                }];
+                
+            }];
+            
+        }];
+        
+    }];
 }
 
 -(void)submitVotesToServer {

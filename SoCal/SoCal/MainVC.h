@@ -23,8 +23,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblMainTitleLabel;
 @property (nonatomic, weak) IBOutlet UIControl *btnCreateEvent;
 @property (nonatomic, weak) IBOutlet UIControl *btnUseInvite;
-@property (nonatomic, weak) IBOutlet UILabel *lblBtnCreateEvent;
-@property (nonatomic, weak) IBOutlet UILabel *lblBtnUseInvite;
+@property (nonatomic, weak) IBOutlet UILabel *lblUpcomingEvents;
+@property (nonatomic, weak) IBOutlet UILabel *lblUpcomingEventsCount;
 
 @property (nonatomic, weak) IBOutlet UITextField *inviteCodeField;
 
@@ -40,6 +40,8 @@
 
 @property (nonatomic, weak) IBOutlet UICollectionView *recentEventsTable;
 @property (nonatomic, strong) NSMutableArray *recentEventsArray;
+
+@property (nonatomic, weak) IBOutlet UIImageView *ivBGView;
 
 @end
 

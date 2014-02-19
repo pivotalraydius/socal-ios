@@ -88,8 +88,6 @@
     
     [self.inviteCodeField setHidden:YES];
     
-    [Helpers setBorderToView:self.btnCreateEvent borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
-    [Helpers setBorderToView:self.btnUseInvite borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRadius:0.0];
     [Helpers setBorderToView:self.btnCancelQRCodeScanner borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:3.0];
     
     if ([Helpers iPhone4]) {
@@ -104,8 +102,8 @@
 -(void)setupFonts {
 
     [self.lblMainTitleLabel setFont:[Helpers Exo2Regular:24.0]];
-    [self.lblBtnCreateEvent setFont:[Helpers Exo2Regular:18.0]];
-    [self.lblBtnUseInvite setFont:[Helpers Exo2Regular:18.0]];
+    [self.lblUpcomingEvents setFont:[Helpers Exo2Regular:16.0]];
+    [self.lblUpcomingEventsCount setFont:[Helpers Exo2Regular:24.0]];
     [self.inviteCodeField setFont:[Helpers Exo2Regular:14.0]];
     [self.btnCancelQRCodeScanner.titleLabel setFont:[Helpers Exo2Regular:18.0]];
 }
@@ -253,6 +251,8 @@
     [self.recentEventsArray addObjectsFromArray:events];
     
     [self.recentEventsTable reloadData];
+    
+    [self.lblUpcomingEventsCount setText:[NSString stringWithFormat:@"%i", self.recentEventsArray.count]];
 }
 
 #pragma mark - UICollectionView Delegate Methods

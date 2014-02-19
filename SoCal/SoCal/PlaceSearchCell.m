@@ -23,8 +23,8 @@
 
 -(void)setupUI {
     
-    [self.lblPlaceName setFont:[Helpers Exo2Regular:14.0]];
-    [self.lblPlaceAddress setFont:[Helpers Exo2Regular:14.0]];
+    [self.lblPlaceName setFont:[Helpers Exo2Regular:11.0]];
+    [self.lblPlaceAddress setFont:[Helpers Exo2Thin:10.0]];
 }
 
 @end

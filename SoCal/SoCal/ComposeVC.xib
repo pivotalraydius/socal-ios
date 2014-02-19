@@ -17,15 +17,20 @@
                 <outlet property="dateTimeTable" destination="sp3-z9-tGG" id="ysD-cb-42k"/>
                 <outlet property="doneButton" destination="9CU-5X-laK" id="9ca-pt-mLb"/>
                 <outlet property="lblBtnLocation" destination="aRx-lD-KBH" id="6Pa-ku-21X"/>
+                <outlet property="locationPickerContainer" destination="JFT-3i-3yR" id="Z2b-zh-qJv"/>
                 <outlet property="mainScrollView" destination="35g-tJ-2nl" id="8ep-3G-gge"/>
                 <outlet property="mainTitleLabel" destination="ilM-hU-ch3" id="6vP-xA-pDg"/>
+                <outlet property="mapView" destination="w02-tm-Xoe" id="xGu-UD-yaz"/>
+                <outlet property="placesTable" destination="NIF-yf-Fb3" id="yke-QA-he2"/>
                 <outlet property="selectContactsButton" destination="wVe-T9-wXn" id="RTq-iz-3mH"/>
                 <outlet property="selectDatesButton" destination="bCb-Bc-hFy" id="KEw-aE-xus"/>
                 <outlet property="timePicker" destination="JzA-h0-Dl6" id="73U-OB-XIR"/>
                 <outlet property="timePickerView" destination="wKg-e5-Udu" id="HQI-hj-GmB"/>
                 <outlet property="timeSelectionContainer" destination="gWn-xu-FVK" id="uP0-Z9-rcr"/>
+                <outlet property="txtCityName" destination="3AQ-ji-l3W" id="VmA-9J-bSG"/>
                 <outlet property="txtDescription" destination="FT2-Wd-Ik0" id="UA0-5C-zPb"/>
                 <outlet property="txtEventName" destination="paC-3Q-Ott" id="OaW-70-fsj"/>
+                <outlet property="txtPlaceName" destination="mhn-2j-iub" id="a0g-ux-Zgv"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -160,7 +165,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="1d5-gs-itG" userLabel="btnEventLocation" customClass="UIControl">
+                <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" id="1d5-gs-itG" userLabel="btnEventLocation" customClass="UIControl">
                     <rect key="frame" x="20" y="67" width="280" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -256,6 +261,48 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+        <view contentMode="scaleToFill" id="JFT-3i-3yR" userLabel="locationContainer">
+            <rect key="frame" x="0.0" y="0.0" width="280" height="286"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="w02-tm-Xoe">
+                    <rect key="frame" x="5" y="70" width="130" height="210"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Tmz-kw-8EV"/>
+                    </connections>
+                </mapView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type here to search for a place/address" textAlignment="center" minimumFontSize="17" id="mhn-2j-iub">
+                    <rect key="frame" x="5" y="3" width="270" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="iUh-xr-wVH"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter a city name here (optional)" textAlignment="center" minimumFontSize="17" id="3AQ-ji-l3W">
+                    <rect key="frame" x="5" y="36" width="270" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="EDL-ZU-yGc"/>
+                    </connections>
+                </textField>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NIF-yf-Fb3">
+                    <rect key="frame" x="140" y="70" width="135" height="210"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="oUj-qs-mpv"/>
+                        <outlet property="delegate" destination="-1" id="JNP-Wz-g5Q"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>

@@ -9,16 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "CKCalendarView.h"
 #import "RDLabeledTextView.h"
-#import "LocationVC.h"
+#import <MapKit/MapKit.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
 
-@interface ComposeVC : UIViewController <CKCalendarDelegate, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate> // ABPeoplePickerNavigationControllerDelegate
+@interface ComposeVC : UIViewController <CKCalendarDelegate, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate, MKMapViewDelegate, RDLabeledTextViewDelegate>
 {
     NSInteger currentlySelectedDateTimeCell;
     
     UISwipeGestureRecognizer *downSwipe;
     UITapGestureRecognizer *tapGesture;
+    
+    BOOL locationPickerShown;
+    
+    BOOL firstTime;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *contactsTableview;
@@ -61,6 +65,13 @@
 @property (nonatomic, strong) NSDictionary *selectedLocationDict;
 
 @property (nonatomic, strong) NSNumber *invitationCode;
+
+@property (nonatomic, weak) IBOutlet UIView *locationPickerContainer;
+@property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) IBOutlet UITextField *txtPlaceName;
+@property (nonatomic, weak) IBOutlet UITextField *txtCityName;
+@property (nonatomic, weak) IBOutlet UITableView *placesTable;
+@property (nonatomic, strong) NSMutableArray *arFilteredPlaces;
 
 -(void)deleteCellAtIndexPathRow:(NSInteger)row;
 -(void)editTimeForCellAtIndexPathRow:(NSInteger)row;

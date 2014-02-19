@@ -12,6 +12,7 @@
 #import "RDPieView.h"
 #import "UIBAlertView.h"
 #import "UIImage+MDQRCode.h"
+#import "PlaceSearchCell.h"
 #import <MessageUI/MessageUI.h>
 
 @implementation ComposeVC
@@ -20,9 +21,24 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self initialize];
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+
+-(void)initialize {
+    
+    self.arFilteredPlaces = [[NSMutableArray alloc] initWithCapacity:0];
+    firstTime = NO;
 }
 
 - (void)viewDidLoad
@@ -34,7 +50,7 @@
     [self setupMainScrollView];
     [self setupUI];
     [self setupFonts];
-    
+    [self addLocationVCView];
     [self getNewInviteCode];
 }
 
@@ -86,6 +102,8 @@
         [self.contactsTableview setFrame:CGRectMake(self.contactsTableview.frame.origin.x, self.contactsTableview.frame.origin.y, self.contactsTableview.frame.size.width, self.contactsTableview.frame.size.height-88)];
         [self.contactDoneButton setFrame:CGRectMake(self.contactDoneButton.frame.origin.x, self.contactDoneButton.frame.origin.y-88, self.contactDoneButton.frame.size.width, self.contactDoneButton.frame.size.height)];
     }
+
+    [self.txtDescription setDelegate:self];
 }
 
 -(void)setupFonts {
@@ -108,6 +126,9 @@
     [self.selectContactsButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
     
     [self.contactDoneButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    
+    [self.txtPlaceName setFont:[Helpers Exo2Regular:14.0]];
+    [self.txtCityName setFont:[Helpers Exo2Regular:14.0]];
     
 //    UILabel *label = [UILabel appearanceWhenContainedIn:[UITableView class], [UIDatePicker class], nil];
 //    label.font = [Helpers Exo2Regular:18.0];
@@ -254,9 +275,72 @@
 
 -(IBAction)locationButtonAction {
     
-    LocationVC *locationVC = [[LocationVC alloc] init];
-    [locationVC setParentVC:self];
-    [self.navigationController pushViewController:locationVC animated:YES];
+//    LocationVC *locationVC = [[LocationVC alloc] init];
+//    [locationVC setParentVC:self];
+//    [self.navigationController pushViewController:locationVC animated:YES];
+    
+    if (locationPickerShown) {
+        [self hideLocationPicker];
+    }
+    else {
+        [self showLocationPicker];
+    }
+}
+
+#pragma mark - Location Picker Methods
+
+-(void)showLocationPicker {
+    
+    [UIView animateWithDuration:0.25 animations:^{
+    
+        [self.btnLocation setFrame:CGRectMake(self.btnLocation.frame.origin.x, self.btnLocation.frame.origin.y, self.btnLocation.frame.size.width, 330)];
+        [self.txtDescription setFrame:CGRectMake(self.txtDescription.frame.origin.x, self.btnLocation.frame.origin.y+self.btnLocation.frame.size.height+13, self.txtDescription.frame.size.width, self.txtDescription.frame.size.height)];
+        [self.selectDatesButton setFrame:CGRectMake(self.selectDatesButton.frame.origin.x, self.selectDatesButton.frame.origin.y+286, self.selectDatesButton.frame.size.width, self.selectDatesButton.frame.size.height)];
+        [self.selectContactsButton setFrame:CGRectMake(self.selectContactsButton.frame.origin.x, self.selectContactsButton.frame.origin.y+286, self.selectContactsButton.frame.size.width, self.selectContactsButton.frame.size.height)];
+        [self.dateTimeTable setFrame:CGRectMake(self.dateTimeTable.frame.origin.x, self.dateTimeTable.frame.origin.y+286, self.dateTimeTable.frame.size.width, self.dateTimeTable.frame.size.height)];
+        
+        //DO TRANSITION CUSTOMIZATION FOR IPHONE4
+        
+    } completion:^(BOOL finished) {
+       
+        locationPickerShown = YES;
+    }];
+    
+}
+
+-(void)hideLocationPicker {
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        [self.btnLocation setFrame:CGRectMake(self.btnLocation.frame.origin.x, self.btnLocation.frame.origin.y, self.btnLocation.frame.size.width, 44)];
+        [self.txtDescription setFrame:CGRectMake(self.txtDescription.frame.origin.x, 124, self.txtDescription.frame.size.width, self.txtDescription.frame.size.height)];
+        [self.selectDatesButton setFrame:CGRectMake(self.selectDatesButton.frame.origin.x, 432, self.selectDatesButton.frame.size.width, self.selectDatesButton.frame.size.height)];
+        [self.selectContactsButton setFrame:CGRectMake(self.selectContactsButton.frame.origin.x, 466, self.selectContactsButton.frame.size.width, self.selectContactsButton.frame.size.height)];
+        [self.dateTimeTable setFrame:CGRectMake(self.dateTimeTable.frame.origin.x, 338, self.dateTimeTable.frame.size.width, self.dateTimeTable.frame.size.height)];
+        
+        //DO TRANSITION CUSTOMIZATION FOR IPHONE4
+        
+    } completion:^(BOOL finished) {
+        
+        locationPickerShown = NO;
+    }];
+}
+
+-(void)addLocationVCView {
+    
+    [self.btnLocation addSubview:self.locationPickerContainer];
+    [self.locationPickerContainer setFrame:CGRectMake(0, 44, self.btnLocation.frame.size.width, 386)];
+    
+    CGFloat lat = 1.2893;
+    CGFloat lng = 103.7819;
+    
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.005;
+    span.longitudeDelta = 0.005;
+    region.span = span;
+    region.center = CLLocationCoordinate2DMake(lat, lng);
+    [self.mapView setRegion:region animated:YES];
 }
 
 #pragma mark - Time Picker Methods
@@ -392,8 +476,10 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (tableView == self.contactsTableview) {
-        
         return self.contactsWithEmail.count;
+    }
+    else if (tableView == self.placesTable) {
+        return self.arFilteredPlaces.count;
     }
     else {
         return self.eventDateTimesArray.count;
@@ -419,6 +505,21 @@
         
         return cell;
     }
+    else if (tableView == self.placesTable) {
+        
+        PlaceSearchCell *cell = (PlaceSearchCell *)[tableView dequeueReusableCellWithIdentifier:@"PlaceSearchCell"];
+        
+        if (!cell) {
+            cell = [PlaceSearchCell newCell];
+        }
+        
+        NSDictionary *placeDict = [self.arFilteredPlaces objectAtIndex:indexPath.row];
+        
+        [cell.lblPlaceName setText:[placeDict objectForKey:@"name"]];
+        [cell.lblPlaceAddress setText:[placeDict objectForKey:@"address"]];
+        
+        return cell;
+    }
     else {
         ComposeDateTimeCell *cell = (ComposeDateTimeCell *)[tableView dequeueReusableCellWithIdentifier:@"ComposeDateTimeCell"];
         
@@ -439,6 +540,9 @@
         
         return 44.0;
     }
+    else if (tableView == self.placesTable) {
+        return 50.0;
+    }
     else {
     
         if (indexPath.row == currentlySelectedDateTimeCell) {
@@ -455,6 +559,25 @@
     if (tableView == self.contactsTableview) {
         
         [[self.contactsWithEmail objectAtIndex:indexPath.row] setObject:[NSNumber numberWithBool:YES] forKey:@"selected"];
+    }
+    else if (tableView == self.placesTable) {
+        
+        NSDictionary *placeDict = [self.arFilteredPlaces objectAtIndex:indexPath.row];
+        
+        [self.lblBtnLocation setText:[placeDict objectForKey:@"name"]];
+        
+        CGFloat lat = [[placeDict objectForKey:@"latitude"] floatValue];
+        CGFloat lng = [[placeDict objectForKey:@"longitude"] floatValue];
+        
+        MKCoordinateRegion region;
+        MKCoordinateSpan span;
+        span.latitudeDelta = 0.005;
+        span.longitudeDelta = 0.005;
+        region.span = span;
+        region.center = CLLocationCoordinate2DMake(lat, lng);
+        [self.mapView setRegion:region animated:YES];
+        
+        self.selectedLocationDict = placeDict;
     }
     else {
     
@@ -478,6 +601,9 @@
     if (tableView == self.contactsTableview) {
         
         [[self.contactsWithEmail objectAtIndex:indexPath.row] setObject:[NSNumber numberWithBool:NO] forKey:@"selected"];
+    }
+    else if (tableView == self.placesTable) {
+        //do nothing
     }
     else {
         
@@ -763,7 +889,162 @@
     
     [self.txtEventName resignFirstResponder];
     [self.txtDescription resignFirstResponder];
+    [self.txtPlaceName resignFirstResponder];
+    [self.txtCityName resignFirstResponder];
 }
+
+#pragma mark - UITextField Delegate Methods
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if (self.txtPlaceName || self.txtCityName) {
+        
+        [self searchForPlacesOnServer];
+    }
+    
+    return YES;
+}
+
+-(void)textViewDidBeginEditing:(RDLabeledTextView *)textView {
+    
+    if (textView == self.txtDescription) {
+        
+        [self hideLocationPicker];
+    }
+}
+
+#pragma mark - MapView Delegate Methods
+
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    
+    CGFloat lat = userLocation.location.coordinate.latitude;
+    CGFloat lng = userLocation.location.coordinate.longitude;
+    
+    if (lat != 0.00 && lng != 0.00 && !firstTime) {
+        
+        MKCoordinateRegion region;
+        MKCoordinateSpan span;
+        span.latitudeDelta = 0.005;
+        span.longitudeDelta = 0.005;
+        region.span = span;
+        region.center = CLLocationCoordinate2DMake(lat, lng);
+        [self.mapView setRegion:region animated:YES];
+        
+        firstTime = YES;
+    }
+}
+
+#pragma mark - Get Location Methods
+
+-(void)searchForPlacesOnServer {
+    
+    [self hideKeyboard];
+    
+    [[NetworkAPIClient sharedStagingClient] cancelAllHTTPOperationsWithMethod:@"POST" path:PLACES_WITHIN_LOCATION];
+    [[NetworkAPIClient sharedStagingClient] cancelAllHTTPOperationsWithMethod:@"POST" path:PLACES_CHECKIN_SEARCH_NEARBY_PLACES];
+    [[NetworkAPIClient sharedStagingClient] cancelAllHTTPOperationsWithMethod:@"POST" path:PLACES_WITHIN_LOCALITY];
+    
+    NSString *locationKeyword = [[self.txtPlaceName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] lowercaseString];
+    NSString *cityKeyword = [[self.txtCityName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] lowercaseString] ;
+    
+    CLLocationCoordinate2D centerCoor = [self.mapView centerCoordinate];
+    CLLocationCoordinate2D topCenterCoor = [self.mapView convertPoint:CGPointMake(self.mapView.frame.size.width / 2.0f, 0) toCoordinateFromView:self.mapView];
+    
+    CLLocation *centerLocation = [[CLLocation alloc] initWithLatitude:centerCoor.latitude longitude:centerCoor.longitude];
+    CLLocation *topCenterLocation = [[CLLocation alloc] initWithLatitude:topCenterCoor.latitude longitude:topCenterCoor.longitude];
+    
+    CLLocationDistance radius = [centerLocation distanceFromLocation:topCenterLocation];
+    
+    NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
+    NSString *path = PLACES_WITHIN_LOCATION;
+    
+    if ([locationKeyword isEqualToString:@""] && [cityKeyword isEqualToString:@""]) {
+        
+        //has neither keywords
+        //do a map-restricted search without keywords
+        
+        path = PLACES_CHECKIN_SEARCH_NEARBY_PLACES;
+        radius = radius/1000; //select_venue API uses km instead of m
+        
+        [queryInfo setObject:[NSNumber numberWithFloat:centerCoor.latitude] forKey:@"latitude"];
+        [queryInfo setObject:[NSNumber numberWithFloat:centerCoor.longitude] forKey:@"longitude"];
+        [queryInfo setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
+    }
+    else if ([locationKeyword isEqualToString:@""] && ![cityKeyword isEqualToString:@""]) {
+        
+        //has city keyword no location keyword
+        //alert user to input location keyword
+        
+        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Missing main keyword" message:@"Please enter the main search keyword together with your city keyword." cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+            
+        }];
+        
+        return;
+    }
+    else if (![locationKeyword isEqualToString:@""] && [cityKeyword isEqualToString:@""]) {
+        
+        //has location keyword no city keyword
+        //do a map-restricted search with location keyword
+        
+        path = PLACES_WITHIN_LOCATION;
+        
+        [queryInfo setObject:[NSNumber numberWithFloat:centerCoor.latitude] forKey:@"latitude"];
+        [queryInfo setObject:[NSNumber numberWithFloat:centerCoor.longitude] forKey:@"longitude"];
+        [queryInfo setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
+        
+        [queryInfo setObject:locationKeyword forKey:@"keyword"];
+        
+    }
+    else if (![locationKeyword isEqualToString:@""] && ![cityKeyword isEqualToString:@""]) {
+        
+        //has both keywords
+        //do a non-map-restricted locality search with both keywords
+        
+        path = PLACES_WITHIN_LOCALITY;
+        
+        [queryInfo setObject:locationKeyword forKey:@"keyword"];
+        [queryInfo setObject:cityKeyword forKey:@"locality"];
+    }
+    
+    [self.arFilteredPlaces removeAllObjects];
+    [self.placesTable reloadData];
+    self.selectedLocationDict = nil;
+    
+    [[NetworkAPIClient sharedStagingClient] postPath:path parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self.arFilteredPlaces removeAllObjects];
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            
+            NSArray *dbArray = [responseObject objectForKey:@"database"];
+            NSArray *ftArray = [responseObject objectForKey:@"factual"];
+            
+            [self.arFilteredPlaces addObjectsFromArray:dbArray];
+            [self.arFilteredPlaces addObjectsFromArray:ftArray];
+        }
+        else if ([responseObject isKindOfClass:[NSArray class]]) {
+            
+            [self.arFilteredPlaces addObjectsFromArray:responseObject];
+        }
+        
+        [self.placesTable reloadData];
+        self.selectedLocationDict = nil;
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [self.arFilteredPlaces removeAllObjects];
+        
+        [self.txtPlaceName setText:@""];
+        
+        [self.placesTable reloadData];
+        self.selectedLocationDict = nil;
+    }];
+}
+
+#pragma mark Contacts and Email Methods
 
 -(void)checkAddressBookAccess {
     
@@ -850,7 +1131,6 @@
     
     return self.contactsWithEmail;
 }
-
 
 -(void)sendInvitationCodeToInvitees {
 

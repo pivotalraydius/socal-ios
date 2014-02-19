@@ -171,11 +171,11 @@
 
 #pragma mark - UITextView Delegate Methods
 
--(BOOL)textView:(RDLabeledTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)aText {
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)aText {
     
     if ([self.delegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)]) {
         
-        return [self.delegate textView:textView shouldChangeTextInRange:range replacementText:aText];
+        return [self.delegate textView:self shouldChangeTextInRange:range replacementText:aText];
     }
     else {
         
@@ -183,11 +183,11 @@
     }
 }
 
--(BOOL)textView:(RDLabeledTextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange {
+-(BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange {
     
     if ([self.delegate respondsToSelector:@selector(textView:shouldInteractWithTextAttachment:inRange:)]) {
         
-        return [self.delegate textView:textView shouldInteractWithTextAttachment:textAttachment inRange:characterRange];
+        return [self.delegate textView:self shouldInteractWithTextAttachment:textAttachment inRange:characterRange];
     }
     else {
         
@@ -195,11 +195,11 @@
     }
 }
 
--(BOOL)textView:(RDLabeledTextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+-(BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
     
     if ([self.delegate respondsToSelector:@selector(textView:shouldInteractWithURL:inRange:)]) {
         
-        return [self.delegate textView:textView shouldInteractWithURL:URL inRange:characterRange];
+        return [self.delegate textView:self shouldInteractWithURL:URL inRange:characterRange];
     }
     else {
         
@@ -207,43 +207,43 @@
     }
 }
 
--(void)textViewDidBeginEditing:(RDLabeledTextView *)textView {
+-(void)textViewDidBeginEditing:(UITextView *)textView {
     
     if ([self.delegate respondsToSelector:@selector(textViewDidBeginEditing:)]) {
         
-        [self.delegate textViewDidBeginEditing:textView];
+        [self.delegate textViewDidBeginEditing:self];
     }
 }
 
--(void)textViewDidChange:(RDLabeledTextView *)textView {
+-(void)textViewDidChange:(UITextView *)textView {
     
     if ([self.delegate respondsToSelector:@selector(textViewDidChange:)]) {
         
-        [self.delegate textViewDidChange:textView];
+        [self.delegate textViewDidChange:self];
     }
 }
 
--(void)textViewDidChangeSelection:(RDLabeledTextView *)textView {
+-(void)textViewDidChangeSelection:(UITextView *)textView {
  
     if ([self.delegate respondsToSelector:@selector(textViewDidChangeSelection:)]) {
         
-        [self.delegate textViewDidChangeSelection:textView];
+        [self.delegate textViewDidChangeSelection:self];
     }
 }
 
--(void)textViewDidEndEditing:(RDLabeledTextView *)textView {
+-(void)textViewDidEndEditing:(UITextView *)textView {
     
     if ([self.delegate respondsToSelector:@selector(textViewDidEndEditing:)]) {
         
-        [self.delegate textViewDidEndEditing:textView];
+        [self.delegate textViewDidEndEditing:self];
     }
 }
 
--(BOOL)textViewShouldBeginEditing:(RDLabeledTextView *)textView {
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView {
  
     if ([self.delegate respondsToSelector:@selector(textViewShouldBeginEditing:)]) {
         
-        return [self.delegate textViewShouldBeginEditing:textView];
+        return [self.delegate textViewShouldBeginEditing:self];
     }
     else {
         
@@ -251,11 +251,11 @@
     }
 }
 
--(BOOL)textViewShouldEndEditing:(RDLabeledTextView *)textView {
+-(BOOL)textViewShouldEndEditing:(UITextView *)textView {
     
     if ([self.delegate respondsToSelector:@selector(textViewShouldEndEditing:)]) {
         
-        return [self.delegate textViewShouldEndEditing:textView];
+        return [self.delegate textViewShouldEndEditing:self];
     }
     else {
         

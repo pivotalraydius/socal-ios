@@ -1602,6 +1602,8 @@
     }];
 }
 
+#pragma mark - CKCalendarView Delegate Methods
+
 -(void)calendar:(CKCalendarView *)calendar didSelectDate:(NSDate *)date {
     
     int count = 0;
@@ -1625,8 +1627,14 @@
         
         if (self.multiDayPopupDatesView.hidden) {
             CGPoint touchPoint = [calendar centerPointForDate:date];
-            touchPoint = CGPointMake(touchPoint.x+20, touchPoint.y);
-            [self multiDatesInDayHandler:multiDates andTouchPoint:touchPoint];
+            
+            if (touchPoint.x == 0.0 && touchPoint.y == 0.0) {
+                
+            }
+            else {
+                touchPoint = CGPointMake(touchPoint.x+20, touchPoint.y);
+                [self multiDatesInDayHandler:multiDates andTouchPoint:touchPoint];
+            }
         }
         else {
             [self hideMultiDayPopupDatesView];
@@ -1638,6 +1646,11 @@
         //only one date in day
         //continue
     }
+}
+
+-(void)calendar:(CKCalendarView *)calendar didChangeToMonth:(NSDate *)date {
+    
+    [self hideMultiDayPopupDatesView];
 }
 
 #pragma mark - UIScrollView Delegate Methods

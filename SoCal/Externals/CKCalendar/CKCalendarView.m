@@ -380,6 +380,8 @@
 //        } else
         if (!self.onlyShowCurrentMonth && [self _compareByMonth:date toDate:self.monthShowing] != NSOrderedSame) {
             item.textColor = [UIColor lightGrayColor];
+            [dateButton.titleLabel setAlpha:1.0];
+            [dateButton setEnabled:NO];
         }
 
         if (self.delegate && [self.delegate respondsToSelector:@selector(calendar:configureDateItem:forDate:)]) {
@@ -405,7 +407,16 @@
             UIView *viewForDate = [selectedDatesViewsArray objectAtIndex:i];
             
             if ([self date:dateForButton isSameDayAsDate:dateButton.date]) {
-                [dateButton addSubview:viewForDate];
+                
+                if (!self.onlyShowCurrentMonth && [self _compareByMonth:date toDate:self.monthShowing] != NSOrderedSame) {
+                    [dateButton addSubview:viewForDate];
+                    [viewForDate setAlpha:0.3];
+                    [dateButton.titleLabel setAlpha:0.0];
+                }
+                else {
+                    [dateButton addSubview:viewForDate];
+                    [viewForDate setAlpha:1.0];
+                }
             }
         }
         
@@ -606,6 +617,7 @@
     }
 
     [self selectDate:date makeVisible:YES];
+//    [self selectDate:date makeVisible:NO];
     [self.delegate calendar:self didSelectDate:date];
     [self setNeedsLayout];
 }
@@ -803,6 +815,11 @@
         }
     }
     
+    if (!self.onlyShowCurrentMonth && [self _compareByMonth:date toDate:self.monthShowing] != NSOrderedSame) {
+     
+        return nil;
+    }
+    
     return date;
 }
 
@@ -811,6 +828,10 @@
     for (DateButton *aButton in self.dateButtons) {
         
         if ([self date:aButton.date isSameDayAsDate:date]) {
+            
+            if (!self.onlyShowCurrentMonth && [self _compareByMonth:date toDate:self.monthShowing] != NSOrderedSame) {
+                
+            }
             
             return [self.calendarContainer convertRect:aButton.frame toView:self];
         }
@@ -824,6 +845,10 @@
     for (DateButton *aButton in self.dateButtons) {
         
         if ([self date:aButton.date isSameDayAsDate:date]) {
+            
+            if (!self.onlyShowCurrentMonth && [self _compareByMonth:date toDate:self.monthShowing] != NSOrderedSame) {
+                
+            }
             
             return [self.calendarContainer convertPoint:aButton.center toView:self];
         }

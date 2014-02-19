@@ -329,7 +329,7 @@
 -(void)addLocationVCView {
     
     [self.btnLocation addSubview:self.locationPickerContainer];
-    [self.locationPickerContainer setFrame:CGRectMake(0, 44, self.btnLocation.frame.size.width, 386)];
+    [self.locationPickerContainer setFrame:CGRectMake(0, 44, self.btnLocation.frame.size.width, 286)];
     
     CGFloat lat = 1.2893;
     CGFloat lng = 103.7819;

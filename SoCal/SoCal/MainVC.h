@@ -41,7 +41,16 @@
 @property (nonatomic, weak) IBOutlet UICollectionView *recentEventsTable;
 @property (nonatomic, strong) NSMutableArray *recentEventsArray;
 
+@property (nonatomic, weak) IBOutlet UIScrollView *bgScrollView;
+@property (nonatomic, weak) IBOutlet UIScrollView *mainScrollView;
+@property (nonatomic, weak) IBOutlet UIImageView *ivBGOverlayView;
 @property (nonatomic, weak) IBOutlet UIImageView *ivBGView;
+
+@property (nonatomic, weak) IBOutlet UIView *mainViewContainer;
+@property (nonatomic, weak) IBOutlet UIView *secondViewContainer;
+
+-(void)closeSecondView:(UIView *)view;
+-(void)scrollBGViewToOffset:(CGPoint)offset;
 
 @end
 

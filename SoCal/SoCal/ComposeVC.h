@@ -25,6 +25,8 @@
     BOOL firstTime;
 }
 
+@property (nonatomic, weak) id parentVC;
+
 @property (nonatomic, weak) IBOutlet UITableView *contactsTableview;
 @property (nonatomic, weak) IBOutlet UIView *contactsSelectionContainer;
 @property (nonatomic, weak) IBOutlet UIButton *contactDoneButton;

@@ -340,7 +340,7 @@
     [self.prevButton setTitle:[self.dateFormatter2 stringFromDate:[self _firstDayOfMonthContainingDate:prevMth]] forState:UIControlStateNormal];
     [self.nextButton setTitle:[self.dateFormatter2 stringFromDate:[self _firstDayOfMonthContainingDate:nextMth]] forState:UIControlStateNormal];
 
-    self.calendarContainer.frame = CGRectMake(CALENDAR_MARGIN, CGRectGetMaxY(self.titleLabel.frame), containerWidth, containerHeight);
+    self.calendarContainer.frame = CGRectMake(CALENDAR_MARGIN, CGRectGetMaxY(self.titleLabel.frame), containerWidth - CALENDAR_MARGIN, containerHeight);
     self.daysHeader.frame = CGRectMake(0, 0, self.calendarContainer.frame.size.width, DAYS_HEADER_HEIGHT);
 
     CGRect lastDayFrame = CGRectZero;

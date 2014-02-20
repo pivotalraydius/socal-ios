@@ -35,7 +35,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="lblCheck" destination="tXp-QV-vbs" id="48I-cz-ZZl"/>
                 <outlet property="lblEmail" destination="oUi-Mn-mo2" id="GDQ-IR-Qlv"/>

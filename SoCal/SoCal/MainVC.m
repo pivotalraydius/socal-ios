@@ -97,6 +97,12 @@
     }
     
     [self.recentEventsTable registerClass:[RecentEventCell class] forCellWithReuseIdentifier:@"RECENT_EVENT_CELL"];
+    
+    [self.bgScrollView setContentSize:self.ivBGView.frame.size];
+    [self.bgScrollView setScrollEnabled:NO];
+    
+    [self.mainScrollView setContentSize:CGSizeMake(640, 568)];
+    [self.mainScrollView setScrollEnabled:NO];
 }
 
 -(void)setupFonts {
@@ -111,7 +117,9 @@
 -(IBAction)btnCreateEventAction {
     
     self.composeVC = [[ComposeVC alloc] init];
-    [self.navigationController pushViewController:self.composeVC animated:YES];
+    [self.composeVC setParentVC:self];
+//    [self.navigationController pushViewController:self.composeVC animated:YES];
+    [self loadSecondView:self.composeVC.view];
 }
 
 -(IBAction)btnUseInviteAction {
@@ -137,8 +145,68 @@
     [self hideKeyboard];
     
     self.eventVC = [[EventVC alloc] init];
+    [self.eventVC setParentVC:self];
     [self.eventVC setEventInviteCode:self.inviteCodeField.text];
-    [self.navigationController pushViewController:self.eventVC animated:YES];
+//    [self.navigationController pushViewController:self.eventVC animated:YES];
+    [self loadSecondView:self.eventVC.view];
+}
+
+#pragma mark - SecondView Handler
+
+-(void)loadSecondView:(UIView *)view {
+    
+    [self.secondViewContainer addSubview:view];
+    
+    [self.mainScrollView setContentOffset:CGPointMake(320, 0) animated:YES];
+    [self.mainScrollView setScrollEnabled:YES];
+    
+//    [UIView animateWithDuration:0.3 animations:^{
+//        
+//        [self.mainScrollView setContentOffset:CGPointMake(320, 0) animated:NO];
+//        
+//    } completion:^(BOOL finished) {
+//        
+//        [self.mainScrollView setScrollEnabled:YES];
+//    }];
+}
+
+-(void)closeSecondView:(UIView *)view {
+    
+    [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+#pragma mark - BGView Handler
+
+-(void)scrollBGViewToOffset:(CGPoint)offset {
+    
+    [self.bgScrollView setContentOffset:CGPointMake(offset.x/4, 0)];
+}
+
+#pragma mark - UIScrollView Delegate Methods
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if (scrollView == self.mainScrollView) {
+        
+        [self scrollBGViewToOffset:scrollView.contentOffset];
+        
+        if (scrollView.contentOffset.x == 0.0) {
+            
+            if (self.composeVC) {
+                
+                [self.composeVC.view removeFromSuperview];
+                self.composeVC = nil;
+            }
+            
+            if (self.eventVC) {
+                
+                [self.eventVC.view removeFromSuperview];
+                self.eventVC = nil;
+            }
+            
+            [self.mainScrollView setScrollEnabled:NO];
+        }
+    }
 }
 
 #pragma mark - QRCode Scanner
@@ -182,6 +250,8 @@
         [self.codePreview setHidden:NO];
         [self.recentEventsTable setHidden:YES];
         [self.session startRunning];
+        
+        [self hideKeyboard];
     }
 }
 
@@ -334,9 +404,11 @@
     [self hideKeyboard];
     
     self.eventVC = [[EventVC alloc] init];
+    [self.eventVC setParentVC:self];
     [self.eventVC setEventInviteCode:inviteCode];
     [self.eventVC additionalSetupForRecentEvent:username];
-    [self.navigationController pushViewController:self.eventVC animated:YES];
+//    [self.navigationController pushViewController:self.eventVC animated:YES];
+    [self loadSecondView:self.eventVC.view];
 }
 
 #pragma mark - UITextField Delegate Methods

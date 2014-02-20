@@ -25,7 +25,11 @@
     NSArray *multiDatesArray;
     
     NSDate *popularDate;
+    
+    CAGradientLayer *maskLayer;
 }
+
+@property (nonatomic, weak) id parentVC;
 
 @property (nonatomic, weak) IBOutlet UIView *detailsView;
 @property (nonatomic, weak) IBOutlet UIView *datesView;
@@ -37,8 +41,6 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *postsTable;
 @property (nonatomic, strong) NSMutableArray *postsArray;
-
-@property (nonatomic, weak) IBOutlet UIImageView *postsTableGradient;
 
 @property (nonatomic, weak) IBOutlet UIView *bottomBar;
 @property (nonatomic, weak) IBOutlet UILabel *lblEnterNamePrompt;

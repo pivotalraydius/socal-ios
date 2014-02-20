@@ -65,7 +65,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="countLabel" destination="ZUE-e3-DLx" id="DsD-JA-Z2a"/>
                 <outlet property="dateLabel" destination="hzA-gd-LV0" id="vfG-XZ-DSZ"/>

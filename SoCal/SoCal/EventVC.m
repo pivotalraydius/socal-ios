@@ -13,6 +13,7 @@
 #import "SummaryDateTimeCell.h"
 #import "RDPieView.h"
 #import "UIBAlertView.h"
+#import "MainVC.h"
 
 #define VOTE_BUTTON_STILL   0
 #define VOTE_BUTTON_MOTION  1
@@ -75,6 +76,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [self setupGradientMask];
     
     [super viewWillAppear:animated];
 }
@@ -171,6 +174,31 @@
     [self.multiDayOption2 setTextColor:[UIColor whiteColor]];
     [self.multiDayOption3 setTextColor:[UIColor whiteColor]];
     [self.multiDayOption4 setTextColor:[UIColor whiteColor]];
+}
+
+-(void)setupGradientMask {
+    
+    if (!maskLayer)
+    {
+        maskLayer = [CAGradientLayer layer];
+        
+        CGColorRef outerColor = [UIColor colorWithWhite:1.0 alpha:0.0].CGColor;
+        CGColorRef innerColor = [UIColor colorWithWhite:1.0 alpha:1.0].CGColor;
+        
+        maskLayer.colors = [NSArray arrayWithObjects:(__bridge id)outerColor,
+                            (__bridge id)innerColor, (__bridge id)innerColor, (__bridge id)outerColor, nil];
+        maskLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0],
+                               [NSNumber numberWithFloat:0.1],
+                               [NSNumber numberWithFloat:0.9],
+                               [NSNumber numberWithFloat:1.0], nil];
+        
+        maskLayer.bounds = CGRectMake(0, 0,
+                                      self.postsTable.frame.size.width,
+                                      self.postsTable.frame.size.height);
+        maskLayer.anchorPoint = CGPointZero;
+        
+        self.postsTable.layer.mask = maskLayer;
+    }
 }
 
 -(void)additionalSetupForRecentEvent:(NSString *)username {
@@ -458,7 +486,9 @@
     [self saveToRecentEvents];
  
     [self pusherDisconnect];
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [(MainVC *)self.parentVC closeSecondView:self.view];
+
 }
 
 -(void)saveToRecentEvents {
@@ -647,7 +677,7 @@
     
     [self.calEventDatesCalendar setOnlyShowCurrentMonth:NO];
     
-    [self.calEventDatesCalendar setBackgroundColor:[UIColor whiteColor]];
+    [self.calEventDatesCalendar setBackgroundColor:[UIColor clearColor]];
     [self.calEventDatesCalendar setInnerBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self.calEventDatesCalendar setDayOfWeekTextColor:[UIColor whiteColor]];
     [self.calEventDatesCalendar setDateFont:[Helpers Exo2Regular:11.0]];
@@ -729,7 +759,6 @@
     
     NSLog(@"Pusher did fail to subscribe to channel");
 }
-
 
 #pragma mark - Posts Methods
 
@@ -1659,11 +1688,19 @@
     
     if (scrollView == self.mainScrollView) {
         
+        [(MainVC *)self.parentVC scrollBGViewToOffset:CGPointMake(scrollView.contentOffset.x+320, 0)];
+        
         [self.postsTable setHidden:NO];
         [self.bottomBar setHidden:NO];
-        [self.postsTableGradient setHidden:NO];
         
 //        [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, 210)];
+        
+        if (scrollView.contentOffset.x == 0.0) {
+            [[(MainVC *)self.parentVC mainScrollView] setScrollEnabled:YES];
+        }
+        else {
+            [[(MainVC *)self.parentVC mainScrollView] setScrollEnabled:NO];
+        }
         
         if (scrollView.contentOffset.x < 320.0) {
             
@@ -1693,7 +1730,6 @@
             
             [self.postsTable setHidden:YES];
             [self.bottomBar setHidden:YES];
-            [self.postsTableGradient setHidden:YES];
         }
         
         if  (self.bottomBar.hidden) [self.lblEnterNamePrompt setHidden:YES];
@@ -1701,6 +1737,13 @@
             if (hasName) [self.lblEnterNamePrompt setHidden:YES];
             else [self.lblEnterNamePrompt setHidden:NO];
         }
+    }
+    else if (scrollView == self.postsTable) {
+        
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
+        maskLayer.position = CGPointMake(0, scrollView.contentOffset.y);
+        [CATransaction commit];
     }
 }
 
@@ -1716,12 +1759,18 @@
         if (scrollView.contentOffset.x == 0.0) {
             
             [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 314, self.postsTable.frame.size.width, 210 + modifier)];
-            [self.postsTableGradient setFrame:CGRectMake(0, self.postsTable.frame.origin.y, self.postsTableGradient.frame.size.width, self.postsTableGradient.frame.size.height)];
+            maskLayer.bounds = CGRectMake(0, 0,
+                                          self.postsTable.frame.size.width,
+                                          self.postsTable.frame.size.height);
+            maskLayer.anchorPoint = CGPointZero;
         }
         else if (scrollView.contentOffset.x == 320.0) {
             
             [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, 377, self.postsTable.frame.size.width, 210-(377-314) + modifier)];
-            [self.postsTableGradient setFrame:CGRectMake(0, self.postsTable.frame.origin.y, self.postsTableGradient.frame.size.width, self.postsTableGradient.frame.size.height)];
+            maskLayer.bounds = CGRectMake(0, 0,
+                                          self.postsTable.frame.size.width,
+                                          self.postsTable.frame.size.height);
+            maskLayer.anchorPoint = CGPointZero;
             
             if (self.postsArray.count > 0)
                 [self.postsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.postsArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];

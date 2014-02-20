@@ -13,6 +13,7 @@
 #import "UIBAlertView.h"
 #import "UIImage+MDQRCode.h"
 #import "PlaceSearchCell.h"
+#import "MainVC.h"
 #import <MessageUI/MessageUI.h>
 
 @implementation ComposeVC
@@ -56,8 +57,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     if (self.selectedLocationDict) {
         [self.lblBtnLocation setText:[self.selectedLocationDict objectForKey:@"name"]];
@@ -192,7 +193,7 @@
     [self.calendarView setOnlyShowCurrentMonth:NO];
     
     
-    [self.calendarView setBackgroundColor:[UIColor whiteColor]];
+    [self.calendarView setBackgroundColor:[UIColor clearColor]];
     [self.calendarView setInnerBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self.calendarView setDayOfWeekTextColor:[UIColor whiteColor]];
     [self.calendarView setDateFont:[Helpers Exo2Regular:11.0]];
@@ -218,7 +219,8 @@
 
 -(IBAction)closeButtonAction {
     
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [(MainVC *)self.parentVC closeSecondView:self.view];
 }
 
 -(IBAction)dateSelectionDoneButtonAction {
@@ -620,6 +622,15 @@
     
     if (scrollView == self.mainScrollView) {
         
+        [(MainVC *)self.parentVC scrollBGViewToOffset:CGPointMake(scrollView.contentOffset.x+320, 0)];
+        
+        if (scrollView.contentOffset.x == 0.0) {
+            [[(MainVC *)self.parentVC mainScrollView] setScrollEnabled:YES];
+        }
+        else {
+            [[(MainVC *)self.parentVC mainScrollView] setScrollEnabled:NO];
+        }
+        
         if (scrollView.contentOffset.x >= 320.0) {
             
             [self.closeButton setHidden:YES];
@@ -869,7 +880,7 @@
 
 #pragma mark - Keyboard Methods
 
--(void)keyboardWillShow {
+-(void)keyboardWillShow:(NSNotification *)notification {
     
     downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [downSwipe setDirection:UISwipeGestureRecognizerDirectionDown];
@@ -877,12 +888,33 @@
     
     tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tapGesture];
+    
+    [self.dateTimeTable setHidden:YES];
+    
+    [UIView animateWithDuration:[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue] delay:0.0 options:[[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue] animations:^{
+        
+        [self.selectDatesButton setFrame:CGRectMake(self.selectDatesButton.frame.origin.x, 215, self.selectDatesButton.frame.size.width, self.selectDatesButton.frame.size.height)];
+        [self.selectContactsButton setFrame:CGRectMake(self.selectContactsButton.frame.origin.x, 249, self.selectContactsButton.frame.size.width, self.selectContactsButton.frame.size.height)];
+        
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
--(void)keyboardWillHide {
+-(void)keyboardWillHide:(NSNotification *)notification {
     
     [self.view removeGestureRecognizer:downSwipe];
     [self.view removeGestureRecognizer:tapGesture];
+    
+    [UIView animateWithDuration:[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue] delay:0.0 options:[[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue] animations:^{
+        
+        [self.selectDatesButton setFrame:CGRectMake(self.selectDatesButton.frame.origin.x, 432, self.selectDatesButton.frame.size.width, self.selectDatesButton.frame.size.height)];
+        [self.selectContactsButton setFrame:CGRectMake(self.selectContactsButton.frame.origin.x, 466, self.selectContactsButton.frame.size.width, self.selectContactsButton.frame.size.height)];
+        
+    } completion:^(BOOL finished) {
+        
+        [self.dateTimeTable setHidden:NO];
+    }];
 }
 
 -(void)hideKeyboard {
@@ -905,12 +937,18 @@
     return YES;
 }
 
--(void)textViewDidBeginEditing:(RDLabeledTextView *)textView {
+-(BOOL)textViewShouldBeginEditing:(RDLabeledTextView *)textView {
     
     if (textView == self.txtDescription) {
         
-        [self hideLocationPicker];
+        if (locationPickerShown) {
+            [self hideLocationPicker];
+            [self hideKeyboard];
+            return NO;
+        }
     }
+    
+    return YES;
 }
 
 #pragma mark - MapView Delegate Methods

@@ -160,11 +160,11 @@
     [self.mainScrollView addSubview:self.contactsSelectionContainer];
     
     [self.timeSelectionContainer setFrame:CGRectMake(320, 0, self.timeSelectionContainer.frame.size.width, self.timeSelectionContainer.frame.size.height)];
-    [self.contactsSelectionContainer setFrame:CGRectMake(320, 0, self.contactsSelectionContainer.frame.size.width, self.contactsSelectionContainer.frame.size.height)];
+    [self.contactsSelectionContainer setFrame:CGRectMake(640, 0, self.contactsSelectionContainer.frame.size.width, self.contactsSelectionContainer.frame.size.height)];
     
     [self setupTimeSelectionContainer];
     
-    [self.mainScrollView setScrollEnabled:NO];
+    [self.mainScrollView setContentSize:CGSizeMake(960.0, self.mainScrollView.frame.size.height)];
 }
 
 -(void)setupComposeEventContainer {
@@ -196,7 +196,7 @@
     [self.calendarView setInnerBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self.calendarView setDayOfWeekTextColor:[UIColor whiteColor]];
     [self.calendarView setDateFont:[Helpers Exo2Regular:11.0]];
-    [self.calendarView setTitleFont:[Helpers Exo2Medium:14.0]];
+    [self.calendarView setTitleFont:[Helpers Exo2Medium:16.0]];
     [self.calendarView setTitleColor:[UIColor whiteColor]];
     
     [self.calendarView setDelegate:self];
@@ -206,6 +206,11 @@
     
     [self.mainScrollView setContentOffset:CGPointMake(320.0, 0.0) animated:YES];
     if(self.contactsWithEmail.count<=0) [self checkAddressBookAccess];
+}
+
+-(void)scrollToContactsSelection {
+    
+    [self.mainScrollView setContentOffset:CGPointMake(640.0, 0.0) animated:YES];
 }
 
 -(void)scrollToComposeEvent {
@@ -225,13 +230,15 @@
 
 -(IBAction)dateSelectionDoneButtonAction {
     
-    [self scrollToComposeEvent];
+//    [self scrollToComposeEvent];
+    [self scrollToContactsSelection];
 
 }
 
 -(IBAction)contactSelectionDoneButtonAction {
     
-    [self scrollToComposeEvent];
+//    [self scrollToComposeEvent];
+    [self createEvent];
 }
 
 -(IBAction)doneButtonAction {
@@ -242,7 +249,6 @@
 -(IBAction)selectDatesAction {
     
     [self.timeSelectionContainer setHidden:NO];
-    [self.contactsSelectionContainer setHidden:YES];
     [self scrollToTimeSelection];
 }
 
@@ -255,7 +261,6 @@
 //    
 //
     [self.timeSelectionContainer setHidden:YES];
-    [self.contactsSelectionContainer setHidden:NO];
     [self.dateTimeTable setHidden:YES];
     [self scrollToTimeSelection];
     [self.contactsTableview reloadData];
@@ -639,6 +644,23 @@
         else {
             [self.closeButton setHidden:NO];
             [self.doneButton setHidden:NO];
+        }
+        
+        if (scrollView.contentOffset.x >= 640.0) {
+            [self.dateTimeTable setHidden:YES];
+        }
+        else {
+            [self.dateTimeTable setHidden:NO];
+        }
+        
+        if (!self.dateTimeTable.hidden) {
+            
+            if (self.eventDateTimesArray.count <= 0) {
+                [self.dateTimeTable setHidden:YES];
+            }
+            else {
+                [self.dateTimeTable setHidden:NO];
+            }
         }
     }
 }

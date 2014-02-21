@@ -158,6 +158,12 @@
     [self.lblEventDateInstruction.layer setShadowColor:[UIColor blackColor].CGColor];
     [self.lblEventDateInstruction.layer setShadowOpacity:0.3];
     [self.lblEventDateInstruction.layer setShadowRadius:0.7];
+    
+    [self.postsTable setScrollsToTop:YES];
+    [self.mainScrollView setScrollsToTop:NO];
+    [self.svEventInfoScrollView setScrollsToTop:NO];
+    [self.calListEventDatesTable setScrollsToTop:NO];
+    [self.doneDatesTableView setScrollsToTop:NO];
 }
 
 -(void)setupFonts {
@@ -208,8 +214,8 @@
         maskLayer.colors = [NSArray arrayWithObjects:(__bridge id)outerColor,
                             (__bridge id)innerColor, (__bridge id)innerColor, (__bridge id)outerColor, nil];
         maskLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0],
-                               [NSNumber numberWithFloat:0.1],
-                               [NSNumber numberWithFloat:0.9],
+                               [NSNumber numberWithFloat:0.05],
+                               [NSNumber numberWithFloat:0.95],
                                [NSNumber numberWithFloat:1.0], nil];
         
         maskLayer.bounds = CGRectMake(0, 0,
@@ -701,7 +707,7 @@
     [self.calEventDatesCalendar setInnerBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self.calEventDatesCalendar setDayOfWeekTextColor:[UIColor whiteColor]];
     [self.calEventDatesCalendar setDateFont:[Helpers Exo2Regular:11.0]];
-    [self.calEventDatesCalendar setTitleFont:[Helpers Exo2Medium:14.0]];
+    [self.calEventDatesCalendar setTitleFont:[Helpers Exo2Medium:16.0]];
     [self.calEventDatesCalendar setTitleColor:[UIColor whiteColor]];
     
     [self.calEventDatesCalendar setNextButtonModifier:-30.0];
@@ -1802,6 +1808,12 @@
     }
     
     NSLog(@"%@", self.postsTable);
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    // Do your action here
+    return NO;
 }
 
 #pragma mark - UITableView Delegate Methods

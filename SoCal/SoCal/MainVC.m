@@ -103,6 +103,9 @@
     
     [self.mainScrollView setContentSize:CGSizeMake(640, 568)];
     [self.mainScrollView setScrollEnabled:NO];
+    
+    [self.bgScrollView setScrollsToTop:NO];
+    [self.mainScrollView setScrollsToTop:NO];
 }
 
 -(void)setupFonts {
@@ -207,6 +210,12 @@
             [self.mainScrollView setScrollEnabled:NO];
         }
     }
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    // Do your action here
+    return NO;
 }
 
 #pragma mark - QRCode Scanner

@@ -630,8 +630,8 @@
 
 - (void)setTitleFont:(UIFont *)font {
     self.titleLabel.font = font;
-    self.prevButton.titleLabel.font = font;
-    self.nextButton.titleLabel.font = font;
+    self.prevButton.titleLabel.font = [font fontWithSize:font.pointSize-2];
+    self.nextButton.titleLabel.font = [font fontWithSize:font.pointSize-2];
 }
 - (UIFont *)titleFont {
     return self.titleLabel.font;
@@ -639,7 +639,6 @@
 
 - (void)setTitleColor:(UIColor *)color {
     self.titleLabel.textColor = color;
-    
     [self.titleLabel.layer setShadowOffset:CGSizeMake(0.8,1.0)];
     [self.titleLabel.layer setShadowColor:[UIColor blackColor].CGColor];
     [self.titleLabel.layer setShadowOpacity:0.3];

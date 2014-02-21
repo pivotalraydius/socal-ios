@@ -9,31 +9,49 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="90" id="S1f-j9-Vit" customClass="PostCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S1f-j9-Vit" id="mdq-R2-aA0">
+            <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S1f-j9-Vit" id="mdq-R2-aA0">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bubble" id="Kcc-Rz-aMZ" userLabel="bubbleBG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
+                    <view alpha="0.89999999999999991" contentMode="scaleToFill" id="Lto-q6-hdR" userLabel="speechBubbleView">
+                        <rect key="frame" x="3" y="0.0" width="275" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="F66-gc-Rxe">
+                                <rect key="frame" x="4" y="4" width="265" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.32156862749999998" green="0.74509803919999995" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="topRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BubbleTailSelf" id="EyB-ou-1Rs" userLabel="rightTail">
+                                <rect key="frame" x="257" y="42" width="15" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BubbleTail" id="Kcc-Rz-aMZ" userLabel="leftTail">
+                                <rect key="frame" x="1" y="42" width="15" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FD4-Kj-T4N" userLabel="contentLabel">
                         <rect key="frame" x="18" y="4" width="246" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ikU-cY-yLm" userLabel="authorLabel">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ikU-cY-yLm" userLabel="authorLabel">
                         <rect key="frame" x="18" y="39" width="135" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="psL-f2-MO6" userLabel="timeLabel">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="psL-f2-MO6" userLabel="timeLabel">
                         <rect key="frame" x="159" y="39" width="109" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -41,13 +59,17 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="authorLabel" destination="ikU-cY-yLm" id="ElF-to-dWw"/>
-                <outlet property="bubbleImageView" destination="Kcc-Rz-aMZ" id="ech-8v-SCb"/>
                 <outlet property="contentLabel" destination="FD4-Kj-T4N" id="5B2-w9-oYw"/>
+                <outlet property="speechBubbleBox" destination="F66-gc-Rxe" id="yJh-qs-FvZ"/>
+                <outlet property="speechBubbleTail" destination="Kcc-Rz-aMZ" id="v6r-bR-4qB"/>
+                <outlet property="speechBubbleTailSelf" destination="EyB-ou-1Rs" id="rf5-4u-ENn"/>
+                <outlet property="speechBubbleView" destination="Lto-q6-hdR" id="UdP-jm-kVm"/>
                 <outlet property="timeLabel" destination="psL-f2-MO6" id="CdV-bL-hbv"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bubble" width="272" height="55"/>
+        <image name="BubbleTail" width="14" height="12"/>
+        <image name="BubbleTailSelf" width="14" height="12"/>
     </resources>
 </document>

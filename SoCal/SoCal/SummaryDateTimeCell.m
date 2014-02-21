@@ -51,6 +51,11 @@
     
     [self.dateLabel setFont:[Helpers Exo2Regular:14.0]];
     [self.monthLabel setFont:[Helpers Exo2Regular:14.0]];
+    
+    [self.starLabel.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.starLabel.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.starLabel.layer setShadowOpacity:0.3];
+    [self.starLabel.layer setShadowRadius:0.7];
 }
 
 -(void)renderWithDate:(NSDate *)date andVotesYes:(NSInteger)yesVotes no:(NSInteger)noVotes Maybe:(NSInteger)maybeVotes {

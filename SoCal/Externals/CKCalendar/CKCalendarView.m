@@ -213,20 +213,24 @@
     UIButton *prevButton = [UIButton buttonWithType:UIButtonTypeCustom];
     prevButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
     [prevButton addTarget:self action:@selector(_moveCalendarToPreviousMonth) forControlEvents:UIControlEventTouchUpInside];
-    [prevButton setTitleColor:[Helpers suriaOrangeColorWithAlpha:1.0] forState:UIControlStateNormal];
+    [prevButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [prevButton.titleLabel setFont:[UIFont systemFontOfSize:10.0]];
+    [prevButton setClipsToBounds:NO];
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
     nextButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
     [nextButton addTarget:self action:@selector(_moveCalendarToNextMonth) forControlEvents:UIControlEventTouchUpInside];
-    [nextButton setTitleColor:[Helpers suriaOrangeColorWithAlpha:1.0] forState:UIControlStateNormal];
+    [nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [nextButton.titleLabel setFont:[UIFont systemFontOfSize:10.0]];
+    [nextButton setClipsToBounds:NO];
     
     [prevButton setTitle:[self.dateFormatter2 stringFromDate:[self _firstDayOfMonthContainingDate:prevMth]] forState:UIControlStateNormal];
     [nextButton setTitle:[self.dateFormatter2 stringFromDate:[self _firstDayOfMonthContainingDate:nextMth]] forState:UIControlStateNormal];
     
     [self addSubview:prevButton];
     [self addSubview:nextButton];
+    
+    [self setClipsToBounds:NO];
     
     self.prevButton = prevButton;
     self.nextButton = nextButton;
@@ -635,6 +639,22 @@
 
 - (void)setTitleColor:(UIColor *)color {
     self.titleLabel.textColor = color;
+    
+    [self.titleLabel.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.titleLabel.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.titleLabel.layer setShadowOpacity:0.3];
+    [self.titleLabel.layer setShadowRadius:0.7];
+    
+    //put here for fun
+    [self.nextButton.titleLabel.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.nextButton.titleLabel.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.nextButton.titleLabel.layer setShadowOpacity:0.3];
+    [self.nextButton.titleLabel.layer setShadowRadius:0.7];
+    
+    [self.prevButton.titleLabel.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.prevButton.titleLabel.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.prevButton.titleLabel.layer setShadowOpacity:0.3];
+    [self.prevButton.titleLabel.layer setShadowRadius:0.7];
 }
 - (UIColor *)titleColor {
     return self.titleLabel.textColor;
@@ -643,6 +663,7 @@
 - (void)setMonthButtonColor:(UIColor *)color {
     [self.prevButton setImage:[CKCalendarView _imageNamed:@"left_arrow.png" withColor:color] forState:UIControlStateNormal];
     [self.nextButton setImage:[CKCalendarView _imageNamed:@"right_arrow.png" withColor:color] forState:UIControlStateNormal];
+
 }
 
 - (void)setInnerBorderColor:(UIColor *)color {

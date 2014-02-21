@@ -143,6 +143,21 @@
         [self.bottomBar setFrame:CGRectMake(self.bottomBar.frame.origin.x, self.bottomBar.frame.origin.y-88, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
         [self.lblEnterNamePrompt setFrame:CGRectMake(self.lblEnterNamePrompt.frame.origin.x, self.lblEnterNamePrompt.frame.origin.y-88, self.lblEnterNamePrompt.frame.size.width, self.lblEnterNamePrompt.frame.size.height)];
     }
+    
+    [self.lblDetailsInfo.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.lblDetailsInfo.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.lblDetailsInfo.layer setShadowOpacity:0.3];
+    [self.lblDetailsInfo.layer setShadowRadius:0.7];
+    
+    [self.lblDetailsEventTitle.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.lblDetailsEventTitle.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.lblDetailsEventTitle.layer setShadowOpacity:0.3];
+    [self.lblDetailsEventTitle.layer setShadowRadius:0.7];
+    
+    [self.lblEventDateInstruction.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.lblEventDateInstruction.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.lblEventDateInstruction.layer setShadowOpacity:0.3];
+    [self.lblEventDateInstruction.layer setShadowRadius:0.7];
 }
 
 -(void)setupFonts {
@@ -168,7 +183,12 @@
     
     [self.lblEventDateInstruction setFont:[Helpers Exo2Regular:12.0]];
     [self.lblDoneSummaryLabel setFont:[Helpers Exo2Light:14.0]];
-    [self.lblDoneSummaryLabel setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+    [self.lblDoneSummaryLabel setTextColor:[UIColor whiteColor]];
+    
+    [self.lblDoneSummaryLabel.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.lblDoneSummaryLabel.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.lblDoneSummaryLabel.layer setShadowOpacity:0.3];
+    [self.lblDoneSummaryLabel.layer setShadowRadius:0.7];
     
     [self.multiDayOption1 setTextColor:[UIColor whiteColor]];
     [self.multiDayOption2 setTextColor:[UIColor whiteColor]];
@@ -682,6 +702,7 @@
     [self.calEventDatesCalendar setDayOfWeekTextColor:[UIColor whiteColor]];
     [self.calEventDatesCalendar setDateFont:[Helpers Exo2Regular:11.0]];
     [self.calEventDatesCalendar setTitleFont:[Helpers Exo2Medium:14.0]];
+    [self.calEventDatesCalendar setTitleColor:[UIColor whiteColor]];
     
     [self.calEventDatesCalendar setNextButtonModifier:-30.0];
     

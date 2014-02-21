@@ -192,13 +192,13 @@
     
     [self.calendarView setOnlyShowCurrentMonth:NO];
     
-    
     [self.calendarView setBackgroundColor:[UIColor clearColor]];
     [self.calendarView setInnerBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self.calendarView setDayOfWeekTextColor:[UIColor whiteColor]];
     [self.calendarView setDateFont:[Helpers Exo2Regular:11.0]];
     [self.calendarView setTitleFont:[Helpers Exo2Medium:14.0]];
- 
+    [self.calendarView setTitleColor:[UIColor whiteColor]];
+    
     [self.calendarView setDelegate:self];
 }
 

@@ -42,6 +42,16 @@
     
     [self.lblName setFont:[Helpers Exo2Regular:13.0]];
     [self.lblEmail setFont:[Helpers Exo2Regular:11.0]];
+    
+    [self.lblName.layer setShadowOffset:CGSizeMake(0.5,1.0)];
+    [self.lblName.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.lblName.layer setShadowOpacity:0.3];
+    [self.lblName.layer setShadowRadius:0.4];
+    
+    [self.lblEmail.layer setShadowOffset:CGSizeMake(0.5,1.0)];
+    [self.lblEmail.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.lblEmail.layer setShadowOpacity:0.3];
+    [self.lblEmail.layer setShadowRadius:0.4];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -74,7 +84,6 @@
         NSLog(@"selected");
     }
     else {
-        
         [self setAccessoryType:UITableViewCellAccessoryNone];
         [self.lblCheck setText:@""]; //u2B1C
         NSLog(@"NOT selected");

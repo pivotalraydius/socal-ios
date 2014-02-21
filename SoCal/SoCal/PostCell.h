@@ -10,7 +10,10 @@
 
 @interface PostCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UIImageView *bubbleImageView;
+@property (nonatomic, weak) IBOutlet UIView *speechBubbleView;
+@property (nonatomic, weak) IBOutlet UIView *speechBubbleBox;
+@property (nonatomic, weak) IBOutlet UIImageView *speechBubbleTail;
+@property (nonatomic, weak) IBOutlet UIImageView *speechBubbleTailSelf;
 @property (nonatomic, weak) IBOutlet UILabel *contentLabel;
 @property (nonatomic, weak) IBOutlet UILabel *authorLabel;
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;

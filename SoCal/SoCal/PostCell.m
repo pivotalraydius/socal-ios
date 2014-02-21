@@ -26,12 +26,39 @@
     [self.contentLabel setFont:[Helpers Exo2Regular:14.0]];
     [self.authorLabel setFont:[Helpers Exo2Regular:12.0]];
     [self.timeLabel setFont:[Helpers Exo2Regular:12.0]];
+    
+    [self.speechBubbleBox.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.speechBubbleBox.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.speechBubbleBox.layer setShadowOpacity:0.3];
+    [self.speechBubbleBox.layer setShadowRadius:0.7];
+    
+    [self.speechBubbleTail.layer setShadowOffset:CGSizeMake(1.3,1.3)];
+    [self.speechBubbleTail.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.speechBubbleTail.layer setShadowOpacity:0.3];
+    [self.speechBubbleTail.layer setShadowRadius:0.9];
+    
+    [self.speechBubbleTailSelf.layer setShadowOffset:CGSizeMake(1.3,1.3)];
+    [self.speechBubbleTailSelf.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.speechBubbleTailSelf.layer setShadowOpacity:0.3];
+    [self.speechBubbleTailSelf.layer setShadowRadius:0.9];
+    
+    [self.authorLabel.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.authorLabel.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.authorLabel.layer setShadowOpacity:0.3];
+    [self.authorLabel.layer setShadowRadius:0.7];
+    
+    [self.timeLabel.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.timeLabel.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.timeLabel.layer setShadowOpacity:0.3];
+    [self.timeLabel.layer setShadowRadius:0.7];
 }
 
 -(void)setLeftSide {
     
-    [self.bubbleImageView setFrame:CGRectMake(0, 0, self.bubbleImageView.frame.size.width, self.bubbleImageView.frame.size.height)];
-    [self.bubbleImageView setImage:[UIImage imageNamed:@"bubble.png"]];
+    [self.speechBubbleView setFrame:CGRectMake(3, 0, self.speechBubbleView.frame.size.width, self.speechBubbleView.frame.size.height)];
+    
+    [self.speechBubbleTail setHidden:NO];
+    [self.speechBubbleTailSelf setHidden:YES];
     
     [self.contentLabel setFrame:CGRectMake(18, 4, self.contentLabel.frame.size.width, self.contentLabel.frame.size.height)];
     [self.timeLabel setFrame:CGRectMake(159, 39, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height)];
@@ -43,8 +70,10 @@
 
 -(void)setRightSide {
     
-    [self.bubbleImageView setFrame:CGRectMake(48, 0, self.frame.size.width, self.frame.size.height)];
-    [self.bubbleImageView setImage:[UIImage imageWithCGImage:self.bubbleImageView.image.CGImage scale:self.bubbleImageView.image.scale orientation: UIImageOrientationUpMirrored]];
+    [self.speechBubbleView setFrame:CGRectMake(44, 0, self.speechBubbleView.frame.size.width, self.speechBubbleView.frame.size.height)];
+    
+    [self.speechBubbleTail setHidden:YES];
+    [self.speechBubbleTailSelf setHidden:NO];
     
     [self.contentLabel setFrame:CGRectMake(60, 4, self.contentLabel.frame.size.width, self.contentLabel.frame.size.height)];
     [self.timeLabel setFrame:CGRectMake(49, 39, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height)];

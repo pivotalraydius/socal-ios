@@ -45,6 +45,7 @@
 @property (nonatomic, weak) IBOutlet UIScrollView *mainScrollView;
 @property (nonatomic, weak) IBOutlet UIImageView *ivBGOverlayView;
 @property (nonatomic, weak) IBOutlet UIImageView *ivBGView;
+@property (nonatomic, weak) IBOutlet UIImageView *ivBGBlurView;
 
 @property (nonatomic, weak) IBOutlet UIView *mainViewContainer;
 @property (nonatomic, weak) IBOutlet UIView *secondViewContainer;

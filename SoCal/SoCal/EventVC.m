@@ -158,12 +158,6 @@
     [self.lblEventDateInstruction.layer setShadowColor:[UIColor blackColor].CGColor];
     [self.lblEventDateInstruction.layer setShadowOpacity:0.3];
     [self.lblEventDateInstruction.layer setShadowRadius:0.7];
-    
-    [self.postsTable setScrollsToTop:YES];
-    [self.mainScrollView setScrollsToTop:NO];
-    [self.svEventInfoScrollView setScrollsToTop:NO];
-    [self.calListEventDatesTable setScrollsToTop:NO];
-    [self.doneDatesTableView setScrollsToTop:NO];
 }
 
 -(void)setupFonts {

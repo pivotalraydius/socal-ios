@@ -7,6 +7,7 @@
 //
 
 #import "MainVC.h"
+#import "UIImage+ImageEffects.h"
 
 @implementation MainVC
 
@@ -104,8 +105,7 @@
     [self.mainScrollView setContentSize:CGSizeMake(640, 568)];
     [self.mainScrollView setScrollEnabled:NO];
     
-    [self.bgScrollView setScrollsToTop:NO];
-    [self.mainScrollView setScrollsToTop:NO];
+    [self.ivBGBlurView setImage:[self.ivBGView.image applyLightEffect]];
 }
 
 -(void)setupFonts {
@@ -183,6 +183,8 @@
 -(void)scrollBGViewToOffset:(CGPoint)offset {
     
     [self.bgScrollView setContentOffset:CGPointMake(offset.x/4, 0)];
+    
+    [self.ivBGBlurView setAlpha:self.bgScrollView.contentOffset.x/80.0];
 }
 
 #pragma mark - UIScrollView Delegate Methods
@@ -208,14 +210,10 @@
             }
             
             [self.mainScrollView setScrollEnabled:NO];
+            
+            [self.ivBGBlurView setAlpha:0.0];
         }
     }
-}
-
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
-{
-    // Do your action here
-    return NO;
 }
 
 #pragma mark - QRCode Scanner

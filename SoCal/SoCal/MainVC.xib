@@ -6,12 +6,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainVC">
             <connections>
-                <outlet property="bgScrollView" destination="Hcn-Zy-qPg" id="yFt-Ca-ZjD"/>
+                <outlet property="bgScrollView" destination="Hcn-Zy-qPg" id="OFz-aC-7fC"/>
                 <outlet property="btnCancelQRCodeScanner" destination="IIE-Hv-j5B" id="Ziu-rj-eTh"/>
                 <outlet property="btnCreateEvent" destination="NOd-fd-dO4" id="9xH-EO-fHi"/>
                 <outlet property="btnUseInvite" destination="q03-1p-ITi" id="xLc-b5-TIw"/>
                 <outlet property="codePreview" destination="CA2-g2-NC0" id="qu0-hV-4Dp"/>
                 <outlet property="inviteCodeField" destination="bB9-La-66q" id="h8s-1y-PZd"/>
+                <outlet property="ivBGBlurView" destination="saH-lp-esW" id="PtT-pd-RaH"/>
                 <outlet property="ivBGOverlayView" destination="A93-EP-P7p" id="Wdl-ed-Gf9"/>
                 <outlet property="ivBGView" destination="eNg-uu-Hfr" id="rvL-zQ-tys"/>
                 <outlet property="lblMainTitleLabel" destination="Wy3-ic-7Lp" id="w64-7W-FWo"/>
@@ -29,11 +30,15 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Hcn-Zy-qPg" userLabel="bgScrollView">
+                <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="Hcn-Zy-qPg" userLabel="bgScrollView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BGCropped" id="eNg-uu-Hfr">
+                        <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BGCropped" id="eNg-uu-Hfr">
+                            <rect key="frame" x="0.0" y="0.0" width="640" height="568"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BGCropped" id="saH-lp-esW" userLabel="BGBlur">
                             <rect key="frame" x="0.0" y="0.0" width="640" height="568"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>

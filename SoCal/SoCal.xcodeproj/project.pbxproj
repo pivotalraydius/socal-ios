@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A045EB118BB025200289D58 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A045EB018BB025200289D58 /* UIImage+ImageEffects.m */; };
 		9A152D10189626B40013B647 /* ComposeDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */; };
 		9A152D12189626D30013B647 /* ComposeDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */; };
 		9A20BD5418A89F0200B90101 /* SummaryDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A20BD5318A89F0200B90101 /* SummaryDateTimeCell.m */; };
@@ -195,6 +196,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A045EAF18BB025200289D58 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		9A045EB018BB025200289D58 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		9A152D0E189626B40013B647 /* ComposeDateTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeDateTimeCell.h; sourceTree = "<group>"; };
 		9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeDateTimeCell.m; sourceTree = "<group>"; };
 		9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeDateTimeCell.xib; sourceTree = "<group>"; };
@@ -409,6 +412,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A045EAE18BB025200289D58 /* UIImage+ImageEffects */ = {
+			isa = PBXGroup;
+			children = (
+				9A045EAF18BB025200289D58 /* UIImage+ImageEffects.h */,
+				9A045EB018BB025200289D58 /* UIImage+ImageEffects.m */,
+			);
+			path = "UIImage+ImageEffects";
+			sourceTree = "<group>";
+		};
 		9A20BD5C18A8D04B00B90101 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,6 +583,7 @@
 		9A5ED7E618924E3E00BA8E02 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				9A045EAE18BB025200289D58 /* UIImage+ImageEffects */,
 				9AA365A418A1DC59004C0E86 /* AFNetworking */,
 				9A5ED822189253F800BA8E02 /* CKCalendar */,
 				9ACDDA2618A381AD00FF4F5C /* Pusher */,
@@ -903,6 +916,7 @@
 			files = (
 				9A7D9D6918AC930B005E32D1 /* UIImage+MDQRCode.m in Sources */,
 				9AA365BB18A1DC59004C0E86 /* AFImageRequestOperation.m in Sources */,
+				9A045EB118BB025200289D58 /* UIImage+ImageEffects.m in Sources */,
 				9AA365BA18A1DC59004C0E86 /* AFHTTPRequestOperation.m in Sources */,
 				9A7D9D6F18ACAF4B005E32D1 /* UIDevice+Resolutions.m in Sources */,
 				9A5ED7B9189245D000BA8E02 /* AppDelegate.m in Sources */,

@@ -29,7 +29,7 @@
                 <outlet property="timeSelectionContainer" destination="gWn-xu-FVK" id="uP0-Z9-rcr"/>
                 <outlet property="txtCityName" destination="3AQ-ji-l3W" id="VmA-9J-bSG"/>
                 <outlet property="txtDescription" destination="FT2-Wd-Ik0" id="UA0-5C-zPb"/>
-                <outlet property="txtEventName" destination="paC-3Q-Ott" id="OaW-70-fsj"/>
+                <outlet property="txtEventName" destination="A5v-Zb-Btc" id="k6Q-Xk-UNR"/>
                 <outlet property="txtPlaceName" destination="mhn-2j-iub" id="a0g-ux-Zgv"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -160,11 +160,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <action selector="selectContactsAction" destination="-1" eventType="touchUpInside" id="TKb-N0-O9Q"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" id="paC-3Q-Ott" userLabel="eventNameTextView" customClass="RDLabeledTextView">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Event Name" textAlignment="center" minimumFontSize="17" id="A5v-Zb-Btc" userLabel="eventNameTextField">
                     <rect key="frame" x="20" y="10" width="280" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                </view>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.0" green="0.63921568630000003" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
                 <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" id="1d5-gs-itG" userLabel="btnEventLocation" customClass="UIControl">
                     <rect key="frame" x="20" y="67" width="280" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -180,6 +183,17 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <color key="textColor" red="0.0" green="0.63921568630000003" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="type here to search" textAlignment="center" minimumFontSize="17" id="mhn-2j-iub">
+                            <rect key="frame" x="0.0" y="0.0" width="235" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.0" green="0.63921568630000003" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="iUh-xr-wVH"/>
+                            </connections>
+                        </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <connections>
@@ -267,23 +281,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="w02-tm-Xoe">
-                    <rect key="frame" x="5" y="70" width="130" height="210"/>
+                    <rect key="frame" x="5" y="34" width="130" height="246"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="Tmz-kw-8EV"/>
                     </connections>
                 </mapView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type here to search for a place/address" textAlignment="center" minimumFontSize="17" id="mhn-2j-iub">
-                    <rect key="frame" x="5" y="3" width="270" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="iUh-xr-wVH"/>
-                    </connections>
-                </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter a city name here (optional)" textAlignment="center" minimumFontSize="17" id="3AQ-ji-l3W">
-                    <rect key="frame" x="5" y="36" width="270" height="30"/>
+                    <rect key="frame" x="5" y="1" width="270" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <textInputTraits key="textInputTraits"/>
@@ -292,7 +297,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NIF-yf-Fb3">
-                    <rect key="frame" x="140" y="70" width="135" height="210"/>
+                    <rect key="frame" x="140" y="34" width="135" height="246"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

@@ -27,6 +27,9 @@
     NSDate *popularDate;
     
     CAGradientLayer *maskLayer;
+    
+    CGFloat originalPostsTableOriginY;
+    CGFloat originalPostsTableHeight;
 }
 
 @property (nonatomic, weak) id parentVC;

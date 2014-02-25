@@ -56,7 +56,7 @@
 @property (nonatomic, weak) IBOutlet UIView *composeEventContainer;
 @property (nonatomic, weak) IBOutlet UIView *timeSelectionContainer;
 
-@property (nonatomic, weak) IBOutlet RDLabeledTextView *txtEventName;
+@property (nonatomic, weak) IBOutlet UITextField *txtEventName;
 @property (nonatomic, weak) IBOutlet RDLabeledTextView *txtDescription;
 
 @property (nonatomic, weak) IBOutlet UIControl *btnLocation;

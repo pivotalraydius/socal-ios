@@ -115,8 +115,7 @@
     [self.closeButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
     [self.doneButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
     
-    [self.txtEventName setTextFont:[Helpers Exo2Regular:14.0]];
-    [self.txtEventName setTitleFont:[Helpers Exo2Regular:18.0]];
+    [self.txtEventName setFont:[Helpers Exo2Regular:18.0]];
     
     [self.txtDescription setTextFont:[Helpers Exo2Regular:14.0]];
     [self.txtDescription setTitleFont:[Helpers Exo2Regular:18.0]];
@@ -128,7 +127,7 @@
     
     [self.contactDoneButton.titleLabel setFont:[Helpers Exo2Regular:14.0]];
     
-    [self.txtPlaceName setFont:[Helpers Exo2Regular:14.0]];
+    [self.txtPlaceName setFont:[Helpers Exo2Regular:18.0]];
     [self.txtCityName setFont:[Helpers Exo2Regular:14.0]];
     
 //    UILabel *label = [UILabel appearanceWhenContainedIn:[UITableView class], [UIDatePicker class], nil];
@@ -169,11 +168,10 @@
 
 -(void)setupComposeEventContainer {
     
-    [self.txtEventName setTitle:@"Event Name"];
+    [self.txtEventName setValue:[Helpers bondiBlueColorWithAlpha:1.0] forKeyPath:@"_placeholderLabel.textColor"];
+    
     [self.txtDescription setTitle:@"Description"];
     
-    [self.txtEventName setTitleColor:[Helpers bondiBlueColorWithAlpha:1.0]];
-    [self.txtEventName setTextColor:[Helpers bondiBlueColorWithAlpha:1.0]];
     [self.txtDescription setTitleColor:[Helpers bondiBlueColorWithAlpha:1.0]];
     [self.txtDescription setTextColor:[Helpers bondiBlueColorWithAlpha:1.0]];
     
@@ -217,7 +215,6 @@
     
     [self.mainScrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
     [self.dateTimeTable setHidden:NO];
-    
 }
 
 #pragma mark - Main Actions
@@ -258,7 +255,6 @@
 //        self.contactsPicker = [[ABPeoplePickerNavigationController alloc] init];
 //        self.contactsPicker.peoplePickerDelegate = self;
 //    }
-//    
 //
     [self.timeSelectionContainer setHidden:YES];
     [self.dateTimeTable setHidden:YES];
@@ -309,7 +305,8 @@
         //DO TRANSITION CUSTOMIZATION FOR IPHONE4
         
     } completion:^(BOOL finished) {
-       
+        
+        [self.txtPlaceName setHidden:NO];
         locationPickerShown = YES;
     }];
     
@@ -329,6 +326,7 @@
         
     } completion:^(BOOL finished) {
         
+        [self.txtPlaceName setHidden:YES];
         locationPickerShown = NO;
     }];
 }
@@ -523,7 +521,13 @@
         NSDictionary *placeDict = [self.arFilteredPlaces objectAtIndex:indexPath.row];
         
         [cell.lblPlaceName setText:[placeDict objectForKey:@"name"]];
-        [cell.lblPlaceAddress setText:[placeDict objectForKey:@"address"]];
+        if (![placeDict objectForKey:@"address"] || [placeDict objectForKey:@"address"] != [NSNull null]) {
+            [cell.lblPlaceAddress setText:[placeDict objectForKey:@"address"]];
+        }
+        else {
+            [cell.lblPlaceAddress setText:@""];
+        }
+        
         
         return cell;
     }
@@ -572,6 +576,7 @@
         NSDictionary *placeDict = [self.arFilteredPlaces objectAtIndex:indexPath.row];
         
         [self.lblBtnLocation setText:[placeDict objectForKey:@"name"]];
+        [self.txtPlaceName setText:[placeDict objectForKey:@"name"]];
         
         CGFloat lat = [[placeDict objectForKey:@"latitude"] floatValue];
         CGFloat lng = [[placeDict objectForKey:@"longitude"] floatValue];
@@ -653,15 +658,7 @@
             [self.dateTimeTable setHidden:NO];
         }
         
-        if (!self.dateTimeTable.hidden) {
-            
-            if (self.eventDateTimesArray.count <= 0) {
-                [self.dateTimeTable setHidden:YES];
-            }
-            else {
-                [self.dateTimeTable setHidden:NO];
-            }
-        }
+        [self hideKeyboard];
     }
 }
 
@@ -892,7 +889,6 @@
         
         NSLog(@"create event success");
         [self sendInvitationCodeToInvitees];
-        [self closeButtonAction];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        
@@ -1217,7 +1213,7 @@
     [mailcompose addAttachmentData:imageData mimeType:@"image/jpeg" fileName:[NSString stringWithFormat:@"%@.jpg",self.invitationCode]];
     [mailcompose setToRecipients:[self getSelectedEmails]];
     
-    [self.navigationController presentViewController:mailcompose animated:NO completion:nil];
+    [(MainVC *)self.parentVC presentViewController:mailcompose animated:YES completion:nil];
 }
 
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
@@ -1244,9 +1240,9 @@
 //    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 //    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     
-    [controller dismissViewControllerAnimated:NO completion:nil];
-    
-
+    [controller dismissViewControllerAnimated:NO completion:^{
+        [self closeButtonAction];
+    }];
 }
 
 -(NSArray*)getSelectedEmails {

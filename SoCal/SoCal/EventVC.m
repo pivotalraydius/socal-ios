@@ -503,12 +503,21 @@
 
 -(void)closeEventVC {
     
-    [self saveToRecentEvents];
+    if (self.eventUserName && self.eventInviteCode)
+        [self saveToRecentEvents];
  
     [self pusherDisconnect];
-//    [self.navigationController popViewControllerAnimated:YES];
-    [(MainVC *)self.parentVC closeSecondView:self.view];
+    
+    self.postsTable = nil;
+    
+    [[NetworkAPIClient sharedClient] cancelAllHTTPOperationsWithMethod:@"POST" path:RETRIEVE_EVENT];
+    [[NetworkAPIClient sharedClient] cancelAllHTTPOperationsWithMethod:@"POST" path:SOCAL_DOWNLOAD_POSTS];
+    
+    self.eventDateTimesArray = nil;
+    self.eventDateTimesDictArray = nil;
+    self.postsArray = nil;
 
+    [(MainVC *)self.parentVC closeSecondView:self.view];
 }
 
 -(void)saveToRecentEvents {
@@ -799,7 +808,7 @@
         
         [self.postsTable reloadData];
         
-        if (self.postsArray.count > 0)
+        if (self.postsArray.count > 0 && self.postsTable)
             [self.postsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.postsArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         
         if (hasName) {
@@ -1804,12 +1813,6 @@
     NSLog(@"%@", self.postsTable);
 }
 
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
-{
-    // Do your action here
-    return NO;
-}
-
 #pragma mark - UITableView Delegate Methods
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -1837,7 +1840,14 @@
         NSDictionary *postDict = [self.postsArray objectAtIndex:indexPath.row];
         
         [cell.contentLabel setText:[postDict objectForKey:@"content"]];
-        [cell.authorLabel setText:[postDict objectForKey:@"username"]];
+        
+        if ([cell.contentLabel.text hasSuffix:@"has joined the conversation"]) {
+            [cell.authorLabel setText:@""];
+        }
+        else {
+            [cell.authorLabel setText:[postDict objectForKey:@"username"]];
+        }
+        
         [cell.timeLabel setText:[Helpers timeframeFromString:[postDict objectForKey:@"created_at"]]];
         
         if ([cell.authorLabel.text isEqualToString:self.eventUserName]) {
@@ -1936,9 +1946,19 @@
     [UIView setAnimationDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
     [UIView setAnimationCurve:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
     [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    originalPostsTableOriginY = self.postsTable.frame.origin.y;
+    originalPostsTableHeight = self.postsTable.frame.size.height;
 
     [self.bottomBar setFrame:CGRectMake(0, self.view.frame.size.height - self.bottomBar.frame.size.height - 216, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
     [self.lblEnterNamePrompt setFrame:CGRectMake(self.lblEnterNamePrompt.frame.origin.x, self.bottomBar.frame.origin.y - self.lblEnterNamePrompt.frame.size.height, self.lblEnterNamePrompt.frame.size.width, self.lblEnterNamePrompt.frame.size.height)];
+    
+    [self.postsTable setFrame:CGRectMake(0, 64, self.postsTable.frame.size.width, self.bottomBar.frame.origin.y-64)];
+    maskLayer.bounds = CGRectMake(0, 0,
+                                  self.postsTable.frame.size.width,
+                                  self.postsTable.frame.size.height);
+    maskLayer.anchorPoint = CGPointZero;
+    [self.postsTable setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:0.5]];
     
     [UIView commitAnimations];
 }
@@ -1955,6 +1975,13 @@
     
     [self.bottomBar setFrame:CGRectMake(0, self.view.frame.size.height - self.bottomBar.frame.size.height, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
     [self.lblEnterNamePrompt setFrame:CGRectMake(self.lblEnterNamePrompt.frame.origin.x, self.bottomBar.frame.origin.y - self.lblEnterNamePrompt.frame.size.height, self.lblEnterNamePrompt.frame.size.width, self.lblEnterNamePrompt.frame.size.height)];
+    
+    [self.postsTable setFrame:CGRectMake(0, originalPostsTableOriginY, self.postsTable.frame.size.width, originalPostsTableHeight)];
+    maskLayer.bounds = CGRectMake(0, 0,
+                                  self.postsTable.frame.size.width,
+                                  self.postsTable.frame.size.height);
+    maskLayer.anchorPoint = CGPointZero;
+    [self.postsTable setBackgroundColor:[UIColor clearColor]];
     
     [UIView commitAnimations];
 }

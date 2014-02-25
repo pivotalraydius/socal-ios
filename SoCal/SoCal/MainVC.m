@@ -41,6 +41,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
     
+    [self retrieveRecentEvents];
     [self.inviteCodeField setText:@""];
     [self.inviteCodeField setHidden:YES];
     
@@ -50,8 +51,6 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    
-    [self retrieveRecentEvents];
     
     [super viewDidAppear:animated];
 }
@@ -119,9 +118,21 @@
 
 -(IBAction)btnCreateEventAction {
     
+    if (self.composeVC) {
+        
+        self.composeVC.mapView.delegate = nil;
+        [self.composeVC.view removeFromSuperview];
+        self.composeVC = nil;
+    }
+    if (self.eventVC) {
+        
+        [self.eventVC.view removeFromSuperview];
+        self.eventVC = nil;
+    }
+    
     self.composeVC = [[ComposeVC alloc] init];
     [self.composeVC setParentVC:self];
-//    [self.navigationController pushViewController:self.composeVC animated:YES];
+
     [self loadSecondView:self.composeVC.view];
 }
 
@@ -145,6 +156,18 @@
 
 -(void)openEventVC {
     
+    if (self.composeVC) {
+        
+        self.composeVC.mapView.delegate = nil;
+        [self.composeVC.view removeFromSuperview];
+        self.composeVC = nil;
+    }
+    if (self.eventVC) {
+        
+        [self.eventVC.view removeFromSuperview];
+        self.eventVC = nil;
+    }
+    
     [self hideKeyboard];
     
     self.eventVC = [[EventVC alloc] init];
@@ -158,22 +181,25 @@
 
 -(void)loadSecondView:(UIView *)view {
     
+    NSLog(@"Load second view");
+    
     [self.secondViewContainer addSubview:view];
     
-    [self.mainScrollView setContentOffset:CGPointMake(320, 0) animated:YES];
-    [self.mainScrollView setScrollEnabled:YES];
+    [self hideKeyboard];
     
-//    [UIView animateWithDuration:0.3 animations:^{
-//        
-//        [self.mainScrollView setContentOffset:CGPointMake(320, 0) animated:NO];
-//        
-//    } completion:^(BOOL finished) {
-//        
-//        [self.mainScrollView setScrollEnabled:YES];
-//    }];
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        [self.mainScrollView setContentOffset:CGPointMake(320, 0) animated:NO];
+        
+    } completion:^(BOOL finished) {
+        
+        [self.mainScrollView setScrollEnabled:YES];
+    }];
 }
 
 -(void)closeSecondView:(UIView *)view {
+    
+    NSLog(@"Close second view");
     
     [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
@@ -199,6 +225,7 @@
             
             if (self.composeVC) {
                 
+                self.composeVC.mapView.delegate = nil;
                 [self.composeVC.view removeFromSuperview];
                 self.composeVC = nil;
             }
@@ -212,6 +239,11 @@
             [self.mainScrollView setScrollEnabled:NO];
             
             [self.ivBGBlurView setAlpha:0.0];
+            
+            [self retrieveRecentEvents];
+            [self.inviteCodeField setText:@""];
+            
+            NSLog(@"Reached main view");
         }
     }
 }
@@ -293,9 +325,25 @@
                 
                 NSString *inviteCode = [scannedValue stringByReplacingOccurrencesOfString:@"http://rayd.us/socal/" withString:@""];
                 
+                if (self.composeVC) {
+                    
+                    self.composeVC.mapView.delegate = nil;
+                    [self.composeVC.view removeFromSuperview];
+                    self.composeVC = nil;
+                }
+                if (self.eventVC) {
+                    
+                    [self.eventVC.view removeFromSuperview];
+                    self.eventVC = nil;
+                }
+                
+                [self hideKeyboard];
+                
                 self.eventVC = [[EventVC alloc] init];
+                [self.eventVC setParentVC:self];
                 [self.eventVC setEventInviteCode:inviteCode];
-                [self.navigationController pushViewController:self.eventVC animated:YES];
+                //    [self.navigationController pushViewController:self.eventVC animated:YES];
+                [self loadSecondView:self.eventVC.view];
             }
             else {
                 
@@ -409,6 +457,18 @@
     NSString *username = [recentEventDict objectForKey:@"username"];
     
     [self hideKeyboard];
+    
+    if (self.composeVC) {
+        
+        self.composeVC.mapView.delegate = nil;
+        [self.composeVC.view removeFromSuperview];
+        self.composeVC = nil;
+    }
+    if (self.eventVC) {
+        
+        [self.eventVC.view removeFromSuperview];
+        self.eventVC = nil;
+    }
     
     self.eventVC = [[EventVC alloc] init];
     [self.eventVC setParentVC:self];

@@ -105,6 +105,8 @@
     [self.mainScrollView setScrollEnabled:NO];
     
     [self.ivBGBlurView setImage:[self.ivBGView.image applyLightEffect]];
+    
+    [self.inviteCodeField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
 }
 
 -(void)setupFonts {

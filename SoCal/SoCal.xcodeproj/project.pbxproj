@@ -66,6 +66,7 @@
 		9A7D9D6918AC930B005E32D1 /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D6118AC930B005E32D1 /* UIImage+MDQRCode.m */; };
 		9A7D9D6B18ACA179005E32D1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7D9D6A18ACA179005E32D1 /* AVFoundation.framework */; };
 		9A7D9D6F18ACAF4B005E32D1 /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D6E18ACAF4B005E32D1 /* UIDevice+Resolutions.m */; };
+		9A80AEE118BC8AA3005637E3 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A045EB018BB025200289D58 /* UIImage+ImageEffects.m */; };
 		9AA365B818A1DC59004C0E86 /* NetworkAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */; };
 		9AA365B918A1DC59004C0E86 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A618A1DC59004C0E86 /* AFHTTPClient.m */; };
 		9AA365BA18A1DC59004C0E86 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A818A1DC59004C0E86 /* AFHTTPRequestOperation.m */; };
@@ -969,6 +970,7 @@
 			files = (
 				DC2A281518AE0F0C005FE5FF /* UIImage+MDQRCode.m in Sources */,
 				DC2A281618AE0F0C005FE5FF /* AFImageRequestOperation.m in Sources */,
+				9A80AEE118BC8AA3005637E3 /* UIImage+ImageEffects.m in Sources */,
 				DC2A281718AE0F0C005FE5FF /* AFHTTPRequestOperation.m in Sources */,
 				DC2A281818AE0F0C005FE5FF /* UIDevice+Resolutions.m in Sources */,
 				DC2A281918AE0F0C005FE5FF /* AppDelegate.m in Sources */,

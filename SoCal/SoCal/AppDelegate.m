@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "MainVC.h"
 
 @implementation AppDelegate
 
@@ -18,8 +17,8 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    MainVC *mainVC = [[MainVC alloc] initWithNibName:@"MainVC" bundle:nil];
-    UINavigationController *navigationController = [[UINavigationController alloc]  initWithRootViewController:mainVC];
+    self.mainVC = [[MainVC alloc] initWithNibName:@"MainVC" bundle:nil];
+    UINavigationController *navigationController = [[UINavigationController alloc]  initWithRootViewController:self.mainVC];
     
     [navigationController setNavigationBarHidden:YES];
     
@@ -56,6 +55,20 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    if ([[url absoluteString] hasPrefix:@"socal://open_event?invitation_code="]) {
+        
+        NSString *inviteCode = [[url absoluteString] stringByReplacingOccurrencesOfString:@"socal://open_event?invitation_code=" withString:@""];
+        
+        [self.mainVC openEventVC:inviteCode];
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

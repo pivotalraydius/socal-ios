@@ -1199,9 +1199,10 @@
     
     MFMailComposeViewController *mailcompose = [[MFMailComposeViewController alloc] init];
     
-    NSString *eventURL = [NSString stringWithFormat:@"http://rayd.us/socal/%@",self.invitationCode];
+    NSString *eventURL = [NSString stringWithFormat:@"http://rayd.us/socal/%@", self.invitationCode];
+    NSString *appURL = [NSString stringWithFormat:@"socal://open_event?invitation_code=%@", self.invitationCode];
     
-    NSString *messageBody = [NSString stringWithFormat:@"<html><p>You have been invited to <strong>%@</strong>.</p><p>Scan the QR Code with your SoCal app or type in this invitation code <strong>%@</strong> manually.</p><p>Alternatively, access our web interface through this <a href=%@>link</a>.</p><p>See you there!</p></html>", self.txtEventName.text, self.invitationCode,eventURL];
+    NSString *messageBody = [NSString stringWithFormat:@"<html><p>You have been invited to <strong>%@</strong>.</p><p>The invitation code for this event is <strong>%@</strong>. Click this <a href=%@>link</a> to open it directly if you have the SoCal app installed on your device. You can also scan the QR Code via the app, or enter the invitation code manually.</p><p>Alternatively, access our web interface through this <a href=%@>link</a>.</p><p>See you there!</p></html>", self.txtEventName.text, self.invitationCode, appURL, eventURL];
     
     UIImage *qrCode = [UIImage mdQRCodeForString:eventURL size:300.0];
     NSData *imageData = UIImageJPEGRepresentation(qrCode, 0.5);

@@ -145,7 +145,7 @@
     }
     else {
         
-        [self openEventVC];
+        [self openEventVC:self.inviteCodeField.text];
     }
 }
 
@@ -154,7 +154,7 @@
     [self dismissScanner];
 }
 
--(void)openEventVC {
+-(void)openEventVC:(NSString *)inviteCode andUsername:(NSString *)username {
     
     if (self.composeVC) {
         
@@ -172,9 +172,18 @@
     
     self.eventVC = [[EventVC alloc] init];
     [self.eventVC setParentVC:self];
-    [self.eventVC setEventInviteCode:self.inviteCodeField.text];
-//    [self.navigationController pushViewController:self.eventVC animated:YES];
+    [self.eventVC setEventInviteCode:inviteCode];
+    
+    if (username) {
+        [self.eventVC additionalSetupForRecentEvent:username];
+    }
+    
     [self loadSecondView:self.eventVC.view];
+}
+
+-(void)openEventVC:(NSString *)inviteCode {
+    
+    [self openEventVC:inviteCode andUsername:nil];
 }
 
 #pragma mark - SecondView Handler
@@ -325,25 +334,7 @@
                 
                 NSString *inviteCode = [scannedValue stringByReplacingOccurrencesOfString:@"http://rayd.us/socal/" withString:@""];
                 
-                if (self.composeVC) {
-                    
-                    self.composeVC.mapView.delegate = nil;
-                    [self.composeVC.view removeFromSuperview];
-                    self.composeVC = nil;
-                }
-                if (self.eventVC) {
-                    
-                    [self.eventVC.view removeFromSuperview];
-                    self.eventVC = nil;
-                }
-                
-                [self hideKeyboard];
-                
-                self.eventVC = [[EventVC alloc] init];
-                [self.eventVC setParentVC:self];
-                [self.eventVC setEventInviteCode:inviteCode];
-                //    [self.navigationController pushViewController:self.eventVC animated:YES];
-                [self loadSecondView:self.eventVC.view];
+                [self openEventVC:inviteCode];
             }
             else {
                 
@@ -458,24 +449,7 @@
     
     [self hideKeyboard];
     
-    if (self.composeVC) {
-        
-        self.composeVC.mapView.delegate = nil;
-        [self.composeVC.view removeFromSuperview];
-        self.composeVC = nil;
-    }
-    if (self.eventVC) {
-        
-        [self.eventVC.view removeFromSuperview];
-        self.eventVC = nil;
-    }
-    
-    self.eventVC = [[EventVC alloc] init];
-    [self.eventVC setParentVC:self];
-    [self.eventVC setEventInviteCode:inviteCode];
-    [self.eventVC additionalSetupForRecentEvent:username];
-//    [self.navigationController pushViewController:self.eventVC animated:YES];
-    [self loadSecondView:self.eventVC.view];
+    [self openEventVC:inviteCode andUsername:username];
 }
 
 #pragma mark - UITextField Delegate Methods
@@ -484,7 +458,7 @@
     
     if (textField == self.inviteCodeField) {
         
-        [self openEventVC];
+        [self openEventVC:self.inviteCodeField.text];
     }
     
     return YES;

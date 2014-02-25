@@ -50,6 +50,7 @@
 @property (nonatomic, weak) IBOutlet UIView *mainViewContainer;
 @property (nonatomic, weak) IBOutlet UIView *secondViewContainer;
 
+-(void)openEventVC:(NSString *)inviteCode;
 -(void)closeSecondView:(UIView *)view;
 -(void)scrollBGViewToOffset:(CGPoint)offset;
 

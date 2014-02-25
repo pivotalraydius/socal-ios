@@ -105,6 +105,8 @@
     }
 
     [self.txtDescription setDelegate:self];
+    
+    [Helpers setBorderToView:self.btnTxtDescriptionClearButton borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.btnTxtDescriptionClearButton.frame.size.height/2];
 }
 
 -(void)setupFonts {
@@ -251,14 +253,8 @@
 
 -(IBAction)selectContactsAction {
 
-//    if (!self.contactsPicker) {
-//        self.contactsPicker = [[ABPeoplePickerNavigationController alloc] init];
-//        self.contactsPicker.peoplePickerDelegate = self;
-//    }
-//
-    [self.timeSelectionContainer setHidden:YES];
     [self.dateTimeTable setHidden:YES];
-    [self scrollToTimeSelection];
+    [self scrollToContactsSelection];
     [self.contactsTableview reloadData];
     
     for (int i = 0 ; i < self.contactsWithEmail.count ; i++) {
@@ -967,6 +963,41 @@
     }
     
     return YES;
+}
+
+-(void)textViewDidBeginEditing:(RDLabeledTextView *)textView {
+    
+    if (textView == self.txtDescription) {
+        
+        if (![textView.textView.text isEqualToString:@""]) {
+            
+            [self.btnTxtDescriptionClearButton setHidden:NO];
+        }
+    }
+}
+
+-(void)textViewDidChange:(RDLabeledTextView *)textView {
+    
+    if (textView == self.txtDescription) {
+        
+        if (![textView.textView.text isEqualToString:@""]) {
+         
+            [self.btnTxtDescriptionClearButton setHidden:NO];
+        }
+    }
+}
+
+-(void)textViewDidEndEditing:(RDLabeledTextView *)textView {
+    
+    if (textView == self.txtDescription) {
+        
+        [self.btnTxtDescriptionClearButton setHidden:YES];
+    }
+}
+
+-(IBAction)clearTxtDescriptionField {
+    
+    [self.txtDescription setText:@""];
 }
 
 #pragma mark - MapView Delegate Methods

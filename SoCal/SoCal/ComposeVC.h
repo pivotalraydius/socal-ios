@@ -58,6 +58,7 @@
 
 @property (nonatomic, weak) IBOutlet UITextField *txtEventName;
 @property (nonatomic, weak) IBOutlet RDLabeledTextView *txtDescription;
+@property (nonatomic, weak) IBOutlet UIButton *btnTxtDescriptionClearButton;
 
 @property (nonatomic, weak) IBOutlet UIControl *btnLocation;
 @property (nonatomic, weak) IBOutlet UILabel *lblBtnLocation;

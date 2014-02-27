@@ -107,6 +107,10 @@
     [self.txtDescription setDelegate:self];
     
     [Helpers setBorderToView:self.btnTxtDescriptionClearButton borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.btnTxtDescriptionClearButton.frame.size.height/2];
+    
+    [self.txtEventName setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.7]];
+    [self.btnLocation setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.7]];
+    [self.txtDescription setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.7]];
 }
 
 -(void)setupFonts {

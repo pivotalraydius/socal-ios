@@ -129,9 +129,21 @@
     
     [self.btnNameOkButton.layer setCornerRadius:3.0];
     [self.btnPostButton.layer setCornerRadius:3.0];
-    [self.eventDateYesPiece.layer setCornerRadius:self.eventDateYesPiece.frame.size.height/2];
-    [self.eventDateNoPiece.layer setCornerRadius:self.eventDateNoPiece.frame.size.height/2];
-    [self.eventDateMaybePiece.layer setCornerRadius:self.eventDateMaybePiece.frame.size.height/2];
+    
+    [self.eventDateYesPiece setBackgroundImage:[UIImage imageNamed:@"VoteYes.png"] forState:UIControlStateNormal];
+    [self.eventDateNoPiece setBackgroundImage:[UIImage imageNamed:@"VoteNo.png"] forState:UIControlStateNormal];
+    [self.eventDateMaybePiece setBackgroundImage:[UIImage imageNamed:@"VoteMaybe.png"] forState:UIControlStateNormal];
+    
+    [self.eventDateYesPiece setBackgroundColor:[UIColor clearColor]];
+    [self.eventDateYesPiece setTitle:@"" forState:UIControlStateNormal];
+    [self.eventDateNoPiece setBackgroundColor:[UIColor clearColor]];
+    [self.eventDateNoPiece setTitle:@"" forState:UIControlStateNormal];
+    [self.eventDateMaybePiece setBackgroundColor:[UIColor clearColor]];
+    [self.eventDateMaybePiece setTitle:@"" forState:UIControlStateNormal];
+    
+//    [self.eventDateYesPiece.layer setCornerRadius:self.eventDateYesPiece.frame.size.height/2];
+//    [self.eventDateNoPiece.layer setCornerRadius:self.eventDateNoPiece.frame.size.height/2];
+//    [self.eventDateMaybePiece.layer setCornerRadius:self.eventDateMaybePiece.frame.size.height/2];
     
     [self setupCalendar];
     
@@ -177,9 +189,9 @@
     
     [self.lblDetailsInfo setFont:[Helpers Exo2Regular:18.0]];
     
-    [self.eventDateYesPiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
-    [self.eventDateNoPiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
-    [self.eventDateMaybePiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+//    [self.eventDateYesPiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+//    [self.eventDateNoPiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+//    [self.eventDateMaybePiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
     
     [self.lblEventDateInstruction setFont:[Helpers Exo2Regular:12.0]];
     [self.lblDoneSummaryLabel setFont:[Helpers Exo2Light:14.0]];
@@ -932,11 +944,11 @@
         
         if (mode == VOTE_BUTTON_MOTION) {
             
-            UIColor *color = self.eventDateYesPiece.backgroundColor;
-            [self.eventDateYesPiece setBackgroundColor:[UIColor clearColor]];
-            [self.eventDateYesPiece.layer setBorderColor:color.CGColor];
-            [self.eventDateYesPiece.layer setBorderWidth:1.0];
-            [self.eventDateYesPiece setTitleColor:color forState:UIControlStateNormal];
+//            UIColor *color = self.eventDateYesPiece.backgroundColor;
+//            [self.eventDateYesPiece setBackgroundColor:[UIColor clearColor]];
+//            [self.eventDateYesPiece.layer setBorderColor:color.CGColor];
+//            [self.eventDateYesPiece.layer setBorderWidth:1.0];
+//            [self.eventDateYesPiece setTitleColor:color forState:UIControlStateNormal];
             
             CGAffineTransform t = CGAffineTransformMakeScale(1.5, 1.5);
             CGPoint center = self.eventDateYesPiece.center;
@@ -945,10 +957,10 @@
         }
         else {
             
-            UIColor *color = [UIColor colorWithCGColor:self.eventDateYesPiece.layer.borderColor];
-            [self.eventDateYesPiece setBackgroundColor:color];
-            [self.eventDateYesPiece.layer setBorderWidth:0.0];
-            [self.eventDateYesPiece setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//            UIColor *color = [UIColor colorWithCGColor:self.eventDateYesPiece.layer.borderColor];
+//            [self.eventDateYesPiece setBackgroundColor:color];
+//            [self.eventDateYesPiece.layer setBorderWidth:0.0];
+//            [self.eventDateYesPiece setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             self.eventDateYesPiece.transform = CGAffineTransformIdentity;
         }

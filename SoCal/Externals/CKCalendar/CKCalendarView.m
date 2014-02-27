@@ -26,7 +26,7 @@
 #define DAYS_HEADER_HEIGHT 20
 #define DEFAULT_CELL_WIDTH 43
 #define DEFAULT_CELL_HEIGHT 35
-#define CELL_BORDER_WIDTH 1
+#define CELL_BORDER_WIDTH 0
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -106,7 +106,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.5];
         self.selectedBackgroundColor = [UIColor whiteColor];
         self.textColor = [UIColor blackColor];
         self.selectedTextColor = [UIColor blackColor];
@@ -401,6 +401,7 @@
         }
 
         dateButton.frame = [self _calculateDayCellFrame:date];
+        [Helpers setBorderToView:dateButton borderColor:[Helpers suriaOrangeColorWithAlpha:1.0] borderThickness:.5 borderRadius:0];
         
         /* OVER HERE!!!!!!! ------------------------------------------------- */
         /* OVER HERE!!!!!!! ------------------------------------------------- */
@@ -559,8 +560,7 @@
     [self setDayOfWeekBottomColor:UIColorFromRGB(0xCCCFD5) topColor:[UIColor whiteColor]];
 
     [self setDateFont:[UIFont boldSystemFontOfSize:16.0f]];
-    [self setDateBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
-//    [self  setDateBorderColor:[UIColor blackColor]];
+    [self setDateBorderColor:[UIColor clearColor]];
 }
 
 - (CGRect)_calculateDayCellFrame:(NSDate *)date {

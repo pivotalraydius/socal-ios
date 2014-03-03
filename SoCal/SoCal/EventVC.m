@@ -302,8 +302,12 @@
         [self.eventDateTimesArray addObject:aDate];
     }
     
+    [self.calEventDatesCalendar goToMonth:[Helpers dateFromString:[[dateStringsArray objectAtIndex:0] objectForKey:@"dateNtime"]]]; 
+    
     [self updateCalendarSubviews];
     if (self.eventUserName) [self updateVoteDictArray];
+    
+    [self.doneDatesTableView reloadData];
 }
 
 -(void)setEventTitleWithTitle:(NSString *)title place:(NSString *)placeName andDate:(NSDate *)date {

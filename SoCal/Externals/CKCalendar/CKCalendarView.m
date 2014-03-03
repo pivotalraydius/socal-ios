@@ -607,6 +607,20 @@
     [self layoutSubviews];
 }
 
+- (void)goToMonth:(NSDate *)date {
+    if ([self.delegate respondsToSelector:@selector(calendar:willChangeToMonth:)] && ![self.delegate calendar:self willChangeToMonth:date]) {
+        return;
+    } else {
+        self.monthShowing = date;
+        if ([self.delegate respondsToSelector:@selector(calendar:didChangeToMonth:)] ) {
+            [self.delegate calendar:self didChangeToMonth:self.monthShowing];
+        }
+    }
+    
+    [self clearDateButtonSubviews];
+    [self layoutSubviews];
+}
+
 - (void)_dateButtonPressed:(id)sender {
     DateButton *dateButton = sender;
     NSDate *date = dateButton.date;

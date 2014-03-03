@@ -68,6 +68,8 @@ typedef enum {
 - (void)reloadData;
 - (void)reloadDates:(NSArray *)dates;
 
+- (void)goToMonth:(NSDate *)date;
+
 // Helper methods for delegates, etc.
 - (BOOL)date:(NSDate *)date1 isSameDayAsDate:(NSDate *)date2;
 - (BOOL)dateIsInCurrentMonth:(NSDate *)date;

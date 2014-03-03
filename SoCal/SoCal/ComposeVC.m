@@ -306,6 +306,8 @@
         
     } completion:^(BOOL finished) {
         
+        [self.selectDatesButton setHidden:YES];
+        [self.lblBtnLocation setHidden:YES];
         [self.txtPlaceName setHidden:NO];
         locationPickerShown = YES;
     }];
@@ -326,6 +328,8 @@
         
     } completion:^(BOOL finished) {
         
+        [self.selectDatesButton setHidden:NO];
+        [self.lblBtnLocation setHidden:NO];
         [self.txtPlaceName setHidden:YES];
         locationPickerShown = NO;
     }];
@@ -1234,7 +1238,9 @@
     
     MFMailComposeViewController *mailcompose = [[MFMailComposeViewController alloc] init];
     
-    NSString *eventURL = [NSString stringWithFormat:@"http://rayd.us/socal/%@", self.invitationCode];
+    NSString *eventBaseURL = @"http://socal-staging.herokuapp.com/";
+//    NSString *eventBaseURL = @"http://rayd.us/socal/";
+    NSString *eventURL = [NSString stringWithFormat:@"%@%@", eventBaseURL, self.invitationCode];
     NSString *appURL = [NSString stringWithFormat:@"socal://open_event?invitation_code=%@", self.invitationCode];
     
     NSString *messageBody = [NSString stringWithFormat:@"<html><p>You have been invited to <strong>%@</strong>.</p><p>The invitation code for this event is <strong>%@</strong>. Click this <a href=%@>link</a> to open it directly if you have the SoCal app installed on your device. You can also scan the QR Code via the app, or enter the invitation code manually.</p><p>Alternatively, access our web interface through this <a href=%@>link</a>.</p><p>See you there!</p></html>", self.txtEventName.text, self.invitationCode, appURL, eventURL];

@@ -1353,9 +1353,9 @@
     [[NetworkAPIClient sharedClient] postPath:VOTE_FOR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [self saveVoteToUD:date andVote:vote];
-        [self.doneDatesTableView reloadData];
-        
         [self.mainDoneButton setEnabled:YES];
+        
+        [self retrieveEvent];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

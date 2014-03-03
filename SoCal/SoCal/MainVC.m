@@ -72,6 +72,8 @@
     
     [self setupUI];
     [self setupFonts];
+    
+    [self retrieveBackgroundImage];
 }
 
 - (void)didReceiveMemoryWarning
@@ -325,16 +327,27 @@
     
     [self dismissScanner];
     
+    NSString *eventBaseURL = @"http://socal-staging.herokuapp.com/";
+    NSString *eventBaseURL2 = @"http://rayd.us/socal/";
+    
     for(AVMetadataObject *current in metadataObjects) {
         if([current isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
             
             NSString *scannedValue = [((AVMetadataMachineReadableCodeObject *) current) stringValue];
             
-            if ([scannedValue hasPrefix:@"http://rayd.us/socal/"] && scannedValue.length == 39) {
+            if ([scannedValue hasPrefix:eventBaseURL]) {
                 
                 NSLog(@"is a socal invite code");
                 
-                NSString *inviteCode = [scannedValue stringByReplacingOccurrencesOfString:@"http://rayd.us/socal/" withString:@""];
+                NSString *inviteCode = [scannedValue stringByReplacingOccurrencesOfString:eventBaseURL withString:@""];
+                
+                [self openEventVC:inviteCode];
+            }
+            else if ([scannedValue hasPrefix:eventBaseURL2]) {
+                
+                NSLog(@"is an older socal invite code");
+                
+                NSString *inviteCode = [scannedValue stringByReplacingOccurrencesOfString:eventBaseURL2 withString:@""];
                 
                 [self openEventVC:inviteCode];
             }
@@ -371,6 +384,28 @@
     [self.recentEventsTable reloadData];
     
     [self.lblUpcomingEventsCount setText:[NSString stringWithFormat:@"%i", self.recentEventsArray.count]];
+}
+
+-(void)retrieveBackgroundImage {
+    
+    //get URL from API, depending on requirements of how this should work.
+    
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://3788115f29daca132b4f-ce1335d853f8573f8e5e4d725b006a21.r57.cf6.rackcdn.com/BGCropped@2x.jpg"]];
+    
+    AFImageRequestOperation *request = [[AFImageRequestOperation alloc] initWithRequest:urlRequest];
+    [request setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if ([responseObject class] == [UIImage class]) {
+            
+            [self.ivBGView setImage:responseObject];
+            [self.ivBGBlurView setImage:[self.ivBGView.image applyLightEffect]];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    
+    [request start];
 }
 
 #pragma mark - UICollectionView Delegate Methods

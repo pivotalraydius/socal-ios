@@ -106,8 +106,8 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.5];
-        self.selectedBackgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+        self.selectedBackgroundColor = [UIColor colorWithWhite:1.0 alpha:0.5];
         self.textColor = [UIColor blackColor];
         self.selectedTextColor = [UIColor blackColor];
     }
@@ -271,6 +271,7 @@
     for (NSInteger i = 1; i <= 42; i++) {
         DateButton *dateButton = [DateButton buttonWithType:UIButtonTypeCustom];
         dateButton.calendar = self.calendar;
+        
         [dateButton addTarget:self action:@selector(_dateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [dateButtons addObject:dateButton];
     }

@@ -327,7 +327,7 @@
     
     [self dismissScanner];
     
-    NSString *eventBaseURL = @"http://socal-staging.herokuapp.com/";
+    NSString *eventBaseURL = @"http://socal-staging.herokuapp.com/use_invitation?i=";
     NSString *eventBaseURL2 = @"http://rayd.us/socal/";
     
     for(AVMetadataObject *current in metadataObjects) {

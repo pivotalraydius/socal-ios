@@ -1231,7 +1231,7 @@
     
     MFMailComposeViewController *mailcompose = [[MFMailComposeViewController alloc] init];
     
-    NSString *eventBaseURL = @"http://socal-staging.herokuapp.com/";
+    NSString *eventBaseURL = @"http://socal-staging.herokuapp.com/use_invitation?i=";
 //    NSString *eventBaseURL = @"http://rayd.us/socal/";
     NSString *eventURL = [NSString stringWithFormat:@"%@%@", eventBaseURL, self.invitationCode];
     NSString *appURL = [NSString stringWithFormat:@"socal://open_event?invitation_code=%@", self.invitationCode];

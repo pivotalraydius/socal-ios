@@ -310,6 +310,8 @@
         [self.lblBtnLocation setHidden:YES];
         [self.txtPlaceName setHidden:NO];
         locationPickerShown = YES;
+        
+        [self.txtPlaceName becomeFirstResponder];
     }];
     
 }

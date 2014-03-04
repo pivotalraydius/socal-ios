@@ -164,6 +164,24 @@
     return dateWithNoTime;
 }
 
++(BOOL)isDay:(NSDate *)date {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateFormat:@"HH"];
+    
+    NSString *hour = [formatter stringFromDate:date];
+    
+    NSInteger hourValue = [hour floatValue];
+    
+    if (hourValue >= 6 && hourValue < 18) {
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
 +(BOOL)iPhone4 {
     
     BOOL itIs = YES;

@@ -57,6 +57,9 @@
     [self.lblTimeTitleLabel setFont:[Helpers Exo2Regular:14.0]];
     [self.lblEventDateTime setFont:[Helpers Exo2Regular:13.0]];
     [self.lblEventEditTime setFont:[Helpers Exo2Regular:20.0]];
+    
+    [self.barBGView setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+    [self.btnAcceptTime setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
 }
 
 -(void)renderCellDataWithDate:(NSDate *)date andIndexPathRow:(NSInteger)row {
@@ -85,7 +88,7 @@
         [self.mainView setFrame:CGRectMake(25, self.mainView.frame.origin.y, self.mainView.frame.size.width, self.mainView.frame.size.height)];
     }
     
-    if ([dateString hasSuffix:@"am"]) {
+    if ([Helpers isDay:date]) {
         [self.barBGView setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
 //        [self.btnDeleteCell setTitleColor:[Helpers suriaOrangeColorWithAlpha:1.0] forState:UIControlStateNormal];
         [self.btnAcceptTime setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
@@ -123,7 +126,9 @@
     
     NSString *displayString2 = dateString2;
     
-    if ([dateString2 hasSuffix:@"am"]) {
+    [self.lblEventEditTime setText:displayString2];
+    
+    if ([Helpers isDay:date]) {
         [self.barBGView setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
 //        [self.btnDeleteCell.titleLabel setTextColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
         [self.btnAcceptTime setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
@@ -137,8 +142,6 @@
 //        [self.lblEventEditTime setTextColor:[Helpers pmBlueColorWithAlpha:1.0]];
 //        [self.lblTimeTitleLabel setTextColor:[Helpers pmBlueColorWithAlpha:1.0]];
     }
-    
-    [self.lblEventEditTime setText:displayString2];
 }
 
 -(IBAction)deleteCellButton {

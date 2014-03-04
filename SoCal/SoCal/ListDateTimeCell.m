@@ -90,7 +90,7 @@
     [self.monthLabel setText:monthStr];
     [self.dayTimeLabel setText:dayTimeStr];
     
-    if ([dayTimeStr hasSuffix:@"am"]) {
+    if ([Helpers isDay:date]) {
         [self.mainBGView setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     }
     else {

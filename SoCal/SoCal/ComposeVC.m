@@ -765,16 +765,9 @@
         
         [view addSubview:label];
         
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MMMM d, EEEE, hh:mm a"];
-        [dateFormatter setAMSymbol:@"am"];
-        [dateFormatter setPMSymbol:@"pm"];
-        
         if (dates.count == 1) { // single cell
             
-            NSString *dateString = [dateFormatter stringFromDate:dateKey];
-            
-            if ([dateString hasSuffix:@"am"])
+            if ([Helpers isDay:dateKey])
                 [view setAMRatio:1 setPMRatio:0];
             else
                 [view setAMRatio:0 setPMRatio:1];
@@ -792,11 +785,9 @@
             int amCount = 0; int pmCount = 0;
             for (NSDate *date in dates) {
                 
-                NSString *dateString = [dateFormatter stringFromDate:date];
-                
-                if ([dateString hasSuffix:@"am"])
+                if ([Helpers isDay:date])
                     amCount++;
-                else if ([dateString hasSuffix:@"pm"])
+                else
                     pmCount++;
             }
             if (pmCount == 0) [view setAMRatio:1 setPMRatio:0];

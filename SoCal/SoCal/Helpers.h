@@ -31,6 +31,8 @@
 +(NSString *)timeframeFromString:(NSString *)timeString;
 +(NSDate *)dateWithNoTime:(NSDate *)date;
 
++(BOOL)isDay:(NSDate *)date;
+
 +(BOOL)iPhone4;
 
 @end

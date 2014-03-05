@@ -32,6 +32,7 @@
 +(NSDate *)dateWithNoTime:(NSDate *)date;
 
 +(BOOL)isDay:(NSDate *)date;
++(BOOL)dateIsTodayOrLater:(NSDate *)date;
 
 +(BOOL)iPhone4;
 

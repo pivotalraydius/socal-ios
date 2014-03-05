@@ -423,6 +423,17 @@
     
     if (self.eventDateTimesArray.count < 5) {
         
+        //cannot select date before current date
+        if (![Helpers dateIsTodayOrLater:date]) {
+         
+            UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Oops!" message:@"I don't think a time machine exists yet. Please select a date and time in the future." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            
+            [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+            }];
+            
+            return;
+        }
+        
         for (int i = 0 ; i < self.selectedCalendarDatesDict.allKeys.count ; i++) {
             
             NSString *strDateKey = [[self.selectedCalendarDatesDict allKeys] objectAtIndex:i];

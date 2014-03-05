@@ -182,6 +182,18 @@
     return NO;
 }
 
++(BOOL)dateIsTodayOrLater:(NSDate *)date {
+    
+    NSDate *current = [NSDate date];
+    
+    if ([current compare:date] == NSOrderedAscending) {
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
 +(BOOL)iPhone4 {
     
     BOOL itIs = YES;

@@ -1509,6 +1509,8 @@
         
         NSLog(@"Multiple dates in this day");
         
+        NSLog(@"touch point in cal: %f, %f", hoverLocation.x, hoverLocation.y);
+        
         CGPoint touchPoint = [gesture locationInView:self.datesView];
         
         [self multiDatesInDayHandler:multiDates andTouchPoint:touchPoint];
@@ -1542,10 +1544,13 @@
             originY = touchPoint.y - 120.0;
         }
         else {
-            originY = touchPoint.y + 20.0;
+            originY = touchPoint.y - 60.0;
         }
         
         [self.multiDayPopupDatesView setFrame:CGRectMake(originX, originY, self.multiDayPopupDatesView.frame.size.width, self.multiDayPopupDatesView.frame.size.height)];
+        
+        NSLog(@"touch point: %f, %f", touchPoint.x, touchPoint.y);
+        NSLog(@"origin of popup view: %f, %f", originX, originY);
         
         [self.multiDayOption1 setText:@""];
         [self.multiDayOption1 setBackgroundColor:[UIColor clearColor]];
@@ -1700,6 +1705,8 @@
             else {
                 touchPoint = CGPointMake(touchPoint.x+20, touchPoint.y);
                 [self multiDatesInDayHandler:multiDates andTouchPoint:touchPoint];
+                
+                NSLog(@"touch point in cal: %f, %f", touchPoint.x, touchPoint.y);
             }
         }
         else {
@@ -1711,6 +1718,9 @@
     else {
         //only one date in day
         //continue
+        
+        CGPoint touchPoint = [calendar centerPointForDate:date];
+        NSLog(@"touch point in cal: %f, %f", touchPoint.x, touchPoint.y);
     }
 }
 

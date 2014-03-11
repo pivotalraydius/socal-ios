@@ -379,9 +379,9 @@
     
     [self.timePicker addTarget:self action:@selector(timePickerValueChanged) forControlEvents:UIControlEventValueChanged];
     
-    downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideTimePicker)];
-    [downSwipe setDirection:UISwipeGestureRecognizerDirectionDown];
-    [self.view addGestureRecognizer:downSwipe];
+//    downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideTimePicker)];
+//    [downSwipe setDirection:UISwipeGestureRecognizerDirectionDown];
+//    [self.view addGestureRecognizer:downSwipe];
     
     tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideTimePicker)];
     [self.view addGestureRecognizer:tapGesture];
@@ -389,8 +389,8 @@
 
 -(void)hideTimePicker {
     
-    [self.view removeGestureRecognizer:downSwipe];
-    downSwipe = nil;
+//    [self.view removeGestureRecognizer:downSwipe];
+//    downSwipe = nil;
     [self.view removeGestureRecognizer:tapGesture];
     tapGesture = nil;
     

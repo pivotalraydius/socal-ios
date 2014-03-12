@@ -271,6 +271,13 @@
     for (NSInteger i = 1; i <= 42; i++) {
         DateButton *dateButton = [DateButton buttonWithType:UIButtonTypeCustom];
         dateButton.calendar = self.calendar;
+    
+        /******* Kale's Special Jue Zao - Jiu An Jian (Long Press Sword) *******/
+        
+        UILongPressGestureRecognizer *jiuAn = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(_dateButtonLongPressed:)];
+        [jiuAn setMinimumPressDuration:0.5];
+        
+        [dateButton addGestureRecognizer:jiuAn];
         
         [dateButton addTarget:self action:@selector(_dateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [dateButtons addObject:dateButton];
@@ -639,6 +646,17 @@
 //    [self selectDate:date makeVisible:NO];
     [self.delegate calendar:self didSelectDate:date];
     [self setNeedsLayout];
+}
+
+- (void)_dateButtonLongPressed:(id)sender {
+    
+    UILongPressGestureRecognizer *gesture = sender;
+    DateButton *dateButton = (DateButton *)gesture.view;
+    NSDate *date = dateButton.date;
+    
+    if ([self.delegate respondsToSelector:@selector(calendar:didLongPressDate:withGesture:)]) {
+        [self.delegate calendar:self didLongPressDate:date withGesture:gesture];
+    }
 }
 
 #pragma mark - Theming getters/setters

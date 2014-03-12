@@ -23,6 +23,8 @@
     BOOL locationPickerShown;
     
     BOOL firstTime;
+    
+    UIView *bigMama;
 }
 
 @property (nonatomic, weak) id parentVC;

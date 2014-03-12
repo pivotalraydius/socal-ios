@@ -97,4 +97,6 @@ typedef enum {
 
 - (void)calendar:(CKCalendarView *)calendar didLayoutInRect:(CGRect)frame;
 
+- (void)calendar:(CKCalendarView *)calendar didLongPressDate:(NSDate *)date withGesture:(UILongPressGestureRecognizer *)gesture;
+
 @end

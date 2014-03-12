@@ -220,8 +220,8 @@
         maskLayer.colors = [NSArray arrayWithObjects:(__bridge id)outerColor,
                             (__bridge id)innerColor, (__bridge id)innerColor, (__bridge id)outerColor, nil];
         maskLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0],
-                               [NSNumber numberWithFloat:0.05],
-                               [NSNumber numberWithFloat:0.95],
+                               [NSNumber numberWithFloat:0.1],
+                               [NSNumber numberWithFloat:0.9],
                                [NSNumber numberWithFloat:1.0], nil];
         
         maskLayer.bounds = CGRectMake(0, 0,

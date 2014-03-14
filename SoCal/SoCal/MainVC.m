@@ -327,9 +327,11 @@
     
     [self dismissScanner];
     
-    NSString *eventBaseURL = @"http://socal-staging.herokuapp.com/use_invitation?i=";
-    NSString *eventBaseURL2 = @"socal-staging.herokuapp.com/use_invitation?i=";
-    NSString *eventBaseURL3 = @"http://rayd.us/socal/";
+    NSString *eventBaseURL = @"http://socal-staging.herokuapp.com/use_invitation?i_code=";
+    NSString *eventBaseURL2 = @"socal-staging.herokuapp.com/use_invitation?i_code=";
+    NSString *eventBaseURL3 = @"http://socal-staging.herokuapp.com/use_invitation?i=";
+    NSString *eventBaseURL4 = @"socal-staging.herokuapp.com/use_invitation?i=";
+    NSString *eventBaseURL5 = @"http://rayd.us/socal/";
     
     for(AVMetadataObject *current in metadataObjects) {
         if([current isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
@@ -357,6 +359,22 @@
                 NSLog(@"is an older socal invite code");
                 
                 NSString *inviteCode = [scannedValue stringByReplacingOccurrencesOfString:eventBaseURL3 withString:@""];
+                
+                [self openEventVC:inviteCode];
+            }
+            else if ([scannedValue hasPrefix:eventBaseURL4]) {
+                
+                NSLog(@"is an older socal invite code");
+                
+                NSString *inviteCode = [scannedValue stringByReplacingOccurrencesOfString:eventBaseURL4 withString:@""];
+                
+                [self openEventVC:inviteCode];
+            }
+            else if ([scannedValue hasPrefix:eventBaseURL5]) {
+                
+                NSLog(@"is an older socal invite code");
+                
+                NSString *inviteCode = [scannedValue stringByReplacingOccurrencesOfString:eventBaseURL5 withString:@""];
                 
                 [self openEventVC:inviteCode];
             }

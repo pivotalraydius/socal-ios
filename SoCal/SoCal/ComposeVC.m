@@ -490,54 +490,56 @@
 
 -(void)calendar:(CKCalendarView *)calendar didLongPressDate:(NSDate *)date withGesture:(UILongPressGestureRecognizer *)gesture {
     
+    BOOL valid = NO;
+    
+    for (int i = 0 ; i < self.selectedCalendarDatesDict.allKeys.count ; i++) {
+        
+        NSString *strDateKey = [[self.selectedCalendarDatesDict allKeys] objectAtIndex:i];
+        NSDate *dateKey = [Helpers dateFromString:strDateKey];
+        if ([self.calendarView date:date isSameDayAsDate:dateKey]) {
+            NSMutableArray *selectedDatesInADay = [self.selectedCalendarDatesDict objectForKey:strDateKey];
+            if (selectedDatesInADay.count > 1) {
+                return;
+            }
+            else {
+                valid = YES;
+            }
+        }
+    }
+    
+    if (!valid) {
+        return;
+    }
+    
     CGPoint touchLocation;
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
         NSLog(@"began!");
         
-//        BOOL valid = NO;
-//        
-//        for (int i = 0 ; i < self.selectedCalendarDatesDict.allKeys.count ; i++) {
-//            
-//            NSString *strDateKey = [[self.selectedCalendarDatesDict allKeys] objectAtIndex:i];
-//            NSDate *dateKey = [Helpers dateFromString:strDateKey];
-//            if ([self.calendarView date:date isSameDayAsDate:dateKey]) {
-//                NSMutableArray *selectedDatesInADay = [self.selectedCalendarDatesDict objectForKey:strDateKey];
-//                if (selectedDatesInADay.count > 1) {
-//                    return;
-//                }
-//                else {
-//                    valid = YES;
-//                }
-//            }
-//        }
+        NSLog(@"long pressed a valid selected date. move on to step 2");
+        touchLocation = [gesture locationInView:self.view];
         
-//        if (valid) {
-            NSLog(@"long pressed a valid selected date. move on to step 2");
-            touchLocation = [gesture locationInView:self.view];
-            
-            bigMama = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
-            
-            NSDate *previous = date;
-            
-            for (NSDate *aDate in self.eventDateTimesArray) {
-                if ([self.calendarView date:aDate isSameDayAsDate:date]) {
-                    previous = aDate;
-                }
+        bigMama = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
+        
+        NSDate *previous = date;
+        
+        for (NSDate *aDate in self.eventDateTimesArray) {
+            if ([self.calendarView date:aDate isSameDayAsDate:date]) {
+                previous = aDate;
             }
-            
-            if ([Helpers isDay:previous]) {
-                [bigMama setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
-            }
-            else {
-                [bigMama setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
-            }
-            
-            [bigMama setAlpha:0.75];
-            [bigMama setFrame:CGRectMake(touchLocation.x-75, touchLocation.y-75, bigMama.frame.size.width, bigMama.frame.size.height)];
-            [bigMama.layer setCornerRadius:75];
-            [self.view addSubview:bigMama];
-//        }
+        }
+        
+        if ([Helpers isDay:previous]) {
+            [bigMama setBackgroundColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
+        }
+        else {
+            [bigMama setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
+        }
+        
+        [bigMama setAlpha:0.75];
+        [bigMama setFrame:CGRectMake(touchLocation.x-75, touchLocation.y-75, bigMama.frame.size.width, bigMama.frame.size.height)];
+        [bigMama.layer setCornerRadius:75];
+        [self.view addSubview:bigMama];
     }
     else if (gesture.state == UIGestureRecognizerStateChanged) {
         NSLog(@"changing!");
@@ -554,7 +556,7 @@
         
         BOOL withinCal = NO;
         
-        touchLocation = [gesture locationInView:self.view];
+        touchLocation = [gesture locationInView:self.calendarView];
         if (CGRectContainsPoint(self.calendarView.frame, touchLocation)) {
             withinCal = YES;
         }
@@ -569,45 +571,63 @@
             }
         }
         
-        if (withinCal) {
+        if (!withinCal) {
+         
+            NSLog(@"outside calendar");
+            
+            //removing!
+            if (row >= 0) {
+                [self deleteCellAtIndexPathRow:row];
+            }
+            
+            CGPoint datePoint = [gesture locationInView:self.calendarView];
+            NSDate *new = [self.calendarView dateForLocationInView:datePoint];
+            NSLog(@"date: %@", new);
+            
+            NSLog(@"frame: %f, %f, %f, %f", self.calendarView.frame.origin.x, self.calendarView.frame.origin.y, self.calendarView.frame.size.width, self.calendarView.frame.size.height);
+            NSLog(@"point: %f, %f", datePoint.x, datePoint.y);
+            
+            return;
+        }
+        
+        NSLog(@"within calendar");
+        
+        //moving it to new!
+        
+        CGPoint datePoint = [gesture locationInView:self.calendarView];
+        
+        NSDate *new = [self.calendarView dateForLocationInView:datePoint];
+        
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        
+        NSDateComponents *components1 = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit fromDate:previous];
+        NSInteger hour = [components1 hour];
+        NSInteger minutes = [components1 minute];
+        
+        NSDateComponents *components2 = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:new];
+        [components2 setHour:hour];
+        [components2 setMinute:minutes];
+        
+        NSDate *newSelection = [calendar dateFromComponents:components2];
+        
+        //check date point, reject past dates
+        
+        if ([newSelection compare:[NSDate date]] == NSOrderedAscending) {
+            
+            //new date is past already, reject
+            NSLog(@"date is in the past");
+        }
+        else {
             
             //removing previous
             if (row >= 0) {
                 [self deleteCellAtIndexPathRow:row];
             }
             
-            //moving it to new!
-            
-            CGPoint datePoint = [gesture locationInView:self.calendarView];
-            
-            NSDate *new = [self.calendarView dateForLocationInView:datePoint];
-            
-            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-            
-            NSDateComponents *components1 = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit fromDate:previous];
-            NSInteger hour = [components1 hour];
-            NSInteger minutes = [components1 minute];
-            
-            NSDateComponents *components2 = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:new];
-            [components2 setHour:hour];
-            [components2 setMinute:minutes];
-
-            NSDate *newSelection = [calendar dateFromComponents:components2];
-            
             [self.eventDateTimesArray addObject:newSelection];
             [self.dateTimeTable reloadData];
             [self updateCalendarSubviews];
-            
         }
-        else {
-        
-            //removing!
-            if (row >= 0) {
-                [self deleteCellAtIndexPathRow:row];
-            }
-        }
-
-        
     }
 }
 
@@ -1365,7 +1385,7 @@
     
     MFMailComposeViewController *mailcompose = [[MFMailComposeViewController alloc] init];
     
-    NSString *eventBaseURL = @"http://socal-staging.herokuapp.com/use_invitation?i=";
+    NSString *eventBaseURL = @"http://socal-staging.herokuapp.com/use_invitation?i_code=";
 //    NSString *eventBaseURL = @"http://rayd.us/socal/";
     NSString *eventURL = [NSString stringWithFormat:@"%@%@", eventBaseURL, self.invitationCode];
     NSString *appURL = [NSString stringWithFormat:@"socal://open_event?invitation_code=%@", self.invitationCode];

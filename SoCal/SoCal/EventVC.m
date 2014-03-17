@@ -495,12 +495,14 @@
          
             //forward to dates
             [self scrollToDatesView];
+            [self hideKeyboard];
         }
     }
     else if (self.mainScrollView.contentOffset.x == 320.0) {
         //forward to done
         [self submitVotesToServer];
         [self scrollToDoneView];
+        [self hideKeyboard];
     }
     else if (self.mainScrollView.contentOffset.x == 640.0) {
         //close eventVC

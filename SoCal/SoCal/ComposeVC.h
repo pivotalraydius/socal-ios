@@ -34,6 +34,9 @@
 @property (nonatomic, weak) IBOutlet UIButton *contactDoneButton;
 @property (nonatomic, strong) NSMutableArray *selectedContacts;
 
+@property (nonatomic, weak) IBOutlet UITextField *creatorNameField;
+@property (nonatomic, weak) IBOutlet UITextField *creatorEmailField;
+
 @property (nonatomic, strong) MFMailComposeViewController *mailComposeVC;
 @property (nonatomic, strong) ABPeoplePickerNavigationController *contactsPicker;
 @property (nonatomic, weak) IBOutlet CKCalendarView *calendarView;

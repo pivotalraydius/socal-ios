@@ -12,7 +12,7 @@
 
 +(int)CurrentEnvironment {
     
-    return DEVELOPMENT;
+    return STAGING;
 }
 
 +(NSString *)BaseHost {

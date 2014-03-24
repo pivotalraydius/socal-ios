@@ -1009,6 +1009,18 @@
         return;
     }
     
+    if ([[self.creatorNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""] || [[self.creatorEmailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
+        
+        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"We Don't Know Who You Are!" message:@"We need your name and email address in order to start this event. Otherwise your invitees won't know who created the event! Do fill up the relevant fields please, thanks!" cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        
+        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+            
+            [self selectContactsAction];
+        }];
+        
+        return;
+    }
+    
     CGFloat latitude = [[self.selectedLocationDict objectForKey:@"latitude"] floatValue];
     CGFloat longitude = [[self.selectedLocationDict objectForKey:@"longitude"] floatValue];
     NSString *placeName = [self.selectedLocationDict objectForKey:@"name"];
@@ -1035,11 +1047,30 @@
     [queryInfo setObject:self.txtDescription.text forKey:@"description"];
     [queryInfo setObject:dateString forKey:@"datetime"];
     
+    NSString *invitees = @"";
+    
+    for (NSDictionary *contact in self.contactsWithEmail) {
+        
+        if ([[contact objectForKey:@"selected"] boolValue]) {
+            
+            invitees = [invitees stringByAppendingString:[contact objectForKey:@"name"]];
+            invitees = [invitees stringByAppendingString:@","];
+            invitees = [invitees stringByAppendingString:[contact objectForKey:@"email"]];
+            invitees = [invitees stringByAppendingString:@"{"];
+        }
+    }
+    
+    [queryInfo setObject:invitees forKey:@"invitees"];
+    
+    [queryInfo setObject:self.creatorNameField.text forKey:@"username"];
+    [queryInfo setObject:self.creatorEmailField.text forKey:@"email"];
     
     [[NetworkAPIClient sharedClient] postPath:CREATE_EVENT parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"create event success");
-        [self sendInvitationCodeToInvitees];
+//        [self sendInvitationCodeToInvitees];
+        
+        [self closeButtonAction];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        
@@ -1092,6 +1123,8 @@
     [self.txtDescription resignFirstResponder];
     [self.txtPlaceName resignFirstResponder];
     [self.txtCityName resignFirstResponder];
+    [self.creatorEmailField resignFirstResponder];
+    [self.creatorNameField resignFirstResponder];
 }
 
 #pragma mark - UITextField Delegate Methods

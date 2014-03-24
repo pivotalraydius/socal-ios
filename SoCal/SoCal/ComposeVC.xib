@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeVC">
@@ -14,6 +14,8 @@
                 <outlet property="contactDoneButton" destination="ZsO-QJ-WON" id="EuO-T3-QzL"/>
                 <outlet property="contactsSelectionContainer" destination="IJ8-yz-CGz" id="a5L-wp-Seg"/>
                 <outlet property="contactsTableview" destination="wfL-VU-NfF" id="Ic6-DA-84T"/>
+                <outlet property="creatorEmailField" destination="6Tn-Ci-6Dm" id="zRj-qM-N2h"/>
+                <outlet property="creatorNameField" destination="owc-8O-bsq" id="Lt9-bC-aF5"/>
                 <outlet property="dateTimeDoneButton" destination="O9A-Mn-HMB" id="m9K-of-JYj"/>
                 <outlet property="dateTimeTable" destination="sp3-z9-tGG" id="ysD-cb-42k"/>
                 <outlet property="doneButton" destination="9CU-5X-laK" id="9ca-pt-mLb"/>
@@ -278,7 +280,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wfL-VU-NfF">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="413"/>
+                    <rect key="frame" x="0.0" y="88" width="320" height="325"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
@@ -286,6 +288,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="delegate" destination="-1" id="jJJ-0H-kfA"/>
                     </connections>
                 </tableView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter your name here" minimumFontSize="17" id="owc-8O-bsq">
+                    <rect key="frame" x="20" y="12" width="280" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter your email address here" minimumFontSize="17" id="6Tn-Ci-6Dm">
+                    <rect key="frame" x="20" y="50" width="280" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

@@ -67,8 +67,6 @@
     [self setupFonts];
     
     [self retrieveEvent];
-    [self downloadPosts];
-    [self pusherConnect];
     [self initTouchForVoteButtons];
 }
 
@@ -277,6 +275,8 @@
         }
         
         [self eventHandler:eventDict];
+        [self downloadPosts];
+        [self pusherConnect];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

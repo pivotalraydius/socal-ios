@@ -10,8 +10,9 @@
 #import <MapKit/MapKit.h>
 #import "CKCalendarView.h"
 #import "PTPusher.h"
+#import <MessageUI/MessageUI.h>
 
-@interface EventVC : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, PTPusherDelegate, UITextFieldDelegate, CKCalendarDelegate>
+@interface EventVC : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, PTPusherDelegate, UITextFieldDelegate, CKCalendarDelegate, MFMailComposeViewControllerDelegate>
 {
     BOOL hasName;
     
@@ -21,6 +22,8 @@
     UIPanGestureRecognizer *yesPan;
     UIPanGestureRecognizer *noPan;
     UIPanGestureRecognizer *maybePan;
+    
+    UIPanGestureRecognizer *confirmSetPan;
     
     NSArray *multiDatesArray;
     
@@ -52,6 +55,7 @@
 
 @property (nonatomic, weak) IBOutlet UITextField *txtPostField;
 @property (nonatomic, weak) IBOutlet UITextField *txtNameField;
+@property (nonatomic, weak) IBOutlet UITextField *txtEmailField;
 @property (nonatomic, weak) IBOutlet UIButton *btnPostButton;
 @property (nonatomic, weak) IBOutlet UIButton *btnNameOkButton;
 
@@ -76,11 +80,24 @@
 @property (nonatomic, weak) IBOutlet UIButton *eventDateMaybePiece;
 @property (nonatomic, weak) IBOutlet UILabel *lblEventDateInstruction;
 
+@property (nonatomic, weak) IBOutlet UIButton *eventDateConfirmSetPiece;
+
+@property (nonatomic, weak) IBOutlet UIButton *votingEndedAssistButton;
+
 @property (nonatomic, weak) IBOutlet UITableView *doneDatesTableView;
 @property (nonatomic, weak) IBOutlet UILabel *lblDoneSummaryLabel;
 
 @property (nonatomic, strong) NSString *eventInviteCode;
 @property (nonatomic, strong) NSString *eventUserName;
+@property (nonatomic, strong) NSString *eventUserEmail;
+@property (nonatomic, strong) NSString *eventCreatorName;
+@property (nonatomic, strong) NSString *eventCreatorEmail;
+@property (nonatomic, strong) NSString *eventTitle;
+
+@property BOOL isEventCreator;
+
+@property BOOL eventConfirmed;
+@property (nonatomic, strong) NSDate *eventConfirmedDate;
 
 @property (nonatomic, strong) NSMutableArray *eventDateTimesDictArray;
 @property (nonatomic, strong) NSMutableArray *eventDateTimesArray;
@@ -105,5 +122,6 @@
 @property (nonatomic, strong) PTPusherChannel *eventChannel;
 
 
--(void)additionalSetupForRecentEvent:(NSString *)username;
+-(void)additionalSetupForRecentEventForUsername:(NSString *)username andEmail:(NSString *)email;
+
 @end

@@ -18,7 +18,6 @@
 +(NSString *)BaseHost {
     
     return @"http://mfalcon.local:5000/";
-//    return @"http://raydius-tv.local:5000/";
 }
 
 +(NSString *)StagingHost {

@@ -141,9 +141,17 @@
     [self.eventDateMaybePiece setBackgroundColor:[UIColor clearColor]];
     [self.eventDateMaybePiece setTitle:@"" forState:UIControlStateNormal];
     
-//    [self.eventDateYesPiece.layer setCornerRadius:self.eventDateYesPiece.frame.size.height/2];
-//    [self.eventDateNoPiece.layer setCornerRadius:self.eventDateNoPiece.frame.size.height/2];
-//    [self.eventDateMaybePiece.layer setCornerRadius:self.eventDateMaybePiece.frame.size.height/2];
+    [self.eventDateConfirmSetPiece.layer setCornerRadius:self.eventDateMaybePiece.frame.size.height/2];
+    
+    [self.votingEndedAssistButton.titleLabel setNumberOfLines:2];
+    [self.votingEndedAssistButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    [self.votingEndedAssistButton.layer setBorderWidth:0.5];
+    [self.votingEndedAssistButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.votingEndedAssistButton.layer setShadowOffset:CGSizeMake(0.8,1.0)];
+    [self.votingEndedAssistButton.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.votingEndedAssistButton.layer setShadowOpacity:0.3];
+    [self.votingEndedAssistButton.layer setShadowRadius:0.7];
     
     [self setupCalendar];
     
@@ -181,9 +189,12 @@
     [self.lblEnterNamePrompt setFont:[Helpers Exo2Regular:18.0]];
     [self.txtPostField setFont:[Helpers Exo2Regular:18.0]];
     [self.txtNameField setFont:[Helpers Exo2Regular:18.0]];
+    [self.txtEmailField setFont:[Helpers Exo2Regular:18.0]];
     
     [self.btnPostButton.titleLabel setFont:[Helpers Exo2Regular:18.0]];
     [self.btnNameOkButton.titleLabel setFont:[Helpers Exo2Regular:18.0]];
+    
+    [self.votingEndedAssistButton.titleLabel setFont:[Helpers Exo2Regular:12.0]];
     
     [self.lblDetailsEventTitle setFont:[Helpers Exo2Regular:20.0]];
     
@@ -233,9 +244,10 @@
     }
 }
 
--(void)additionalSetupForRecentEvent:(NSString *)username {
+-(void)additionalSetupForRecentEventForUsername:(NSString *)username andEmail:(NSString *)email {
     
     self.eventUserName = username;
+    self.eventUserEmail = email;
     hasName = YES;
     
     [self submitUsernameToServer];
@@ -257,6 +269,13 @@
         
         NSDictionary *eventDict = [responseObject objectForKey:@"topic"];
         
+        self.eventInviteCode = [eventDict objectForKey:@"invitation_code"];
+        
+        if ([responseObject objectForKey:@"invitee_name"] && [responseObject objectForKey:@"invitee_name"] != [NSNull null] && [responseObject objectForKey:@"invitee_email"] && [responseObject objectForKey:@"invitee_email"] != [NSNull null]) {
+            
+            [self additionalSetupForRecentEventForUsername:[responseObject objectForKey:@"invitee_name"] andEmail:[responseObject objectForKey:@"invitee_email"]];
+        }
+        
         [self eventHandler:eventDict];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -277,9 +296,50 @@
     [self.eventDateTimesDictArray removeAllObjects];
     [self.voteDictArray removeAllObjects];
     
+    self.eventTitle = [eventDict objectForKey:@"title"];
+    
+    self.eventConfirmed = [[eventDict objectForKey:@"confirm_state"] boolValue];
+    
+    if ([eventDict objectForKey:@"confirmed_date"] && [eventDict objectForKey:@"confirmed_date"] != [NSNull null]) {
+        self.eventConfirmedDate = [Helpers dateFromString:[eventDict objectForKey:@"confirmed_date"]];
+    }
+    
+    self.eventCreatorName = [eventDict objectForKey:@"creator_name"];
+    self.eventCreatorEmail = [eventDict objectForKey:@"creator_email"];
+    
+    if ([self.eventCreatorEmail isEqualToString:self.eventUserEmail]) {
+        self.isEventCreator = YES;
+        [self.eventDateConfirmSetPiece setHidden:NO];
+    }
+    else {
+        self.isEventCreator = NO;
+        [self.eventDateConfirmSetPiece setHidden:YES];
+    }
+    
+    if (self.eventConfirmed) {
+        
+        //hide voting
+        [self.eventDateYesPiece setHidden:YES];
+        [self.eventDateNoPiece setHidden:YES];
+        [self.eventDateMaybePiece setHidden:YES];
+        
+        //hide confirmation
+        [self.eventDateConfirmSetPiece setHidden:YES];
+        
+        [self.votingEndedAssistButton setHidden:NO];
+    }
+    else {
+        
+        [self.votingEndedAssistButton setHidden:YES];
+    }
+    
     //set labels
     [self setEventTitleWithTitle:[eventDict objectForKey:@"title"] place:[eventDict objectForKey:@"place_name"] andDate:nil];
     [self.lblDetailsInfo setText:[eventDict objectForKey:@"description"]];
+    
+    if (self.eventConfirmedDate) {
+        [self setEventTitleWithTitle:[eventDict objectForKey:@"title"] place:[eventDict objectForKey:@"place_name"] andDate:self.eventConfirmedDate];
+    }
     
     //set map
     CGFloat lat = [[eventDict objectForKey:@"latitude"] floatValue];
@@ -308,6 +368,10 @@
     if (self.eventUserName) [self updateVoteDictArray];
     
     [self.doneDatesTableView reloadData];
+    
+    if (self.eventConfirmed) {
+        [self scrollToDoneView];
+    }
 }
 
 -(void)setEventTitleWithTitle:(NSString *)title place:(NSString *)placeName andDate:(NSDate *)date {
@@ -531,7 +595,7 @@
 
 -(void)saveToRecentEvents {
     
-    if (!self.eventInviteCode || !self.eventUserName) {
+    if (!self.eventInviteCode || !self.eventUserName || !self.eventUserEmail) {
         
         return;
     }
@@ -560,6 +624,7 @@
 
     [recentEvent setObject:self.eventInviteCode forKey:@"invitation_code"];
     [recentEvent setObject:self.eventUserName forKey:@"username"];
+    [recentEvent setObject:self.eventUserEmail forKey:@"email"];
     
     NSInteger indexExists = -1;
     
@@ -666,6 +731,7 @@
     
     [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
     [queryInfo setObject:self.eventUserName forKey:@"username"];
+    [queryInfo setObject:self.eventUserEmail forKey:@"email"];
     
     [[NetworkAPIClient sharedClient] postPath:SOCAL_CREATE_USER parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -842,7 +908,7 @@
     
     NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
     
-    [queryInfo setObject:self.eventUserName forKey:@"username"];
+    [queryInfo setObject:self.eventUserEmail forKey:@"email"];
     [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
     [queryInfo setObject:self.txtPostField.text forKey:@"content"];
     
@@ -869,6 +935,65 @@
     [self.eventDateNoPiece addGestureRecognizer:noPan];
     maybePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [self.eventDateMaybePiece addGestureRecognizer:maybePan];
+    confirmSetPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleConfirmSetPan:)];
+    [self.eventDateConfirmSetPiece addGestureRecognizer:confirmSetPan];
+}
+
+-(void)handleConfirmSetPan:(UIPanGestureRecognizer *)gesture {
+    
+    CGPoint touchLocation = [gesture locationInView:self.doneView];
+
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        
+        [self switchVoteButton:gesture.view toMode:VOTE_BUTTON_MOTION];
+    }
+    else if (gesture.state == UIGestureRecognizerStateChanged) {
+        
+        self.eventDateConfirmSetPiece.center = touchLocation;
+    }
+    else if (gesture.state == UIGestureRecognizerStateEnded) {
+        
+        [self switchVoteButton:gesture.view toMode:VOTE_BUTTON_STILL];
+        
+        touchLocation = [gesture locationInView:self.doneDatesTableView];
+        
+        for (int i = 0; i < self.eventDateTimesArray.count; i++) {
+            
+            CGRect cellFrame = [self.doneDatesTableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            if (CGRectContainsPoint(cellFrame, touchLocation)) {
+                //confirm date target
+                
+                NSDate *date = [self.eventDateTimesArray objectAtIndex:i];
+                
+                NSString *monthStr = @"";
+                NSString *timeStr = @"";
+                
+                NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                
+                [df setAMSymbol:@"am"];
+                [df setPMSymbol:@"pm"];
+                
+                [df setDateFormat:@"dd MMMM"];
+                
+                monthStr = [NSString stringWithFormat:@"%@",
+                            [df stringFromDate:date]];
+                
+                [df setDateFormat:@"hh:mm a"];
+                
+                timeStr = [NSString stringWithFormat:@"%@",
+                           [df stringFromDate:date]];
+                
+                NSString *dateStr = [NSString stringWithFormat:@"%@ on %@", timeStr, monthStr];
+                
+                UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Would You Like to Confirm this Event?" message:[NSString stringWithFormat:@"Would you like to confirm this event for %@?", dateStr] cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+                    if (!didCancel) {
+                        [self confirmDateWithServer:date];
+                    }
+                }];
+            }
+        }
+    }
 }
 
 -(void)handlePan:(UIPanGestureRecognizer *)gesture {
@@ -933,6 +1058,38 @@
             [self checkVoteButtonsTarget:gesture];
         }
     }
+}
+
+-(void)confirmDateWithServer:(NSDate *)date {
+    
+    NSNumber *dateID;
+    
+    for (NSDate *aDate in self.eventDateTimesArray) {
+        
+        if ([aDate compare:date] == NSOrderedSame) {
+            
+            dateID = [[self.eventDateTimesDictArray objectAtIndex:[self.eventDateTimesArray indexOfObject:aDate]] objectForKey:@"id"];
+        }
+    }
+    
+    NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
+    [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
+    [queryInfo setObject:[NSNumber numberWithBool:YES] forKey:@"confirm_state"];
+    [queryInfo setObject:dateID forKey:@"confirmed_date_id"];
+    
+    [[NetworkAPIClient sharedClient] postPath:SOCAL_CONFIRM_EVENT parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"topic confirmed");
+        self.eventConfirmed = YES;
+        self.eventConfirmedDate = date;
+        
+        [self.doneDatesTableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
 }
 
 -(void)switchVoteButton:(id)button toMode:(NSInteger)mode {
@@ -1010,6 +1167,41 @@
             [self.eventDateMaybePiece setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             self.eventDateMaybePiece.transform = CGAffineTransformIdentity;
+        }
+    }
+    else if (button == self.eventDateConfirmSetPiece) {
+        
+        if (mode == VOTE_BUTTON_MOTION) {
+            
+//            UIColor *color = self.eventDateConfirmSetPiece.backgroundColor;
+//            [self.eventDateConfirmSetPiece setBackgroundColor:[UIColor clearColor]];
+//            [self.eventDateConfirmSetPiece.layer setBorderColor:color.CGColor];
+//            [self.eventDateConfirmSetPiece.layer setBorderWidth:1.0];
+//            [self.eventDateConfirmSetPiece setTitleColor:color forState:UIControlStateNormal];
+            
+            CGAffineTransform t = CGAffineTransformMakeScale(1.5, 1.5);
+            CGPoint center = self.eventDateConfirmSetPiece.center;
+            self.eventDateConfirmSetPiece.transform = t;
+            self.eventDateConfirmSetPiece.center = center;
+        }
+        else {
+            
+//            UIColor *color = [UIColor colorWithCGColor:self.eventDateConfirmSetPiece.layer.borderColor];
+//            [self.eventDateConfirmSetPiece setBackgroundColor:color];
+//            [self.eventDateConfirmSetPiece.layer setBorderWidth:0.0];
+//            [self.eventDateConfirmSetPiece setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            
+            self.eventDateConfirmSetPiece.transform = CGAffineTransformIdentity;
+            
+            //reset button position
+            [UIView animateWithDuration:0.05
+                             animations:^{
+                                 
+                                 [self.eventDateConfirmSetPiece setFrame:CGRectMake(138, 331, self.eventDateConfirmSetPiece.frame.size.width, self.eventDateConfirmSetPiece.frame.size.height)];
+                                 
+                             } completion:^(BOOL finished) {
+                                 
+                             }];
         }
     }
 }
@@ -1162,7 +1354,24 @@
     return nil;
 }
 
+-(IBAction)noVoteForConfirmedEvent {
+    
+    UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Event Has Been Finalized" message:[NSString stringWithFormat:@"Sorry, but you cannot vote on an event that has already been finalized. The date has been set! If you can't make it, do get in touch with %@, the organizer.", self.eventCreatorName] cancelButtonTitle:@"Ok" otherButtonTitles:@"Email", nil];
+    [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+        if (!didCancel) {
+            [self emailOrganizer];
+        }
+    }];
+}
+
 -(void)vote:(NSInteger)vote forDate:(NSDate *)date {
+    
+    if (self.eventConfirmed) {
+        
+        [self noVoteForConfirmedEvent];
+        
+        return;
+    }
     
     if (!date) {
         return;
@@ -1401,6 +1610,36 @@
 
 -(void)updateMostPopularDateTime {
     
+    if (self.eventConfirmed) {
+        
+        NSDate *date = self.eventConfirmedDate;
+        
+        NSString *monthStr = @"";
+        NSString *timeStr = @"";
+        
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        
+        [df setAMSymbol:@"am"];
+        [df setPMSymbol:@"pm"];
+        
+        [df setDateFormat:@"dd MMMM"];
+        
+        monthStr = [NSString stringWithFormat:@"%@",
+                    [df stringFromDate:date]];
+        
+        [df setDateFormat:@"hh:mm a"];
+        
+        timeStr = [NSString stringWithFormat:@"%@",
+                   [df stringFromDate:date]];
+        
+        NSString *str = [NSString stringWithFormat:@"%@ on %@ is the confirmed date and time for the event.", timeStr, monthStr];
+        
+        [self.lblDoneSummaryLabel setText:str];
+        [self setSummaryLabelWithAttributedStringForTime:timeStr andMonth:monthStr];
+        
+        return;
+    }
+    
     if (self.eventDateTimesDictArray.count <= 0) {
         
         NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
@@ -1472,8 +1711,7 @@
         
         NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
         [self.lblDoneSummaryLabel setText:str];
-    }
-}
+    }}
 
 -(void)setSummaryLabelWithAttributedStringForTime:(NSString *)timeStr andMonth:(NSString *)monthStr {
     
@@ -1672,6 +1910,77 @@
     
         [self.multiDayPopupDatesView setHidden:YES];
         [self.multiDayPopupDatesView setAlpha:1.0];
+    }];
+}
+
+-(void)emailOrganizer {
+    
+    if (![MFMailComposeViewController canSendMail]) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"You device is not set up for email" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
+    NSDate *date = self.eventConfirmedDate;
+    
+    NSString *monthStr = @"";
+    NSString *timeStr = @"";
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    
+    [df setAMSymbol:@"am"];
+    [df setPMSymbol:@"pm"];
+    
+    [df setDateFormat:@"dd MMMM"];
+    
+    monthStr = [NSString stringWithFormat:@"%@",
+                [df stringFromDate:date]];
+    
+    [df setDateFormat:@"hh:mm a"];
+    
+    timeStr = [NSString stringWithFormat:@"%@",
+               [df stringFromDate:date]];
+    
+    NSString *str = [NSString stringWithFormat:@"%@ on %@", timeStr, monthStr];
+    
+    MFMailComposeViewController *mailcompose = [[MFMailComposeViewController alloc] init];
+    
+    NSString *messageBody = [NSString stringWithFormat:@"<html><p>Hi %@,</p><p>Unfortunately, I'm no longer able to vote for my preferred dates for %@. I don't think I can make it at %@. I'll join you guys next time!</p><p>Regards,<br/>%@</p></html>", self.eventCreatorName, self.eventTitle, str, self.eventUserName];
+    
+    mailcompose = [[MFMailComposeViewController alloc] init];
+    mailcompose.mailComposeDelegate = self;
+    [mailcompose setSubject:@"Sorry, I may not be able to attend the event"];
+    [mailcompose setMessageBody:messageBody isHTML:YES];
+    NSArray *array = [NSArray arrayWithObject:self.eventCreatorEmail];
+    [mailcompose setToRecipients:array];
+    
+    [(MainVC *)self.parentVC presentViewController:mailcompose animated:YES completion:nil];
+}
+
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            break;
+        case MFMailComposeResultSaved:
+            break;
+        case MFMailComposeResultSent:
+            break;
+        case MFMailComposeResultFailed:
+            break;
+        default:
+        {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email" message:@"Email Failed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+            break;
+    }
+    
+    [controller dismissViewControllerAnimated:NO completion:^{
+        //remain at done view
+        [self scrollToDoneView];
     }];
 }
 
@@ -1920,6 +2229,17 @@
             if ([date compare:popularDate] == NSOrderedSame) {
                 [cell.starLabel setHidden:NO];
             }
+        }
+        
+        if (self.eventConfirmed && self.eventConfirmedDate) {
+            
+            if ([self.eventConfirmedDate compare:date] == NSOrderedSame) {
+                [cell.starLabel setHidden:NO];
+                [cell.starLabel setTextColor:[UIColor yellowColor]];
+            }
+        }
+        else {
+            [cell.starLabel setTextColor:[UIColor whiteColor]];
         }
         
         return cell;

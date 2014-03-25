@@ -1113,7 +1113,13 @@
         
     } completion:^(BOOL finished) {
         
-        [self.dateTimeTable setHidden:NO];
+        if (self.mainScrollView.contentOffset.x == 640.0) {
+            //at contacts selection
+            [self.dateTimeTable setHidden:YES];
+        }
+        else {
+            [self.dateTimeTable setHidden:NO];
+        }
     }];
 }
 

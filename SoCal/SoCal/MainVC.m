@@ -158,7 +158,7 @@
     [self dismissScanner];
 }
 
--(void)openEventVC:(NSString *)inviteCode andUsername:(NSString *)username {
+-(void)openEventVC:(NSString *)inviteCode username:(NSString *)username andEmail:(NSString *)email {
     
     if (self.composeVC) {
         
@@ -179,7 +179,7 @@
     [self.eventVC setEventInviteCode:inviteCode];
     
     if (username) {
-        [self.eventVC additionalSetupForRecentEvent:username];
+        [self.eventVC additionalSetupForRecentEventForUsername:username andEmail:email];
     }
     
     [self loadSecondView:self.eventVC.view];
@@ -187,7 +187,7 @@
 
 -(void)openEventVC:(NSString *)inviteCode {
     
-    [self openEventVC:inviteCode andUsername:nil];
+    [self openEventVC:inviteCode username:nil andEmail:nil];
 }
 
 #pragma mark - SecondView Handler
@@ -327,10 +327,21 @@
     
     [self dismissScanner];
     
-    NSString *eventBaseURL = @"http://socal-staging.herokuapp.com/use_invitation?i_code=";
-    NSString *eventBaseURL2 = @"socal-staging.herokuapp.com/use_invitation?i_code=";
-    NSString *eventBaseURL3 = @"http://socal-staging.herokuapp.com/use_invitation?i=";
-    NSString *eventBaseURL4 = @"socal-staging.herokuapp.com/use_invitation?i=";
+    NSString *baseHost;
+    
+    if ([Environment CurrentEnvironment] == STAGING) {
+        baseHost = @"socal-staging.herokuapp.com";
+    }
+    else {
+        baseHost = @"localhost:5000";
+    }
+    
+    [NSString stringWithFormat:@"http://%@/use_invitation?i_code=", baseHost];
+    
+    NSString *eventBaseURL = [NSString stringWithFormat:@"http://%@/use_invitation?i_code=", baseHost];
+    NSString *eventBaseURL2 = [NSString stringWithFormat:@"%@/use_invitation?i_code=", baseHost];
+    NSString *eventBaseURL3 = [NSString stringWithFormat:@"http://%@/use_invitation?i=", baseHost];
+    NSString *eventBaseURL4 = [NSString stringWithFormat:@"%@/use_invitation?i=", baseHost];
     NSString *eventBaseURL5 = @"http://rayd.us/socal/";
     
     for(AVMetadataObject *current in metadataObjects) {
@@ -510,10 +521,11 @@
     
     NSString *inviteCode = [recentEventDict objectForKey:@"invitation_code"];
     NSString *username = [recentEventDict objectForKey:@"username"];
+    NSString *userEmail = [recentEventDict objectForKey:@"email"];
     
     [self hideKeyboard];
     
-    [self openEventVC:inviteCode andUsername:username];
+    [self openEventVC:inviteCode username:username andEmail:userEmail];
 }
 
 #pragma mark - UITextField Delegate Methods

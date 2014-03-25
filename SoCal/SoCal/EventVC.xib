@@ -20,6 +20,7 @@
                 <outlet property="detailsView" destination="wX6-Ze-SEH" id="nzs-zn-Swz"/>
                 <outlet property="doneDatesTableView" destination="IfS-wg-6ne" id="LxD-0O-s06"/>
                 <outlet property="doneView" destination="Eil-wt-ZaD" id="oW0-rV-TE4"/>
+                <outlet property="eventDateConfirmSetPiece" destination="b21-Wk-oFx" id="8I6-2O-SJT"/>
                 <outlet property="eventDateMaybePiece" destination="3oS-pB-360" id="fJq-Uf-PLR"/>
                 <outlet property="eventDateNoPiece" destination="kSh-yB-BhW" id="ePP-97-1q1"/>
                 <outlet property="eventDateYesPiece" destination="Kf3-6d-HVe" id="YCO-Rb-N6F"/>
@@ -46,9 +47,11 @@
                 <outlet property="postsInputView" destination="0tp-N6-8OW" id="ZSn-X3-NDq"/>
                 <outlet property="postsTable" destination="Uq6-iZ-x92" id="ndR-Wp-eAR"/>
                 <outlet property="svEventInfoScrollView" destination="bsN-qI-WZG" id="6e7-Pk-dTI"/>
-                <outlet property="txtNameField" destination="qbj-VU-zsc" id="jgt-YD-o7p"/>
+                <outlet property="txtEmailField" destination="qbj-VU-zsc" id="0Xz-mu-D3M"/>
+                <outlet property="txtNameField" destination="nB9-dd-bVc" id="B0c-pe-Nwt"/>
                 <outlet property="txtPostField" destination="W4e-sM-BVE" id="ypW-KT-TdP"/>
                 <outlet property="view" destination="1" id="3"/>
+                <outlet property="votingEndedAssistButton" destination="5G7-OR-Wvl" id="o9h-it-vAX"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -114,7 +117,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.89999999999999991" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your name to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xw1-JO-g5F">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.89999999999999991" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your name &amp; email to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xw1-JO-g5F">
                     <rect key="frame" x="0.0" y="495" width="320" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -302,12 +305,27 @@
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="M6a-ZF-xSr">
-                    <rect key="frame" x="20" y="336" width="280" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="b21-Wk-oFx">
+                    <rect key="frame" x="138" y="331" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Confirm Event">
+                    <color key="backgroundColor" red="0.32156862749999998" green="0.78823529410000004" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="set">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5G7-OR-Wvl">
+                    <rect key="frame" x="85" y="331" width="150" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="Voting Ended - Click Here for Assistance">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="noVoteForConfirmedEvent" destination="-1" eventType="touchUpInside" id="tKs-VD-LcT"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -342,11 +360,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>
         <view contentMode="scaleToFill" id="dcL-Q9-L5p" userLabel="nameInputBar">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="qbj-VU-zsc">
-                    <rect key="frame" x="8" y="7" width="236" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter email here" minimumFontSize="17" id="qbj-VU-zsc">
+                    <rect key="frame" x="8" y="39" width="236" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
@@ -354,8 +372,17 @@
                         <outlet property="delegate" destination="-1" id="gaV-fQ-Wlp"/>
                     </connections>
                 </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter name here" minimumFontSize="17" id="nB9-dd-bVc">
+                    <rect key="frame" x="8" y="6" width="236" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="BWD-ed-dJR"/>
+                    </connections>
+                </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cdY-eR-4Yk">
-                    <rect key="frame" x="252" y="7" width="50" height="30"/>
+                    <rect key="frame" x="252" y="39" width="50" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.63921568630000003" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>

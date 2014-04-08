@@ -577,12 +577,14 @@
         [self.dateLabel setFont:[Helpers Exo2Regular:11.0]];
         [self.dateLabel setTextColor:[UIColor whiteColor]];
         [self.dateLabel setTextAlignment:NSTextAlignmentCenter];
+        [self.dateLabel setClipsToBounds:YES];
         
         self.monthLabel = [[UILabel alloc] initWithFrame:CGRectMake(7.5, 7.5, 45, 45)];
         [Helpers setBorderToView:self.monthLabel borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:self.monthLabel.frame.size.width/2];
         [self.monthLabel setFont:[Helpers Exo2Regular:16.0]];
         [self.monthLabel setTextColor:[UIColor whiteColor]];
         [self.monthLabel setTextAlignment:NSTextAlignmentCenter];
+        [self.monthLabel setClipsToBounds:YES];
         
         [self addSubview:self.monthLabel];
         [self addSubview:self.dateLabel];

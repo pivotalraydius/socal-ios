@@ -176,6 +176,8 @@
     [self.lblEventDateInstruction.layer setShadowColor:[UIColor blackColor].CGColor];
     [self.lblEventDateInstruction.layer setShadowOpacity:0.3];
     [self.lblEventDateInstruction.layer setShadowRadius:0.7];
+    
+    [self.eventDateRevotePiece.layer setCornerRadius:self.eventDateRevotePiece.frame.size.height/2];
 }
 
 -(void)setupFonts {
@@ -201,6 +203,9 @@
 //    [self.eventDateYesPiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
 //    [self.eventDateNoPiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
 //    [self.eventDateMaybePiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    
+    [self.eventDateRevotePiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
+    [self.eventDateConfirmSetPiece.titleLabel setFont:[Helpers Exo2Regular:14.0]];
     
     [self.lblEventDateInstruction setFont:[Helpers Exo2Regular:12.0]];
     [self.lblDoneSummaryLabel setFont:[Helpers Exo2Light:14.0]];
@@ -274,9 +279,18 @@
             [self additionalSetupForRecentEventForUsername:[responseObject objectForKey:@"invitee_name"] andEmail:[responseObject objectForKey:@"invitee_email"]];
         }
         
+        if ([responseObject objectForKey:@"user_voted_state"] && [responseObject objectForKey:@"user_voted_state"] != [NSNull null]) {
+            
+            self.hasVoted = [[responseObject objectForKey:@"user_voted_state"] boolValue];
+            
+            if (self.hasVoted) [self showReVoteMode];
+        }
+        
         [self eventHandler:eventDict];
         [self downloadPosts];
         [self pusherConnect];
+        
+        [self updateVoteDictArray];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -478,10 +492,21 @@
         
         if (dates.count == 1) { // single cell
             
-            if ([Helpers isDay:dateKey])
-                [view setAMRatio:1 setPMRatio:0];
-            else
-                [view setAMRatio:0 setPMRatio:1];
+            if ([self dateHasPassed:dateKey]) {
+             
+                [view setAMRatio:0 setPMRatio:0];
+                [view setBackgroundColor:[UIColor grayColor]];
+                [view.layer setCornerRadius:view.frame.size.height/2];
+                [view setClipsToBounds:YES];
+                [label setTextColor:[UIColor lightGrayColor]];
+            }
+            else {
+                
+                if ([Helpers isDay:dateKey])
+                    [view setAMRatio:1 setPMRatio:0];
+                else
+                    [view setAMRatio:0 setPMRatio:1];
+            }
             
             NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
             [dateFormatter2 setDateFormat:@"hh:mm"];
@@ -737,12 +762,21 @@
         
         NSLog(@"%@ has joined the conversation.", self.eventUserName);
         
+        if ([responseObject objectForKey:@"user_voted_status"] && [responseObject objectForKey:@"user_voted_status"] != [NSNull null]) {
+            
+            self.hasVoted = [[responseObject objectForKey:@"user_voted_status"] boolValue];
+            
+            if (self.hasVoted) [self showReVoteMode];
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
 }
 
 -(void)updateVoteDictArray {
+    
+    [self.voteDictArray removeAllObjects];
     
     for (NSDictionary *dateDict in self.eventDateTimesDictArray) {
         
@@ -926,6 +960,43 @@
 }
 
 #pragma mark - Drag Yes/No/Maybe Methods
+
+-(void)showReVoteMode {
+    
+    [self.eventDateYesPiece setHidden:YES];
+    [self.eventDateNoPiece setHidden:YES];
+    [self.eventDateMaybePiece setHidden:YES];
+    [self.eventDateRevotePiece setHidden:NO];
+    
+    [self.lblEventDateInstruction setText:@"You have voted previously"];
+}
+
+-(void)showNormalMode {
+    
+    [self.eventDateYesPiece setHidden:NO];
+    [self.eventDateNoPiece setHidden:NO];
+    [self.eventDateMaybePiece setHidden:NO];
+    [self.eventDateRevotePiece setHidden:YES];
+    
+    [self.lblEventDateInstruction setText:@"Drag the buttons to the relevant dates"];
+}
+
+-(IBAction)revoteButtonAction {
+    
+    [self showNormalMode];
+}
+
+-(BOOL)dateHasPassed:(NSDate *)date {
+    
+    if ([date compare:[NSDate date]] == NSOrderedAscending) {
+        
+        NSLog(@"Date has passed");
+        
+        return YES;
+    }
+    
+    return NO;
+}
 
 -(void)initTouchForVoteButtons {
     
@@ -1231,6 +1302,12 @@
             releasePointDate = [multiDatesArray objectAtIndex:3];
         }
         
+        if ([self dateHasPassed:releasePointDate]) {
+            
+            NSLog(@"Add alert here for date has passed");
+            return;
+        }
+        
         if (gesture.view == self.eventDateYesPiece) {
             
             [self vote:VOTE_YES forDate:releasePointDate];
@@ -1324,6 +1401,12 @@
         votedDate = releasePointDate;
     }
     
+    if ([self dateHasPassed:releasePointDate]) {
+        
+        NSLog(@"Add alert here for date has passed");
+        return;
+    }
+    
     if (gesture.view == self.eventDateYesPiece) {
         
         [self vote:VOTE_YES forDate:votedDate];
@@ -1374,19 +1457,6 @@
     }
     
     if (!date) {
-        return;
-    }
-    
-    NSInteger possibleVote = [self checkUDForPreviousVote:date];
-    
-    if (possibleVote >= VOTE_MAYBE) {
-        
-        NSLog(@"voted before!");
-        
-        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, but you can only vote each date once, and you have already submitted all your dates previously." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
-        }];
-        
         return;
     }
     
@@ -1508,54 +1578,48 @@
 
 -(void)submitVotesToServer {
     
-    for (NSMutableDictionary *voteDict in self.voteDictArray) {
-    
-        NSDate *aDate = [voteDict objectForKey:@"date"];
-        NSInteger possibleVote = [self checkUDForPreviousVote:aDate];
+    if (self.hasVoted && !self.eventDateRevotePiece.hidden) {
         
-        if (possibleVote < 0) {
-        
-            NSLog(@"never voted before, submit to server");
-            [self submitToServerVote:[[voteDict objectForKey:@"vote"] intValue] forDate:aDate];
-        }
-        else {
-            
-            NSLog(@"voted before, cannot submit to server");
-        }
-    }
-}
-
--(void)submitToServerVote:(NSInteger)vote forDate:(NSDate *)date {
-    
-    if (!date) {
         return;
     }
     
-    NSLog(@"Voted: %i for date: %@", vote, date);
+    NSString *paramsDatesVotes = @"";
     
-    NSNumber *dateID;
-    
-    for (NSDate *aDate in self.eventDateTimesArray) {
+    for (NSMutableDictionary *voteDict in self.voteDictArray) {
         
-        if ([aDate compare:date] == NSOrderedSame) {
+        NSDate *aDate = [voteDict objectForKey:@"date"];
+        NSInteger possibleVote = [[voteDict objectForKey:@"vote"] integerValue];
+        
+        NSNumber *dateID;
+        
+        for (NSDate *date in self.eventDateTimesArray) {
             
-            dateID = [[self.eventDateTimesDictArray objectAtIndex:[self.eventDateTimesArray indexOfObject:aDate]] objectForKey:@"id"];
+            if ([aDate compare:date] == NSOrderedSame) {
+                
+                dateID = [[self.eventDateTimesDictArray objectAtIndex:[self.eventDateTimesArray indexOfObject:aDate]] objectForKey:@"id"];
+            }
         }
+        
+        paramsDatesVotes = [paramsDatesVotes stringByAppendingString:[NSString stringWithFormat:@"%@", dateID]];
+        paramsDatesVotes = [paramsDatesVotes stringByAppendingString:@","];
+        paramsDatesVotes = [paramsDatesVotes stringByAppendingString:[NSString stringWithFormat:@"%li", (long)possibleVote]];
+        paramsDatesVotes = [paramsDatesVotes stringByAppendingString:@"{"];
     }
     
     NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
     
-    [queryInfo setObject:[NSNumber numberWithInt:vote] forKey:@"vote"];
-    [queryInfo setObject:dateID forKey:@"id"];
-    
-    NSLog(@"id i am voting for: %@", dateID);
-    
-    [self.mainDoneButton setEnabled:NO];
+    [queryInfo setObject:paramsDatesVotes forKey:@"votes"];
+    [queryInfo setObject:self.eventUserEmail forKey:@"email"];
+    [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
     
     [[NetworkAPIClient sharedClient] postPath:VOTE_FOR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        [self saveVoteToUD:date andVote:vote];
-        [self.mainDoneButton setEnabled:YES];
+        for (NSMutableDictionary *voteDict in self.voteDictArray) {
+         
+            NSDate *aDate = [voteDict objectForKey:@"date"];
+            NSInteger possibleVote = [[voteDict objectForKey:@"vote"] integerValue];
+            [self saveVoteToUD:aDate andVote:possibleVote];
+        }
         
         [self retrieveEvent];
         
@@ -1639,79 +1703,64 @@
         
         return;
     }
-    
-    if (self.eventDateTimesDictArray.count <= 0) {
-        
-        NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
-        [self.lblDoneSummaryLabel setText:str];
-        
-        return;
-    }
-    
-    NSDictionary *mainDict = nil;
-    NSInteger yesVotes = 0;
-    
-    for (NSDictionary *dateTimeDict in self.eventDateTimesDictArray) {
-        
-        if (!mainDict) {
-            if ([[dateTimeDict objectForKey:@"yes"] intValue] > 0) {
-                mainDict = dateTimeDict;
-                
-                yesVotes = [[mainDict objectForKey:@"yes"] intValue];
-            }
-        }
-        else {
-            
-            if ([[dateTimeDict objectForKey:@"yes"] intValue] > 0) {
-                
-                int yes = [[dateTimeDict objectForKey:@"yes"] intValue];
-                
-                if (yes > yesVotes) {
-                    
-                    mainDict = dateTimeDict;
-                    
-                    yesVotes = [[mainDict objectForKey:@"yes"] intValue];
-                }
-            }
-        }
-    }
-    
-    if (mainDict) {
-        
-        NSDate *date = [Helpers dateFromString:[mainDict objectForKey:@"dateNtime"]];
-        
-        NSString *monthStr = @"";
-        NSString *timeStr = @"";
-        
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        
-        [df setAMSymbol:@"am"];
-        [df setPMSymbol:@"pm"];
-        
-        [df setDateFormat:@"dd MMMM"];
-        
-        monthStr = [NSString stringWithFormat:@"%@",
-                    [df stringFromDate:date]];
-        
-        [df setDateFormat:@"hh:mm a"];
-        
-        timeStr = [NSString stringWithFormat:@"%@",
-                      [df stringFromDate:date]];
-        
-        NSString *str = [NSString stringWithFormat:@"%@ on %@ is currently the most popular date and time.", timeStr, monthStr];
-        
-        [self.lblDoneSummaryLabel setText:str];
-        [self setSummaryLabelWithAttributedStringForTime:timeStr andMonth:monthStr];
-        
-        popularDate = date;
-    }
     else {
         
-        popularDate = nil;
+        NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
+        [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
         
-        NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
-        [self.lblDoneSummaryLabel setText:str];
-    }}
+        [[NetworkAPIClient sharedClient] postPath:RETRIEVE_POPULAR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSDate *date;
+            
+            if ([responseObject objectForKey:@"date"] && [responseObject objectForKey:@"date"] != [NSNull null]) {
+                
+                date = [responseObject objectForKey:@"date"];
+                
+                NSString *monthStr = @"";
+                NSString *timeStr = @"";
+                
+                NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                
+                [df setAMSymbol:@"am"];
+                [df setPMSymbol:@"pm"];
+                
+                [df setDateFormat:@"dd MMMM"];
+                
+                monthStr = [NSString stringWithFormat:@"%@",
+                            [df stringFromDate:date]];
+                
+                [df setDateFormat:@"hh:mm a"];
+                
+                timeStr = [NSString stringWithFormat:@"%@",
+                           [df stringFromDate:date]];
+                
+                NSString *str = [NSString stringWithFormat:@"%@ on %@ is currently the most popular date and time.", timeStr, monthStr];
+                
+                [self.lblDoneSummaryLabel setText:str];
+                [self setSummaryLabelWithAttributedStringForTime:timeStr andMonth:monthStr];
+                
+                popularDate = date;
+            }
+            else {
+                
+                popularDate = nil;
+                
+                NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
+                [self.lblDoneSummaryLabel setText:str];
+            }
+
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            popularDate = nil;
+            
+            NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
+            [self.lblDoneSummaryLabel setText:str];
+            
+            return;
+        }];
+    }
+}
 
 -(void)setSummaryLabelWithAttributedStringForTime:(NSString *)timeStr andMonth:(NSString *)monthStr {
     
@@ -2061,6 +2110,10 @@
         }
         
         if (scrollView.contentOffset.x < 320.0) {
+            
+            if (self.isEventCreator) {
+                [self scrollToDoneView];
+            }
             
             [self.mainBackButton setTitle:@"Home" forState:UIControlStateNormal];
             [self.mainDoneButton setTitle:@"Dates" forState:UIControlStateNormal];

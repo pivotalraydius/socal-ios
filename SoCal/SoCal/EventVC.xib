@@ -23,6 +23,7 @@
                 <outlet property="eventDateConfirmSetPiece" destination="b21-Wk-oFx" id="8I6-2O-SJT"/>
                 <outlet property="eventDateMaybePiece" destination="3oS-pB-360" id="fJq-Uf-PLR"/>
                 <outlet property="eventDateNoPiece" destination="kSh-yB-BhW" id="ePP-97-1q1"/>
+                <outlet property="eventDateRevotePiece" destination="oAP-jm-hiO" id="JQr-D4-acE"/>
                 <outlet property="eventDateYesPiece" destination="Kf3-6d-HVe" id="YCO-Rb-N6F"/>
                 <outlet property="lblDetailsEventTitle" destination="2ao-91-YkP" id="yLR-uT-SHi"/>
                 <outlet property="lblDetailsInfo" destination="EJu-j2-wpP" id="R56-iV-cDF"/>
@@ -264,6 +265,19 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oAP-jm-hiO">
+                    <rect key="frame" x="61" y="269" width="66" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="re-vote">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="revoteButtonAction" destination="-1" eventType="touchUpInside" id="5sX-ME-RnU"/>
+                    </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag the buttons to the relevant dates" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fXn-FB-gLE">
                     <rect key="frame" x="178" y="269" width="122" height="44"/>

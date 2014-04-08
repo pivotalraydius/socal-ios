@@ -16,6 +16,7 @@
 #define SOCAL_DOWNLOAD_POSTS                    @"api/home/download_posts"
 #define SOCAL_CREATE_USER                       @"api/home/create_user"
 #define SOCAL_CONFIRM_EVENT                     @"api/home/topic_state"
+#define RETRIEVE_POPULAR_DATE                   @"api/home/retrieve_popular_date"
 
 #define DOWNLOAD_INITIAL_RETRIEVE               @"api/downloaddata/initial_retrieve"
 #define DOWNLOAD_BACKGROUND_RETRIEVE            @"api/downloaddata/background_retrieve"

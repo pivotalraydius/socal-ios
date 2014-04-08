@@ -19,6 +19,9 @@ static inline float radians(double degrees) { return degrees * PI / 180; }
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         // Initialization code
+        
+        [Helpers setBorderToView:self borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:frame.size.height/2];
+        [self setClipsToBounds:YES];
     }
     return self;
 }
@@ -83,7 +86,6 @@ static inline float radians(double degrees) { return degrees * PI / 180; }
 }
 
 -(void)drawPartitions {
-    
     
     if (self->m_amRatio == 0 || self->m_amRatio == 1) {
         return;

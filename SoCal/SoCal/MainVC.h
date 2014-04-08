@@ -51,6 +51,7 @@
 @property (nonatomic, weak) IBOutlet UIView *secondViewContainer;
 
 -(void)openEventVC:(NSString *)inviteCode;
+-(void)openEventVC:(NSString *)inviteCode username:(NSString *)username andEmail:(NSString *)email;
 -(void)closeSecondView:(UIView *)view;
 -(void)scrollBGViewToOffset:(CGPoint)offset;
 

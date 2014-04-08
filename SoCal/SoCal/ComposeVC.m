@@ -1072,6 +1072,8 @@
         
         [self closeButtonAction];
         
+        [(MainVC *)self.parentVC openEventVC:[NSString stringWithFormat:@"%@", self.invitationCode] username:self.creatorNameField.text andEmail:self.creatorEmailField.text];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        
         NSLog(@"creat event failed with error: %@", error);

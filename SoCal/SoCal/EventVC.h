@@ -96,6 +96,9 @@
 
 @property BOOL isEventCreator;
 
+@property BOOL hasVoted;
+@property (nonatomic, weak) IBOutlet UIButton *eventDateRevotePiece;
+
 @property BOOL eventConfirmed;
 @property (nonatomic, strong) NSDate *eventConfirmedDate;
 

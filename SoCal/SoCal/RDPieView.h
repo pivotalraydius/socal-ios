@@ -16,6 +16,7 @@
     
     UIColor *m_amColor;
     UIColor *m_pmColor;
+    UIColor *m_expiredColor;
 }
 
 -(void)setAMRatio:(float)amRatio setPMRatio:(float)pmRatio;

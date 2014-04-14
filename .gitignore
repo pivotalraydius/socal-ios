@@ -16,3 +16,5 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+SoCal/Pods/
+Socal/Podfile.lock

@@ -36,4 +36,6 @@
 
 +(BOOL)iPhone4;
 
++(BOOL)string:(NSString *)mainStr containsString:(NSString *)secStr;
+
 @end

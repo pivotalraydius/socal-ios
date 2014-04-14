@@ -71,11 +71,11 @@
 #define RETRIEVE_MEAL_TAGS                      @"api/tags/retrieve_meal_tags"
 #define RETRIEVE_USER_TOPIC_RATING              @"api/topics/user_rating"
 
-@interface NetworkAPIClient : AFHTTPClient
+@interface NetworkAPIClient : AFHTTPRequestOperationManager
 
 +(id)sharedClient;
 +(id)sharedStagingClient;
 
--(void)cancelHTTPOperationWithPath:(NSString *)path;
+-(void)cancelHTTPOperationsWithPath:(NSString *)path;
 
 @end

@@ -12,7 +12,6 @@
 #define PI 3.14159265358979323846
 #define DEFAULT_AM_COLOR [Helpers suriaOrangeColorWithAlpha:1.0]
 #define DEFAULT_PM_COLOR [Helpers pmBlueColorWithAlpha:1.0]
-static inline float radians(double degrees) { return degrees * PI / 180; }
 
 @implementation RDPieView
 

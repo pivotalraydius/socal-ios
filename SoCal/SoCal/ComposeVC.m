@@ -974,7 +974,7 @@
 
 -(void)getNewInviteCode {
  
-    [[NetworkAPIClient sharedClient] postPath:GENERATE_INVITE_CODE parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[NetworkAPIClient sharedClient] POST:GENERATE_INVITE_CODE parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         self.invitationCode = [responseObject objectForKey:@"invitation_code"];
         NSLog(@"invitation code: %@", self.invitationCode);
@@ -1065,7 +1065,7 @@
     [queryInfo setObject:self.creatorNameField.text forKey:@"username"];
     [queryInfo setObject:self.creatorEmailField.text forKey:@"email"];
     
-    [[NetworkAPIClient sharedClient] postPath:CREATE_EVENT parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[NetworkAPIClient sharedClient] POST:CREATE_EVENT parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"create event success");
 //        [self sendInvitationCodeToInvitees];
@@ -1223,9 +1223,9 @@
     
     [self hideKeyboard];
     
-    [[NetworkAPIClient sharedStagingClient] cancelAllHTTPOperationsWithMethod:@"POST" path:PLACES_WITHIN_LOCATION];
-    [[NetworkAPIClient sharedStagingClient] cancelAllHTTPOperationsWithMethod:@"POST" path:PLACES_CHECKIN_SEARCH_NEARBY_PLACES];
-    [[NetworkAPIClient sharedStagingClient] cancelAllHTTPOperationsWithMethod:@"POST" path:PLACES_WITHIN_LOCALITY];
+    [[NetworkAPIClient sharedStagingClient] cancelHTTPOperationsWithPath:PLACES_WITHIN_LOCATION];
+    [[NetworkAPIClient sharedStagingClient] cancelHTTPOperationsWithPath:PLACES_CHECKIN_SEARCH_NEARBY_PLACES];
+    [[NetworkAPIClient sharedStagingClient] cancelHTTPOperationsWithPath:PLACES_WITHIN_LOCALITY];
     
     NSString *locationKeyword = [[self.txtPlaceName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] lowercaseString];
     NSString *cityKeyword = [[self.txtCityName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] lowercaseString] ;
@@ -1296,7 +1296,7 @@
     [self.placesTable reloadData];
     self.selectedLocationDict = nil;
     
-    [[NetworkAPIClient sharedStagingClient] postPath:path parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[NetworkAPIClient sharedStagingClient] POST:path parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [self.arFilteredPlaces removeAllObjects];
         

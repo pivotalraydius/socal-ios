@@ -158,7 +158,7 @@
     if ([Helpers iPhone4]) {
         
         [self.postsTable setFrame:CGRectMake(self.postsTable.frame.origin.x, self.postsTable.frame.origin.y, self.postsTable.frame.size.width, self.postsTable.frame.size.height-88)];
-        [self.bottomBar setFrame:CGRectMake(self.bottomBar.frame.origin.x, self.bottomBar.frame.origin.y-88, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
+        [self.bottomBar setFrame:CGRectMake(self.bottomBar.frame.origin.x, self.bottomBar.frame.origin.y-176, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
         [self.lblEnterNamePrompt setFrame:CGRectMake(self.lblEnterNamePrompt.frame.origin.x, self.lblEnterNamePrompt.frame.origin.y-88, self.lblEnterNamePrompt.frame.size.width, self.lblEnterNamePrompt.frame.size.height)];
     }
     
@@ -268,7 +268,7 @@
     NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
     [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
     
-    [[NetworkAPIClient sharedClient] postPath:RETRIEVE_EVENT parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[NetworkAPIClient sharedClient] POST:RETRIEVE_EVENT parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *eventDict = [responseObject objectForKey:@"topic"];
         
@@ -608,8 +608,8 @@
     
     self.postsTable = nil;
     
-    [[NetworkAPIClient sharedClient] cancelAllHTTPOperationsWithMethod:@"POST" path:RETRIEVE_EVENT];
-    [[NetworkAPIClient sharedClient] cancelAllHTTPOperationsWithMethod:@"POST" path:SOCAL_DOWNLOAD_POSTS];
+    [[NetworkAPIClient sharedClient] cancelHTTPOperationsWithPath:RETRIEVE_EVENT];
+    [[NetworkAPIClient sharedClient] cancelHTTPOperationsWithPath:SOCAL_DOWNLOAD_POSTS];
     
     self.eventDateTimesArray = nil;
     self.eventDateTimesDictArray = nil;
@@ -723,6 +723,8 @@
         [self.postsInputView setHidden:NO];
         [self.nameInputView setHidden:YES];
         [self.lblEnterNamePrompt setHidden:YES];
+        
+        [self.bottomBar setFrame:CGRectMake(self.bottomBar.frame.origin.x, self.bottomBar.frame.origin.y+44, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
     }
     else {
         [self.postsInputView setHidden:YES];
@@ -736,6 +738,7 @@
     [self hideKeyboard];
     
     self.eventUserName = self.txtNameField.text;
+    self.eventUserEmail = self.txtEmailField.text;
     hasName = YES;
     
     [self submitUsernameToServer];
@@ -758,7 +761,7 @@
     [queryInfo setObject:self.eventUserName forKey:@"username"];
     [queryInfo setObject:self.eventUserEmail forKey:@"email"];
     
-    [[NetworkAPIClient sharedClient] postPath:SOCAL_CREATE_USER parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[NetworkAPIClient sharedClient] POST:SOCAL_CREATE_USER parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"%@ has joined the conversation.", self.eventUserName);
         
@@ -831,10 +834,8 @@
 
 -(void)pusherConnect {
     
-    self.pusherClient = [PTPusher pusherWithKey:[Environment Pusher_Key] connectAutomatically:NO encrypted:YES];
-    [self.pusherClient setDelegate:self];
+    self.pusherClient = [PTPusher pusherWithKey:[Environment Pusher_Key] delegate:self encrypted:YES];
     [self.pusherClient connect];
-    [self.pusherClient setReconnectAutomatically:YES];
     [self.pusherClient setReconnectDelay:0.1];
     
     //subscribe to main channel
@@ -907,7 +908,7 @@
     
     [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
     
-    [[NetworkAPIClient sharedClient] postPath:SOCAL_DOWNLOAD_POSTS parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[NetworkAPIClient sharedClient] POST:SOCAL_DOWNLOAD_POSTS parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [self.postsArray removeAllObjects];
         
@@ -946,7 +947,7 @@
     [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
     [queryInfo setObject:self.txtPostField.text forKey:@"content"];
     
-    [[NetworkAPIClient sharedClient] postPath:SOCAL_CREATE_POST parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[NetworkAPIClient sharedClient] POST:SOCAL_CREATE_POST parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [self.txtPostField setText:@""];
         [self hideKeyboard];
@@ -1149,7 +1150,7 @@
     [queryInfo setObject:[NSNumber numberWithBool:YES] forKey:@"confirm_state"];
     [queryInfo setObject:dateID forKey:@"confirmed_date_id"];
     
-    [[NetworkAPIClient sharedClient] postPath:SOCAL_CONFIRM_EVENT parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[NetworkAPIClient sharedClient] POST:SOCAL_CONFIRM_EVENT parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"topic confirmed");
         self.eventConfirmed = YES;
@@ -1612,7 +1613,7 @@
     [queryInfo setObject:self.eventUserEmail forKey:@"email"];
     [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
     
-    [[NetworkAPIClient sharedClient] postPath:VOTE_FOR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[NetworkAPIClient sharedClient] POST:VOTE_FOR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         for (NSMutableDictionary *voteDict in self.voteDictArray) {
          
@@ -1708,47 +1709,51 @@
         NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
         [queryInfo setObject:self.eventInviteCode forKey:@"invitation_code"];
         
-        [[NetworkAPIClient sharedClient] postPath:RETRIEVE_POPULAR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[NetworkAPIClient sharedClient] POST:RETRIEVE_POPULAR_DATE parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            NSDate *date;
-            
-            if ([responseObject objectForKey:@"date"] && [responseObject objectForKey:@"date"] != [NSNull null]) {
+            if ([responseObject objectForKey:@"popular_date"] && [responseObject objectForKey:@"popular_date"] != [NSNull null]) {
                 
-                date = [responseObject objectForKey:@"date"];
+                NSDictionary *dateDict = [responseObject objectForKey:@"popular_date"];
                 
-                NSString *monthStr = @"";
-                NSString *timeStr = @"";
+                NSDate *date;
                 
-                NSDateFormatter *df = [[NSDateFormatter alloc] init];
-                
-                [df setAMSymbol:@"am"];
-                [df setPMSymbol:@"pm"];
-                
-                [df setDateFormat:@"dd MMMM"];
-                
-                monthStr = [NSString stringWithFormat:@"%@",
-                            [df stringFromDate:date]];
-                
-                [df setDateFormat:@"hh:mm a"];
-                
-                timeStr = [NSString stringWithFormat:@"%@",
-                           [df stringFromDate:date]];
-                
-                NSString *str = [NSString stringWithFormat:@"%@ on %@ is currently the most popular date and time.", timeStr, monthStr];
-                
-                [self.lblDoneSummaryLabel setText:str];
-                [self setSummaryLabelWithAttributedStringForTime:timeStr andMonth:monthStr];
-                
-                popularDate = date;
+                if ([dateDict objectForKey:@"date"] && [dateDict objectForKey:@"date"] != [NSNull null]) {
+                    
+                    date = [Helpers dateFromString:[dateDict objectForKey:@"date"]];
+                    
+                    NSString *monthStr = @"";
+                    NSString *timeStr = @"";
+                    
+                    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                    
+                    [df setAMSymbol:@"am"];
+                    [df setPMSymbol:@"pm"];
+                    
+                    [df setDateFormat:@"dd MMMM"];
+                    
+                    monthStr = [NSString stringWithFormat:@"%@",
+                                [df stringFromDate:date]];
+                    
+                    [df setDateFormat:@"hh:mm a"];
+                    
+                    timeStr = [NSString stringWithFormat:@"%@",
+                               [df stringFromDate:date]];
+                    
+                    NSString *str = [NSString stringWithFormat:@"%@ on %@ is currently the most popular date and time.", timeStr, monthStr];
+                    
+                    [self.lblDoneSummaryLabel setText:str];
+                    [self setSummaryLabelWithAttributedStringForTime:timeStr andMonth:monthStr];
+                    
+                    popularDate = date;
+                }
+                else {
+                    
+                    popularDate = nil;
+                    
+                    NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
+                    [self.lblDoneSummaryLabel setText:str];
+                }
             }
-            else {
-                
-                popularDate = nil;
-                
-                NSString *str = @"Insufficient data to calculate the most popular event date at the moment.";
-                [self.lblDoneSummaryLabel setText:str];
-            }
-
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
@@ -2111,10 +2116,6 @@
         
         if (scrollView.contentOffset.x < 320.0) {
             
-            if (self.isEventCreator) {
-                [self scrollToDoneView];
-            }
-            
             [self.mainBackButton setTitle:@"Home" forState:UIControlStateNormal];
             [self.mainDoneButton setTitle:@"Dates" forState:UIControlStateNormal];
             [self.lblTitleLabel setText:@"Details"];
@@ -2341,11 +2342,20 @@
     
     originalPostsTableOriginY = self.postsTable.frame.origin.y;
     originalPostsTableHeight = self.postsTable.frame.size.height;
-
-    [self.bottomBar setFrame:CGRectMake(0, self.view.frame.size.height - self.bottomBar.frame.size.height - 216, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
-    [self.lblEnterNamePrompt setFrame:CGRectMake(self.lblEnterNamePrompt.frame.origin.x, self.bottomBar.frame.origin.y - self.lblEnterNamePrompt.frame.size.height, self.lblEnterNamePrompt.frame.size.width, self.lblEnterNamePrompt.frame.size.height)];
     
-    [self.postsTable setFrame:CGRectMake(0, 64, self.postsTable.frame.size.width, self.bottomBar.frame.origin.y-64)];
+    if (self.nameInputView.hidden) {
+        [self.bottomBar setFrame:CGRectMake(0, self.view.frame.size.height - self.bottomBar.frame.size.height - 172, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
+        [self.lblEnterNamePrompt setFrame:CGRectMake(self.lblEnterNamePrompt.frame.origin.x, self.bottomBar.frame.origin.y - self.lblEnterNamePrompt.frame.size.height, self.lblEnterNamePrompt.frame.size.width, self.lblEnterNamePrompt.frame.size.height)];
+        
+        [self.postsTable setFrame:CGRectMake(0, 64, self.postsTable.frame.size.width, self.bottomBar.frame.origin.y-64)];
+    }
+    else {
+        [self.bottomBar setFrame:CGRectMake(0, self.view.frame.size.height - self.bottomBar.frame.size.height - 216, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
+        [self.lblEnterNamePrompt setFrame:CGRectMake(self.lblEnterNamePrompt.frame.origin.x, self.bottomBar.frame.origin.y - self.lblEnterNamePrompt.frame.size.height, self.lblEnterNamePrompt.frame.size.width, self.lblEnterNamePrompt.frame.size.height)];
+        
+        [self.postsTable setFrame:CGRectMake(0, 64, self.postsTable.frame.size.width, self.bottomBar.frame.origin.y-64)];
+    }
+    
     maskLayer.bounds = CGRectMake(0, 0,
                                   self.postsTable.frame.size.width,
                                   self.postsTable.frame.size.height);
@@ -2365,10 +2375,19 @@
     [UIView setAnimationCurve:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
     [UIView setAnimationBeginsFromCurrentState:YES];
     
-    [self.bottomBar setFrame:CGRectMake(0, self.view.frame.size.height - self.bottomBar.frame.size.height, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
-    [self.lblEnterNamePrompt setFrame:CGRectMake(self.lblEnterNamePrompt.frame.origin.x, self.bottomBar.frame.origin.y - self.lblEnterNamePrompt.frame.size.height, self.lblEnterNamePrompt.frame.size.width, self.lblEnterNamePrompt.frame.size.height)];
+    if (self.nameInputView.hidden) {
+        [self.bottomBar setFrame:CGRectMake(0, self.view.frame.size.height - self.bottomBar.frame.size.height + 44, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
+        [self.lblEnterNamePrompt setFrame:CGRectMake(self.lblEnterNamePrompt.frame.origin.x, self.bottomBar.frame.origin.y - self.lblEnterNamePrompt.frame.size.height, self.lblEnterNamePrompt.frame.size.width, self.lblEnterNamePrompt.frame.size.height)];
+        
+        [self.postsTable setFrame:CGRectMake(0, originalPostsTableOriginY, self.postsTable.frame.size.width, originalPostsTableHeight)];
+    }
+    else {
+        [self.bottomBar setFrame:CGRectMake(0, self.view.frame.size.height - self.bottomBar.frame.size.height, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
+        [self.lblEnterNamePrompt setFrame:CGRectMake(self.lblEnterNamePrompt.frame.origin.x, self.bottomBar.frame.origin.y - self.lblEnterNamePrompt.frame.size.height, self.lblEnterNamePrompt.frame.size.width, self.lblEnterNamePrompt.frame.size.height)];
+        
+        [self.postsTable setFrame:CGRectMake(0, originalPostsTableOriginY, self.postsTable.frame.size.width, originalPostsTableHeight)];
+    }
     
-    [self.postsTable setFrame:CGRectMake(0, originalPostsTableOriginY, self.postsTable.frame.size.width, originalPostsTableHeight)];
     maskLayer.bounds = CGRectMake(0, 0,
                                   self.postsTable.frame.size.width,
                                   self.postsTable.frame.size.height);
@@ -2381,6 +2400,7 @@
 -(void)hideKeyboard {
     
     [self.txtNameField resignFirstResponder];
+    [self.txtEmailField resignFirstResponder];
     [self.txtPostField resignFirstResponder];
 }
 

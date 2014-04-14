@@ -8,6 +8,7 @@
 
 #import "MainVC.h"
 #import "UIImage+ImageEffects.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation MainVC
 
@@ -430,20 +431,13 @@
     
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://3788115f29daca132b4f-ce1335d853f8573f8e5e4d725b006a21.r57.cf6.rackcdn.com/BGCropped@2x.jpg"]];
     
-    AFImageRequestOperation *request = [[AFImageRequestOperation alloc] initWithRequest:urlRequest];
-    [request setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.ivBGView setImageWithURLRequest:urlRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         
-        if ([responseObject class] == [UIImage class]) {
-            
-            [self.ivBGView setImage:responseObject];
-            [self.ivBGBlurView setImage:[self.ivBGView.image applyLightEffect]];
-        }
+        [self.ivBGBlurView setImage:[self.ivBGView.image applyLightEffect]];
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         
     }];
-    
-    [request start];
 }
 
 #pragma mark - UICollectionView Delegate Methods

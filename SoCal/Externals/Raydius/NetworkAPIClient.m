@@ -34,17 +34,22 @@
     self = [super initWithBaseURL:url];
     if (self) {
         
-        [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-        [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+        AFJSONResponseSerializer *serializer = [[AFJSONResponseSerializer alloc] init];
+        [self setResponseSerializer:serializer];
     }
     
     return self;
 }
 
--(void)cancelHTTPOperationWithPath:(NSString *)path {
+-(void)cancelHTTPOperationsWithPath:(NSString *)path {
     
-    [super cancelAllHTTPOperationsWithMethod:@"POST" path:path];
-    [NSObject cancelPreviousPerformRequestsWithTarget:nil selector:@selector(postPath:parameters:success:failure:) object:self];
+    for (AFHTTPRequestOperation *operation in self.operationQueue.operations) {
+        
+        if ([Helpers string:operation.request.URL.absoluteString containsString:path]) {
+            
+            [operation cancel];
+        }
+    }
 }
 
 @end

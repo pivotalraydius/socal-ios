@@ -205,4 +205,16 @@
     return itIs;
 }
 
++(BOOL)string:(NSString *)mainStr containsString:(NSString *)secStr {
+    
+    NSRange range = [mainStr rangeOfString:secStr options:NSCaseInsensitiveSearch];
+    
+    if (range.location != NSNotFound) {
+        
+        return true;
+    }
+    
+    return false;
+}
+
 @end

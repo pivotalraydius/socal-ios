@@ -1,0 +1,11 @@
+platform :ios, '7.0'
+
+link_with 'SoCal', 'SoCal-Dev'
+
+pod 'AFNetworking', '~> 2.0'
+pod 'libPusher', '~> 1.5'
+
+workspace 'SoCal'
+
+# ignore all warnings from all pods
+inhibit_all_warnings!

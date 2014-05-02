@@ -33,6 +33,7 @@
     
     CGFloat originalPostsTableOriginY;
     CGFloat originalPostsTableHeight;
+    CGFloat originalContainerOriginY;
 }
 
 @property (nonatomic, weak) id parentVC;

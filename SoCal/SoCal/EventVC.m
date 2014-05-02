@@ -2342,6 +2342,7 @@
     
     originalPostsTableOriginY = self.postsTable.frame.origin.y;
     originalPostsTableHeight = self.postsTable.frame.size.height;
+    originalContainerOriginY = self.detailsView.frame.origin.y;
     
     if (self.nameInputView.hidden) {
         [self.bottomBar setFrame:CGRectMake(0, self.view.frame.size.height - self.bottomBar.frame.size.height - 172, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height)];
@@ -2355,6 +2356,9 @@
         
         [self.postsTable setFrame:CGRectMake(0, 64, self.postsTable.frame.size.width, self.bottomBar.frame.origin.y-64)];
     }
+    
+    [self.detailsView setFrame:CGRectMake(self.detailsView.frame.origin.x, originalContainerOriginY-self.detailsView.frame.size.height, self.detailsView.frame.size.width, self.detailsView.frame.size.height)];
+    [self.datesView setFrame:CGRectMake(self.datesView.frame.origin.x, originalContainerOriginY-self.datesView.frame.size.height, self.datesView.frame.size.width, self.datesView.frame.size.height)];
     
     maskLayer.bounds = CGRectMake(0, 0,
                                   self.postsTable.frame.size.width,
@@ -2387,6 +2391,9 @@
         
         [self.postsTable setFrame:CGRectMake(0, originalPostsTableOriginY, self.postsTable.frame.size.width, originalPostsTableHeight)];
     }
+    
+    [self.detailsView setFrame:CGRectMake(self.detailsView.frame.origin.x, originalContainerOriginY, self.detailsView.frame.size.width, self.detailsView.frame.size.height)];
+    [self.datesView setFrame:CGRectMake(self.datesView.frame.origin.x, originalContainerOriginY, self.datesView.frame.size.width, self.datesView.frame.size.height)];
     
     maskLayer.bounds = CGRectMake(0, 0,
                                   self.postsTable.frame.size.width,

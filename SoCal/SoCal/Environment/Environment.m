@@ -22,7 +22,7 @@
 
 +(NSString *)BaseHost {
     
-    return @"https://socal-staging.herokuapp.com/";
+    return @"https://h1ve-staging.herokuapp.com/";
 }
 
 //+(NSString *)StagingHost {

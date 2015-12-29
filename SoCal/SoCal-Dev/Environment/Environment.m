@@ -12,8 +12,8 @@
 
 +(NSString *)App_Key {
     
-//    return @"75228cb90b54ae08d637267fdb8bf8d2";
-    return @"872e1e6f6717e443d566b3f405d116ae";
+//    return @"872e1e6f6717e443d566b3f405d116ae";
+    return @"75228cb90b54ae08d637267fdb8bf8d2";
 }
 
 +(int)CurrentEnvironment {
@@ -24,7 +24,8 @@
 +(NSString *)BaseHost {
     
 //    return @"http://mfalcon.local:5000/";
-    return @"http://192.168.0.120:5000/";
+//    return @"http://192.168.0.120:5000/";
+    return @"http://192.168.0.111:5000/";   //wwm's PC IP
 }
 
 //+(NSString *)StagingHost {

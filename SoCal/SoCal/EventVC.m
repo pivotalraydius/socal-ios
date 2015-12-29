@@ -14,6 +14,7 @@
 #import "RDPieView.h"
 #import "UIBAlertView.h"
 #import "MainVC.h"
+#import "NetworkAPIClient.h"
 
 #define VOTE_BUTTON_STILL   0
 #define VOTE_BUTTON_MOTION  1
@@ -289,7 +290,6 @@
         [self eventHandler:eventDict];
         [self downloadPosts];
         [self pusherConnect];
-        
         [self updateVoteDictArray];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -371,12 +371,15 @@
     [self.eventDateTimesDictArray addObjectsFromArray:dateStringsArray];
     
     for (NSDictionary *dateDict in dateStringsArray) {
+        NSLog(@"date form string %@",[dateDict objectForKey:@"dateNtime"]);
+        NSDate *aDate = [self dateForRFC3339DateTimeString:[dateDict objectForKey:@"dateNtime"]];
+        NSLog(@"Date string::::: %@",aDate),
         
-        NSDate *aDate = [Helpers dateFromString:[dateDict objectForKey:@"dateNtime"]];
         [self.eventDateTimesArray addObject:aDate];
     }
     
-    [self.calEventDatesCalendar goToMonth:[Helpers dateFromString:[[dateStringsArray objectAtIndex:0] objectForKey:@"dateNtime"]]]; 
+    
+    [self.calEventDatesCalendar goToMonth:[self dateForRFC3339DateTimeString:[[dateStringsArray objectAtIndex:0] objectForKey:@"dateNtime"]]];
     
     [self updateCalendarSubviews];
     if (self.eventUserName) [self updateVoteDictArray];
@@ -386,6 +389,18 @@
     if (self.eventConfirmed) {
         [self scrollToDoneView];
     }
+}
+
+-(NSDate *)dateForRFC3339DateTimeString:(NSString *)rfc3339DateTimeString {
+    
+    NSDateFormatter *rfc3339DateFormatter = [[NSDateFormatter alloc] init];
+    //    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+    [rfc3339DateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"];
+    [rfc3339DateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    
+    // Convert the RFC 3339 date time string to an NSDate.
+    NSDate *result = [rfc3339DateFormatter dateFromString:rfc3339DateTimeString];
+    return result;
 }
 
 -(void)setEventTitleWithTitle:(NSString *)title place:(NSString *)placeName andDate:(NSDate *)date {
@@ -446,7 +461,7 @@
         for (int i = 0 ; i < self.selectedCalendarDatesDict.allKeys.count ; i++) {
             
             NSString *strDateKey = [[self.selectedCalendarDatesDict allKeys] objectAtIndex:i];
-            NSDate *dateKey = [Helpers dateFromString:strDateKey];
+            NSDate *dateKey = [self dateForRFC3339DateTimeString:strDateKey];
             if ([self.calEventDatesCalendar date:eventDateTime isSameDayAsDate:dateKey]) {
                 
                 aldyExist = YES;
@@ -783,7 +798,7 @@
     
     for (NSDictionary *dateDict in self.eventDateTimesDictArray) {
         
-        NSDate *aDate = [Helpers dateFromString:[dateDict objectForKey:@"dateNtime"]];
+        NSDate *aDate = [self dateForRFC3339DateTimeString:[dateDict objectForKey:@"dateNtime"]];
         NSInteger aVote = [self checkUDForPreviousVote:aDate];
         NSNumber *dateID = [dateDict objectForKey:@"id"];
         
@@ -817,7 +832,6 @@
 -(void)setupCalendar {
     
     [self.calEventDatesCalendar setOnlyShowCurrentMonth:NO];
-    
     [self.calEventDatesCalendar setBackgroundColor:[UIColor clearColor]];
     [self.calEventDatesCalendar setInnerBorderColor:[Helpers suriaOrangeColorWithAlpha:1.0]];
     [self.calEventDatesCalendar setDayOfWeekTextColor:[UIColor whiteColor]];
@@ -1388,7 +1402,6 @@
             //return
             
             NSLog(@"Multiple dates in this day");
-            
 //            [self multiDatesInDayHandler:multiDates];
             return;
         }

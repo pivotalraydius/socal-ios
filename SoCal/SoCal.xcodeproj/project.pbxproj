@@ -69,6 +69,13 @@
 		9A7D9D6B18ACA179005E32D1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7D9D6A18ACA179005E32D1 /* AVFoundation.framework */; };
 		9A7D9D6F18ACAF4B005E32D1 /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D6E18ACAF4B005E32D1 /* UIDevice+Resolutions.m */; };
 		9A80AEE118BC8AA3005637E3 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A045EB018BB025200289D58 /* UIImage+ImageEffects.m */; };
+		9A9C07A31AAED14D00BDD5D1 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9C07A21AAED14D00BDD5D1 /* InterfaceController.swift */; };
+		9A9C07A51AAED14D00BDD5D1 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9C07A41AAED14D00BDD5D1 /* NotificationController.swift */; };
+		9A9C07A71AAED14D00BDD5D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A9C07A61AAED14D00BDD5D1 /* Images.xcassets */; };
+		9A9C07AB1AAED14D00BDD5D1 /* SoCal WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 9A9C07AA1AAED14D00BDD5D1 /* SoCal WatchKit App.app */; };
+		9A9C07B31AAED14D00BDD5D1 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A9C07B11AAED14D00BDD5D1 /* Interface.storyboard */; };
+		9A9C07B51AAED14D00BDD5D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A9C07B41AAED14D00BDD5D1 /* Images.xcassets */; };
+		9A9C07B81AAED14D00BDD5D1 /* SoCal WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9A9C079D1AAED14D00BDD5D1 /* SoCal WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9AA365B818A1DC59004C0E86 /* NetworkAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */; };
 		9AA365CD18A20918004C0E86 /* UIBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365CC18A20918004C0E86 /* UIBAlertView.m */; };
 		9AA365D018A20D06004C0E86 /* PlaceSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365CF18A20D06004C0E86 /* PlaceSearchCell.m */; };
@@ -176,11 +183,40 @@
 			remoteGlobalIDString = 9A5ED7A4189245D000BA8E02;
 			remoteInfo = SoCal;
 		};
+		9A9C07AC1AAED14D00BDD5D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A5ED79D189245D000BA8E02 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A9C07A91AAED14D00BDD5D1;
+			remoteInfo = "SoCal WatchKit App";
+		};
+		9A9C07B61AAED14D00BDD5D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A5ED79D189245D000BA8E02 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A9C079C1AAED14D00BDD5D1;
+			remoteInfo = "SoCal WatchKit Extension";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9A9C07BF1AAED14D00BDD5D1 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9A9C07B81AAED14D00BDD5D1 /* SoCal WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		04F67F3B627C494F88983E92 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		292B2C70D3DB4BD78D584973 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		510A9AE5958CA7AFD1C5C215 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7A64244771CA74B9D5969247 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9A045EAF18BB025200289D58 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		9A045EB018BB025200289D58 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		9A152D0E189626B40013B647 /* ComposeDateTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeDateTimeCell.h; sourceTree = "<group>"; };
@@ -262,6 +298,16 @@
 		9A7D9D6A18ACA179005E32D1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9A7D9D6D18ACAF4B005E32D1 /* UIDevice+Resolutions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Resolutions.h"; sourceTree = "<group>"; };
 		9A7D9D6E18ACAF4B005E32D1 /* UIDevice+Resolutions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Resolutions.m"; sourceTree = "<group>"; };
+		9A9C079D1AAED14D00BDD5D1 /* SoCal WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SoCal WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A9C07A01AAED14D00BDD5D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A9C07A11AAED14D00BDD5D1 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		9A9C07A21AAED14D00BDD5D1 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		9A9C07A41AAED14D00BDD5D1 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		9A9C07A61AAED14D00BDD5D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9A9C07AA1AAED14D00BDD5D1 /* SoCal WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SoCal WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A9C07B01AAED14D00BDD5D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A9C07B21AAED14D00BDD5D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		9A9C07B41AAED14D00BDD5D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9AA365A218A1DC59004C0E86 /* NetworkAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkAPIClient.h; sourceTree = "<group>"; };
 		9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkAPIClient.m; sourceTree = "<group>"; };
 		9AA365C318A1DCFE004C0E86 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Environment.h; path = SoCal/Environment.h; sourceTree = SOURCE_ROOT; };
@@ -331,6 +377,13 @@
 				9A5ED7C2189245D000BA8E02 /* XCTest.framework in Frameworks */,
 				9A5ED7C4189245D000BA8E02 /* UIKit.framework in Frameworks */,
 				9A5ED7C3189245D000BA8E02 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A9C079A1AAED14D00BDD5D1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,9 +463,11 @@
 				9A5ED7E618924E3E00BA8E02 /* Externals */,
 				9A5ED7AE189245D000BA8E02 /* SoCal */,
 				9A5ED7C7189245D000BA8E02 /* SoCalTests */,
+				9A9C079E1AAED14D00BDD5D1 /* SoCal WatchKit Extension */,
+				9A9C07AE1AAED14D00BDD5D1 /* SoCal WatchKit App */,
 				9A5ED7A7189245D000BA8E02 /* Frameworks */,
 				9A5ED7A6189245D000BA8E02 /* Products */,
-				292B2C70D3DB4BD78D584973 /* Pods.xcconfig */,
+				FCD93ED06D2E50824BE3038B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -422,6 +477,8 @@
 				9A5ED7A5189245D000BA8E02 /* SoCal.app */,
 				9A5ED7C0189245D000BA8E02 /* SoCalTests.xctest */,
 				DC2A286F18AE0F0C005FE5FF /* SoCal-Dev.app */,
+				9A9C079D1AAED14D00BDD5D1 /* SoCal WatchKit Extension.appex */,
+				9A9C07AA1AAED14D00BDD5D1 /* SoCal WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -594,6 +651,44 @@
 			path = "UIDevice+Resolutions";
 			sourceTree = "<group>";
 		};
+		9A9C079E1AAED14D00BDD5D1 /* SoCal WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9A9C07A21AAED14D00BDD5D1 /* InterfaceController.swift */,
+				9A9C07A41AAED14D00BDD5D1 /* NotificationController.swift */,
+				9A9C07A61AAED14D00BDD5D1 /* Images.xcassets */,
+				9A9C079F1AAED14D00BDD5D1 /* Supporting Files */,
+			);
+			path = "SoCal WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		9A9C079F1AAED14D00BDD5D1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9A9C07A01AAED14D00BDD5D1 /* Info.plist */,
+				9A9C07A11AAED14D00BDD5D1 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9A9C07AE1AAED14D00BDD5D1 /* SoCal WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				9A9C07B11AAED14D00BDD5D1 /* Interface.storyboard */,
+				9A9C07B41AAED14D00BDD5D1 /* Images.xcassets */,
+				9A9C07AF1AAED14D00BDD5D1 /* Supporting Files */,
+			);
+			path = "SoCal WatchKit App";
+			sourceTree = "<group>";
+		};
+		9A9C07AF1AAED14D00BDD5D1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9A9C07B01AAED14D00BDD5D1 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		9AA365A118A1DC59004C0E86 /* Raydius */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,6 +732,15 @@
 			name = "SoCal-Dev";
 			sourceTree = "<group>";
 		};
+		FCD93ED06D2E50824BE3038B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				510A9AE5958CA7AFD1C5C215 /* Pods.debug.xcconfig */,
+				7A64244771CA74B9D5969247 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -649,10 +753,12 @@
 				9A5ED7A2189245D000BA8E02 /* Frameworks */,
 				9A5ED7A3189245D000BA8E02 /* Resources */,
 				9570E31A5E044E86806F5A03 /* Copy Pods Resources */,
+				9A9C07BF1AAED14D00BDD5D1 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9A9C07B71AAED14D00BDD5D1 /* PBXTargetDependency */,
 			);
 			name = SoCal;
 			productName = SoCal;
@@ -676,6 +782,39 @@
 			productName = SoCalTests;
 			productReference = 9A5ED7C0189245D000BA8E02 /* SoCalTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9A9C079C1AAED14D00BDD5D1 /* SoCal WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A9C07BE1AAED14D00BDD5D1 /* Build configuration list for PBXNativeTarget "SoCal WatchKit Extension" */;
+			buildPhases = (
+				9A9C07991AAED14D00BDD5D1 /* Sources */,
+				9A9C079A1AAED14D00BDD5D1 /* Frameworks */,
+				9A9C079B1AAED14D00BDD5D1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9A9C07AD1AAED14D00BDD5D1 /* PBXTargetDependency */,
+			);
+			name = "SoCal WatchKit Extension";
+			productName = "SoCal WatchKit Extension";
+			productReference = 9A9C079D1AAED14D00BDD5D1 /* SoCal WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		9A9C07A91AAED14D00BDD5D1 /* SoCal WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A9C07BD1AAED14D00BDD5D1 /* Build configuration list for PBXNativeTarget "SoCal WatchKit App" */;
+			buildPhases = (
+				9A9C07A81AAED14D00BDD5D1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SoCal WatchKit App";
+			productName = "SoCal WatchKit App";
+			productReference = 9A9C07AA1AAED14D00BDD5D1 /* SoCal WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
 		};
 		DC2A281318AE0F0C005FE5FF /* SoCal-Dev */ = {
 			isa = PBXNativeTarget;
@@ -702,11 +841,18 @@
 		9A5ED79D189245D000BA8E02 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = HereNow;
 				TargetAttributes = {
 					9A5ED7BF189245D000BA8E02 = {
 						TestTargetID = 9A5ED7A4189245D000BA8E02;
+					};
+					9A9C079C1AAED14D00BDD5D1 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					9A9C07A91AAED14D00BDD5D1 = {
+						CreatedOnToolsVersion = 6.2;
 					};
 				};
 			};
@@ -716,6 +862,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 9A5ED79C189245D000BA8E02;
 			productRefGroup = 9A5ED7A6189245D000BA8E02 /* Products */;
@@ -725,6 +872,8 @@
 				9A5ED7A4189245D000BA8E02 /* SoCal */,
 				DC2A281318AE0F0C005FE5FF /* SoCal-Dev */,
 				9A5ED7BF189245D000BA8E02 /* SoCalTests */,
+				9A9C079C1AAED14D00BDD5D1 /* SoCal WatchKit Extension */,
+				9A9C07A91AAED14D00BDD5D1 /* SoCal WatchKit App */,
 			);
 		};
 /* End PBXProject section */
@@ -772,6 +921,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A5ED7CC189245D000BA8E02 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A9C079B1AAED14D00BDD5D1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A9C07A71AAED14D00BDD5D1 /* Images.xcassets in Resources */,
+				9A9C07AB1AAED14D00BDD5D1 /* SoCal WatchKit App.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A9C07A81AAED14D00BDD5D1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A9C07B31AAED14D00BDD5D1 /* Interface.storyboard in Resources */,
+				9A9C07B51AAED14D00BDD5D1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -827,7 +994,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		39E6829F1D0543BA8E05E065 /* Check Pods Manifest.lock */ = {
@@ -857,7 +1024,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C04C0EA849B041E795B77123 /* Check Pods Manifest.lock */ = {
@@ -922,6 +1089,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9A9C07991AAED14D00BDD5D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A9C07A51AAED14D00BDD5D1 /* NotificationController.swift in Sources */,
+				9A9C07A31AAED14D00BDD5D1 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DC2A281418AE0F0C005FE5FF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -966,6 +1142,16 @@
 			target = 9A5ED7A4189245D000BA8E02 /* SoCal */;
 			targetProxy = 9A5ED7C5189245D000BA8E02 /* PBXContainerItemProxy */;
 		};
+		9A9C07AD1AAED14D00BDD5D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9A9C07A91AAED14D00BDD5D1 /* SoCal WatchKit App */;
+			targetProxy = 9A9C07AC1AAED14D00BDD5D1 /* PBXContainerItemProxy */;
+		};
+		9A9C07B71AAED14D00BDD5D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9A9C079C1AAED14D00BDD5D1 /* SoCal WatchKit Extension */;
+			targetProxy = 9A9C07B61AAED14D00BDD5D1 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -983,6 +1169,14 @@
 				9A5ED7CB189245D000BA8E02 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9A9C07B11AAED14D00BDD5D1 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A9C07B21AAED14D00BDD5D1 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1064,7 +1258,7 @@
 		};
 		9A5ED7D2189245D000BA8E02 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 292B2C70D3DB4BD78D584973 /* Pods.xcconfig */;
+			baseConfigurationReference = 510A9AE5958CA7AFD1C5C215 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					armv7,
@@ -1072,7 +1266,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hnin Htet Aung (66SG73UQVV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Raymond Ser (3XT3J2E77K)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
 				INFOPLIST_FILE = "SoCal/SoCal-Info.plist";
@@ -1080,7 +1275,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6CBF2F18-75D7-4294-814E-BC7836CE87B0";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1088,7 +1283,7 @@
 		};
 		9A5ED7D3189245D000BA8E02 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 292B2C70D3DB4BD78D584973 /* Pods.xcconfig */;
+			baseConfigurationReference = 7A64244771CA74B9D5969247 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					armv7,
@@ -1097,6 +1292,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: HereNow Pte. Ltd. (ZJN6979MJ3)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
 				INFOPLIST_FILE = "SoCal/SoCal-Info.plist";
@@ -1104,7 +1300,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9711F71B-C824-4D0A-9F91-8D07D476C3B6";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1152,9 +1348,90 @@
 			};
 			name = Release;
 		};
+		9A9C07B91AAED14D00BDD5D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Raymond Ser (3XT3J2E77K)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "SoCal WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9A9C07BA1AAED14D00BDD5D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: HereNow Pte. Ltd. (ZJN6979MJ3)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "SoCal WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		9A9C07BB1AAED14D00BDD5D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IBSC_MODULE = SoCal_WatchKit_Extension;
+				INFOPLIST_FILE = "SoCal WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		9A9C07BC1AAED14D00BDD5D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IBSC_MODULE = SoCal_WatchKit_Extension;
+				INFOPLIST_FILE = "SoCal WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
 		DC2A286D18AE0F0C005FE5FF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 292B2C70D3DB4BD78D584973 /* Pods.xcconfig */;
+			baseConfigurationReference = 510A9AE5958CA7AFD1C5C215 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					armv7,
@@ -1162,7 +1439,7 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hnin Htet Aung (66SG73UQVV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Raymond Ser (3XT3J2E77K)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/SoCal-Dev/SoCal-Dev-Info.plist";
@@ -1170,7 +1447,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "SoCal-Dev";
-				PROVISIONING_PROFILE = "6CBF2F18-75D7-4294-814E-BC7836CE87B0";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1178,7 +1455,7 @@
 		};
 		DC2A286E18AE0F0C005FE5FF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 292B2C70D3DB4BD78D584973 /* Pods.xcconfig */;
+			baseConfigurationReference = 7A64244771CA74B9D5969247 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					armv7,
@@ -1194,7 +1471,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "SoCal-Dev";
-				PROVISIONING_PROFILE = "9711F71B-C824-4D0A-9F91-8D07D476C3B6";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1226,6 +1503,24 @@
 			buildConfigurations = (
 				9A5ED7D5189245D000BA8E02 /* Debug */,
 				9A5ED7D6189245D000BA8E02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A9C07BD1AAED14D00BDD5D1 /* Build configuration list for PBXNativeTarget "SoCal WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A9C07BB1AAED14D00BDD5D1 /* Debug */,
+				9A9C07BC1AAED14D00BDD5D1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A9C07BE1AAED14D00BDD5D1 /* Build configuration list for PBXNativeTarget "SoCal WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A9C07B91AAED14D00BDD5D1 /* Debug */,
+				9A9C07BA1AAED14D00BDD5D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

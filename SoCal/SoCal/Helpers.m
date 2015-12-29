@@ -84,24 +84,49 @@
     if (radius>0) [view.layer setCornerRadius:radius];
 }
 
+
+
 + (NSDate *)dateFromString:(NSString *)dateString {
     
-    if (!dateString) return nil;
-    if ([dateString hasSuffix:@"Z"]) {
-        dateString = [[dateString substringToIndex:(dateString.length-1)] stringByAppendingString:@"-0000"];
-    }
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+//    if (!dateString) return nil;
+//    if ([dateString hasSuffix:@"Z"]) {
+//        dateString = [[dateString substringToIndex:(dateString.length-1)] stringByAppendingString:@"-0000"];
+//    }
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+//    
+//    return [formatter dateFromString:dateString];
     
-    return [formatter dateFromString:dateString];
+    NSDateFormatter *rfc3339DateFormatter = [[NSDateFormatter alloc] init];
+    //    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+    [rfc3339DateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"];
+    [rfc3339DateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    
+    // Convert the RFC 3339 date time string to an NSDate.
+    NSDate *result = [rfc3339DateFormatter dateFromString:dateString];
+    return result;
 }
 
 +(NSString *)stringFromDate:(NSDate *)date {
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+//    
+//    return [formatter stringFromDate:date];
+    // Create our date formatter.
     
-    return [formatter stringFromDate:date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"];
+    
+    // We will upload the date at UTC 0.
+    dateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    
+    // Format our date object to a suitable string.
+
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    
+    return dateString;      
+    
 }
 
 +(NSString *)timeframeFromString:(NSString *)timeString {

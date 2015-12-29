@@ -987,16 +987,16 @@
 
 -(void)createEvent {
     
-    if ([[self.txtEventName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""] || !self.selectedLocationDict || self.eventDateTimesArray.count <= 0) {
-        
-        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Missing Event Data" message:@"Oops! We can't create an event for you without an Event Name, a Location, and the selected Dates." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        
-        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
-        }];
-        
-        return;
-    }
-    
+//    if ([[self.txtEventName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""] || !self.selectedLocationDict || self.eventDateTimesArray.count <= 0) {
+//        
+//        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Missing Event Data" message:@"Oops! We can't create an event for you without an Event Name, a Location, and the selected Dates." cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+//        
+//        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+//        }];
+//        
+//        return;
+//    }
+//    
     if ([self getSelectedEmails].count<=0) {
         
         UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"You Have No Guests!" message:@"Oops! It's going to be a pretty boring event if you are going alone. How about inviting some of your friends?" cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -1026,6 +1026,9 @@
     NSString *placeName = [self.selectedLocationDict objectForKey:@"name"];
     NSString *placeAddress = [self.selectedLocationDict objectForKey:@"address"];
     
+
+    
+    
     NSString *dateString = @"";
     for (NSDate *date in self.eventDateTimesArray) {
 
@@ -1036,18 +1039,21 @@
     NSMutableDictionary *queryInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
     
     [queryInfo setObject:self.txtEventName.text forKey:@"event_name"];
+    
     [queryInfo setObject:self.invitationCode forKey:@"invitation_code"];
-    [queryInfo setObject:[NSNumber numberWithFloat:latitude] forKey:@"latitude"];
-    [queryInfo setObject:[NSNumber numberWithFloat:longitude] forKey:@"longitude"];
-    [queryInfo setObject:placeName forKey:@"place_name"];
+//    [queryInfo setObject:[NSNumber numberWithFloat:latitude] forKey:@"latitude"];
+//    [queryInfo setObject:[NSNumber numberWithFloat:longitude] forKey:@"longitude"];
+  //  [queryInfo setObject:placeName forKey:@"place_name"];
     
     if (placeAddress)
-        [queryInfo setObject:placeAddress forKey:@"address"];
+//        [queryInfo setObject:placeAddress forKey:@"address"];
     
     [queryInfo setObject:self.txtDescription.text forKey:@"description"];
     [queryInfo setObject:dateString forKey:@"datetime"];
     
     NSString *invitees = @"";
+    
+    
     
     for (NSDictionary *contact in self.contactsWithEmail) {
         
@@ -1060,10 +1066,46 @@
         }
     }
     
+    NSMutableDictionary *hStoreDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [hStoreDict setObject:self.invitationCode forKey:@"invitation_code"];
+    [hStoreDict setObject:self.txtDescription.text forKey:@"description"];
+    [hStoreDict setObject:[NSNumber numberWithFloat:latitude] forKey:@"latitude"];
+    [hStoreDict setObject:[NSNumber numberWithFloat:longitude] forKey:@"longitude"];
+    [hStoreDict setObject:placeAddress forKey:@"address"];
+    [hStoreDict setObject:placeName forKey:@"place_name"];
+    [hStoreDict setObject:[NSNumber numberWithFloat:0]  forKey:@"confirm_state"];
+    [hStoreDict setObject:@"" forKey:@"confirmed_date"];
+    
+    if (hStoreDict) {
+        
+        NSString *dataStr = @"{";
+        
+        for (id key in hStoreDict) {
+            
+            NSString *keyStr = key;
+            NSString *valueStr = hStoreDict[key];
+            
+            NSString *kvStr = [NSString stringWithFormat:@"%@:%@,", keyStr, valueStr];
+            
+            dataStr = [dataStr stringByAppendingString:kvStr];
+        }
+        
+        dataStr = [dataStr stringByPaddingToLength:dataStr.length-1 withString:nil startingAtIndex:0];
+        
+        dataStr = [dataStr stringByAppendingString:@"}"];
+        
+        //string must drop two chars ", "
+        //add "} "
+        
+        [queryInfo setObject:dataStr forKey:@"data"];
+    }
+
     [queryInfo setObject:invitees forKey:@"invitees"];
     
     [queryInfo setObject:self.creatorNameField.text forKey:@"username"];
     [queryInfo setObject:self.creatorEmailField.text forKey:@"email"];
+    
+    NSLog(@"Query INFO :::: %@",queryInfo);
     
     [[NetworkAPIClient sharedClient] POST:CREATE_EVENT parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -1254,19 +1296,19 @@
         [queryInfo setObject:[NSNumber numberWithFloat:centerCoor.longitude] forKey:@"longitude"];
         [queryInfo setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
     }
-    else if ([locationKeyword isEqualToString:@""] && ![cityKeyword isEqualToString:@""]) {
-        
-        //has city keyword no location keyword
-        //alert user to input location keyword
-        
-        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Missing main keyword" message:@"Please enter the main search keyword together with your city keyword." cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        
-        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
-            
-        }];
-        
-        return;
-    }
+//    else if ([locationKeyword isEqualToString:@""] && ![cityKeyword isEqualToString:@""]) {
+//        
+//        //has city keyword no location keyword
+//        //alert user to input location keyword
+//        
+//        UIBAlertView *alertView = [[UIBAlertView alloc] initWithTitle:@"Missing main keyword" message:@"Please enter the main search keyword together with your city keyword." cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        
+//        [alertView showWithDismissHandler:^(NSInteger selectedIndex, BOOL didCancel) {
+//            
+//        }];
+//        
+//        return;
+//    }
     else if (![locationKeyword isEqualToString:@""] && [cityKeyword isEqualToString:@""]) {
         
         //has location keyword no city keyword

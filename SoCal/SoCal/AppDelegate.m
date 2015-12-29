@@ -12,6 +12,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+//    NSSetUncaughtExceptionHandler(&exceptionHandler);
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Override point for customization after application launch.
@@ -29,6 +32,15 @@
     
     return YES;
 }
+
+//void exceptionHandler(NSException *exception)
+//{
+//    NSLog(@"Exception name %@",[exception name]);
+//    NSLog(@"Reason %@",[exception reason]);
+//    NSLog(@"Info %@",[exception userInfo]);
+//    NSLog(@"callStackSymbols%@",[exception callStackSymbols]);
+//    NSLog(@"callStackReturnAddresses%@",[exception callStackReturnAddresses]);
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

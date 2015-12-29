@@ -8,15 +8,15 @@
 
 #import "AFNetworking.h"
 
-#define GENERATE_INVITE_CODE                    @"api/home/retrieve_invitation_code"
-#define CREATE_EVENT                            @"api/home/create_event"
-#define RETRIEVE_EVENT                          @"api/home/retrieve_event"
-#define VOTE_FOR_DATE                           @"api/home/vote_date"
-#define SOCAL_CREATE_POST                       @"api/home/create_post"
-#define SOCAL_DOWNLOAD_POSTS                    @"api/home/download_posts"
-#define SOCAL_CREATE_USER                       @"api/home/create_user"
-#define SOCAL_CONFIRM_EVENT                     @"api/home/topic_state"
-#define RETRIEVE_POPULAR_DATE                   @"api/home/retrieve_popular_date"
+#define GENERATE_INVITE_CODE                    @"api/socal/retrieve_invitation_code"
+#define CREATE_EVENT                            @"api/socal/create_event"
+#define RETRIEVE_EVENT                          @"api/socal/retrieve_event"
+#define VOTE_FOR_DATE                           @"api/socal/vote_date"
+#define SOCAL_CREATE_POST                       @"api/socal/create_post"
+#define SOCAL_DOWNLOAD_POSTS                    @"api/socal/download_posts"
+#define SOCAL_CREATE_USER                       @"api/socal/create_user"
+#define SOCAL_CONFIRM_EVENT                     @"api/socal/topic_state"
+#define RETRIEVE_POPULAR_DATE                   @"api/socal/retrieve_popular_date"
 
 #define DOWNLOAD_INITIAL_RETRIEVE               @"api/downloaddata/initial_retrieve"
 #define DOWNLOAD_BACKGROUND_RETRIEVE            @"api/downloaddata/background_retrieve"
@@ -54,6 +54,7 @@
 #define PLACES_PLACE_TOP_USERS                  @"api/places/top_venue_users"
 #define PLACES_PLACE_ACTIVE_USERS               @"api/places/currently_active"
 #define PLACES_CHECKIN_CREATE_NEW               @"api/places/create_record"
+
 #define PLACES_CHECKIN_SEARCH_NEARBY_PLACES     @"api/places/select_venue"
 
 #define PLACES_WITHIN_LOCATION                  @"api/places/within_location"

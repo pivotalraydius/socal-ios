@@ -10,6 +10,11 @@
 
 @implementation Environment
 
++(NSString *)App_Key {
+    
+    return @"9c1c1f541c66d52d63f3efd22340c044";
+}
+
 +(int)CurrentEnvironment {
     
     return STAGING;
@@ -20,10 +25,10 @@
     return @"https://socal-staging.herokuapp.com/";
 }
 
-+(NSString *)StagingHost {
-    
-    return @"https://raydius-staging.herokuapp.com/";
-}
+//+(NSString *)StagingHost {
+//    
+//    return @"https://raydius-staging.herokuapp.com/";
+//}
 
 +(NSString *)Rackspace_Images_CDN_BaseURL {
     

@@ -120,9 +120,9 @@
     
     [self hideKeyboard];
     
-    [[NetworkAPIClient sharedStagingClient] cancelHTTPOperationsWithPath:PLACES_WITHIN_LOCATION];
-    [[NetworkAPIClient sharedStagingClient] cancelHTTPOperationsWithPath:PLACES_CHECKIN_SEARCH_NEARBY_PLACES];
-    [[NetworkAPIClient sharedStagingClient] cancelHTTPOperationsWithPath:PLACES_WITHIN_LOCALITY];
+    [[NetworkAPIClient sharedClient] cancelHTTPOperationsWithPath:PLACES_WITHIN_LOCATION];
+    [[NetworkAPIClient sharedClient] cancelHTTPOperationsWithPath:PLACES_CHECKIN_SEARCH_NEARBY_PLACES];
+    [[NetworkAPIClient sharedClient] cancelHTTPOperationsWithPath:PLACES_WITHIN_LOCALITY];
     
     NSString *locationKeyword = [[self.txtPlaceName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] lowercaseString];
     NSString *cityKeyword = [[self.txtCityName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] lowercaseString] ;
@@ -193,7 +193,7 @@
     [self.placesTable reloadData];
     selectedPlaceDict = nil;
     
-    [[NetworkAPIClient sharedStagingClient] POST:path parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[NetworkAPIClient sharedClient] POST:path parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [self.arFilteredPlaces removeAllObjects];
         

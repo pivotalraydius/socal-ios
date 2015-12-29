@@ -18,17 +18,19 @@
     dispatch_once(&onceToken, ^{
         __sharedClient = [[NetworkAPIClient alloc] initWithBaseURL:[NSURL URLWithString:[Environment BaseHost]]];
     });
+    __sharedClient.requestSerializer = [AFJSONRequestSerializer serializer];
+    __sharedClient.requestSerializer.HTTPMethodsEncodingParametersInURI =[NSSet setWithArray:@[@"POST", @"GET", @"HEAD"]];
     return __sharedClient;
 }
 
-+(id)sharedStagingClient {
-    static NetworkAPIClient *__sharedStagingClient;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        __sharedStagingClient = [[NetworkAPIClient alloc] initWithBaseURL:[NSURL URLWithString:[Environment StagingHost]]];
-    });
-    return __sharedStagingClient;
-}
+//+(id)sharedStagingClient {
+//    static NetworkAPIClient *__sharedStagingClient;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        __sharedStagingClient = [[NetworkAPIClient alloc] initWithBaseURL:[NSURL URLWithString:[Environment StagingHost]]];
+//    });
+//    return __sharedStagingClient;
+//}
 
 -(id)initWithBaseURL:(NSURL *)url {
     self = [super initWithBaseURL:url];

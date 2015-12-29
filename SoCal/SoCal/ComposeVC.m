@@ -1051,6 +1051,8 @@
     [queryInfo setObject:self.txtDescription.text forKey:@"description"];
     [queryInfo setObject:dateString forKey:@"datetime"];
     
+    NSString *appkey =[Environment App_Key];
+    [queryInfo setObject:appkey forKey:@"app_key"];
     NSString *invitees = @"";
     
     
@@ -1265,9 +1267,9 @@
     
     [self hideKeyboard];
     
-    [[NetworkAPIClient sharedStagingClient] cancelHTTPOperationsWithPath:PLACES_WITHIN_LOCATION];
-    [[NetworkAPIClient sharedStagingClient] cancelHTTPOperationsWithPath:PLACES_CHECKIN_SEARCH_NEARBY_PLACES];
-    [[NetworkAPIClient sharedStagingClient] cancelHTTPOperationsWithPath:PLACES_WITHIN_LOCALITY];
+    [[NetworkAPIClient sharedClient] cancelHTTPOperationsWithPath:PLACES_WITHIN_LOCATION];
+    [[NetworkAPIClient sharedClient] cancelHTTPOperationsWithPath:PLACES_CHECKIN_SEARCH_NEARBY_PLACES];
+    [[NetworkAPIClient sharedClient] cancelHTTPOperationsWithPath:PLACES_WITHIN_LOCALITY];
     
     NSString *locationKeyword = [[self.txtPlaceName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] lowercaseString];
     NSString *cityKeyword = [[self.txtCityName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] lowercaseString] ;
@@ -1295,6 +1297,9 @@
         [queryInfo setObject:[NSNumber numberWithFloat:centerCoor.latitude] forKey:@"latitude"];
         [queryInfo setObject:[NSNumber numberWithFloat:centerCoor.longitude] forKey:@"longitude"];
         [queryInfo setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
+        NSString *appkey =[Environment App_Key];
+        [queryInfo setObject:appkey forKey:@"app_key"];
+
     }
 //    else if ([locationKeyword isEqualToString:@""] && ![cityKeyword isEqualToString:@""]) {
 //        
@@ -1338,7 +1343,7 @@
     [self.placesTable reloadData];
     self.selectedLocationDict = nil;
     
-    [[NetworkAPIClient sharedStagingClient] POST:path parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[NetworkAPIClient sharedClient] POST:path parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [self.arFilteredPlaces removeAllObjects];
         

@@ -10,6 +10,12 @@
 
 @implementation Environment
 
++(NSString *)App_Key {
+    
+//    return @"75228cb90b54ae08d637267fdb8bf8d2";
+    return @"872e1e6f6717e443d566b3f405d116ae";
+}
+
 +(int)CurrentEnvironment {
     
     return DEVELOPMENT;
@@ -21,10 +27,10 @@
     return @"http://192.168.0.120:5000/";
 }
 
-+(NSString *)StagingHost {
-    
-    return @"https://raydius-staging.herokuapp.com/";
-}
+//+(NSString *)StagingHost {
+//    
+//    return @"https://raydius-staging.herokuapp.com/";
+//}
 
 +(NSString *)Rackspace_Images_CDN_BaseURL {
     

@@ -16,8 +16,9 @@
 
 +(int)CurrentEnvironment;
 
++(NSString *)App_Key;
 +(NSString *)BaseHost;
-+(NSString *)StagingHost;
+//+(NSString *)StagingHost;
 
 +(NSString *)Rackspace_Images_CDN_BaseURL;
 +(NSString *)Rackspace_Images_Container;

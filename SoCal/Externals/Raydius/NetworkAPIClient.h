@@ -75,7 +75,7 @@
 @interface NetworkAPIClient : AFHTTPRequestOperationManager
 
 +(id)sharedClient;
-+(id)sharedStagingClient;
+//+(id)sharedStagingClient;
 
 -(void)cancelHTTPOperationsWithPath:(NSString *)path;
 

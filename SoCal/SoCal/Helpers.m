@@ -97,6 +97,11 @@
 //    
 //    return [formatter dateFromString:dateString];
     
+//    if ([dateString integerValue] == 0) {
+//        return [NSDate date];
+//    }
+//    else {
+    
     NSDateFormatter *rfc3339DateFormatter = [[NSDateFormatter alloc] init];
     //    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
     [rfc3339DateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"];
@@ -105,6 +110,7 @@
     // Convert the RFC 3339 date time string to an NSDate.
     NSDate *result = [rfc3339DateFormatter dateFromString:dateString];
     return result;
+//    }
 }
 
 +(NSString *)stringFromDate:(NSDate *)date {

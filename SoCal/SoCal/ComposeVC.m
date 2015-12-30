@@ -1048,7 +1048,7 @@
     if (placeAddress)
 //        [queryInfo setObject:placeAddress forKey:@"address"];
     
-    [queryInfo setObject:self.txtDescription.text forKey:@"description"];
+
     [queryInfo setObject:dateString forKey:@"datetime"];
     
     NSString *appkey =[Environment App_Key];
@@ -1070,13 +1070,13 @@
     
     NSMutableDictionary *hStoreDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     [hStoreDict setObject:self.invitationCode forKey:@"invitation_code"];
-    [hStoreDict setObject:self.txtDescription.text forKey:@"description"];
     [hStoreDict setObject:[NSNumber numberWithFloat:latitude] forKey:@"latitude"];
     [hStoreDict setObject:[NSNumber numberWithFloat:longitude] forKey:@"longitude"];
     [hStoreDict setObject:placeAddress forKey:@"address"];
     [hStoreDict setObject:placeName forKey:@"place_name"];
     [hStoreDict setObject:[NSNumber numberWithFloat:0]  forKey:@"confirm_state"];
-    [hStoreDict setObject:@"" forKey:@"confirmed_date"];
+    [hStoreDict setObject:[NSNumber numberWithFloat:0] forKey:@"confirmed_date"];
+    [hStoreDict setObject:self.txtDescription.text forKey:@"content"];
     
     if (hStoreDict) {
         

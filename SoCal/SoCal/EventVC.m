@@ -279,6 +279,7 @@
             
             [self additionalSetupForRecentEventForUsername:[responseObject objectForKey:@"invitee_name"] andEmail:[responseObject objectForKey:@"invitee_email"]];
         }
+        NSLog(@"Retrieve Event Object %@", responseObject);
         
         if ([responseObject objectForKey:@"user_voted_state"] && [responseObject objectForKey:@"user_voted_state"] != [NSNull null]) {
             
@@ -304,6 +305,15 @@
     }];
 }
 
+- (id)objectForKey:(id)key {
+    id object = [self objectForKey:key];
+    if (object == [NSNull null])
+        return nil;
+    
+    return object;
+}
+
+
 -(void)eventHandler:(NSDictionary *)eventDict {
     
     [self.eventDateTimesArray removeAllObjects];
@@ -317,7 +327,7 @@
     if ([eventDict objectForKey:@"confirmed_date"] && [eventDict objectForKey:@"confirmed_date"] != [NSNull null]) {
         self.eventConfirmedDate = [Helpers dateFromString:[eventDict objectForKey:@"confirmed_date"]];
     }
-    
+       
     self.eventCreatorName = [eventDict objectForKey:@"creator_name"];
     self.eventCreatorEmail = [eventDict objectForKey:@"creator_email"];
     
@@ -974,6 +984,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         [self.btnPostButton setEnabled:YES];
+        NSLog(@"Create Post error %@", error);
     }];
 }
 
@@ -2274,7 +2285,9 @@
             NSLog(@"vote value: %ld",(long)vote);
         }
         
-        [cell renderWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andVote:0];
+        [cell renderWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andVote:vote];
+        
+        NSLog(@"Cell value %@", cell);
         
         return cell;
     }

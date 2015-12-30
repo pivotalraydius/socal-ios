@@ -795,6 +795,7 @@
 -(void)updateVoteDictArray {
     
     [self.voteDictArray removeAllObjects];
+    NSLog(@"Event date times dict array %@", self.eventDateTimesDictArray);
     
     for (NSDictionary *dateDict in self.eventDateTimesDictArray) {
         
@@ -812,6 +813,7 @@
         [voteDict setObject:dateID forKey:@"id"];
         
         [self.voteDictArray addObject:voteDict];
+        NSLog(@"vote Dict %@", self.voteDictArray);
     }
     
     [self updateCalendarSubviews];
@@ -941,6 +943,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Download Posts error %@", error);
         
     }];
 }
@@ -2267,9 +2270,11 @@
         if (self.voteDictArray.count > 0) {
             NSDictionary *voteDict = [self.voteDictArray objectAtIndex:indexPath.row];
             vote = [[voteDict objectForKey:@"vote"] intValue];
+            
+            NSLog(@"vote value: %ld",(long)vote);
         }
         
-        [cell renderWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andVote:vote];
+        [cell renderWithDate:[self.eventDateTimesArray objectAtIndex:indexPath.row] andVote:0];
         
         return cell;
     }

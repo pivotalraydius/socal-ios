@@ -96,6 +96,7 @@
     else {
         [self.mainBGView setBackgroundColor:[Helpers pmBlueColorWithAlpha:1.0]];
     }
+    
 }
 
 @end

@@ -454,7 +454,7 @@
             NSLog(@"was selected: %@", currentlySelected);
             NSLog(@"just selected: %@", date);
             
-            [self deleteCellAtIndexPathRow:currentlySelectedDateTimeCell];
+            //[self deleteCellAtIndexPathRow:currentlySelectedDateTimeCell];
             
             if ([self.calendarView date:date isSameDayAsDate:currentlySelected]) {
                 

@@ -17,12 +17,12 @@
 
 +(int)CurrentEnvironment {
     
-    return STAGING;
+    return PRODUCTION;
 }
 
 +(NSString *)BaseHost {
     
-    return @"https://h1ve-staging.herokuapp.com/";
+    return @"https://h1ve-production.herokuapp.com/";
 }
 
 +(NSString *)Rackspace_Images_CDN_BaseURL {

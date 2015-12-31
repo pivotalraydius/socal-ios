@@ -28,11 +28,6 @@
     return @"http://192.168.0.111:5000/";   //wwm's PC IP
 }
 
-//+(NSString *)StagingHost {
-//    
-//    return @"https://raydius-staging.herokuapp.com/";
-//}
-
 +(NSString *)Rackspace_Images_CDN_BaseURL {
     
     return @"http://3065cbd42358ac65f2d4-e265b11a02ec41d6e2e50f4fb75e3eb1.r97.cf1.rackcdn.com/";
@@ -76,10 +71,6 @@
 
 +(NSString *)Pusher_Secret {
     return @"e58e48596fbe758eb605";
-}
-
-+(NSString *)LuncheonAppURLBaseHost {
-    return @"luncheonDevelopment://";
 }
 
 @end

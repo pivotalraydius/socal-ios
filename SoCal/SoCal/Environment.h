@@ -18,7 +18,6 @@
 
 +(NSString *)App_Key;
 +(NSString *)BaseHost;
-//+(NSString *)StagingHost;
 
 +(NSString *)Rackspace_Images_CDN_BaseURL;
 +(NSString *)Rackspace_Images_Container;
@@ -30,8 +29,6 @@
 +(NSString *)Pusher_App_ID;
 +(NSString *)Pusher_Key;
 +(NSString *)Pusher_Secret;
-
-+(NSString *)LuncheonAppURLBaseHost;
 
 +(NSString *)Rackspace_Place_Images_Container;
 +(NSString *)RackSpace_PlaceImages_CDN_BaseURL;

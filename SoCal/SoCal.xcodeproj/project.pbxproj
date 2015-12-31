@@ -8,6 +8,83 @@
 
 /* Begin PBXBuildFile section */
 		2875B97317E740048465792D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F67F3B627C494F88983E92 /* libPods.a */; };
+		3E5051681C34D17700E3F0DE /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D6118AC930B005E32D1 /* UIImage+MDQRCode.m */; };
+		3E5051691C34D17700E3F0DE /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A045EB018BB025200289D58 /* UIImage+ImageEffects.m */; };
+		3E50516A1C34D17700E3F0DE /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D6E18ACAF4B005E32D1 /* UIDevice+Resolutions.m */; };
+		3E50516B1C34D17700E3F0DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7B8189245D000BA8E02 /* AppDelegate.m */; };
+		3E50516C1C34D17700E3F0DE /* RDPieView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1434C418A4B51D0062AD7A /* RDPieView.m */; };
+		3E50516D1C34D17700E3F0DE /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5A18AC930B005E32D1 /* qrspec.c */; };
+		3E50516E1C34D17700E3F0DE /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7D8189245F900BA8E02 /* MainVC.m */; };
+		3E50516F1C34D17700E3F0DE /* SummaryDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A20BD5318A89F0200B90101 /* SummaryDateTimeCell.m */; };
+		3E5051701C34D17700E3F0DE /* CKCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED824189253F800BA8E02 /* CKCalendarView.m */; };
+		3E5051711C34D17700E3F0DE /* ListDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A20BD5618A89F1700B90101 /* ListDateTimeCell.m */; };
+		3E5051721C34D17700E3F0DE /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7897018A0DDCC008EA2E5 /* LocationVC.m */; };
+		3E5051731C34D17700E3F0DE /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD74AE918AB680500961BE8 /* ContactCell.m */; };
+		3E5051741C34D17700E3F0DE /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5818AC930B005E32D1 /* qrinput.c */; };
+		3E5051751C34D17700E3F0DE /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5618AC930B005E32D1 /* qrencode.c */; };
+		3E5051761C34D17700E3F0DE /* RDLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7896D18A086AA008EA2E5 /* RDLabeledTextView.m */; };
+		3E5051771C34D17700E3F0DE /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5418AC930B005E32D1 /* mask.c */; };
+		3E5051781C34D17700E3F0DE /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2A287818AE103B005FE5FF /* Environment.m */; };
+		3E5051791C34D17700E3F0DE /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACDDA1918A35EBB00FF4F5C /* PostCell.m */; };
+		3E50517A1C34D17700E3F0DE /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5C18AC930B005E32D1 /* rscode.c */; };
+		3E50517B1C34D17700E3F0DE /* NetworkAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */; };
+		3E50517C1C34D17700E3F0DE /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5218AC930B005E32D1 /* bitstream.c */; };
+		3E50517D1C34D17700E3F0DE /* UIBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365CC18A20918004C0E86 /* UIBAlertView.m */; };
+		3E50517E1C34D17700E3F0DE /* ComposeDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */; };
+		3E50517F1C34D17700E3F0DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7B4189245D000BA8E02 /* main.m */; };
+		3E5051801C34D17700E3F0DE /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED82018924FFB00BA8E02 /* Helpers.m */; };
+		3E5051811C34D17700E3F0DE /* EventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7DD1892471800BA8E02 /* EventVC.m */; };
+		3E5051821C34D17700E3F0DE /* ComposeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5ED7E21892476C00BA8E02 /* ComposeVC.m */; };
+		3E5051831C34D17700E3F0DE /* PlaceSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA365CF18A20D06004C0E86 /* PlaceSearchCell.m */; };
+		3E5051841C34D17700E3F0DE /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A7D9D5E18AC930B005E32D1 /* split.c */; };
+		3E5051861C34D17700E3F0DE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7D9D6A18ACA179005E32D1 /* AVFoundation.framework */; };
+		3E5051871C34D17700E3F0DE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74AE118AB472300961BE8 /* MessageUI.framework */; };
+		3E5051881C34D17700E3F0DE /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74ADF18AB3B8A00961BE8 /* AddressBookUI.framework */; };
+		3E5051891C34D17700E3F0DE /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD74ADD18AB3B8000961BE8 /* AddressBook.framework */; };
+		3E50518A1C34D17700E3F0DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA4218A3828E00FF4F5C /* libsqlite3.dylib */; };
+		3E50518B1C34D17700E3F0DE /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA4018A3828200FF4F5C /* libicucore.dylib */; };
+		3E50518C1C34D17700E3F0DE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3E18A3827C00FF4F5C /* libz.dylib */; };
+		3E50518D1C34D17700E3F0DE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3C18A3827600FF4F5C /* CoreTelephony.framework */; };
+		3E50518E1C34D17700E3F0DE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3A18A3825400FF4F5C /* Security.framework */; };
+		3E50518F1C34D17700E3F0DE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACDDA3818A3824100FF4F5C /* CFNetwork.framework */; };
+		3E5051901C34D17700E3F0DE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4821911898E312002DA0E4 /* MapKit.framework */; };
+		3E5051911C34D17700E3F0DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED81D18924F6D00BA8E02 /* QuartzCore.framework */; };
+		3E5051921C34D17700E3F0DE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED81B18924F6700BA8E02 /* SystemConfiguration.framework */; };
+		3E5051931C34D17700E3F0DE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED81918924F5F00BA8E02 /* MobileCoreServices.framework */; };
+		3E5051941C34D17700E3F0DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7AA189245D000BA8E02 /* CoreGraphics.framework */; };
+		3E5051951C34D17700E3F0DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7AC189245D000BA8E02 /* UIKit.framework */; };
+		3E5051961C34D17700E3F0DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5ED7A8189245D000BA8E02 /* Foundation.framework */; };
+		3E5051971C34D17700E3F0DE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F67F3B627C494F88983E92 /* libPods.a */; };
+		3E5051991C34D17700E3F0DE /* Exo2.0-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6618A8D1E100B90101 /* Exo2.0-LightItalic.otf */; };
+		3E50519A1C34D17700E3F0DE /* Exo2.0-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6818A8D1E100B90101 /* Exo2.0-Italic.otf */; };
+		3E50519B1C34D17700E3F0DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7B1189245D000BA8E02 /* InfoPlist.strings */; };
+		3E50519C1C34D17700E3F0DE /* Exo2.0-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6918A8D1E100B90101 /* Exo2.0-ExtraBoldItalic.otf */; };
+		3E50519D1C34D17700E3F0DE /* Exo2.0-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6E18A8D1E100B90101 /* Exo2.0-Bold.otf */; };
+		3E50519E1C34D17700E3F0DE /* MainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7D9189245F900BA8E02 /* MainVC.xib */; };
+		3E50519F1C34D17700E3F0DE /* Exo2.0-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6D18A8D1E100B90101 /* Exo2.0-BlackItalic.otf */; };
+		3E5051A01C34D17700E3F0DE /* Exo2.0-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6218A8D1E100B90101 /* Exo2.0-SemiBold.otf */; };
+		3E5051A11C34D17700E3F0DE /* Exo2.0-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5E18A8D1E100B90101 /* Exo2.0-ThinItalic.otf */; };
+		3E5051A21C34D17700E3F0DE /* Exo2.0-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6F18A8D1E100B90101 /* Exo2.0-Black.otf */; };
+		3E5051A31C34D17700E3F0DE /* ComposeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7E31892476C00BA8E02 /* ComposeVC.xib */; };
+		3E5051A41C34D17700E3F0DE /* Exo2.0-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6B18A8D1E100B90101 /* Exo2.0-BoldItalic.otf */; };
+		3E5051A51C34D17700E3F0DE /* Exo2.0-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6718A8D1E100B90101 /* Exo2.0-ExtraLightItalic.otf */; };
+		3E5051A61C34D17700E3F0DE /* Exo2.0-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6018A8D1E100B90101 /* Exo2.0-Thin.otf */; };
+		3E5051A71C34D17700E3F0DE /* Exo2.0-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6118A8D1E100B90101 /* Exo2.0-Regular.otf */; };
+		3E5051A81C34D17700E3F0DE /* Exo2.0-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6518A8D1E100B90101 /* Exo2.0-Light.otf */; };
+		3E5051A91C34D17700E3F0DE /* ListDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5A18A89F3E00B90101 /* ListDateTimeCell.xib */; };
+		3E5051AA1C34D17700E3F0DE /* Exo2.0-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5F18A8D1E100B90101 /* Exo2.0-SemiBoldItalic.otf */; };
+		3E5051AB1C34D17700E3F0DE /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCD74AE618AB67E500961BE8 /* ContactCell.xib */; };
+		3E5051AC1C34D17700E3F0DE /* ComposeDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A152D11189626D30013B647 /* ComposeDateTimeCell.xib */; };
+		3E5051AD1C34D17700E3F0DE /* Exo2.0-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6318A8D1E100B90101 /* Exo2.0-Medium.otf */; };
+		3E5051AE1C34D17700E3F0DE /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ACDDA1B18A35ECC00FF4F5C /* PostCell.xib */; };
+		3E5051AF1C34D17700E3F0DE /* Exo2.0-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6A18A8D1E100B90101 /* Exo2.0-ExtraLight.otf */; };
+		3E5051B01C34D17700E3F0DE /* SummaryDateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD5818A89F2E00B90101 /* SummaryDateTimeCell.xib */; };
+		3E5051B11C34D17700E3F0DE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7BA189245D000BA8E02 /* Images.xcassets */; };
+		3E5051B21C34D17700E3F0DE /* Exo2.0-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6418A8D1E100B90101 /* Exo2.0-MediumItalic.otf */; };
+		3E5051B31C34D17700E3F0DE /* EventVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5ED7DE1892471800BA8E02 /* EventVC.xib */; };
+		3E5051B41C34D17700E3F0DE /* LocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF7897118A0DDCC008EA2E5 /* LocationVC.xib */; };
+		3E5051B51C34D17700E3F0DE /* PlaceSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA365D118A20D20004C0E86 /* PlaceSearchCell.xib */; };
+		3E5051B61C34D17700E3F0DE /* Exo2.0-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6C18A8D1E100B90101 /* Exo2.0-ExtraBold.otf */; };
 		848BD24CFACD4E78B1EA133E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F67F3B627C494F88983E92 /* libPods.a */; };
 		9A045EB118BB025200289D58 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A045EB018BB025200289D58 /* UIImage+ImageEffects.m */; };
 		9A152D10189626B40013B647 /* ComposeDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */; };
@@ -179,6 +256,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		3E5051B81C34D17700E3F0DE /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9A9C07BF1AAED14D00BDD5D1 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -193,6 +280,8 @@
 
 /* Begin PBXFileReference section */
 		04F67F3B627C494F88983E92 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E5051BC1C34D17700E3F0DE /* SoCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E5051BD1C34D17700E3F0DE /* SoCal-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SoCal-Info.plist"; path = "/Users/Galactica/workspace/socal-ios/SoCal/SoCal-Info.plist"; sourceTree = "<absolute>"; };
 		510A9AE5958CA7AFD1C5C215 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7A64244771CA74B9D5969247 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9A045EAF18BB025200289D58 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -225,11 +314,11 @@
 		9A20BD6E18A8D1E100B90101 /* Exo2.0-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-Bold.otf"; path = "Fonts/exo-2/Exo2.0-Bold.otf"; sourceTree = SOURCE_ROOT; };
 		9A20BD6F18A8D1E100B90101 /* Exo2.0-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-Black.otf"; path = "Fonts/exo-2/Exo2.0-Black.otf"; sourceTree = SOURCE_ROOT; };
 		9A4821911898E312002DA0E4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		9A5ED7A5189245D000BA8E02 /* SoCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A5ED7A5189245D000BA8E02 /* SoCal-Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SoCal-Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A5ED7A8189245D000BA8E02 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9A5ED7AA189245D000BA8E02 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		9A5ED7AC189245D000BA8E02 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		9A5ED7B0189245D000BA8E02 /* SoCal-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SoCal-Info.plist"; sourceTree = "<group>"; };
+		9A5ED7B0189245D000BA8E02 /* SoCal-Staging-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SoCal-Staging-Info.plist"; sourceTree = "<group>"; };
 		9A5ED7B2189245D000BA8E02 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9A5ED7B4189245D000BA8E02 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9A5ED7B6189245D000BA8E02 /* SoCal-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoCal-Prefix.pch"; sourceTree = "<group>"; };
@@ -313,6 +402,31 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3E5051851C34D17700E3F0DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E5051861C34D17700E3F0DE /* AVFoundation.framework in Frameworks */,
+				3E5051871C34D17700E3F0DE /* MessageUI.framework in Frameworks */,
+				3E5051881C34D17700E3F0DE /* AddressBookUI.framework in Frameworks */,
+				3E5051891C34D17700E3F0DE /* AddressBook.framework in Frameworks */,
+				3E50518A1C34D17700E3F0DE /* libsqlite3.dylib in Frameworks */,
+				3E50518B1C34D17700E3F0DE /* libicucore.dylib in Frameworks */,
+				3E50518C1C34D17700E3F0DE /* libz.dylib in Frameworks */,
+				3E50518D1C34D17700E3F0DE /* CoreTelephony.framework in Frameworks */,
+				3E50518E1C34D17700E3F0DE /* Security.framework in Frameworks */,
+				3E50518F1C34D17700E3F0DE /* CFNetwork.framework in Frameworks */,
+				3E5051901C34D17700E3F0DE /* MapKit.framework in Frameworks */,
+				3E5051911C34D17700E3F0DE /* QuartzCore.framework in Frameworks */,
+				3E5051921C34D17700E3F0DE /* SystemConfiguration.framework in Frameworks */,
+				3E5051931C34D17700E3F0DE /* MobileCoreServices.framework in Frameworks */,
+				3E5051941C34D17700E3F0DE /* CoreGraphics.framework in Frameworks */,
+				3E5051951C34D17700E3F0DE /* UIKit.framework in Frameworks */,
+				3E5051961C34D17700E3F0DE /* Foundation.framework in Frameworks */,
+				3E5051971C34D17700E3F0DE /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9A5ED7A2189245D000BA8E02 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -376,6 +490,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E5051BE1C34D2D300E3F0DE /* SoCal-Production */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "SoCal-Production";
+			sourceTree = "<group>";
+		};
 		9A045EAE18BB025200289D58 /* UIImage+ImageEffects */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,9 +554,10 @@
 		9A5ED7A6189245D000BA8E02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9A5ED7A5189245D000BA8E02 /* SoCal.app */,
+				9A5ED7A5189245D000BA8E02 /* SoCal-Staging.app */,
 				9A5ED7C0189245D000BA8E02 /* SoCalTests.xctest */,
 				DC2A286F18AE0F0C005FE5FF /* SoCal-Dev.app */,
+				3E5051BC1C34D17700E3F0DE /* SoCal.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -522,7 +644,8 @@
 				9A5ED7B1189245D000BA8E02 /* InfoPlist.strings */,
 				9A5ED7B4189245D000BA8E02 /* main.m */,
 				DC2A287418AE101C005FE5FF /* SoCal-Dev-Info.plist */,
-				9A5ED7B0189245D000BA8E02 /* SoCal-Info.plist */,
+				9A5ED7B0189245D000BA8E02 /* SoCal-Staging-Info.plist */,
+				3E5051BD1C34D17700E3F0DE /* SoCal-Info.plist */,
 				9A5ED7B6189245D000BA8E02 /* SoCal-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -629,18 +752,19 @@
 		DC2A287118AE0FA8005FE5FF /* Environments */ = {
 			isa = PBXGroup;
 			children = (
+				3E5051BE1C34D2D300E3F0DE /* SoCal-Production */,
 				DC2A287318AE0FC1005FE5FF /* SoCal-Dev */,
-				DC2A287218AE0FB3005FE5FF /* SoCal */,
+				DC2A287218AE0FB3005FE5FF /* SoCal-Staging */,
 			);
 			name = Environments;
 			sourceTree = "<group>";
 		};
-		DC2A287218AE0FB3005FE5FF /* SoCal */ = {
+		DC2A287218AE0FB3005FE5FF /* SoCal-Staging */ = {
 			isa = PBXGroup;
 			children = (
 				DC2A287818AE103B005FE5FF /* Environment.m */,
 			);
-			name = SoCal;
+			name = "SoCal-Staging";
 			sourceTree = "<group>";
 		};
 		DC2A287318AE0FC1005FE5FF /* SoCal-Dev */ = {
@@ -663,9 +787,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9A5ED7A4189245D000BA8E02 /* SoCal */ = {
+		3E5051651C34D17700E3F0DE /* SoCal */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9A5ED7D1189245D000BA8E02 /* Build configuration list for PBXNativeTarget "SoCal" */;
+			buildConfigurationList = 3E5051B91C34D17700E3F0DE /* Build configuration list for PBXNativeTarget "SoCal" */;
+			buildPhases = (
+				3E5051661C34D17700E3F0DE /* Check Pods Manifest.lock */,
+				3E5051671C34D17700E3F0DE /* Sources */,
+				3E5051851C34D17700E3F0DE /* Frameworks */,
+				3E5051981C34D17700E3F0DE /* Resources */,
+				3E5051B71C34D17700E3F0DE /* Copy Pods Resources */,
+				3E5051B81C34D17700E3F0DE /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SoCal;
+			productName = SoCal;
+			productReference = 3E5051BC1C34D17700E3F0DE /* SoCal.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9A5ED7A4189245D000BA8E02 /* SoCal-Staging */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A5ED7D1189245D000BA8E02 /* Build configuration list for PBXNativeTarget "SoCal-Staging" */;
 			buildPhases = (
 				C04C0EA849B041E795B77123 /* Check Pods Manifest.lock */,
 				9A5ED7A1189245D000BA8E02 /* Sources */,
@@ -678,9 +822,9 @@
 			);
 			dependencies = (
 			);
-			name = SoCal;
+			name = "SoCal-Staging";
 			productName = SoCal;
-			productReference = 9A5ED7A5189245D000BA8E02 /* SoCal.app */;
+			productReference = 9A5ED7A5189245D000BA8E02 /* SoCal-Staging.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9A5ED7BF189245D000BA8E02 /* SoCalTests */ = {
@@ -730,6 +874,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = HereNow;
 				TargetAttributes = {
+					3E5051651C34D17700E3F0DE = {
+						DevelopmentTeam = ZJN6979MJ3;
+					};
 					9A5ED7A4189245D000BA8E02 = {
 						DevelopmentTeam = ZJN6979MJ3;
 					};
@@ -751,7 +898,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9A5ED7A4189245D000BA8E02 /* SoCal */,
+				3E5051651C34D17700E3F0DE /* SoCal */,
+				9A5ED7A4189245D000BA8E02 /* SoCal-Staging */,
 				DC2A281318AE0F0C005FE5FF /* SoCal-Dev */,
 				9A5ED7BF189245D000BA8E02 /* SoCalTests */,
 			);
@@ -759,6 +907,43 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3E5051981C34D17700E3F0DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E5051991C34D17700E3F0DE /* Exo2.0-LightItalic.otf in Resources */,
+				3E50519A1C34D17700E3F0DE /* Exo2.0-Italic.otf in Resources */,
+				3E50519B1C34D17700E3F0DE /* InfoPlist.strings in Resources */,
+				3E50519C1C34D17700E3F0DE /* Exo2.0-ExtraBoldItalic.otf in Resources */,
+				3E50519D1C34D17700E3F0DE /* Exo2.0-Bold.otf in Resources */,
+				3E50519E1C34D17700E3F0DE /* MainVC.xib in Resources */,
+				3E50519F1C34D17700E3F0DE /* Exo2.0-BlackItalic.otf in Resources */,
+				3E5051A01C34D17700E3F0DE /* Exo2.0-SemiBold.otf in Resources */,
+				3E5051A11C34D17700E3F0DE /* Exo2.0-ThinItalic.otf in Resources */,
+				3E5051A21C34D17700E3F0DE /* Exo2.0-Black.otf in Resources */,
+				3E5051A31C34D17700E3F0DE /* ComposeVC.xib in Resources */,
+				3E5051A41C34D17700E3F0DE /* Exo2.0-BoldItalic.otf in Resources */,
+				3E5051A51C34D17700E3F0DE /* Exo2.0-ExtraLightItalic.otf in Resources */,
+				3E5051A61C34D17700E3F0DE /* Exo2.0-Thin.otf in Resources */,
+				3E5051A71C34D17700E3F0DE /* Exo2.0-Regular.otf in Resources */,
+				3E5051A81C34D17700E3F0DE /* Exo2.0-Light.otf in Resources */,
+				3E5051A91C34D17700E3F0DE /* ListDateTimeCell.xib in Resources */,
+				3E5051AA1C34D17700E3F0DE /* Exo2.0-SemiBoldItalic.otf in Resources */,
+				3E5051AB1C34D17700E3F0DE /* ContactCell.xib in Resources */,
+				3E5051AC1C34D17700E3F0DE /* ComposeDateTimeCell.xib in Resources */,
+				3E5051AD1C34D17700E3F0DE /* Exo2.0-Medium.otf in Resources */,
+				3E5051AE1C34D17700E3F0DE /* PostCell.xib in Resources */,
+				3E5051AF1C34D17700E3F0DE /* Exo2.0-ExtraLight.otf in Resources */,
+				3E5051B01C34D17700E3F0DE /* SummaryDateTimeCell.xib in Resources */,
+				3E5051B11C34D17700E3F0DE /* Images.xcassets in Resources */,
+				3E5051B21C34D17700E3F0DE /* Exo2.0-MediumItalic.otf in Resources */,
+				3E5051B31C34D17700E3F0DE /* EventVC.xib in Resources */,
+				3E5051B41C34D17700E3F0DE /* LocationVC.xib in Resources */,
+				3E5051B51C34D17700E3F0DE /* PlaceSearchCell.xib in Resources */,
+				3E5051B61C34D17700E3F0DE /* Exo2.0-ExtraBold.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9A5ED7A3189245D000BA8E02 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -874,6 +1059,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		3E5051661C34D17700E3F0DE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3E5051B71C34D17700E3F0DE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9570E31A5E044E86806F5A03 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -907,6 +1122,42 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3E5051671C34D17700E3F0DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E5051681C34D17700E3F0DE /* UIImage+MDQRCode.m in Sources */,
+				3E5051691C34D17700E3F0DE /* UIImage+ImageEffects.m in Sources */,
+				3E50516A1C34D17700E3F0DE /* UIDevice+Resolutions.m in Sources */,
+				3E50516B1C34D17700E3F0DE /* AppDelegate.m in Sources */,
+				3E50516C1C34D17700E3F0DE /* RDPieView.m in Sources */,
+				3E50516D1C34D17700E3F0DE /* qrspec.c in Sources */,
+				3E50516E1C34D17700E3F0DE /* MainVC.m in Sources */,
+				3E50516F1C34D17700E3F0DE /* SummaryDateTimeCell.m in Sources */,
+				3E5051701C34D17700E3F0DE /* CKCalendarView.m in Sources */,
+				3E5051711C34D17700E3F0DE /* ListDateTimeCell.m in Sources */,
+				3E5051721C34D17700E3F0DE /* LocationVC.m in Sources */,
+				3E5051731C34D17700E3F0DE /* ContactCell.m in Sources */,
+				3E5051741C34D17700E3F0DE /* qrinput.c in Sources */,
+				3E5051751C34D17700E3F0DE /* qrencode.c in Sources */,
+				3E5051761C34D17700E3F0DE /* RDLabeledTextView.m in Sources */,
+				3E5051771C34D17700E3F0DE /* mask.c in Sources */,
+				3E5051781C34D17700E3F0DE /* Environment.m in Sources */,
+				3E5051791C34D17700E3F0DE /* PostCell.m in Sources */,
+				3E50517A1C34D17700E3F0DE /* rscode.c in Sources */,
+				3E50517B1C34D17700E3F0DE /* NetworkAPIClient.m in Sources */,
+				3E50517C1C34D17700E3F0DE /* bitstream.c in Sources */,
+				3E50517D1C34D17700E3F0DE /* UIBAlertView.m in Sources */,
+				3E50517E1C34D17700E3F0DE /* ComposeDateTimeCell.m in Sources */,
+				3E50517F1C34D17700E3F0DE /* main.m in Sources */,
+				3E5051801C34D17700E3F0DE /* Helpers.m in Sources */,
+				3E5051811C34D17700E3F0DE /* EventVC.m in Sources */,
+				3E5051821C34D17700E3F0DE /* ComposeVC.m in Sources */,
+				3E5051831C34D17700E3F0DE /* PlaceSearchCell.m in Sources */,
+				3E5051841C34D17700E3F0DE /* split.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9A5ED7A1189245D000BA8E02 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -992,7 +1243,7 @@
 /* Begin PBXTargetDependency section */
 		9A5ED7C6189245D000BA8E02 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9A5ED7A4189245D000BA8E02 /* SoCal */;
+			target = 9A5ED7A4189245D000BA8E02 /* SoCal-Staging */;
 			targetProxy = 9A5ED7C5189245D000BA8E02 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1017,6 +1268,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3E5051BA1C34D17700E3F0DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 510A9AE5958CA7AFD1C5C215 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Raymond Ser (3XT3J2E77K)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/SoCal-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.herenow.SoCal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3E5051BB1C34D17700E3F0DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A64244771CA74B9D5969247 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: HereNow Pte. Ltd. (ZJN6979MJ3)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/SoCal-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.herenow.SoCal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		9A5ED7CF189245D000BA8E02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1105,7 +1402,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Raymond Ser (3XT3J2E77K)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
-				INFOPLIST_FILE = "SoCal/SoCal-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SoCal/SoCal-Staging-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
@@ -1128,7 +1425,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: HereNow Pte. Ltd. (ZJN6979MJ3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoCal/SoCal-Prefix.pch";
-				INFOPLIST_FILE = "SoCal/SoCal-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SoCal/SoCal-Staging-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
@@ -1187,10 +1484,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 510A9AE5958CA7AFD1C5C215 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv7s,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Raymond Ser (3XT3J2E77K)";
@@ -1211,10 +1505,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A64244771CA74B9D5969247 /* Pods.release.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv7s,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: HereNow Pte. Ltd. (ZJN6979MJ3)";
@@ -1234,6 +1525,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3E5051B91C34D17700E3F0DE /* Build configuration list for PBXNativeTarget "SoCal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E5051BA1C34D17700E3F0DE /* Debug */,
+				3E5051BB1C34D17700E3F0DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9A5ED7A0189245D000BA8E02 /* Build configuration list for PBXProject "SoCal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1243,7 +1543,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9A5ED7D1189245D000BA8E02 /* Build configuration list for PBXNativeTarget "SoCal" */ = {
+		9A5ED7D1189245D000BA8E02 /* Build configuration list for PBXNativeTarget "SoCal-Staging" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9A5ED7D2189245D000BA8E02 /* Debug */,

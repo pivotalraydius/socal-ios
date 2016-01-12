@@ -12,7 +12,7 @@
 
 +(NSString *)App_Key {
     
-    return @"9c1c1f541c66d52d63f3efd22340c044";
+    return @"89433f46a2f596f3f1c8259e8f262c3e";
 }
 
 +(int)CurrentEnvironment {

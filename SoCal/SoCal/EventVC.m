@@ -275,10 +275,10 @@
         
         self.eventInviteCode = [eventDict objectForKey:@"invitation_code"];
         
-        if ([responseObject objectForKey:@"invitee_name"] && [responseObject objectForKey:@"invitee_name"] != [NSNull null] && [responseObject objectForKey:@"invitee_email"] && [responseObject objectForKey:@"invitee_email"] != [NSNull null]) {
-            
-            [self additionalSetupForRecentEventForUsername:[responseObject objectForKey:@"invitee_name"] andEmail:[responseObject objectForKey:@"invitee_email"]];
-        }
+//        if ([responseObject objectForKey:@"invitee_name"] && [responseObject objectForKey:@"invitee_name"] != [NSNull null] && [responseObject objectForKey:@"invitee_email"] && [responseObject objectForKey:@"invitee_email"] != [NSNull null]) {
+//            
+//            [self additionalSetupForRecentEventForUsername:[responseObject objectForKey:@"invitee_name"] andEmail:[responseObject objectForKey:@"invitee_email"]];
+//        }
         NSLog(@"Retrieve Event Object %@", responseObject);
         
         if ([responseObject objectForKey:@"user_voted_state"] && [responseObject objectForKey:@"user_voted_state"] != [NSNull null]) {

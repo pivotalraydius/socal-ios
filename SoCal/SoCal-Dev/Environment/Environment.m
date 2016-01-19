@@ -73,4 +73,16 @@
     return @"e58e48596fbe758eb605";
 }
 
++(NSString *)AmazonS3_Access_Key {
+    return @"AKIAIJMZ5RLXRO6LJHPQ";
+}
+
++(NSString *)AmazonS3_Secrect_Key {
+    return @"pxYxkAUwYtircX4N0iUW+CMl294bRuHfKPc4m+go";
+}
+
++(NSString *)AmazonS3_Bucket_Images {
+    return @"hivedevimages";
+}
+
 @end

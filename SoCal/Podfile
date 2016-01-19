@@ -2,8 +2,10 @@ platform :ios, '7.0'
 
 link_with 'SoCal', 'SoCal-Dev'
 
-pod 'AFNetworking', '~> 2.0'
+pod 'AFNetworking', '~> 2.5.0s'
 pod 'libPusher', '~> 1.5'
+# pod 'AWSiOSSDK', '~> 1.7.1'
+# pod 'SDWebImage'
 
 workspace 'SoCal'
 

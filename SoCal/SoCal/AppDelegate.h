@@ -9,9 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "MainVC.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UserDelegate> {
+    
+    NSString *currentUsername;
+    NSNumber *currentUserID;
+    NSString *currentAuthToken;
+    NSString *currentPushToken;
+}
 
+@property (nonatomic, strong) AFHTTPRequestOperationManager *sharedManager;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) MainVC *mainVC;
+
+- (void)getAnonymousUserWithCompletionBlock:(void(^)(BOOL completed))completion;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MainVC.h"
+#import "AppDelegate.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+AFNetworking.h"
 
@@ -49,6 +50,16 @@
     [super viewWillAppear:animated];
     
     [self becomeFirstResponder];
+    
+    //set sign in button status
+    if ([User loggedInToRaydius]) {
+        [self.btnSignInOut setTitle:@"Sign out" forState:normal];
+        NSLog(@"Sign in status");
+    }
+    else {
+        [self.btnSignInOut setTitle:@"Sign In" forState:normal];
+        NSLog(@"Not sign in yet");
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -90,6 +101,7 @@
 -(void)setupUI {
     
     [self.inviteCodeField setHidden:YES];
+
     
     [Helpers setBorderToView:self.btnCancelQRCodeScanner borderColor:[UIColor clearColor] borderThickness:0.0 borderRadius:3.0];
     
@@ -102,6 +114,7 @@
     [self.recentEventsTable registerClass:[RecentEventCell class] forCellWithReuseIdentifier:@"RECENT_EVENT_CELL"];
     
     [self.bgScrollView setContentSize:self.ivBGView.frame.size];
+
     [self.bgScrollView setScrollEnabled:NO];
     
     [self.mainScrollView setContentSize:CGSizeMake(640, 568)];
@@ -110,6 +123,9 @@
     [self.ivBGBlurView setImage:[self.ivBGView.image applyLightEffect]];
     
     [self.inviteCodeField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [self.signInView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    
+        [self setupSignInView];
 }
 
 -(void)setupFonts {
@@ -120,6 +136,34 @@
     [self.inviteCodeField setFont:[Helpers Exo2Regular:14.0]];
     [self.btnCancelQRCodeScanner.titleLabel setFont:[Helpers Exo2Regular:18.0]];
 }
+
+- (IBAction)SignInButtonAction:(UIButton *)sender {
+
+    if ([User loggedInToRaydius]) {
+        
+        NSLog(@"Going to Sign out");
+        
+        [self signOutRaydius];
+    }
+    else {
+        
+        [self.txtSignInViewEmailField setText:@""];
+        [self.txtSignInViewPasswordField setText:@""];
+        
+        [self.mainViewContainer setHidden:YES];
+       [self.signInView setHidden:NO];
+        
+       // [[(MainVC *)self.parentVC vMapViewContainer] setHidden:YES];
+        
+        //[self.view addSubview:self.signInView];
+        //[self.view bringSubviewToFront:self.signInView];
+        
+//        self.setupSignInView;
+        
+        //currentView = self.signInView;
+    }
+}
+
 
 -(IBAction)btnCreateEventAction {
     
@@ -190,6 +234,284 @@
     
     [self openEventVC:inviteCode username:nil andEmail:nil];
 }
+
+-(IBAction)signInViewCancelButtonAction:(id)sender {
+    
+    [self hideKeyboardAndLoad];
+    
+    [self.signUpView setHidden:YES];
+    [self.signInView setHidden:YES];
+    [self.mainViewContainer setHidden:NO];
+    //[[(MainVC *)self.parentVC vMapViewContainer] setHidden:NO];
+}
+
+
+#pragma mark - Sign In View Methods
+
+-(void)setupSignInView {
+    
+    [self.view addSubview:self.signInView];
+    [self.signInView setHidden:YES];
+    
+//    [Helpers setBorderToView:self.btnSignInViewCancelButton borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
+//    [Helpers setBorderToView:self.btnSignInViewSubmitButton borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
+//    [Helpers setBorderToView:self.txtSignInViewEmailField borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
+//    [Helpers setBorderToView:self.txtSignInViewPasswordField borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
+//    
+//    [Helpers setBorderToView:self.btnSignUpViewCancelButton borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
+//    [Helpers setBorderToView:self.btnSignUpViewSubmitButton borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
+//    [Helpers setBorderToView:self.txtSignUpViewEmailField borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
+//    [Helpers setBorderToView:self.txtSignUpViewPasswordField borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
+//    [Helpers setBorderToView:self.txtSignUpViewConfirmPasswordField borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
+//    
+    [self.signInView addSubview:self.signUpView];
+    [self.signUpView setHidden:YES];
+    
+    //[self hideKeyboard];
+}
+
+-(void)signInRaydius {
+    
+
+    
+    [User signInWithRaydiusUsingEmail:self.txtSignInViewEmailField.text password:self.txtSignInViewPasswordField.text withCompletionBlock:^(NSInteger statusCode) {
+        
+        switch (statusCode) {
+                
+            case SIGN_IN_SUCCESSFUL:
+                
+                [self updateUIWithNewUser];
+                break;
+                
+            case SIGN_UP_SUCCESSFUL:
+                
+                [self updateUIWithNewUser];
+                break;
+                
+            case SIGN_IN_ERROR_EMAIL_DOES_NOT_EXIST:
+                
+                [self signUpPrompt];
+                break;
+                
+            case SIGN_IN_ERROR_WRONG_PASSWORD:
+                
+                [self errorWithSignInUpPrompt];
+                break;
+        }
+        
+    }];
+}
+
+-(void)signUpRaydius {
+    
+    [User signUpWithRaydiusUsingEmail:self.txtSignInViewEmailField.text password:self.txtSignInViewPasswordField.text withCompletionBlock:^(NSInteger statusCode) {
+        
+        switch (statusCode) {
+                
+            case SIGN_IN_SUCCESSFUL:
+                
+                [self updateUIWithNewUser];
+                break;
+                
+            case SIGN_UP_SUCCESSFUL:
+                
+                [self updateUIWithNewUser];
+                break;
+                
+            case SIGN_IN_ERROR_EMAIL_DOES_NOT_EXIST:
+                
+                [self errorWithSignInUpPrompt];
+                break;
+                
+            case SIGN_IN_ERROR_WRONG_PASSWORD:
+                
+                [self errorWithSignInUpPrompt];
+                break;
+        }
+        
+    }];
+}
+
+-(void)signOutRaydius {
+    
+    [User signOutOfRaydiusWithCompletionBlock:^(BOOL success) {
+        
+        [self updateUIWithNewUser];
+    }];
+}
+
+-(void)checkSignInFields {
+    
+    if ([Helpers NSStringIsValidEmail:self.txtSignInViewEmailField.text]) {
+        
+        if (![self.txtSignInViewPasswordField.text isEqualToString:@""]) {
+            
+            //if email is valid and password is not blank
+            
+            [self signInRaydius];
+        }
+        else {
+            
+            [self invalidFieldsPrompt];
+        }
+    }
+    else {
+        
+        [self invalidFieldsPrompt];
+    }
+}
+
+-(void)checkSignUpFields {
+    
+    if ([Helpers NSStringIsValidEmail:self.txtSignUpViewEmailField.text]) {
+        
+        if (![self.txtSignUpViewPasswordField.text isEqualToString:@""]) {
+            
+            if ([self.txtSignUpViewPasswordField.text isEqualToString:self.txtSignUpViewConfirmPasswordField.text]) {
+                
+                //if email is valid and password is confirmed
+                
+                [self signUpRaydius];
+            }
+        }
+        else {
+            
+            [self invalidFieldsPrompt];
+        }
+    }
+    else {
+        
+        [self invalidFieldsPrompt];
+    }
+}
+
+-(void)updateUIWithNewUser {
+    
+    [self hideKeyboardAndLoad];
+    
+    [self.signUpView setHidden:YES];
+    [self.signInView setHidden:YES];
+    [self.mainViewContainer setHidden:NO];
+    [self.btnSignInOut setTitle:@"Sign out" forState:normal];
+//    [[(MainVC *)self.parentVC vMapViewContainer] setHidden:NO];
+    
+    [self.txtSignInViewEmailField setText:@""];
+    [self.txtSignInViewPasswordField setText:@""];
+    [self.txtSignUpViewConfirmPasswordField setText:@""];
+    [self.txtSignUpViewEmailField setText:@""];
+    [self.txtSignUpViewPasswordField setText:@""];
+    
+    //ProfileVC
+//    [self.lblUserName setText:[User currentUsername]];
+//    
+//    [[RDImageLoader sharedImageLoader] deleteCachedSelfAvatar];
+//    
+//    UIImageView *ivAvatar = [(MainVC *)self.parentVC imagePreview];
+//    NSString *RDProfilePicture = [[NSUserDefaults standardUserDefaults] objectForKey:@"RDProfilePicture"];
+//    if (RDProfilePicture){
+//        [[HNDataManager dataManager] downloadImageWithName:RDProfilePicture withSuccess:^(UIImage *image) {
+//            NSLog(@"success download from updateUI %@",image);
+//            [ivAvatar setImage:image];
+//        } orFailure:^(NSError *error) {
+//            NSLog(@"fail download");
+//        }];
+//    }else{
+//        [[RDImageLoader sharedImageLoader] loadAvatarForObject:ivAvatar withUsername:[User currentUsername] andUserID:[User currentUserID]];
+//    }
+//    
+//    
+//    [MyFavrsController downloadFavrTopicsForUserWithCompletionBlock:^{
+//        
+//        [self loadMyRequests];
+//        [self loadMyTasks];
+//        [self loadMyInfo];
+//    }];
+//    
+//
+    
+    
+    
+    //set sign in button status
+    if ([User loggedInToRaydius]) {
+
+        [self.btnSignInOut setTitle:@"Sign out" forState:normal];
+        NSLog(@"Sign in status");
+    }
+    else {
+        
+        [User flushRaydiusUserInfo];
+        [User setRaydiusLogInStatus:NO];
+        [self flushCurrentUserInfo];
+        
+//        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//        [appDelegate getAnonymousUserWithCompletionBlock:^(BOOL completed) {
+//            NSLog(@"getting anonymous user after sign out");
+//        }
+//         ];
+        
+        [self.btnSignInOut setTitle:@"Sign In" forState:normal];
+        NSLog(@"Sign out and anonymous");
+        
+    }
+//
+//    //MainVC
+//    //username label
+//    [self.parentVC setLblGreetings];
+}
+
+-(void)flushCurrentUserInfo {
+    
+    currentUserID = nil;
+    currentUsername = nil;
+    currentAuthToken = nil;
+    currentPushToken = nil;
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"current_username"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"authentication_token"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"current_user_id"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"push_token"];
+}
+
+-(void)signUpPrompt {
+    
+    NSLog(@"TODO: prompt user if he would like to sign up first");
+    
+    [self.txtSignUpViewEmailField setText:self.txtSignInViewEmailField.text];
+    [self.txtSignUpViewPasswordField setText:@""];
+    [self.txtSignUpViewConfirmPasswordField setText:@""];
+    
+    [self.signUpView setHidden:NO];
+    
+    [self hideKeyboardAndLoad];
+}
+
+-(void)invalidFieldsPrompt {
+    
+    NSLog(@"TODO: check email or password and prompt user which is wrong");
+}
+
+-(void)errorWithSignInUpPrompt {
+    
+    NSLog(@"TODO: prompt relevant error when API returns error code");
+    
+    UIAlertView *signInFailedAlert = [[UIAlertView alloc] initWithTitle:@"Sign In Failed" message:@"Incorrect password entered. Please try again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    
+    [signInFailedAlert show];
+}
+
+-(IBAction)signInViewSubmitAction {
+    
+    [self checkSignInFields];
+    [self signInRaydius];
+}
+
+-(IBAction)signUpViewSubmitAction {
+    
+    [self checkSignUpFields];
+    [self signUpRaydius];
+}
+
+
 
 #pragma mark - SecondView Handler
 
@@ -538,6 +860,13 @@
 
 -(void)keyboardWillShow {
     
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    [self.signInView setFrame:CGRectMake(0, -250, self.signInView.frame.size.width, self.signInView.frame.size.height)];
+    
+    [UIView commitAnimations];
+    
     downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [downSwipe setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.view addGestureRecognizer:downSwipe];
@@ -547,9 +876,22 @@
 }
 
 -(void)keyboardWillHide {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    [self.signInView setFrame:CGRectMake(0, 0, self.signInView.frame.size.width, self.signInView.frame.size.height)];
     
     [self.view removeGestureRecognizer:downSwipe];
 //    [self.view removeGestureRecognizer:tapGesture];
+}
+
+-(void)hideKeyboardAndLoad {
+    
+    [self.txtSignInViewEmailField resignFirstResponder];
+    [self.txtSignInViewPasswordField resignFirstResponder];
+    [self.txtSignUpViewEmailField resignFirstResponder];
+    [self.txtSignUpViewPasswordField resignFirstResponder];
+    [self.txtSignUpViewConfirmPasswordField resignFirstResponder];
 }
 
 -(void)hideKeyboard {

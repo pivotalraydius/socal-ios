@@ -31,11 +31,23 @@
 +(NSString *)timeframeFromString:(NSString *)timeString;
 +(NSDate *)dateWithNoTime:(NSDate *)date;
 
++(void)setBorderToView:(UIView*)view borderColor:(UIColor*)color borderThickness:(float)thickness borderRaydius:(float)raydius;
+
 +(BOOL)isDay:(NSDate *)date;
 +(BOOL)dateIsTodayOrLater:(NSDate *)date;
 
 +(BOOL)iPhone4;
 
 +(BOOL)string:(NSString *)mainStr containsString:(NSString *)secStr;
+
++(BOOL) NSStringIsValidEmail:(NSString *)checkString;
+
+@end
+
+//NSObject Perform Block After Delay
+
+@interface NSObject (PerformBlockAfterDelay)
+
+-(void)performBlock:(void (^)(void))block afterDelay:(NSTimeInterval)delay;
 
 @end

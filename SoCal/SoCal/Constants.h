@@ -31,6 +31,7 @@ extern NSString * const UserHasShakenForSuggestionsKey;
 
 //User
 extern NSString * const RDUserIDKey;
+extern NSString * const RDDailyPointKey;
 extern NSString * const RDUsernameKey;
 extern NSString * const RDAuthTokenKey;
 extern NSString * const RDEmailKey;
@@ -53,10 +54,6 @@ extern NSString * const RDCheckedInPlaceNameKey;
 extern NSString * const RDCheckedInPlaceAddressKey;
 extern NSString * const RDCheckedInPlaceLatitudeKey;
 extern NSString * const RDCheckedInPlaceLongitudeKey;
-
-//Rackspace
-extern NSString * const RackSpace_CloudFiles_Username;
-extern NSString * const RackSpace_CloudFiles_API_KEY;
 
 //Facebook-Linked Account
 extern NSString * const FBUsernameKey;
@@ -118,46 +115,46 @@ extern const int DINNER_TIME;
 extern const int SUPPER_TIME;
 
 
-//Favr States ( for Favr )
-typedef enum {
-    TOPIC_STATE_DEFAULT = 0,
-    TOPIC_STATE_OPENED,
-    TOPIC_STATE_IN_PROGRESS,
-    TOPIC_STATE_FINISHED,
-    TOPIC_STATE_ACKNOWLEDGED,
-    TOPIC_STATE_REJECTED,
-    TOPIC_STATE_REVOKED,
-    TOPIC_STATE_TASK_EXPIRED,
-    TOPIC_STATE_EXPIRED
-} TOPIC_STATE;
-
-//Favr Actions
-typedef enum {
-    FAVR_ACTION_CREATE = 0,
-    FAVR_ACTION_START,
-    FAVR_ACTION_FINISH,
-    FAVR_ACTION_ACKNOWLEDGE,
-    FAVR_ACTION_REJECT,
-    FAVR_ACTION_REVOKE,
-    FAVR_ACTION_REOPEN,
-    FAVR_ACTION_EXTEND
-} FAVR_ACTION;
-
-//Favr Status
-typedef enum {
-    FAVR_STATUS_DEFAULT = 0,
-    FAVR_STATUS_DOER_STARTED,
-    FAVR_STATUS_DOER_FINISHED,
-    FAVR_STATUS_OWNER_ACKNOWLEDGED,
-    FAVR_STATUS_OWNER_REJECTED,
-    FAVR_STATUS_DOER_RESPONDED_ACK,
-    FAVR_STATUS_DOER_RESPONDED_REJ,
-    FAVR_STATUS_OWNER_REVOKED,
-    FAVR_STATUS_COMPLETION_REMINDER_SENT,
-    FAVR_STATUS_EXPIRED_AFTER_STARTED,
-    FAVR_STATUS_EXPIRED_AFTER_FINISHED,
-    FAVR_STATUS_EXPIRED
-} FAVR_STATUS;
+////Favr States ( for Favr )
+//typedef enum {
+//    TOPIC_STATE_DEFAULT = 0,
+//    TOPIC_STATE_OPENED,
+//    TOPIC_STATE_IN_PROGRESS,
+//    TOPIC_STATE_FINISHED,
+//    TOPIC_STATE_ACKNOWLEDGED,
+//    TOPIC_STATE_REJECTED,
+//    TOPIC_STATE_REVOKED,
+//    TOPIC_STATE_TASK_EXPIRED,
+//    TOPIC_STATE_EXPIRED
+//} TOPIC_STATE;
+//
+////Favr Actions
+//typedef enum {
+//    FAVR_ACTION_CREATE = 0,
+//    FAVR_ACTION_START,
+//    FAVR_ACTION_FINISH,
+//    FAVR_ACTION_ACKNOWLEDGE,
+//    FAVR_ACTION_REJECT,
+//    FAVR_ACTION_REVOKE,
+//    FAVR_ACTION_REOPEN,
+//    FAVR_ACTION_EXTEND
+//} FAVR_ACTION;
+//
+////Favr Status
+//typedef enum {
+//    FAVR_STATUS_DEFAULT = 0,
+//    FAVR_STATUS_DOER_STARTED,
+//    FAVR_STATUS_DOER_FINISHED,
+//    FAVR_STATUS_OWNER_ACKNOWLEDGED,
+//    FAVR_STATUS_OWNER_REJECTED,
+//    FAVR_STATUS_DOER_RESPONDED_ACK,
+//    FAVR_STATUS_DOER_RESPONDED_REJ,
+//    FAVR_STATUS_OWNER_REVOKED,
+//    FAVR_STATUS_COMPLETION_REMINDER_SENT,
+//    FAVR_STATUS_EXPIRED_AFTER_STARTED,
+//    FAVR_STATUS_EXPIRED_AFTER_FINISHED,
+//    FAVR_STATUS_EXPIRED
+//} FAVR_STATUS;
 
 //Scroll Direction
 typedef enum ScrollDirection {

@@ -33,4 +33,8 @@
 +(NSString *)Rackspace_Place_Images_Container;
 +(NSString *)RackSpace_PlaceImages_CDN_BaseURL;
 
++(NSString *)AmazonS3_Access_Key;
++(NSString *)AmazonS3_Secrect_Key;
++(NSString *)AmazonS3_Bucket_Images;
+
 @end

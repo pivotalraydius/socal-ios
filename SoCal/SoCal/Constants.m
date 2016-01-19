@@ -53,6 +53,7 @@ NSString * const UserHasShakenForSuggestionsKey = @KEY_BASE "UserHasShakenForSug
 
 //User
 NSString * const RDUserIDKey = @KEY_BASE "UserIDKey";
+NSString * const RDDailyPointKey = @KEY_BASE "DailyPointKey";
 NSString * const RDUsernameKey = @KEY_BASE "UsernameKey";
 NSString * const RDAuthTokenKey = @KEY_BASE "AuthTokenKey";
 NSString * const RDEmailKey = @KEY_BASE "EmailKey";
@@ -77,9 +78,6 @@ NSString * const RDCheckedInPlaceAddressKey = @KEY_BASE "CheckedInPlaceAddressKe
 NSString * const RDCheckedInPlaceLatitudeKey = @KEY_BASE "CheckedInPlaceLatitudeKey";
 NSString * const RDCheckedInPlaceLongitudeKey = @KEY_BASE "CheckedInPlaceLongitudeKey";
 
-//Rackspace
-NSString * const RackSpace_CloudFiles_Username = @"rayser";
-NSString * const RackSpace_CloudFiles_API_KEY = @"9008c2d6d784889027ac9568bfd68536";
 
 //Facebook-Linked Account
 NSString * const FBUsernameKey = @KEY_BASE "FBUsernameKey";

@@ -8,10 +8,44 @@
 
 #import "AppDelegate.h"
 
+static NSString *baseHostURL;
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    NSString *currentBundleVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *previousBundleVersion = [[NSUserDefaults standardUserDefaults] objectForKey: @"bundle_version"];
+    if (previousBundleVersion) {
+        if (![previousBundleVersion isEqualToString: currentBundleVersion]) {
+            
+            [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+            
+//            //clear image cache
+//            [[RDImageLoader sharedImageLoader] clearWholeImageCache];
+            
+            //clear keys
+            NSArray *array = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
+            for (NSString *key in array) {
+                
+                if ([key isEqualToString:RDDeviceUDIDKey] ||
+                    [key isEqualToString:RDDeviceAPNKey] ||
+                    [key isEqualToString:RDUserIDKey] ||
+                    [key isEqualToString:RDUsernameKey] ||
+                    [key isEqualToString:RDAuthTokenKey] ||
+                    [key isEqualToString:RDEmailKey]) {
+                    
+                    //don't delete
+                }
+                else {
+                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+                }
+            }
+        }
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:currentBundleVersion forKey:@"bundle_version"];
     
 //    NSSetUncaughtExceptionHandler(&exceptionHandler);
     
@@ -30,17 +64,37 @@
     
     [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:YES];
     
+    
+    
+    
+    if (![User currentUserAuthToken]) {
+        
+        [User registerWithServerWithDelegate:self];
+//        
+//        [self getAnonymousUserWithCompletionBlock:^(BOOL completed) {
+//            
+//            NSLog(@"Getting Anonymous user");
+//            
+//        }];
+        
+    }
+    else {
+        [self userHasUsernameAndAuthToken];
+    }
+    
+    if ([User currentUserAppFirstRun]) {
+        
+        NSLog(@"App first run");
+        
+        [User currentUserClearFirstRun];
+    }
+    
+    
+    [Environment registerAPN];
+
+    
     return YES;
 }
-
-//void exceptionHandler(NSException *exception)
-//{
-//    NSLog(@"Exception name %@",[exception name]);
-//    NSLog(@"Reason %@",[exception reason]);
-//    NSLog(@"Info %@",[exception userInfo]);
-//    NSLog(@"callStackSymbols%@",[exception callStackSymbols]);
-//    NSLog(@"callStackReturnAddresses%@",[exception callStackReturnAddresses]);
-//}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -69,6 +123,19 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)userHasUsernameAndAuthToken {
+    
+    NSLog(@"Retrieved credentials from Raydius");
+    
+//    [self.mainVC setLblGreetings];
+    
+//    [MyFavrsController downloadFavrTopicsForUserWithCompletionBlock:^{
+//        
+//    }];
+    
+    NSLog(@"User ID: %@", [User currentUserID]);
+}
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
     if ([[url absoluteString] hasPrefix:@"socal://open_event?invitation_code="]) {
@@ -81,6 +148,111 @@
     }
     
     return NO;
+}
+
+
+#pragma mark - User Methods
+
+- (void)getAnonymousUserWithCompletionBlock:(void(^)(BOOL completed))completion {
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authentication_token"] != nil) {
+        
+        currentAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authentication_token"];
+        currentUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_user_id"];
+        currentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_username"];
+        currentPushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"push_token"];
+        
+        completion(YES);
+        
+    }
+    else {
+        
+        NSString *uuid = [[NSUUID UUID] UUIDString];
+        
+        NSDictionary *queryInfo = @{ @"device_id":uuid };
+        
+        baseHostURL = [Environment BaseHost];
+        self.sharedManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:baseHostURL]];
+        [self.sharedManager GET:@"api/users/create_anonymous_user" parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSLog(@"Response obj : %@", responseObject);
+            
+            NSDictionary *userDict = [responseObject objectForKey:@"user"];
+            NSString *userName = [userDict objectForKey:@"username"];
+            NSString *authToken = [userDict objectForKey:@"authentication_token"];
+            NSNumber *userID = [userDict objectForKey:@"id"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"current_username"];
+            [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:@"authentication_token"];
+            [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"current_user_id"];
+            [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:@"push_token"];
+            
+            currentAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authentication_token"];
+            currentUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_user_id"];
+            currentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_username"];
+            currentPushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"push_token"];
+            
+            completion(YES);
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            NSLog(@"Error getting anonymous user account %@",error);
+            
+            completion(NO);
+        }];
+    }
+    
+}
+
+
+- (void)verifyCurrentUser {
+    
+    NSDictionary *queryInfo = @{ @"auth_token":[self currentAuthToken], @"push_token":[self currentPushToken] };
+    
+    [self.sharedManager POST:@"api/users/verify_user_account" parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+}
+
+- (NSString *)currentAuthToken {
+    
+    if (!currentAuthToken) {
+        currentAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authentication_token"];
+    }
+    
+    return currentAuthToken;
+}
+
+- (NSString *)currentUsername {
+    
+    if (!currentUsername) {
+        currentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_username"];
+    }
+    
+    return currentUsername;
+}
+
+- (NSNumber *)currentUserID {
+    
+    if (!currentUserID) {
+        currentUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_user_id"];
+    }
+    
+    return currentUserID;
+}
+
+- (NSString *)currentPushToken {
+    
+    if (!currentPushToken) {
+        currentPushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"push_notification_token"];
+    }
+    
+    return currentPushToken;
 }
 
 @end

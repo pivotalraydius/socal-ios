@@ -85,6 +85,15 @@
 		3E5051B51C34D17700E3F0DE /* PlaceSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA365D118A20D20004C0E86 /* PlaceSearchCell.xib */; };
 		3E5051B61C34D17700E3F0DE /* Exo2.0-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A20BD6C18A8D1E100B90101 /* Exo2.0-ExtraBold.otf */; };
 		3E5051C41C34D58D00E3F0DE /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5051C31C34D58D00E3F0DE /* Environment.m */; };
+		3E65BDB91C4772A200B8E70F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65BDB81C4772A200B8E70F /* User.m */; };
+		3E65BDBA1C4772A200B8E70F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65BDB81C4772A200B8E70F /* User.m */; };
+		3E65BDBB1C4772A200B8E70F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65BDB81C4772A200B8E70F /* User.m */; };
+		3E65BDBF1C477A1400B8E70F /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65BDBE1C477A1400B8E70F /* UICKeyChainStore.m */; };
+		3E65BDC01C477A1400B8E70F /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65BDBE1C477A1400B8E70F /* UICKeyChainStore.m */; };
+		3E65BDC11C477A1400B8E70F /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65BDBE1C477A1400B8E70F /* UICKeyChainStore.m */; };
+		3E65BDCE1C47942900B8E70F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65BDCD1C47942900B8E70F /* Constants.m */; };
+		3E65BDCF1C47942900B8E70F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65BDCD1C47942900B8E70F /* Constants.m */; };
+		3E65BDD01C47942900B8E70F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65BDCD1C47942900B8E70F /* Constants.m */; };
 		848BD24CFACD4E78B1EA133E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F67F3B627C494F88983E92 /* libPods.a */; };
 		9A045EB118BB025200289D58 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A045EB018BB025200289D58 /* UIImage+ImageEffects.m */; };
 		9A152D10189626B40013B647 /* ComposeDateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A152D0F189626B40013B647 /* ComposeDateTimeCell.m */; };
@@ -283,6 +292,12 @@
 		3E5051BC1C34D17700E3F0DE /* SoCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E5051BD1C34D17700E3F0DE /* SoCal-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SoCal-Info.plist"; path = "/Users/Galactica/workspace/socal-ios/SoCal/SoCal-Info.plist"; sourceTree = "<absolute>"; };
 		3E5051C31C34D58D00E3F0DE /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Environment.m; path = "SoCal-Production/Environment/Environment.m"; sourceTree = SOURCE_ROOT; };
+		3E65BDB71C4772A200B8E70F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		3E65BDB81C4772A200B8E70F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		3E65BDBD1C477A1400B8E70F /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
+		3E65BDBE1C477A1400B8E70F /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
+		3E65BDCC1C47942900B8E70F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		3E65BDCD1C47942900B8E70F /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		510A9AE5958CA7AFD1C5C215 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7A64244771CA74B9D5969247 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9A045EAF18BB025200289D58 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -499,6 +514,16 @@
 			name = "SoCal-Production";
 			sourceTree = "<group>";
 		};
+		3E65BDBC1C477A1400B8E70F /* UICKeychainStore */ = {
+			isa = PBXGroup;
+			children = (
+				3E65BDBD1C477A1400B8E70F /* UICKeyChainStore.h */,
+				3E65BDBE1C477A1400B8E70F /* UICKeyChainStore.m */,
+			);
+			name = UICKeychainStore;
+			path = Externals/UICKeychainStore;
+			sourceTree = SOURCE_ROOT;
+		};
 		9A045EAE18BB025200289D58 /* UIImage+ImageEffects */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +626,8 @@
 				9A5ED7E11892476C00BA8E02 /* ComposeVC.h */,
 				9A5ED7E21892476C00BA8E02 /* ComposeVC.m */,
 				9A5ED7E31892476C00BA8E02 /* ComposeVC.xib */,
+				3E65BDCC1C47942900B8E70F /* Constants.h */,
+				3E65BDCD1C47942900B8E70F /* Constants.m */,
 				DCD74AE818AB680500961BE8 /* ContactCell.h */,
 				DCD74AE918AB680500961BE8 /* ContactCell.m */,
 				DCD74AE618AB67E500961BE8 /* ContactCell.xib */,
@@ -674,8 +701,9 @@
 		9A5ED7E618924E3E00BA8E02 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
-				9A045EAE18BB025200289D58 /* UIImage+ImageEffects */,
+				3E65BDBC1C477A1400B8E70F /* UICKeychainStore */,
 				9A5ED822189253F800BA8E02 /* CKCalendar */,
+				9A045EAE18BB025200289D58 /* UIImage+ImageEffects */,
 				9A7D9D5018AC930B005E32D1 /* QR */,
 				9AA365A118A1DC59004C0E86 /* Raydius */,
 				9AA365CA18A20918004C0E86 /* UIBAlertView */,
@@ -738,6 +766,8 @@
 			children = (
 				9AA365A218A1DC59004C0E86 /* NetworkAPIClient.h */,
 				9AA365A318A1DC59004C0E86 /* NetworkAPIClient.m */,
+				3E65BDB71C4772A200B8E70F /* User.h */,
+				3E65BDB81C4772A200B8E70F /* User.m */,
 			);
 			path = Raydius;
 			sourceTree = "<group>";
@@ -1131,6 +1161,7 @@
 				3E5051681C34D17700E3F0DE /* UIImage+MDQRCode.m in Sources */,
 				3E5051C41C34D58D00E3F0DE /* Environment.m in Sources */,
 				3E5051691C34D17700E3F0DE /* UIImage+ImageEffects.m in Sources */,
+				3E65BDCE1C47942900B8E70F /* Constants.m in Sources */,
 				3E50516A1C34D17700E3F0DE /* UIDevice+Resolutions.m in Sources */,
 				3E50516B1C34D17700E3F0DE /* AppDelegate.m in Sources */,
 				3E50516C1C34D17700E3F0DE /* RDPieView.m in Sources */,
@@ -1148,6 +1179,8 @@
 				3E5051791C34D17700E3F0DE /* PostCell.m in Sources */,
 				3E50517A1C34D17700E3F0DE /* rscode.c in Sources */,
 				3E50517B1C34D17700E3F0DE /* NetworkAPIClient.m in Sources */,
+				3E65BDBF1C477A1400B8E70F /* UICKeyChainStore.m in Sources */,
+				3E65BDB91C4772A200B8E70F /* User.m in Sources */,
 				3E50517C1C34D17700E3F0DE /* bitstream.c in Sources */,
 				3E50517D1C34D17700E3F0DE /* UIBAlertView.m in Sources */,
 				3E50517E1C34D17700E3F0DE /* ComposeDateTimeCell.m in Sources */,
@@ -1167,6 +1200,7 @@
 				9A7D9D6918AC930B005E32D1 /* UIImage+MDQRCode.m in Sources */,
 				9A045EB118BB025200289D58 /* UIImage+ImageEffects.m in Sources */,
 				9A7D9D6F18ACAF4B005E32D1 /* UIDevice+Resolutions.m in Sources */,
+				3E65BDCF1C47942900B8E70F /* Constants.m in Sources */,
 				9A5ED7B9189245D000BA8E02 /* AppDelegate.m in Sources */,
 				DC1434C518A4B51D0062AD7A /* RDPieView.m in Sources */,
 				9A7D9D6618AC930B005E32D1 /* qrspec.c in Sources */,
@@ -1184,6 +1218,8 @@
 				9ACDDA1A18A35EBB00FF4F5C /* PostCell.m in Sources */,
 				9A7D9D6718AC930B005E32D1 /* rscode.c in Sources */,
 				9AA365B818A1DC59004C0E86 /* NetworkAPIClient.m in Sources */,
+				3E65BDC01C477A1400B8E70F /* UICKeyChainStore.m in Sources */,
+				3E65BDBA1C4772A200B8E70F /* User.m in Sources */,
 				9A7D9D6218AC930B005E32D1 /* bitstream.c in Sources */,
 				9AA365CD18A20918004C0E86 /* UIBAlertView.m in Sources */,
 				9A152D10189626B40013B647 /* ComposeDateTimeCell.m in Sources */,
@@ -1211,6 +1247,7 @@
 				DC2A281518AE0F0C005FE5FF /* UIImage+MDQRCode.m in Sources */,
 				9A80AEE118BC8AA3005637E3 /* UIImage+ImageEffects.m in Sources */,
 				DC2A281818AE0F0C005FE5FF /* UIDevice+Resolutions.m in Sources */,
+				3E65BDD01C47942900B8E70F /* Constants.m in Sources */,
 				DC2A281918AE0F0C005FE5FF /* AppDelegate.m in Sources */,
 				DC2A281A18AE0F0C005FE5FF /* RDPieView.m in Sources */,
 				DC2A281B18AE0F0C005FE5FF /* qrspec.c in Sources */,
@@ -1228,6 +1265,8 @@
 				DC2A282A18AE0F0C005FE5FF /* PostCell.m in Sources */,
 				DC2A282C18AE0F0C005FE5FF /* rscode.c in Sources */,
 				DC2A282E18AE0F0C005FE5FF /* NetworkAPIClient.m in Sources */,
+				3E65BDC11C477A1400B8E70F /* UICKeyChainStore.m in Sources */,
+				3E65BDBB1C4772A200B8E70F /* User.m in Sources */,
 				DC2A282F18AE0F0C005FE5FF /* bitstream.c in Sources */,
 				DC2A283018AE0F0C005FE5FF /* UIBAlertView.m in Sources */,
 				DC2A283218AE0F0C005FE5FF /* ComposeDateTimeCell.m in Sources */,

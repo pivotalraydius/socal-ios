@@ -38,6 +38,8 @@
 		<string>Exo2.0-Bold.otf</string>
 		<string>Exo2.0-MediumItalic.otf</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>MainVC</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

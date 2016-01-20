@@ -111,6 +111,14 @@
     [self.txtEventName setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.5]];
     [self.btnLocation setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.5]];
     [self.txtDescription setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.5]];
+    
+    if ([User loggedInToRaydius]) {
+        
+        NSLog(@"User's email : %@ %@", [User currentUsername], [User currentUserEmail]);
+        
+        self.creatorEmailField.text = [User currentUserEmail];
+    }
+    
 }
 
 -(void)setupFonts {

@@ -11,6 +11,7 @@
 #import "CKCalendarView.h"
 #import "PTPusher.h"
 #import <MessageUI/MessageUI.h>
+#import "User.h"
 
 @interface EventVC : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, PTPusherDelegate, UITextFieldDelegate, CKCalendarDelegate, MFMailComposeViewControllerDelegate>
 {

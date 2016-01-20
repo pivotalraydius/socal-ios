@@ -69,7 +69,6 @@ static NSString *baseHostURL;
     
     if (![User currentUserAuthToken]) {
         
-       //[User registerWithServerWithDelegate:self];
         
         [self getAnonymousUserWithCompletionBlock:^(BOOL completed) {
             

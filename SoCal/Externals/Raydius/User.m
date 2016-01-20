@@ -50,6 +50,7 @@
                                                   NSString *username = [userDict objectForKey:@"username"];
                                                   NSString *authtoken = [userDict objectForKey:@"authentication_token"];
                                                   NSNumber *userId = [userDict objectForKey:@"id"];
+                                                  NSString *email = [userDict objectForKey:@"email"];
                                                   
                                                   NSString* savedEmail= [[NSUserDefaults standardUserDefaults] objectForKey:RDEmailKey];
                                                   if (savedEmail  == nil) {
@@ -60,6 +61,7 @@
                                                       [[NSUserDefaults standardUserDefaults] setObject:username forKey:RDUsernameKey];
                                                       [[NSUserDefaults standardUserDefaults] setObject:authtoken forKey:RDAuthTokenKey];
                                                       [[NSUserDefaults standardUserDefaults] setObject:userId forKey:RDUserIDKey];
+                                                      [[NSUserDefaults standardUserDefaults] setObject:email forKey:RDEmailKey];
                                                   }
                                                   
                                                   if(aDelegate)
@@ -111,6 +113,7 @@
                                               NSString *username = [userDict objectForKey:@"username"];
                                               NSString *authtoken = [userDict objectForKey:@"authentication_token"];
                                               NSNumber *userId = [userDict objectForKey:@"id"];
+                                              NSString *email = [userDict objectForKey:@"email"];
                                               NSLog(@"authentication token %@", authtoken);
                                               
                                               NSString* savedEmail= [[NSUserDefaults standardUserDefaults] objectForKey:RDEmailKey];
@@ -122,6 +125,7 @@
                                                   [[NSUserDefaults standardUserDefaults] setObject:username forKey:RDUsernameKey];
                                                   [[NSUserDefaults standardUserDefaults] setObject:authtoken forKey:RDAuthTokenKey];
                                                   [[NSUserDefaults standardUserDefaults] setObject:userId forKey:RDUserIDKey];
+                                                  [[NSUserDefaults standardUserDefaults] setObject:email forKey:RDEmailKey];
                                               }
                                               
                                               block1();
@@ -297,6 +301,13 @@
     return placeAddress;
 }
 
++(NSString *)currentUserEmail {
+    
+    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:RDEmailKey];
+    
+    return email;
+}
+
 +(BOOL)currentUserAppFirstRun {
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:RDAppFirstRunKey])
@@ -401,6 +412,7 @@
         NSString *username = [userDict objectForKey:@"username"];
         NSString *authtoken = [userDict objectForKey:@"authentication_token"];
         NSNumber *userId = [userDict objectForKey:@"id"];
+        NSString *email = [userDict objectForKey:@"email"];
         
         NSString* savedEmail= [[NSUserDefaults standardUserDefaults] objectForKey:RDEmailKey];
         if (savedEmail  == nil) {
@@ -411,6 +423,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:username forKey:RDUsernameKey];
             [[NSUserDefaults standardUserDefaults] setObject:authtoken forKey:RDAuthTokenKey];
             [[NSUserDefaults standardUserDefaults] setObject:userId forKey:RDUserIDKey];
+            [[NSUserDefaults standardUserDefaults] setObject:email forKey:RDEmailKey];
         }
         
         switch (successCode) {

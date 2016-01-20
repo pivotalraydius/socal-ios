@@ -48,6 +48,7 @@
 +(NSNumber *)currentUserCheckedInPlaceID;
 +(NSString *)currentUserCheckedInPlaceName;
 +(NSString *)currentUserCheckedInPlaceAddress;
++(NSString *)currentUserEmail;
 
 +(BOOL)currentUserAppFirstRun;
 +(BOOL)currentUserAppCompletedInitialDownload;

@@ -43,7 +43,6 @@
                 <outlet property="signUpPanelConfirmPasswordField" destination="p68-01-LUG" id="PpB-1u-Scm"/>
                 <outlet property="signUpPanelEmailField" destination="ArS-dV-6dT" id="HvO-bh-Mxn"/>
                 <outlet property="signUpPanelPasswordField" destination="kV8-vS-4p9" id="kRF-eG-9iw"/>
-                <outlet property="signUpPanelSubmitButton" destination="JHz-Fm-kga" id="imE-Oz-FE5"/>
                 <outlet property="signUpView" destination="Whi-Ns-C5e" id="9yY-o2-1Ys"/>
                 <outlet property="txtSignInViewEmailField" destination="XcP-hU-3wf" id="yM6-40-Cjv"/>
                 <outlet property="txtSignInViewPasswordField" destination="N07-Vi-iSX" id="s2z-Rl-QC6"/>

@@ -105,8 +105,6 @@
 
 -(void)postPath:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
     
-    NSLog(@"*** parameters %ld %ld %ld", (long)self.reachabilityManager.networkReachabilityStatus, (long)AFNetworkReachabilityStatusReachableViaWiFi, (long)AFNetworkReachabilityStatusReachableViaWWAN);
-    
     if (self.reachabilityManager.networkReachabilityStatus == AFNetworkReachabilityStatusReachableViaWiFi ||
         self.reachabilityManager.networkReachabilityStatus == AFNetworkReachabilityStatusReachableViaWWAN) {
         

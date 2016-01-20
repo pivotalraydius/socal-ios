@@ -53,12 +53,11 @@
     
     //set sign in button status
     if ([User loggedInToRaydius]) {
+        
         [self.btnSignInOut setTitle:@"Sign out" forState:normal];
-        NSLog(@"Sign in status");
     }
     else {
         [self.btnSignInOut setTitle:@"Sign In" forState:normal];
-        NSLog(@"Not sign in yet");
     }
 }
 
@@ -141,8 +140,6 @@
 
     if ([User loggedInToRaydius]) {
         
-        NSLog(@"Going to Sign out");
-        
         [self signOutRaydius];
     }
     else {
@@ -152,15 +149,6 @@
         
         [self.mainViewContainer setHidden:YES];
        [self.signInView setHidden:NO];
-        
-       // [[(MainVC *)self.parentVC vMapViewContainer] setHidden:YES];
-        
-        //[self.view addSubview:self.signInView];
-        //[self.view bringSubviewToFront:self.signInView];
-        
-//        self.setupSignInView;
-        
-        //currentView = self.signInView;
     }
 }
 
@@ -242,7 +230,6 @@
     [self.signUpView setHidden:YES];
     [self.signInView setHidden:YES];
     [self.mainViewContainer setHidden:NO];
-    //[[(MainVC *)self.parentVC vMapViewContainer] setHidden:NO];
 }
 
 
@@ -253,17 +240,6 @@
     [self.view addSubview:self.signInView];
     [self.signInView setHidden:YES];
     
-//    [Helpers setBorderToView:self.btnSignInViewCancelButton borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
-//    [Helpers setBorderToView:self.btnSignInViewSubmitButton borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
-//    [Helpers setBorderToView:self.txtSignInViewEmailField borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
-//    [Helpers setBorderToView:self.txtSignInViewPasswordField borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
-//    
-//    [Helpers setBorderToView:self.btnSignUpViewCancelButton borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
-//    [Helpers setBorderToView:self.btnSignUpViewSubmitButton borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
-//    [Helpers setBorderToView:self.txtSignUpViewEmailField borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
-//    [Helpers setBorderToView:self.txtSignUpViewPasswordField borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
-//    [Helpers setBorderToView:self.txtSignUpViewConfirmPasswordField borderColor:[Helpers bondiBlueColorWithAlpha:1.0] borderThickness:1.0 borderRaydius:0.0];
-//    
     [self.signInView addSubview:self.signUpView];
     [self.signUpView setHidden:YES];
     
@@ -303,6 +279,8 @@
 }
 
 -(void)signUpRaydius {
+    
+    NSLog(@"*** Auth Token before Sign up %@", RDAuthTokenKey);
     
     [User signUpWithRaydiusUsingEmail:self.txtSignInViewEmailField.text password:self.txtSignInViewPasswordField.text withCompletionBlock:^(NSInteger statusCode) {
         
@@ -401,36 +379,6 @@
     [self.txtSignUpViewEmailField setText:@""];
     [self.txtSignUpViewPasswordField setText:@""];
     
-    //ProfileVC
-//    [self.lblUserName setText:[User currentUsername]];
-//    
-//    [[RDImageLoader sharedImageLoader] deleteCachedSelfAvatar];
-//    
-//    UIImageView *ivAvatar = [(MainVC *)self.parentVC imagePreview];
-//    NSString *RDProfilePicture = [[NSUserDefaults standardUserDefaults] objectForKey:@"RDProfilePicture"];
-//    if (RDProfilePicture){
-//        [[HNDataManager dataManager] downloadImageWithName:RDProfilePicture withSuccess:^(UIImage *image) {
-//            NSLog(@"success download from updateUI %@",image);
-//            [ivAvatar setImage:image];
-//        } orFailure:^(NSError *error) {
-//            NSLog(@"fail download");
-//        }];
-//    }else{
-//        [[RDImageLoader sharedImageLoader] loadAvatarForObject:ivAvatar withUsername:[User currentUsername] andUserID:[User currentUserID]];
-//    }
-//    
-//    
-//    [MyFavrsController downloadFavrTopicsForUserWithCompletionBlock:^{
-//        
-//        [self loadMyRequests];
-//        [self loadMyTasks];
-//        [self loadMyInfo];
-//    }];
-//    
-//
-    
-    
-    
     //set sign in button status
     if ([User loggedInToRaydius]) {
 
@@ -439,37 +387,12 @@
     }
     else {
         
-        [User flushRaydiusUserInfo];
         [User setRaydiusLogInStatus:NO];
-        [self flushCurrentUserInfo];
-        
-//        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//        [appDelegate getAnonymousUserWithCompletionBlock:^(BOOL completed) {
-//            NSLog(@"getting anonymous user after sign out");
-//        }
-//         ];
         
         [self.btnSignInOut setTitle:@"Sign In" forState:normal];
         NSLog(@"Sign out and anonymous");
         
     }
-//
-//    //MainVC
-//    //username label
-//    [self.parentVC setLblGreetings];
-}
-
--(void)flushCurrentUserInfo {
-    
-    currentUserID = nil;
-    currentUsername = nil;
-    currentAuthToken = nil;
-    currentPushToken = nil;
-    
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"current_username"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"authentication_token"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"current_user_id"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"push_token"];
 }
 
 -(void)signUpPrompt {
@@ -502,7 +425,7 @@
 -(IBAction)signInViewSubmitAction {
     
     [self checkSignInFields];
-    [self signInRaydius];
+    //[self signInRaydius];
 }
 
 -(IBAction)signUpViewSubmitAction {
@@ -870,9 +793,6 @@
     downSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [downSwipe setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.view addGestureRecognizer:downSwipe];
-    
-//    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-//    [self.view addGestureRecognizer:tapGesture];
 }
 
 -(void)keyboardWillHide {
@@ -882,7 +802,6 @@
     [self.signInView setFrame:CGRectMake(0, 0, self.signInView.frame.size.width, self.signInView.frame.size.height)];
     
     [self.view removeGestureRecognizer:downSwipe];
-//    [self.view removeGestureRecognizer:tapGesture];
 }
 
 -(void)hideKeyboardAndLoad {

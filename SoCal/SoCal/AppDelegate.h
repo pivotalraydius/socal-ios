@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MainVC.h"
+#import "User.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UserDelegate> {
     
@@ -22,5 +23,6 @@
 @property (strong, nonatomic) MainVC *mainVC;
 
 - (void)getAnonymousUserWithCompletionBlock:(void(^)(BOOL completed))completion;
+
 
 @end

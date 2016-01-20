@@ -69,13 +69,13 @@ static NSString *baseHostURL;
     
     if (![User currentUserAuthToken]) {
         
-        [User registerWithServerWithDelegate:self];
-//        
-//        [self getAnonymousUserWithCompletionBlock:^(BOOL completed) {
-//            
-//            NSLog(@"Getting Anonymous user");
-//            
-//        }];
+       //[User registerWithServerWithDelegate:self];
+        
+        [self getAnonymousUserWithCompletionBlock:^(BOOL completed) {
+            
+            NSLog(@"Getting Anonymous user");
+            
+        }];
         
     }
     else {
@@ -155,11 +155,11 @@ static NSString *baseHostURL;
 
 - (void)getAnonymousUserWithCompletionBlock:(void(^)(BOOL completed))completion {
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authentication_token"] != nil) {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:RDAuthTokenKey] != nil) {
         
-        currentAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authentication_token"];
-        currentUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_user_id"];
-        currentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_username"];
+        currentAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:RDAuthTokenKey];
+        currentUserID = [[NSUserDefaults standardUserDefaults] objectForKey:RDUserIDKey];
+        currentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:RDUsernameKey];
         currentPushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"push_token"];
         
         completion(YES);
@@ -182,14 +182,14 @@ static NSString *baseHostURL;
             NSString *authToken = [userDict objectForKey:@"authentication_token"];
             NSNumber *userID = [userDict objectForKey:@"id"];
             
-            [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"current_username"];
-            [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:@"authentication_token"];
-            [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"current_user_id"];
+            [[NSUserDefaults standardUserDefaults] setObject:userName forKey:RDUsernameKey];
+            [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:RDAuthTokenKey];
+            [[NSUserDefaults standardUserDefaults] setObject:userID forKey:RDUserIDKey];
             [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:@"push_token"];
             
-            currentAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authentication_token"];
-            currentUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_user_id"];
-            currentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_username"];
+            currentAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:RDAuthTokenKey];
+            currentUserID = [[NSUserDefaults standardUserDefaults] objectForKey:RDUserIDKey];
+            currentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:RDUsernameKey];
             currentPushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"push_token"];
             
             completion(YES);
@@ -222,7 +222,7 @@ static NSString *baseHostURL;
 - (NSString *)currentAuthToken {
     
     if (!currentAuthToken) {
-        currentAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"authentication_token"];
+        currentAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:RDAuthTokenKey];
     }
     
     return currentAuthToken;
@@ -231,7 +231,7 @@ static NSString *baseHostURL;
 - (NSString *)currentUsername {
     
     if (!currentUsername) {
-        currentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_username"];
+        currentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:RDUsernameKey];
     }
     
     return currentUsername;
@@ -240,7 +240,7 @@ static NSString *baseHostURL;
 - (NSNumber *)currentUserID {
     
     if (!currentUserID) {
-        currentUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_user_id"];
+        currentUserID = [[NSUserDefaults standardUserDefaults] objectForKey:RDUserIDKey];
     }
     
     return currentUserID;

@@ -22,22 +22,7 @@
     NSLog(@"registerWithServerWithDelegate******");
     
     if (nil == authToken) {
-        
-//        if ([self userKeychainAvailable]) {
-//            
-//            NSDictionary *userDict = [self userDictFromKeychain];
-//            
-//            [[NSUserDefaults standardUserDefaults] setObject:[userDict objectForKey:@"username"] forKey:RDUsernameKey];
-//            [[NSUserDefaults standardUserDefaults] setObject:[userDict objectForKey:@"auth_token"] forKey:RDAuthTokenKey];
-//            [[NSUserDefaults standardUserDefaults] setObject:[userDict objectForKey:@"user_id"] forKey:RDUserIDKey];
-//            
-//            if(aDelegate)
-//                [aDelegate userHasUsernameAndAuthToken];
-//            
-//            return;
-//        }
-//        else {
-        
+                
             [User checkOrGenerateUUID];
             NSString *APNtoken = [[NSUserDefaults standardUserDefaults] objectForKey:RDDeviceAPNKey];
             NSString *myUDID = [[NSUserDefaults standardUserDefaults] objectForKey:RDDeviceUDIDKey];
@@ -150,17 +135,7 @@
                                               NSString *authtoken = [userDict objectForKey:@"authentication_token"];
                                               NSNumber *userId = [userDict objectForKey:@"id"];
                                               NSNumber *userProfanityCounter = [userDict objectForKey:@"profanity_counter"];
-                                              
-//                                              NSString * avatar = [theResponse objectForKey:@"avatar"];
-//                                              
-//                                              
-//                                              NSLog(@"avatar******2 %@",avatar);
-//                                               NSNumber *dailyPoints = [userDict objectForKey:@"daily_points"];
-//                                              [[NSUserDefaults standardUserDefaults] setObject:dailyPoints forKey:RDDailyPointKey];
-//                                              
-//                                              
-//                                              [[NSUserDefaults standardUserDefaults] setObject:avatar forKey:@"avatar"];
-                                              
+
                                               NSLog(@"authentication token %@", authtoken);
                                               
                                               NSString* savedEmail= [[NSUserDefaults standardUserDefaults] objectForKey:RDEmailKey];
@@ -429,6 +404,7 @@
     
     [queryInfo setObject:emailStr forKey:@"email"];
     [queryInfo setObject:passStr forKey:@"password"];
+    NSLog(@"Print Auth Token %@, %@", RDAuthTokenKey, [User currentUserAuthToken]);
     [queryInfo setObject:[User currentUserAuthToken] forKey:@"auth_token"];
     
     [[NetworkAPIClient sharedClient] postPath:USER_RAYDIUS_SIGN_UP parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -655,41 +631,6 @@
     return fbPicURL;
 }
 
-//+(void)retrieveFromDBFBFriendsList {
-//
-//    [[RDOperations sharedWorkerQueue] addOperationWithBlock:^{
-//        [[RDDBControl sharedDBController] dbOpen];
-//        fbFriendsList = [[NSArray arrayWithArray:[[RDDBControl sharedDBController] fbFriendsList]] retain];
-//        NSLog(@"fbFriendsList retrieved from database.");
-//        [[RDDBControl sharedDBController] dbClose];
-//    }];
-//}
-
-//+(BOOL)userIDIsMyFriend:(NSNumber *)user_id {
-//
-//    if ([RDUser loggedInToFacebook]) {
-//        if (!fbFriendsList) {
-//            [RDUser retrieveFromDBFBFriendsList];
-//            for (NSDictionary *aFriend in fbFriendsList) {
-//                
-//                if ([user_id intValue] == [[aFriend objectForKey:@"raydius_id"] intValue]) {
-//                    return YES;
-//                }
-//            }
-//        }
-//        else {
-//            for (NSDictionary *aFriend in fbFriendsList) {
-//                
-//                if ([user_id intValue] == [[aFriend objectForKey:@"raydius_id"] intValue]) {
-//                    return YES;
-//                }
-//            }
-//        }
-//    }
-//    
-//    return NO;
-//}
-
 +(void)setFacebookLogInStatus:(BOOL)status {
     
     if (status) {
@@ -710,69 +651,6 @@
     
     return NO;
 }
-
-//#pragma mark Quid limit methods
-//
-//+(void)dailyQuidUsed:(int)noOfQuidUsed {
-//    
-//    int remainingDailyQuid = [self remainingDailyQuid];
-//    
-//    if (remainingDailyQuid > 0) {
-//        remainingDailyQuid = remainingDailyQuid-noOfQuidUsed;
-//        
-//        NSNumber *nRemainingDailyQuid = [[NSNumber alloc] initWithInt:remainingDailyQuid];
-//        [[NSUserDefaults standardUserDefaults] setObject:nRemainingDailyQuid forKey:RDRemainingDailyQuidKey];
-//    }
-//    
-//    NSDate *newExpiry = [NSDate date];
-//    [[NSUserDefaults standardUserDefaults] setObject:newExpiry forKey:RDDailyQuidExpiryKey];
-//}
-//
-//+(int)remainingDailyQuid {
-//    
-//
-//    int remainingDailyQuid;
-//    id obj = [[NSUserDefaults standardUserDefaults] objectForKey:RDDailyPointKey];
-//    remainingDailyQuid = [obj intValue] ;
-//    
-//    NSLog(@"remain daily quid %d", remainingDailyQuid);
-//    return remainingDailyQuid;
-//    
-//}
-//
-//
-//
-//+(BOOL)reachedDailyQuidLimit {
-//    
-//    int remainingDailyQuid = [self remainingDailyQuid];
-//    
-//    NSDate *current = [NSDate date];
-//    NSDate *date = [[NSUserDefaults standardUserDefaults] objectForKey:RDDailyQuidExpiryKey];
-//    
-//    if (!date) {
-//        [[NSUserDefaults standardUserDefaults] setObject:current forKey:RDDailyQuidExpiryKey];
-//        remainingDailyQuid = RD_DAILY_QUID_LIMIT;
-//        NSNumber *nRemainingDailyQuid = [[NSNumber alloc] initWithInt: remainingDailyQuid];
-//        [[NSUserDefaults standardUserDefaults] setObject:nRemainingDailyQuid forKey:RDRemainingDailyQuidKey];
-//        return NO;
-//    }
-//    else {
-//        if ([Helpers dayFromDate:current] != [Helpers dayFromDate:date]) {
-//            remainingDailyQuid = RD_DAILY_QUID_LIMIT;
-//            
-//            NSNumber *nRemainingDailyQuid = [[NSNumber alloc] initWithInt:remainingDailyQuid];
-//            [[NSUserDefaults standardUserDefaults] setObject:nRemainingDailyQuid forKey:RDRemainingDailyQuidKey];
-//            [[NSUserDefaults standardUserDefaults] setObject:current forKey:RDDailyQuidExpiryKey];
-//            return NO;
-//        }
-//        else {
-//            if ( remainingDailyQuid > 0 )
-//                return NO;
-//            else
-//                return YES;
-//        }
-//    }
-//}
 
 #pragma mark - Honor Methods
 
@@ -831,34 +709,18 @@
 
     [self setPositiveHonorPoints: [User getPositiveHonorPoints]+points];
     
-//    NSNumber *currentPoints = [[NSUserDefaults standardUserDefaults] objectForKey:RDUserPositivePointsKey];
-//    if (currentPoints)
-//        [User setPositiveHonorPoints:points+currentPoints.intValue];
-//    else
-//        [User setPositiveHonorPoints:points];
 }
 
 +(void)addNegativeHonorPoints:(int)points {
     
     [self setNegativeHonorPoints: [User getNegativeHonorPoints]+points];
     
-//    NSNumber *currentPoints = [[NSUserDefaults standardUserDefaults] objectForKey:RDUserNegativePointsKey];
-//    if (currentPoints)
-//        [User setNegativeHonorPoints:points+currentPoints.intValue];
-//    else
-//        [User setNegativeHonorPoints:points];
-    
 }
 
 +(void)addHonoredCount {
     
     [self setHonoredCount: [User getHonoredCount]+1];
-    
-//    NSNumber *currentCount = [[NSUserDefaults standardUserDefaults] objectForKey:RDUserHonorCountKey];
-//    if (currentCount)
-//        [User setHonorCount:currentCount.intValue+1];
-//    else
-//        [User setHonorCount:1];
+
 }
 
 +(int)getTotalHonorPoints {
@@ -873,46 +735,7 @@
         [User setPoints:0];
         return 0;
     }
-    
-//    points = [NSNumber numberWithInt:100];
     return points.intValue;
 }
-
-//+(BOOL)useTotalAmountOfQuid:(int)totalQuid outFreeQuid:(int*)outFreeQuid outOwnQuid:(int*)outOwnQuid {
-//
-//    int nOwnQuid = [User getPoints];
-//    int nDailyFreeQuid = 0;
-//    
-//    if (![User reachedDailyQuidLimit]) {
-//        nDailyFreeQuid = [User remainingDailyQuid];
-//    }
-//    
-//    int nOwnQuidToUse = 0;
-//    int nDailyFreeQuidToUse = 0;
-//    
-//    if (totalQuid <= nDailyFreeQuid) {
-//        nDailyFreeQuidToUse = totalQuid;
-//    }
-//    else if (nDailyFreeQuid < totalQuid) {
-//        
-//        nDailyFreeQuidToUse = nDailyFreeQuid;
-//        
-//        int diff = totalQuid - nDailyFreeQuid;
-//        if (nOwnQuid < diff) {
-//            return NO;
-//        }
-//        else {
-//            
-//            nOwnQuidToUse = diff;
-//        }
-//    }
-//    
-//    NSLog(@"*****Before return: no of Daily Free Quid to use : no of Own Quid to use %d %d", nDailyFreeQuidToUse, nOwnQuidToUse);
-//    
-//    *outFreeQuid = nDailyFreeQuidToUse;
-//    *outOwnQuid = nOwnQuidToUse;
-//
-//    return YES;
-//}
 
 @end

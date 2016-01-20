@@ -35,8 +35,6 @@ extern NSString * const RDDailyPointKey;
 extern NSString * const RDUsernameKey;
 extern NSString * const RDAuthTokenKey;
 extern NSString * const RDEmailKey;
-extern NSString * const RDUserProfanityCounterKey;
-extern NSString * const RDUserOffenceDate;
 
 extern NSString * const RDLogInStatusKey;
 

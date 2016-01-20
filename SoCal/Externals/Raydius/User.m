@@ -50,19 +50,7 @@
                                                   NSString *username = [userDict objectForKey:@"username"];
                                                   NSString *authtoken = [userDict objectForKey:@"authentication_token"];
                                                   NSNumber *userId = [userDict objectForKey:@"id"];
-                                                  NSNumber *userProfanityCounter = [userDict objectForKey:@"profanity_counter"];
                                                   
-//                                                  NSString * avatar = [theResponse objectForKey:@"avatar"];
-//                                                  NSLog(@"avatar******1 %@",avatar);
-//         
-// 
-//                                                  [[NSUserDefaults standardUserDefaults] setObject:avatar forKey:@"avatar"];
-//                                                  
-//                                                  NSNumber *dailyPoints = [userDict objectForKey:@"daily_points"];
-//                                                  [[NSUserDefaults standardUserDefaults] setObject:dailyPoints forKey:RDDailyPointKey];
-//                                                  
-//                                                  NSLog(@"dailyPoints*** %@",dailyPoints);
-
                                                   NSString* savedEmail= [[NSUserDefaults standardUserDefaults] objectForKey:RDEmailKey];
                                                   if (savedEmail  == nil) {
                                                       savedEmail = @"";
@@ -72,17 +60,6 @@
                                                       [[NSUserDefaults standardUserDefaults] setObject:username forKey:RDUsernameKey];
                                                       [[NSUserDefaults standardUserDefaults] setObject:authtoken forKey:RDAuthTokenKey];
                                                       [[NSUserDefaults standardUserDefaults] setObject:userId forKey:RDUserIDKey];
-                                                                                                        }
-                                                  if (userProfanityCounter) {
-                                                      
-                                                      [[NSUserDefaults standardUserDefaults] setObject:userProfanityCounter forKey:RDUserProfanityCounterKey];
-                                                      
-                                                      if (userProfanityCounter.intValue > 0) {
-                                                          
-                                                          NSString *offenceDate = [userDict objectForKey:@"offence_date"];
-                                                          // check previous offense date
-                                                          [[NSUserDefaults standardUserDefaults] setObject:offenceDate forKey:RDUserOffenceDate];
-                                                      }
                                                   }
                                                   
                                                   if(aDelegate)
@@ -134,8 +111,6 @@
                                               NSString *username = [userDict objectForKey:@"username"];
                                               NSString *authtoken = [userDict objectForKey:@"authentication_token"];
                                               NSNumber *userId = [userDict objectForKey:@"id"];
-                                              NSNumber *userProfanityCounter = [userDict objectForKey:@"profanity_counter"];
-
                                               NSLog(@"authentication token %@", authtoken);
                                               
                                               NSString* savedEmail= [[NSUserDefaults standardUserDefaults] objectForKey:RDEmailKey];
@@ -147,17 +122,6 @@
                                                   [[NSUserDefaults standardUserDefaults] setObject:username forKey:RDUsernameKey];
                                                   [[NSUserDefaults standardUserDefaults] setObject:authtoken forKey:RDAuthTokenKey];
                                                   [[NSUserDefaults standardUserDefaults] setObject:userId forKey:RDUserIDKey];
-                                              }
-                                              if (userProfanityCounter) {
-                                                  
-                                                  [[NSUserDefaults standardUserDefaults] setObject:userProfanityCounter forKey:RDUserProfanityCounterKey];
-                                                  
-                                                  if (userProfanityCounter.intValue > 0) {
-                                                      
-                                                      NSString *offenceDate = [userDict objectForKey:@"offence_date"];
-                                                      // check previous offense date
-                                                      [[NSUserDefaults standardUserDefaults] setObject:offenceDate forKey:RDUserOffenceDate];
-                                                  }
                                               }
                                               
                                               block1();
@@ -333,23 +297,6 @@
     return placeAddress;
 }
 
-+(NSNumber*) currentUserProfanityCounter {
-
-    NSNumber *user_profanity_counter = [[NSUserDefaults standardUserDefaults] objectForKey:RDUserProfanityCounterKey];
-    return user_profanity_counter;
-}
-
-+(NSDate*)currentUserOffenceDate {
-    
-    NSString *strUserOffenceDate = [[NSUserDefaults standardUserDefaults] objectForKey:RDUserOffenceDate];
-    if (!strUserOffenceDate) {
-        return nil;
-    }
-    
-    NSDate *user_offence_date = [Helpers dateFromString:strUserOffenceDate];
-    return user_offence_date;
-}
-
 +(BOOL)currentUserAppFirstRun {
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:RDAppFirstRunKey])
@@ -374,28 +321,6 @@
         return YES;
 }
 
-+(BOOL)isCurrentUserBeingSuspended {
-    
-    int profanity_counter = [[User currentUserProfanityCounter] intValue];
-    
-    if (profanity_counter==0) return NO;
-    
-    if (profanity_counter%3!=0) return NO;
-    
-    NSDate *offenceDate = [User currentUserOffenceDate];
-    if (!offenceDate) return NO;
-
-    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate: offenceDate];
-    if (timeInterval >= 24*60*60) return NO;
-    else {
-     
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account Temporarily Suspended" message:@"You have been suspended for 24 hours for violating our terms and conditions. You may still browse but you cannot post. Contact an admin for more information." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        
-        return YES;
-    }
-}
-
 //Raydius Sign In Sign Up Methods
 
 +(void)signUpWithRaydiusUsingEmail:(NSString *)emailStr password:(NSString *)passStr withCompletionBlock:(void (^)(NSInteger statusCode))block {
@@ -404,7 +329,6 @@
     
     [queryInfo setObject:emailStr forKey:@"email"];
     [queryInfo setObject:passStr forKey:@"password"];
-    NSLog(@"Print Auth Token %@, %@", RDAuthTokenKey, [User currentUserAuthToken]);
     [queryInfo setObject:[User currentUserAuthToken] forKey:@"auth_token"];
     
     [[NetworkAPIClient sharedClient] postPath:USER_RAYDIUS_SIGN_UP parameters:queryInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -477,7 +401,6 @@
         NSString *username = [userDict objectForKey:@"username"];
         NSString *authtoken = [userDict objectForKey:@"authentication_token"];
         NSNumber *userId = [userDict objectForKey:@"id"];
-        NSNumber *userProfanityCounter = [userDict objectForKey:@"profanity_counter"];
         
         NSString* savedEmail= [[NSUserDefaults standardUserDefaults] objectForKey:RDEmailKey];
         if (savedEmail  == nil) {
@@ -488,17 +411,6 @@
             [[NSUserDefaults standardUserDefaults] setObject:username forKey:RDUsernameKey];
             [[NSUserDefaults standardUserDefaults] setObject:authtoken forKey:RDAuthTokenKey];
             [[NSUserDefaults standardUserDefaults] setObject:userId forKey:RDUserIDKey];
-        }
-        if (userProfanityCounter) {
-            
-            [[NSUserDefaults standardUserDefaults] setObject:userProfanityCounter forKey:RDUserProfanityCounterKey];
-            
-            if (userProfanityCounter.intValue > 0) {
-                
-                NSString *offenceDate = [userDict objectForKey:@"offence_date"];
-                // check previous offense date
-                [[NSUserDefaults standardUserDefaults] setObject:offenceDate forKey:RDUserOffenceDate];
-            }
         }
         
         switch (successCode) {

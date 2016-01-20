@@ -57,8 +57,6 @@ NSString * const RDDailyPointKey = @KEY_BASE "DailyPointKey";
 NSString * const RDUsernameKey = @KEY_BASE "UsernameKey";
 NSString * const RDAuthTokenKey = @KEY_BASE "AuthTokenKey";
 NSString * const RDEmailKey = @KEY_BASE "EmailKey";
-NSString * const RDUserProfanityCounterKey = @KEY_BASE "UserProfanityCounterKey";
-NSString * const RDUserOffenceDate = @KEY_BASE "UserOffenceDate";
 
 NSString * const RDLogInStatusKey = @KEY_BASE "LogInStatusKey";
 

@@ -48,15 +48,10 @@
 +(NSNumber *)currentUserCheckedInPlaceID;
 +(NSString *)currentUserCheckedInPlaceName;
 +(NSString *)currentUserCheckedInPlaceAddress;
-+(NSNumber*) currentUserProfanityCounter;
-+(NSNumber*) currentUserDailyPoint;
-+(NSDate*)currentUserOffenceDate;
-
 
 +(BOOL)currentUserAppFirstRun;
 +(BOOL)currentUserAppCompletedInitialDownload;
 +(BOOL)currentUserAppCompletedBackgroundDownload;
-+(BOOL)isCurrentUserBeingSuspended;
 
 //Raydius Login
 

@@ -1450,7 +1450,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.herenow.SoCal-s";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f1dad1ed-76d4-4e6c-a82e-f901c26e2fa8";
+				PROVISIONING_PROFILE = "dbdb5faa-5058-454e-bdfe-6f96d9d7a0f0";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1473,7 +1473,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.herenow.SoCal-s";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ffbd8a3c-88c1-4c97-bef7-c886528f5ef7";
+				PROVISIONING_PROFILE = "7cd80765-1d0b-4cd4-8628-db9795543a46";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
